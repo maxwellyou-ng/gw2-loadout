@@ -1,0 +1,41 @@
+@import 'tailwindcss';
+
+/*
+  GW2 Loadout Tracker — global theme.
+  Tailwind v4: design tokens live in @theme so they're usable as utilities
+  (e.g. bg-surface, text-muted, border-line).
+*/
+@theme {
+  --color-canvas: #0f1117;
+  --color-surface: #181b24;
+  --color-surface-2: #20242f;
+  --color-line: #2c3140;
+  --color-muted: #8b93a7;
+  --color-ink: #e7eaf0;
+  --color-accent: #e0a44a; /* GW2 legendary gold */
+  --color-accent-soft: rgba(224, 164, 74, 0.14);
+  --color-good: #4ade80;
+  --color-warn: #fbbf24;
+  --color-bad: #f87171;
+  --color-gate: #a78bfa; /* time-gated emphasis */
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Thin scrollbars to match the dark surface */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-line) transparent;
+}
