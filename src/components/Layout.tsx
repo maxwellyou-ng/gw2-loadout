@@ -3,7 +3,9 @@ import { useApp } from '../state/store'
 import { formatRelative } from '../lib/format'
 
 const tabs = [
+  { to: '/dashboard', label: 'Dashboard' },
   { to: '/loadout', label: 'Loadout' },
+  { to: '/materials', label: 'Materials' },
   { to: '/settings', label: 'Settings' },
 ]
 

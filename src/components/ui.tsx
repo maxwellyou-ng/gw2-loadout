@@ -2,7 +2,35 @@
 
 import type { ReactNode } from 'react'
 import type { TimeGateSeverity } from '../types'
-import { formatPercent } from '../lib/format'
+import { formatPercent, wikiUrl } from '../lib/format'
+
+/**
+ * A material/ingredient name that links to its GW2 wiki page when one exists.
+ * Synthetic intermediates (no resolved item id) render as plain text.
+ */
+export function WikiName({
+  name,
+  itemId,
+  className = '',
+}: {
+  name: string
+  itemId: number
+  className?: string
+}) {
+  const url = wikiUrl(name, itemId)
+  if (!url) return <span className={className}>{name}</span>
+  return (
+    <a
+      href={url}
+      target="_blank"
+      rel="noreferrer"
+      className={`${className} underline decoration-dotted underline-offset-2 hover:text-accent`}
+      title={`${name} — open GW2 wiki`}
+    >
+      {name}
+    </a>
+  )
+}
 
 export function Card({
   children,
@@ -78,6 +106,57 @@ export function Badge({
   }
   return (
     <span className={`rounded px-1.5 py-0.5 text-xs font-medium ${tones[tone]}`}>{children}</span>
+  )
+}
+
+/** Circular completion ring. `value` is 0..1. */
+export function Ring({
+  value,
+  size = 132,
+  stroke = 12,
+  label,
+  sublabel,
+}: {
+  value: number
+  size?: number
+  stroke?: number
+  label?: ReactNode
+  sublabel?: ReactNode
+}) {
+  const pct = Math.max(0, Math.min(1, value))
+  const r = (size - stroke) / 2
+  const c = 2 * Math.PI * r
+  const color =
+    pct >= 0.999 ? 'text-good' : pct >= 0.66 ? 'text-accent' : pct >= 0.33 ? 'text-warn' : 'text-bad'
+  return (
+    <div className="relative inline-flex items-center justify-center" style={{ width: size, height: size }}>
+      <svg width={size} height={size} className="-rotate-90">
+        <circle
+          cx={size / 2}
+          cy={size / 2}
+          r={r}
+          fill="none"
+          strokeWidth={stroke}
+          className="stroke-surface-2"
+        />
+        <circle
+          cx={size / 2}
+          cy={size / 2}
+          r={r}
+          fill="none"
+          strokeWidth={stroke}
+          strokeLinecap="round"
+          strokeDasharray={c}
+          strokeDashoffset={c * (1 - pct)}
+          className={`${color} transition-all`}
+          stroke="currentColor"
+        />
+      </svg>
+      <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+        {label != null && <span className="text-2xl font-semibold text-ink">{label}</span>}
+        {sublabel != null && <span className="text-xs text-muted">{sublabel}</span>}
+      </div>
+    </div>
   )
 }
 

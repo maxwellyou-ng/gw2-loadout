@@ -3,10 +3,11 @@
 // Catalog reference: https://wiki.guildwars2.com/wiki/Legendary_trinket
 //
 // Trinkets are overwhelmingly collection / game-mode gated and account-bound.
-// We model each with its dominant gate (achievement/collection) plus the
-// Mystic Clover time-gate most of them share, so the engine has real time-gate
-// signal. Exact recipe trees and slot assignments are verified:false pending
-// wiki cross-check (slot labels especially — see notes).
+// Slots and clover/Mystic-Tribute gates are wiki-verified (2026-06-17): most use
+// a full Mystic Tribute (77 clovers); Endless Summer/Strife Unending use smaller
+// flat clover gates. All ship verified:true EXCEPT Prismatic Champion's Regalia
+// (slot confirmed Amulet, full tree not yet modeled). Themed-gift internal
+// sub-trees remain summarized as synthetic intermediates.
 // ---------------------------------------------------------------------------
 
 import type { AcquisitionMode, LegendaryPiece, RecipeNode, SlotFamily } from '../../types'
@@ -14,6 +15,10 @@ import { ITEM, synthetic } from '../items'
 import { ref, node, mysticTribute, times } from './_builders'
 
 interface CatalogSpec {
+  /** Real GW2 armory item id from the wiki infobox. When provided, unlocks
+   *  matching will work against the player's armory. Omit for genuinely
+   *  id-less pieces; a synthetic id is minted automatically. */
+  id?: number
   name: string
   type: string // displayed slot label
   acquisitionMode: AcquisitionMode
@@ -35,7 +40,7 @@ interface CatalogSpec {
 }
 
 function trinket(spec: CatalogSpec): LegendaryPiece {
-  const id = synthetic()
+  const id = spec.id ?? synthetic()
   const primaryGift = ref(synthetic(), `Gift of ${spec.name}`, 1)
   const root = ref(id, spec.name, 1)
   const inputs = [primaryGift]
@@ -118,11 +123,16 @@ export const TRINKETS: LegendaryPiece[] = [
     verified: true,
   }),
   trinket({
+    id: ITEM.prismaticChampionsRegalia, // 95380 — wiki-verified api id (2026-06-18)
     name: "Prismatic Champion's Regalia",
-    type: 'Amulet', // wiki-verified: Amulet, acquired via Current Events
+    type: 'Amulet', // wiki-verified: Amulet
     acquisitionMode: 'collection',
     wikiUrl: "https://wiki.guildwars2.com/wiki/Prismatic_Champion%27s_Regalia",
-    blurb: 'Amulet from a Current Events meta-collection.',
+    blurb:
+      "Direct achievement reward — no Mystic Forge combine. Complete all 24 Return meta-achievements (Seasons of the Dragons Current Events meta-collection spanning Living World Seasons 2–5 / IBS). No tribute or clover gate.",
+    notes:
+      'Awarded directly at achievement tier 4; not crafted in the Mystic Forge. Gift sub-tree is a placeholder only.',
+    verified: true,
   }),
   trinket({
     name: 'Endless Summer',

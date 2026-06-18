@@ -1,6 +1,6 @@
 import { Link, useParams } from 'react-router-dom'
 import { useApp, CATALOG_BY_ID } from '../state/store'
-import { Card, ProgressBar, ScorePill, SeverityDot, Badge, EmptyState } from '../components/ui'
+import { Card, ProgressBar, ScorePill, SeverityDot, Badge, EmptyState, WikiName } from '../components/ui'
 import { formatGold, formatDate, formatPercent } from '../lib/format'
 import type { RemainingMaterial } from '../types'
 
@@ -9,7 +9,7 @@ function MaterialRow({ m }: { m: RemainingMaterial }) {
     <div className="flex items-center justify-between gap-3 border-b border-line/60 py-2 last:border-0">
       <div className="flex min-w-0 items-center gap-2">
         {m.timeGate.isGated && m.timeGate.severity && <SeverityDot severity={m.timeGate.severity} />}
-        <span className="truncate text-sm text-ink">{m.name}</span>
+        <WikiName name={m.name} itemId={m.itemId} className="truncate text-sm text-ink" />
       </div>
       <div className="flex shrink-0 items-center gap-3 text-sm">
         {m.timeGate.isGated && m.timeGate.dailyRate ? (

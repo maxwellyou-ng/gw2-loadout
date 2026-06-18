@@ -4,12 +4,23 @@ import { validateKey } from '../api/gw2'
 import { Card, Badge } from '../components/ui'
 import { formatRelative } from '../lib/format'
 import { DEFAULT_WEIGHTS } from '../types'
+import { encode, decode } from '../lib/buildcode'
 
 const REQUIRED_SCOPES = ['account', 'inventories', 'wallet', 'unlocks', 'characters', 'progression']
 
 export default function Settings() {
-  const { settings, setApiKey, setWeights, runSync, syncing, syncMessage, syncError, sync } =
-    useApp()
+  const {
+    settings,
+    setApiKey,
+    setWeights,
+    runSync,
+    syncing,
+    syncMessage,
+    syncError,
+    sync,
+    loadout,
+    setLoadout,
+  } = useApp()
   const [keyInput, setKeyInput] = useState(settings.apiKey)
   const [validation, setValidation] = useState<
     | { state: 'idle' }
@@ -34,6 +45,35 @@ export default function Settings() {
   }
 
   const w = settings.weights
+
+  // --- Build-code import / export (Phase 5.1) — goals only, never the key ---
+  const exportCode = encode(loadout)
+  const [importInput, setImportInput] = useState('')
+  const [importMsg, setImportMsg] = useState<
+    { state: 'idle' } | { state: 'ok' } | { state: 'error'; message: string }
+  >({ state: 'idle' })
+  const [copied, setCopied] = useState(false)
+
+  const copyCode = async () => {
+    try {
+      await navigator.clipboard.writeText(exportCode)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 1500)
+    } catch {
+      /* clipboard blocked — the textarea is selectable as a fallback */
+    }
+  }
+
+  const applyImport = () => {
+    try {
+      const next = decode(importInput)
+      setLoadout(next)
+      setImportInput('')
+      setImportMsg({ state: 'ok' })
+    } catch (e) {
+      setImportMsg({ state: 'error', message: e instanceof Error ? e.message : 'Invalid code.' })
+    }
+  }
 
   return (
     <div className="space-y-6">
@@ -153,6 +193,59 @@ export default function Settings() {
         >
           Reset to defaults
         </button>
+      </Card>
+
+      <Card>
+        <h2 className="mb-1 text-lg font-semibold text-ink">Share your loadout</h2>
+        <p className="mb-4 text-sm text-muted">
+          A build code captures only your slot goals (chosen pieces, status, priority, candidates)
+          — never your API key or account data. Share it or save it as a backup.
+        </p>
+
+        <label className="mb-1 block text-sm font-medium text-ink">Export</label>
+        <div className="flex flex-wrap gap-2">
+          <textarea
+            readOnly
+            value={exportCode}
+            rows={2}
+            onFocus={(e) => e.currentTarget.select()}
+            className="min-w-0 flex-1 resize-none rounded-lg border border-line bg-surface-2 px-3 py-2 font-mono text-xs text-ink outline-none"
+          />
+          <button
+            onClick={copyCode}
+            className="self-start rounded-lg border border-line px-3 py-2 text-sm font-medium text-ink hover:border-accent"
+          >
+            {copied ? 'Copied ✓' : 'Copy'}
+          </button>
+        </div>
+
+        <label className="mb-1 mt-4 block text-sm font-medium text-ink">Import</label>
+        <p className="mb-2 text-xs text-warn">Importing replaces your current loadout.</p>
+        <div className="flex flex-wrap gap-2">
+          <textarea
+            value={importInput}
+            onChange={(e) => {
+              setImportInput(e.target.value)
+              setImportMsg({ state: 'idle' })
+            }}
+            rows={2}
+            placeholder="Paste a gw2-v1.… build code"
+            className="min-w-0 flex-1 resize-none rounded-lg border border-line bg-surface-2 px-3 py-2 font-mono text-xs text-ink outline-none focus:border-accent"
+          />
+          <button
+            onClick={applyImport}
+            disabled={!importInput.trim()}
+            className="self-start rounded-lg bg-accent px-3 py-2 text-sm font-semibold text-canvas disabled:opacity-40"
+          >
+            Import
+          </button>
+        </div>
+        {importMsg.state === 'ok' && (
+          <p className="mt-2 text-sm text-good">✓ Loadout replaced from build code.</p>
+        )}
+        {importMsg.state === 'error' && (
+          <p className="mt-2 text-sm text-bad">{importMsg.message}</p>
+        )}
       </Card>
     </div>
   )

@@ -7,14 +7,14 @@
 import type { SlotFamily, SlotKey } from '../types'
 import { pieceByName } from './recipes'
 
-export type SlotStatus = 'must-have' | 'flexible' | 'done' | 'not-pursuing'
-
 export interface LoadoutSlot {
   key: SlotKey
   label: string
   family: SlotFamily
-  status: SlotStatus
+  /** Counts toward whole-loadout totals (Materials, dashboard). Toggleable. */
   tracked: boolean
+  /** You're weighing candidates for this slot — surfaces the Compare link. */
+  flexible: boolean
   /** Lower = higher priority for the daily dashboard. 'defer' = lowest. */
   priority: number | 'defer'
   /** Chosen legendary piece id, or null if undecided. */
@@ -65,12 +65,39 @@ function slot(
     key: o.key,
     label: o.label ?? meta.label,
     family: o.family ?? meta.family,
-    status: o.status ?? 'not-pursuing',
     tracked: o.tracked ?? false,
+    flexible: o.flexible ?? false,
     priority: o.priority ?? 'defer',
     chosenPieceId: o.chosenPieceId ?? null,
     candidateIds: o.candidateIds ?? [],
   }
+}
+
+/**
+ * Ensure a loadout has every slot in SLOT_ORDER (backfilling blanks — notably
+ * weapon8, absent from the seed) and that each slot carries the current shape.
+ * Migrates stale localStorage loadouts forward so the editable UI can rely on
+ * all eight weapon slots existing and on `flexible` being a boolean.
+ */
+export function normalizeLoadout(loadout: Loadout): Loadout {
+  const byKey = new Map(loadout.slots.map((s) => [s.key, s]))
+  const slots = SLOT_ORDER.map((meta) => {
+    const existing = byKey.get(meta.key)
+    if (existing) {
+      return {
+        key: meta.key,
+        label: existing.label ?? meta.label,
+        family: existing.family ?? meta.family,
+        tracked: existing.tracked ?? false,
+        flexible: existing.flexible ?? false,
+        priority: existing.priority ?? 'defer',
+        chosenPieceId: existing.chosenPieceId ?? null,
+        candidateIds: existing.candidateIds ?? [],
+      }
+    }
+    return slot({ key: meta.key })
+  })
+  return { name: loadout.name, slots }
 }
 
 /** The seed loadout from Section 4 — used to build and validate end-to-end. */
@@ -78,32 +105,32 @@ export function buildSeedLoadout(): Loadout {
   return {
     name: 'Seed loadout',
     slots: [
-      slot({ key: 'helm', status: 'must-have', tracked: true, priority: 1, chosenPieceId: pid('Obsidian Helm') }),
-      slot({ key: 'shoulders', status: 'must-have', tracked: true, priority: 1, chosenPieceId: pid('Legendary Shoulders (WvW)') }),
-      slot({ key: 'gloves', status: 'must-have', tracked: true, priority: 1, chosenPieceId: pid('Eikasia Greaves (Mists-Grasper)') }),
-      slot({ key: 'boots', status: 'must-have', tracked: true, priority: 1, chosenPieceId: pid('Obsidian Boots') }),
-      slot({ key: 'chest', status: 'flexible', tracked: true, priority: 5 }),
-      slot({ key: 'leggings', status: 'flexible', tracked: true, priority: 5 }),
+      slot({ key: 'helm', tracked: true, priority: 1, chosenPieceId: pid('Obsidian Helm') }),
+      slot({ key: 'shoulders', tracked: true, priority: 1, chosenPieceId: pid('Legendary Shoulders (WvW)') }),
+      slot({ key: 'gloves', tracked: true, priority: 1, chosenPieceId: pid('Eikasia, Mists-Grasper (Gloves)') }),
+      slot({ key: 'boots', tracked: true, priority: 1, chosenPieceId: pid('Obsidian Boots') }),
+      slot({ key: 'chest', flexible: true, tracked: true, priority: 5 }),
+      slot({ key: 'leggings', flexible: true, tracked: true, priority: 5 }),
 
-      slot({ key: 'weapon1', label: 'Aetheric Anchor', status: 'must-have', tracked: true, priority: 1, chosenPieceId: pid('Aetheric Anchor') }),
-      slot({ key: 'weapon2', label: 'Exordium', status: 'must-have', tracked: true, priority: 2, chosenPieceId: pid('Exordium') }),
-      slot({ key: 'weapon3', label: "Aurene's Fang", status: 'must-have', tracked: true, priority: 3, chosenPieceId: pid("Aurene's Fang") }),
-      slot({ key: 'weapon4', label: "Aurene's Scale", status: 'must-have', tracked: true, priority: 4, chosenPieceId: pid("Aurene's Scale") }),
-      slot({ key: 'weapon5', label: 'Incinerator', status: 'must-have', tracked: true, priority: 6, chosenPieceId: pid('Incinerator') }),
-      slot({ key: 'weapon6', label: 'Astralaria', status: 'must-have', tracked: true, priority: 7, chosenPieceId: pid('Astralaria') }),
-      slot({ key: 'weapon7', label: 'Pharus', status: 'must-have', tracked: true, priority: 8, chosenPieceId: pid('Pharus') }),
-      // weapon8 is the second Aetheric Anchor unlock (handled via that piece's two unlocks).
+      slot({ key: 'weapon1', tracked: true, priority: 1, chosenPieceId: pid('Aetheric Anchor') }),
+      slot({ key: 'weapon2', tracked: true, priority: 2, chosenPieceId: pid('Exordium') }),
+      slot({ key: 'weapon3', tracked: true, priority: 3, chosenPieceId: pid("Aurene's Fang") }),
+      slot({ key: 'weapon4', tracked: true, priority: 4, chosenPieceId: pid("Aurene's Scale") }),
+      slot({ key: 'weapon5', tracked: true, priority: 6, chosenPieceId: pid('Incinerator') }),
+      slot({ key: 'weapon6', tracked: true, priority: 7, chosenPieceId: pid('Astralaria') }),
+      slot({ key: 'weapon7', tracked: true, priority: 8, chosenPieceId: pid('Pharus') }),
+      slot({ key: 'weapon8', priority: 'defer' }), // open 8th weapon slot
 
-      slot({ key: 'amulet', status: 'flexible', tracked: true, priority: 9, candidateIds: [] }),
-      slot({ key: 'ring1', status: 'flexible', tracked: true, priority: 9 }),
-      slot({ key: 'ring2', status: 'flexible', tracked: true, priority: 9 }),
-      slot({ key: 'accessory1', status: 'flexible', tracked: true, priority: 9 }),
-      slot({ key: 'accessory2', status: 'flexible', tracked: true, priority: 9 }),
+      slot({ key: 'amulet', flexible: true, tracked: true, priority: 9, candidateIds: [] }),
+      slot({ key: 'ring1', flexible: true, tracked: true, priority: 9 }),
+      slot({ key: 'ring2', flexible: true, tracked: true, priority: 9 }),
+      slot({ key: 'accessory1', flexible: true, tracked: true, priority: 9 }),
+      slot({ key: 'accessory2', flexible: true, tracked: true, priority: 9 }),
 
-      slot({ key: 'back', status: 'flexible', tracked: false, priority: 'defer' }), // backpack: defer
-      slot({ key: 'relic', status: 'not-pursuing', tracked: false, priority: 'defer' }),
-      slot({ key: 'runes', status: 'not-pursuing', tracked: false, priority: 'defer' }),
-      slot({ key: 'aquabreather', status: 'not-pursuing', tracked: false, priority: 'defer' }),
+      slot({ key: 'back', flexible: true, tracked: false, priority: 'defer' }), // backpack: defer
+      slot({ key: 'relic', tracked: false, priority: 'defer' }),
+      slot({ key: 'runes', tracked: false, priority: 'defer' }),
+      slot({ key: 'aquabreather', tracked: false, priority: 'defer' }),
     ],
   }
 }

@@ -21,7 +21,13 @@ import type {
 } from '../types'
 import { DEFAULT_WEIGHTS } from '../types'
 import { CATALOG, CATALOG_BY_ID } from '../data/recipes'
-import { buildSeedLoadout, type Loadout } from '../data/loadout'
+import {
+  buildSeedLoadout,
+  normalizeLoadout,
+  type Loadout,
+  type LoadoutSlot,
+} from '../data/loadout'
+import type { SlotKey } from '../types'
 import { computeProgress } from '../engine'
 import { syncAccount } from '../api/gw2'
 import { STORAGE_KEYS, loadJSON, saveJSON } from './storage'
@@ -44,6 +50,13 @@ interface AppState {
   setApiKey: (key: string) => void
   setWeights: (w: Settings['weights']) => void
   runSync: () => Promise<void>
+  // Loadout mutators (pure/immutable; progress re-derives via the useMemo below).
+  setLoadout: (loadout: Loadout) => void
+  setSlotPiece: (key: SlotKey, pieceId: number | null) => void
+  setSlotFlexible: (key: SlotKey, flexible: boolean) => void
+  setSlotTracked: (key: SlotKey, tracked: boolean) => void
+  setSlotPriority: (key: SlotKey, priority: number | 'defer') => void
+  setSlotCandidates: (key: SlotKey, candidateIds: number[]) => void
 }
 
 const AppContext = createContext<AppState | null>(null)
@@ -52,8 +65,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [settings, setSettings] = useState<Settings>(() =>
     loadJSON<Settings>(STORAGE_KEYS.settings, { apiKey: '', weights: DEFAULT_WEIGHTS }),
   )
-  const [loadout] = useState<Loadout>(() =>
-    loadJSON<Loadout>(STORAGE_KEYS.loadout, buildSeedLoadout()),
+  const [loadout, setLoadout] = useState<Loadout>(() =>
+    normalizeLoadout(loadJSON<Loadout>(STORAGE_KEYS.loadout, buildSeedLoadout())),
   )
   const [sync, setSync] = useState<SyncState | null>(() =>
     loadJSON<SyncState | null>(STORAGE_KEYS.sync, null),
@@ -75,6 +88,41 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const setWeights = useCallback((weights: Settings['weights']) => {
     setSettings((s) => ({ ...s, weights }))
   }, [])
+
+  // Immutable per-slot patch helper: replaces one slot, leaving the rest intact.
+  const patchSlot = useCallback(
+    (key: SlotKey, patch: (slot: LoadoutSlot) => LoadoutSlot) => {
+      setLoadout((l) => ({
+        ...l,
+        slots: l.slots.map((s) => (s.key === key ? patch(s) : s)),
+      }))
+    },
+    [],
+  )
+
+  const setSlotPiece = useCallback(
+    (key: SlotKey, pieceId: number | null) =>
+      patchSlot(key, (s) => ({ ...s, chosenPieceId: pieceId })),
+    [patchSlot],
+  )
+  const setSlotFlexible = useCallback(
+    (key: SlotKey, flexible: boolean) => patchSlot(key, (s) => ({ ...s, flexible })),
+    [patchSlot],
+  )
+  const setSlotTracked = useCallback(
+    (key: SlotKey, tracked: boolean) => patchSlot(key, (s) => ({ ...s, tracked })),
+    [patchSlot],
+  )
+  const setSlotPriority = useCallback(
+    (key: SlotKey, priority: number | 'defer') =>
+      patchSlot(key, (s) => ({ ...s, priority })),
+    [patchSlot],
+  )
+  const setSlotCandidates = useCallback(
+    (key: SlotKey, candidateIds: number[]) =>
+      patchSlot(key, (s) => ({ ...s, candidateIds })),
+    [patchSlot],
+  )
 
   const runSync = useCallback(async () => {
     if (!settings.apiKey.trim()) {
@@ -117,6 +165,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setApiKey,
     setWeights,
     runSync,
+    setLoadout,
+    setSlotPiece,
+    setSlotFlexible,
+    setSlotTracked,
+    setSlotPriority,
+    setSlotCandidates,
   }
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>
@@ -129,5 +183,4 @@ export function useApp(): AppState {
   return ctx
 }
 
-// eslint-disable-next-line react-refresh/only-export-components
 export { CATALOG_BY_ID }

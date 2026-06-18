@@ -49,13 +49,21 @@ interface LeafAcc {
 }
 
 /**
- * Expand a recipe tree into leaf requirements. Intermediates the account
- * already owns are credited (not expanded). Terminal nodes with no inputs
- * (achievement gifts, precursors, vendor items) are recorded as leaves.
+ * Expand a recipe tree into requirements.
+ *
+ * Base mode (default): fully flatten to leaf materials, crediting owned
+ * intermediates along the way. Terminal nodes with no inputs (achievement
+ * gifts, precursors, vendor items) are recorded as leaves.
+ *
+ * `stopAtIntermediates`: only the root combine is expanded; each *direct input*
+ * of the final combine (gifts like Gift of Fortune, plus top-level base mats
+ * like clovers/ecto) is recorded as a line item at full required qty. Owned
+ * crediting is applied downstream in `toMaterial`, so it isn't double-counted.
  */
 function flatten(
   piece: LegendaryPiece,
   snapshot: InventorySnapshot,
+  stopAtIntermediates = false,
 ): Map<number, LeafAcc> {
   const nodeByOutput = new Map<number, RecipeNode>()
   for (const n of piece.recipe.nodes) nodeByOutput.set(n.output.itemId, n)
@@ -70,11 +78,17 @@ function flatten(
   }
 
   const seen = new Set<number>()
-  const expand = (itemId: number, name: string, qty: number) => {
+  const expand = (itemId: number, name: string, qty: number, isRoot: boolean) => {
     if (qty <= 0) return
     const node = nodeByOutput.get(itemId)
     // Leaf: no producing node, or a terminal node with no inputs.
     if (!node || node.inputs.length === 0) {
+      recordLeaf(itemId, name, qty, node)
+      return
+    }
+    // Gift-level: record this intermediate as a line item instead of expanding
+    // it (owned credit applied downstream, so record full qty here).
+    if (stopAtIntermediates && !isRoot) {
       recordLeaf(itemId, name, qty, node)
       return
     }
@@ -86,13 +100,50 @@ function flatten(
     const per = node.output.qty || 1
     const crafts = Math.ceil(need / per)
     for (const input of node.inputs) {
-      expand(input.itemId, input.name, crafts * input.qty)
+      expand(input.itemId, input.name, crafts * input.qty, false)
     }
     seen.delete(itemId)
   }
 
-  expand(piece.id, piece.name, 1)
+  expand(piece.id, piece.name, 1, true)
   return leaves
+}
+
+/** Build a RemainingMaterial from a flattened leaf, crediting owned once. */
+function toMaterial(
+  leaf: LeafAcc,
+  snapshot: InventorySnapshot,
+  prices: PriceMap,
+): RemainingMaterial {
+  const have = isSynthetic(leaf.itemId) ? 0 : snapshot[leaf.itemId] ?? 0
+  const remaining = Math.max(0, leaf.required - have)
+  const buyable = leafBuyable(leaf.itemId, leaf.node)
+  const gate = leafGate(leaf.itemId, leaf.node)
+  const unitPrice = buyable ? prices[leaf.itemId] : undefined
+  return {
+    itemId: leaf.itemId,
+    name: leaf.name,
+    required: leaf.required,
+    owned: Math.min(have, leaf.required),
+    remaining,
+    buyable,
+    timeGate: gate,
+    unitPrice,
+  }
+}
+
+/**
+ * Gift-level requirements: the direct inputs of a piece's final combine
+ * (gifts/intermediates + any top-level base mats), as RemainingMaterials.
+ * Reuses the same recipe walk and leaf classification as `computeProgress`.
+ */
+export function intermediateRequirements(
+  piece: LegendaryPiece,
+  snapshot: InventorySnapshot,
+  prices: PriceMap,
+): RemainingMaterial[] {
+  const leafMap = flatten(piece, snapshot, true)
+  return [...leafMap.values()].map((leaf) => toMaterial(leaf, snapshot, prices))
 }
 
 function isOwned(piece: LegendaryPiece, meta?: SyncMeta): boolean {
@@ -122,35 +173,21 @@ export function computeProgress(
   let gatedRemainW = 0
 
   for (const leaf of leafMap.values()) {
-    const have = isSynthetic(leaf.itemId) ? 0 : snapshot[leaf.itemId] ?? 0
-    const remaining = Math.max(0, leaf.required - have)
-    const buyable = leafBuyable(leaf.itemId, leaf.node)
-    const gate = leafGate(leaf.itemId, leaf.node)
-    const unitPrice = buyable ? prices[leaf.itemId] : undefined
+    const m = toMaterial(leaf, snapshot, prices)
+    materials.push(m)
 
-    materials.push({
-      itemId: leaf.itemId,
-      name: leaf.name,
-      required: leaf.required,
-      owned: Math.min(have, leaf.required),
-      remaining,
-      buyable,
-      timeGate: gate,
-      unitPrice,
-    })
+    qtyNeeded += m.required
+    qtyOwned += m.owned
 
-    qtyNeeded += leaf.required
-    qtyOwned += Math.min(have, leaf.required)
-
-    if (buyable && unitPrice != null) {
-      goldTotal += leaf.required * unitPrice
-      goldOwned += Math.min(have, leaf.required) * unitPrice
+    if (m.buyable && m.unitPrice != null) {
+      goldTotal += m.required * m.unitPrice
+      goldOwned += m.owned * m.unitPrice
     }
 
-    if (gate.isGated && gate.severity) {
-      const w = SEVERITY_WEIGHT[gate.severity]
-      gatedTotalW += w * leaf.required
-      gatedRemainW += w * remaining
+    if (m.timeGate.isGated && m.timeGate.severity) {
+      const w = SEVERITY_WEIGHT[m.timeGate.severity]
+      gatedTotalW += w * m.required
+      gatedRemainW += w * m.remaining
     }
   }
 

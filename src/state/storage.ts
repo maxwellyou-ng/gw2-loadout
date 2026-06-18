@@ -7,6 +7,7 @@ export const STORAGE_KEYS = {
   settings: `${PREFIX}settings`,
   sync: `${PREFIX}sync`,
   loadout: `${PREFIX}loadout`,
+  dailyLog: `${PREFIX}dailyLog`,
 } as const
 
 export function loadJSON<T>(key: string, fallback: T): T {

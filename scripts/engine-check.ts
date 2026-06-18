@@ -3,10 +3,24 @@
 // the buy-out split, and name-based owned detection — without a live API key.
 
 import { CATALOG, pieceByName } from '../src/data/recipes'
-import { computeProgress, mergeInventory } from '../src/engine'
+import {
+  computeProgress,
+  mergeInventory,
+  aggregateRequirements,
+  aggregateIntermediates,
+  intermediateRequirements,
+} from '../src/engine'
 import { DEFAULT_WEIGHTS } from '../src/types'
 import { ITEM, currency, CUR } from '../src/data/items'
 import type { SyncMeta } from '../src/types'
+import {
+  SLOT_ORDER,
+  buildSeedLoadout,
+  normalizeLoadout,
+  type Loadout,
+  type LoadoutSlot,
+} from '../src/data/loadout'
+import { encode, decode } from '../src/lib/buildcode'
 
 let failures = 0
 function check(label: string, cond: boolean, detail?: unknown) {
@@ -95,6 +109,116 @@ check('exists under verified name', !!eik)
 check('has achievement gate (Incursive Investigation)', hasAchievement === true)
 check('18-clover gate present', eikClover?.required === 18, eikClover?.required)
 check('clovers are time-gated (grind-only)', eikProg.remainingNonPurchasable.some((m) => m.itemId === ITEM.mysticClover))
+
+// --- 6. Whole-loadout aggregation: shared mats de-dup, owned subtracted once -
+// Incinerator (77 clovers) + Eikasia (18 clovers) share the Mystic Clover mat.
+// The aggregate required must be the *sum* (95), and owned is subtracted once.
+console.log('\nWhole-loadout aggregation:')
+const mkSlot = (over: Partial<LoadoutSlot> & { key: LoadoutSlot['key'] }): LoadoutSlot => {
+  const meta = SLOT_ORDER.find((s) => s.key === over.key)!
+  return {
+    key: over.key,
+    label: over.label ?? meta.label,
+    family: over.family ?? meta.family,
+    tracked: over.tracked ?? true,
+    flexible: over.flexible ?? false,
+    priority: over.priority ?? 1,
+    chosenPieceId: over.chosenPieceId ?? null,
+    candidateIds: over.candidateIds ?? [],
+  }
+}
+const incPiece = pieceByName('Incinerator')!
+const eikPiece = pieceByName('Eikasia, Mists-Grasper (Gloves)')!
+const aggSlots: LoadoutSlot[] = [
+  mkSlot({ key: 'weapon5', chosenPieceId: incPiece.id }),
+  mkSlot({ key: 'gloves', chosenPieceId: eikPiece.id }),
+  // Untracked slot with another clover piece — must NOT contribute.
+  mkSlot({ key: 'weapon1', chosenPieceId: anchor.id, tracked: false }),
+]
+const aggEmpty = aggregateRequirements(aggSlots, {}, {})
+const aggClover = aggEmpty.materials.find((m) => m.itemId === ITEM.mysticClover)
+// Exactly 77 + 18 — the untracked anchor (which also needs clovers) is excluded.
+check('aggregate clovers = 77 + 18, untracked excluded', aggClover?.required === 95, aggClover?.required)
+const aggOwned = aggregateRequirements(aggSlots, mergeInventory({ materials: [{ id: ITEM.mysticClover, count: 50 }] }), {})
+const aggCloverOwned = aggOwned.materials.find((m) => m.itemId === ITEM.mysticClover)
+check('owned subtracted once: 95 - 50 = 45', aggCloverOwned?.remaining === 45, aggCloverOwned?.remaining)
+check('aggregate time-gate debt includes clovers', aggOwned.timeGateDebt.some((d) => d.itemId === ITEM.mysticClover))
+
+// --- 7. Gift-level vs base-level granularity (feature 5) --------------------
+console.log('\nGift / intermediate granularity:')
+const incInter = intermediateRequirements(incPiece, {}, {})
+check('gift-level includes Gift of Fortune (direct combine input)', incInter.some((m) => m.itemId === ITEM.giftOfFortune))
+check('gift-level omits deep base mat (Vicious Fang inside the gift)', !incInter.some((m) => m.itemId === ITEM.viciousFang))
+check('base-level still includes Vicious Fang', incProg.remainingMaterials.some((m) => m.itemId === ITEM.viciousFang))
+// Two tracked slots needing the same gift sum to 2 (and stay at gift level —
+// no descent into the gift's base mats).
+const interAgg = aggregateIntermediates(
+  [mkSlot({ key: 'weapon5', chosenPieceId: incPiece.id }), mkSlot({ key: 'weapon6', chosenPieceId: incPiece.id })],
+  {},
+  {},
+)
+const aggFortune = interAgg.materials.find((m) => m.itemId === ITEM.giftOfFortune)
+check('two pieces needing a gift aggregate to 2 Gift of Fortune', aggFortune?.required === 2, aggFortune?.required)
+check('gift-level aggregate omits deep base mats', !interAgg.materials.some((m) => m.itemId === ITEM.viciousFang))
+
+// --- 8. normalizeLoadout: all 8 weapon slots + flexible boolean -------------
+console.log('\nnormalizeLoadout:')
+const normed = normalizeLoadout(buildSeedLoadout())
+const weaponSlots = normed.slots.filter((s) => s.family === 'weapon')
+check('exposes all 8 weapon slots', weaponSlots.length === 8, weaponSlots.length)
+check('every slot has a boolean flexible', normed.slots.every((s) => typeof s.flexible === 'boolean'))
+// Migrating a loadout missing weapon8 backfills it as a blank slot.
+const missing8 = normalizeLoadout({ name: 't', slots: normed.slots.filter((s) => s.key !== 'weapon8') })
+check('backfills missing weapon8', missing8.slots.some((s) => s.key === 'weapon8' && s.chosenPieceId === null))
+
+// --- 9. Build-code round-trip + v1 back-compat + no-key leakage (Phase 5) ---
+console.log('\nBuild code:')
+// A normalized loadout round-trips losslessly (label/family rehydrated from
+// SLOT_ORDER; decode also normalizes, so slot sets match exactly).
+const rtLoadout: Loadout = normalizeLoadout({
+  name: 'Round-trip test',
+  slots: [
+    mkSlot({ key: 'helm', priority: 1, chosenPieceId: pieceByName('Obsidian Helm')?.id ?? null }),
+    mkSlot({ key: 'chest', flexible: true, priority: 5, tracked: true, candidateIds: [incPiece.id, eikPiece.id] }),
+    mkSlot({ key: 'back', flexible: false, priority: 'defer', tracked: false }),
+  ],
+})
+const roundTripped = decode(encode(rtLoadout))
+const deepEqual = (a: unknown, b: unknown): boolean => {
+  if (a === b) return true
+  if (typeof a !== 'object' || typeof b !== 'object' || a == null || b == null) return false
+  const ka = Object.keys(a as object)
+  const kb = Object.keys(b as object)
+  if (ka.length !== kb.length) return false
+  return ka.every((k) => deepEqual((a as Record<string, unknown>)[k], (b as Record<string, unknown>)[k]))
+}
+check('decode(encode(x)) deep-equals x', deepEqual(roundTripped, rtLoadout))
+const code = encode(rtLoadout)
+check('build code is v2 version-prefixed', code.startsWith('gw2-v2.'), code.slice(0, 10))
+const fakeKey = 'ABCDEF12-3456-7890-ABCD-EF1234567890DEADBEEF'
+check('build code never contains an api key', !code.includes(fakeKey))
+check('decode rejects a garbage code', (() => { try { decode('not-a-code'); return false } catch { return true } })())
+
+// Legacy v1 codes (status index) still decode, mapping status->flexible.
+const b64url = (s: string) =>
+  Buffer.from(s, 'utf8').toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
+const v1code =
+  'gw2-v1.' +
+  b64url(
+    JSON.stringify({
+      n: 'Legacy',
+      s: [
+        { k: 'chest', c: null, s: 1, t: 1, p: 5, n: [] }, // status index 1 = 'flexible'
+        { k: 'helm', c: null, s: 0, t: 1, p: 1, n: [] }, // status index 0 = 'must-have'
+      ],
+    }),
+  )
+const v1decoded = decode(v1code)
+const v1chest = v1decoded.slots.find((s) => s.key === 'chest')
+const v1helm = v1decoded.slots.find((s) => s.key === 'helm')
+check("v1 'flexible' status -> flexible true", v1chest?.flexible === true)
+check("v1 'must-have' status -> flexible false", v1helm?.flexible === false)
+check('v1 tracked preserved', v1chest?.tracked === true)
 
 console.log(`\n${failures === 0 ? 'ALL CHECKS PASSED ✅' : `${failures} CHECK(S) FAILED ❌`}`)
 process.exit(failures === 0 ? 0 : 1)

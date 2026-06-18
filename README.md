@@ -4,8 +4,9 @@ A pure client-side SPA (React + Vite + Tailwind v4) that plans and tracks progre
 toward a Guild Wars 2 legendary loadout. Connect a read-only GW2 API key, sync, and
 see per-piece completion, time-gate debt, earliest finish dates, and buy-out estimates.
 
-This repo implements **Phases 1–2** of the build brief: the data spine (API client +
-curated recipe dataset) and a read-only tracker.
+This repo implements **Phases 1–5** of the build brief: the data spine (API client +
+curated recipe dataset), the read-only tracker, the daily dashboard + time-gate engine,
+flexible-slot comparison, whole-loadout material aggregation, and portable build codes.
 
 ## Run
 
@@ -37,14 +38,14 @@ src/
 
 ### Id-namespace convention
 
-The merged `owned[itemId]` snapshot keeps items, currencies, and unverified
+The merged `owned[itemId]` snapshot keeps items, currencies, and synthetic
 intermediates collision-free:
 
 | Range | Meaning |
 |---|---|
 | `0 … 7_999_999` | Real GW2 item ids |
 | `8_000_000 + currencyId` | Wallet currencies (`/v2/account/wallet`) |
-| `9_000_000 + n` | Synthetic intermediates (unverified gifts / precursors) |
+| `9_000_000 + n` | Synthetic intermediates (account-bound gifts / precursors consumed in the forge; not inventory-matchable) |
 
 ### Completion score
 
@@ -57,13 +58,33 @@ counted as 100% — so an unsynced account never looks falsely complete.
 ## Data accuracy (important)
 
 Per the brief's risk section, Mystic Forge recipes are hand-curated, not API-derived.
-**The well-known costed / time-gated leaves use real item ids and quantities**
-(Mystic Clovers, Mystic Coins, Globs of Ectoplasm, T6 fine mats, Obsidian Shards,
-Charged Quartz). **Piece-specific precursors / themed gifts and newer
-"Visions of Eternity"-era catalog entries are modeled as synthetic placeholders and
-ship `verified: false`** with a wiki link — the UI flags them as *unverified*. They
-must be cross-checked against the wiki and filled in (Phase 1 follow-up). Slot
-assignments for a few newer trinkets are likewise unconfirmed.
+Every recipe in the seed loadout plus the full trinket/back catalog was
+**cross-checked against the GW2 Wiki (2026-06-17/18)** and ships `verified: true` with a
+wiki link.
+
+- **All inventory-accumulating leaves use real, wiki-verified item ids and
+  quantities** — every tier of the eight fine-material lines (Claw/Fang/Scale/Bone,
+  Blood/Venom/Totem/Dust), plus Mystic Clovers/Coins, ecto, Obsidian Shards, Provisioner
+  Tokens, and the account mats the trees touch (Memory of Battle, Amalgamated Draconic
+  Lodestone/Rift Essence, Icy/Mystic Runestones, Certificates, etc.). On sync these
+  subtract correctly against your account.
+- **The shared forge gifts use real ids too** (Gift of Fortune, Mastery, Mystic Tribute,
+  Condensed Might/Magic, Might/Magic, Bloodstone Shard, Gift of War Prosperity, Gift of
+  Jade Mastery, Gift of Expertise, Gift of Magical/Mighty Prosperity), so a pre-built
+  gift sitting in your bank is matched rather than re-counted.
+- **Vendor-purchased items are fully costed** with dedicated vendor nodes: Gift of
+  Craftsmanship (50 Provisioner Tokens), Eldritch Scroll (50 Spirit Shards from Miyani),
+  Legendary War Insight (1,095 WvW Skirmish Claim Tickets), Certificate of Honor (500),
+  Certificate of Heroics (250), and Glob of Condensed Spirit Energy (100) — all wiki-
+  verified 2026-06-18. The engine expands these to their currency costs rather than
+  treating them as opaque leaves.
+- **Still synthetic by design:** per-map heart-vendor gifts, achievements, and precursors
+  that are *consumed in the forge* rather than stockpiled (e.g. the Aetheric Anchor
+  heart-vendor gifts, Gift of Exploration, weapon precursors, Draconic Tribute). Matching
+  these against inventory has no practical effect, so their ids were left unresolved.
+- **All catalog entries are `verified: true`.** Prismatic Champion's Regalia (2026-06-18):
+  confirmed as a direct achievement reward (Seasons of the Dragons, 24 Return
+  meta-achievements) — no Mystic Forge combine, no clover gate. Real api id 95380.
 
 ## Verification status (brief checklist)
 
@@ -71,12 +92,64 @@ assignments for a few newer trinkets are likewise unconfirmed.
 |---|---|
 | App builds without errors | ✅ `npm run build` clean |
 | Enter API key + Sync — no console errors | ✅ UI renders error-free; client has tolerant per-endpoint handling (needs a live key for a full end-to-end run) |
-| Material counts match in-game vault | ⏳ needs a live key; engine maps the real item ids and merges all sources |
-| Aetheric Anchor tree down to base mats | ✅ clovers (gated) + Mystic Tribute leaves + map-completion gifts; VoE specifics flagged unverified |
-| Owned legendary auto-shows "Done" | ✅ id + name match (`npm run check` covers it) |
-| Eikasia gloves achievement-gated, no forge | ✅ asserted in `npm run check` |
+| Material counts match in-game vault | ⏳ needs a live key; engine maps real item ids (all fine-mat tiers resolved) and merges all sources |
+| Aetheric Anchor tree down to base mats | ✅ wiki-verified: four VoE gifts; 100-clover gate inside Gift of Insight; dual spear+staff unlock |
+| Owned legendary auto-shows "Done" | ✅ real armory ids + name match (`npm run check` covers it) |
+| Eikasia gloves achievement-gated | ✅ wiki-verified: "Incursive Investigation" gate + 18-clover craft path (asserted in `npm run check`) |
+| All catalog entries verified | ✅ Prismatic Champion's Regalia resolved 2026-06-18 — last `verified: false` entry |
+| Recipe ingredient accuracy | ✅ Gift of Expertise (50 Obsidian Shard, not 600 ecto), Gift of Prosperity (no Provisioner Token in forge), Eikasia prosperity (Gift of Research added) — all corrected 2026-06-18 |
+| Vendor cost tracking | ✅ Gift of Craftsmanship (50 PT), Eldritch Scroll (50 Spirit Shards), WvW ticket items (LWI/Cert of Honor/Heroics/Glob) — all modeled as vendor nodes 2026-06-18 |
 
-## Not yet built (Phase 3+)
+## Planning layer (Phases 3–5)
 
-Daily "what to do" dashboard, flexible-slot comparison, whole-loadout aggregation,
-time-gate forecaster, build-code export/import, snapshot history.
+Built on top of the per-piece engine — every total routes through
+`engine/loadout-progress.ts` so untracked slots are excluded everywhere and shared
+materials (clovers feed many pieces) are de-duplicated.
+
+- **Dashboard** (`/dashboard`, default tab) — the daily "what to do": a time-gate
+  hygiene list of daily-capped mats to collect today (with a localStorage "collected
+  today" toggle — `gw2lt:dailyLog[itemId] = ISODate`, advisory only, never alters
+  computed counts), finish-line pushes for nearly-done pieces, and summary cards
+  (completion ring, nearest finishes, total time-gate debt). Honors `priority`; `'defer'`
+  slots sink to the bottom.
+- **Loadout** (`/loadout`) — editable. Each slot has two orthogonal toggles: **Tracked**
+  (counts toward Materials + dashboard totals, or hidden) and **Flexible** (you're weighing
+  candidates — surfaces the Compare link). There's no `status` enum: "done" is derived from
+  ownership, and an unchosen slot just renders blank. **Weapons** are compact and editable —
+  up to 8, each removable, with an "Add weapon" picker; empty weapon slots collapse.
+- **Materials** (`/materials`) — whole-loadout aggregation: every tracked piece rolled
+  into one master list keyed by itemId, required summed across pieces, owned subtracted
+  **once**, split gated / grind / buyable, with a total buy-out cost. A **Base materials ↔
+  Gifts & intermediates** view switch (`aggregateRequirements` vs `aggregateIntermediates`)
+  toggles granularity: the gift view stops at the final-combine inputs, so once a gift is
+  crafted and synced its base mats drop out. Every material name links to its GW2 wiki page
+  (`lib/format.ts` `wikiUrl`; synthetic intermediates have no link).
+- **Compare** (`/compare/:slotKey`) — side-by-side flexible-slot candidates ranked by
+  remaining time-gate days, then gold, then material overlap; recommends the lowest-effort
+  option and lets you pick the winner.
+- **Build codes** (`lib/buildcode.ts`) — `encode`/`decode` a compact, URL-safe, versioned
+  (`gw2-v2.…`) string of **goals only** (chosen pieces, tracked, flexible, priority,
+  candidates). Never includes the API key. Import/export lives in Settings. Legacy `gw2-v1.`
+  codes (which carried a `status` index) still decode — their status maps forward to the
+  `flexible` flag. Round-trip is lossless for the goal fields (presentational label/family
+  are rehydrated from `SLOT_ORDER` on decode, and the loadout is `normalizeLoadout`'d so all
+  eight weapon slots exist).
+
+### Custom-domain hosting (one-time DNS)
+
+`npm run deploy` builds with `base: /gw2-loadout/` and publishes `dist/` to the `gh-pages`
+branch. For a **custom domain** instead of `<user>.github.io/gw2-loadout/`:
+
+1. Build for the domain root: `VITE_BASE=/ npm run build` (the project `base` path is wrong
+   for an apex/subdomain).
+2. Add a `CNAME` file containing your domain (e.g. `loadout.example.com`) to `public/` so
+   it's copied into every `dist/` and survives redeploys.
+3. DNS: for a subdomain, add a `CNAME` record pointing to `<user>.github.io`; for an apex
+   domain, add GitHub Pages' `A`/`AAAA` records. Then set the custom domain in the repo's
+   **Settings → Pages**. Allow time for DNS propagation and the TLS cert to issue.
+
+## Not yet built (Phase 6, nice-to-have)
+
+Weighting sliders already ship in Settings. Still open: time-gate forecaster (project a
+whole-loadout finish date from adjustable pace assumptions) and snapshot history (chart
+momentum per piece per sync).

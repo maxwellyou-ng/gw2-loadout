@@ -1,5 +1,22 @@
 // Display formatting helpers.
 
+import { isSynthetic } from '../data/items'
+
+/**
+ * GW2 wiki URL for a material/ingredient, or null when there's no page to link
+ * (synthetic intermediates whose real item id isn't resolved). The wiki uses
+ * deterministic title URLs (spaces → underscores, percent-encoded otherwise,
+ * matching e.g. `Aurene%27s_Fang`). We strip a trailing parenthetical
+ * disambiguator we add for display (e.g. " (achievement)", " (base)", " (helm)")
+ * since it isn't part of the page title.
+ */
+export function wikiUrl(name: string, itemId: number): string | null {
+  if (isSynthetic(itemId)) return null
+  const title = name.replace(/\s*\([^)]*\)\s*$/, '').trim()
+  if (!title) return null
+  return `https://wiki.guildwars2.com/wiki/${encodeURIComponent(title).replace(/%20/g, '_')}`
+}
+
 /** Copper -> "12g 34s 56c" (GW2 coin: 1g = 100s = 10000c). */
 export function formatGold(copper: number): string {
   const c = Math.max(0, Math.round(copper))

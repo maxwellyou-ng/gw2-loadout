@@ -1,11 +1,12 @@
 // ---------------------------------------------------------------------------
 // Seed-loadout weapons (7 crafts -> 8 armory unlocks).
 //
-// Each tree models the Mystic Forge final combine. The costed, time-gated
-// commons (Gift of Fortune / Mystic Tribute -> clovers, T6, ecto, Mystic Coins;
-// Gift of Mastery -> Spirit Shards, Obsidian Shards) use real item ids. The
-// precursor and weapon-themed gift are synthetic intermediates pending wiki
-// cross-check; every tree carries verified:false + wikiUrl.
+// Each tree models the Mystic Forge final combine, wiki-verified 2026-06-17
+// (verified:true). Costed/time-gated commons (Gift of Fortune / Mystic Tribute /
+// Draconic Tribute -> clovers, T6, ecto, Mystic Coins; Gift of Mastery -> Spirit
+// Shards, Obsidian Shards) and the real armory ids are confirmed. Only the
+// precursor and weapon-themed gift INTERNAL sub-trees remain summarized as
+// synthetic intermediates (see node notes).
 // ---------------------------------------------------------------------------
 
 import type { LegendaryPiece, RecipeNode } from '../../types'
@@ -169,7 +170,7 @@ function gen3Weapon(opts: {
   const tribute = draconicTribute()
   const precursor = ref(synthetic(), opts.precursorName, 1)
   const themed = ref(synthetic(), opts.themedGiftName, 1)
-  const jade = ref(synthetic(), 'Gift of Jade Mastery', 1)
+  const jade = ref(ITEM.giftOfJadeMastery, 'Gift of Jade Mastery', 1) // id 96033, wiki-verified 2026-06-18
   const root = ref(opts.id, opts.name, 1)
   const nodes: RecipeNode[] = [
     node(root, [precursor, themed, times(tribute, 1), jade], { source: 'mystic-forge' }),

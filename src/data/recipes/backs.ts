@@ -1,8 +1,9 @@
 // ---------------------------------------------------------------------------
 // Full legendary back-item catalog (brief: ALL legendary back items).
 // Catalog reference: https://wiki.guildwars2.com/wiki/Legendary_back_item
-// Modeled like trinkets: dominant game-mode gate + shared clover gate where
-// applicable. verified:false pending wiki cross-check.
+// Modeled like trinkets: dominant game-mode gate + shared clover/Fortune/Draconic
+// gate. Ad Infinitum, The Ascension, Warbringer and Orrax Manifested are
+// wiki-verified (2026-06-17, verified:true) with their combine ingredients noted.
 // ---------------------------------------------------------------------------
 
 import type { AcquisitionMode, LegendaryPiece, RecipeNode } from '../../types'

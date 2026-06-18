@@ -7,7 +7,7 @@
 // ---------------------------------------------------------------------------
 
 import type { LegendaryPiece, RecipeNode } from '../../types'
-import { ITEM, synthetic } from '../items'
+import { ITEM, synthetic, currency, CUR } from '../items'
 import { ref, node, giftOfCondensedMight, giftOfCondensedMagic } from './_builders'
 
 // WvW shoulders — wiki-verified (2026-06-17). Final Mystic Forge combine:
@@ -22,7 +22,7 @@ import { ref, node, giftOfCondensedMight, giftOfCondensedMagic } from './_builde
 function wvwShoulders(): LegendaryPiece {
   const id = synthetic()
   const ascendedBase = ref(synthetic(), "Ascended Triumphant Hero's Shoulderguards (base)", 1)
-  const prosperity = ref(synthetic(), 'Gift of War Prosperity', 1) // id not verified -> synthetic
+  const prosperity = ref(ITEM.giftOfWarProsperity, 'Gift of War Prosperity', 1) // id 82746, wiki-verified 2026-06-18
   const prowess = ref(ITEM.giftOfWarProwess, 'Gift of War Prowess', 1) // id 84168
   const dedication = ref(ITEM.giftOfWarDedication, 'Gift of War Dedication', 1) // id 83259
   const cMight = giftOfCondensedMight()
@@ -38,6 +38,8 @@ function wvwShoulders(): LegendaryPiece {
       notes: 'Ascended base piece is a prerequisite tier (craft or WvW reward track)',
     }),
     // Prosperity: 15-clover time-gate + the two Condensed gifts.
+    // Wiki-verified recipe (2026-06-18): Gift of Battle + 15 Mystic Clovers +
+    //   Gift of Condensed Might + Gift of Condensed Magic.
     node(
       prosperity,
       [
@@ -68,6 +70,34 @@ function wvwShoulders(): LegendaryPiece {
       ],
       { source: 'mystic-forge', notes: 'Memories of Battle from WvW reward tracks' }
     ),
+    // Vendor cost nodes: surface ticket / scroll costs for material tracking
+    // Eldritch Scroll: 50 Spirit Shards from Miyani (wiki-verified 2026-06-18)
+    node(
+      ref(ITEM.eldritchScroll, 'Eldritch Scroll', 1),
+      [ref(currency(CUR.spiritShard), 'Spirit Shard', 50)],
+      { source: 'vendor', notes: 'Miyani / Mystic Forge Attendant: 50 Spirit Shards' }
+    ),
+    // WvW ticket items: all sold by War Razor / Burn Razor (WvW Skirmish Claim Tickets)
+    node(
+      ref(ITEM.legendaryWarInsight, 'Legendary War Insight', 1),
+      [ref(currency(CUR.wvwSkirmishClaimTicket), 'WvW Skirmish Claim Ticket', 1095)],
+      { source: 'vendor', notes: 'War Razor / Burn Razor vendor, 1,095 WvW Skirmish Claim Tickets' }
+    ),
+    node(
+      ref(ITEM.certificateOfHonor, 'Certificate of Honor', 1),
+      [ref(currency(CUR.wvwSkirmishClaimTicket), 'WvW Skirmish Claim Ticket', 500)],
+      { source: 'vendor', notes: 'War Razor / Burn Razor vendor, 500 WvW Skirmish Claim Tickets' }
+    ),
+    node(
+      ref(ITEM.certificateOfHeroics, 'Certificate of Heroics', 1),
+      [ref(currency(CUR.wvwSkirmishClaimTicket), 'WvW Skirmish Claim Ticket', 250)],
+      { source: 'vendor', notes: 'War Razor / Burn Razor vendor, 250 WvW Skirmish Claim Tickets' }
+    ),
+    node(
+      ref(ITEM.globOfCondensedSpiritEnergy, 'Glob of Condensed Spirit Energy', 1),
+      [ref(currency(CUR.wvwSkirmishClaimTicket), 'WvW Skirmish Claim Ticket', 100)],
+      { source: 'vendor', notes: 'War Razor / Burn Razor vendor, 100 WvW Skirmish Claim Tickets' }
+    ),
     ...cMight.nodes,
     ...cMagic.nodes,
   ]
@@ -95,11 +125,11 @@ function wvwShoulders(): LegendaryPiece {
 // Mystic Forge combine, and there is no 50,000-karma cost (that was wrong).
 // Per piece the heavy-line components are:
 //   Gift of (Mighty|Magical) Prosperity  [helm/shoulders/chest -> Magical;
-//       gloves/leggings/boots -> Mighty]  = Gift of Craftsmanship + 50
-//       Provisioner Tokens + 9 Mystic Clover + Gift of Condensed Might/Magic
-//       + Gift of Research
-//   Gift of Expertise = 12 Amalgamated Rift Essence + 600 Glob of Ectoplasm +
-//       Eldritch Scroll + Cube of Stabilized Dark Energy
+//       gloves/leggings/boots -> Mighty]  = Gift of Craftsmanship (vendor:
+//       50 Provisioner Tokens) + 9 Mystic Clover + Gift of Condensed
+//       Might/Magic + Gift of Research
+//   Gift of Expertise = 12 Amalgamated Rift Essence + 50 Obsidian Shard +
+//       Eldritch Scroll (vendor: 50 Spirit Shards) + Cube of Stabilized Dark Energy
 //   Gift of the Astral Ward = Skywatch/Amnytas/Inner Nayos map gifts + Gift of
 //       Persistence
 //   one Arcanum (per-slot collection unlock)
@@ -109,8 +139,12 @@ function obsidianPiece(name: string, type: string, slot: 'helm' | 'boots'): Lege
   // Gloves/leggings/boots use Mighty (Condensed Might); helm/shoulders/chest use Magical.
   const useMight = slot === 'boots'
   const condensed = useMight ? giftOfCondensedMight() : giftOfCondensedMagic()
-  const prosperity = ref(synthetic(), `Gift of ${useMight ? 'Mighty' : 'Magical'} Prosperity`, 1)
-  const expertise = ref(synthetic(), 'Gift of Expertise', 1)
+  const prosperity = ref(
+    useMight ? ITEM.giftOfMightyProsperity : ITEM.giftOfMagicalProsperity,
+    `Gift of ${useMight ? 'Mighty' : 'Magical'} Prosperity`,
+    1,
+  ) // ids 100933/100512, wiki-verified 2026-06-18
+  const expertise = ref(ITEM.giftOfExpertise, 'Gift of Expertise', 1) // id 100852, wiki-verified 2026-06-18
   const astralWard = ref(synthetic(), 'Gift of the Astral Ward', 1)
   const arcanum = ref(synthetic(), `Arcanum (${slot})`, 1)
   const root = ref(id, name, 1)
@@ -120,11 +154,13 @@ function obsidianPiece(name: string, type: string, slot: 'helm' | 'boots'): Lege
       discipline: 'Armorsmith 500 (Wizard’s Tower only)',
       notes: 'Final step is a normal craft, not a Mystic Forge combine.',
     }),
+    // Prosperity recipe (wiki-verified 2026-06-18): Gift of Craftsmanship +
+    //   9 Mystic Clovers + Gift of Condensed Might/Magic + Gift of Research.
+    //   (Provisioner Token was previously listed here in error.)
     node(
       prosperity,
       [
         ref(ITEM.giftOfCraftsmanship, 'Gift of Craftsmanship', 1),
-        ref(ITEM.provisionerToken, 'Provisioner Token', 50),
         ref(ITEM.mysticClover, 'Mystic Clover', 9),
         condensed.out,
         ref(ITEM.giftOfResearch, 'Gift of Research', 1),
@@ -135,7 +171,7 @@ function obsidianPiece(name: string, type: string, slot: 'helm' | 'boots'): Lege
       expertise,
       [
         ref(ITEM.amalgamatedRiftEssence, 'Amalgamated Rift Essence', 12),
-        ref(ITEM.ectoplasm, 'Glob of Ectoplasm', 600),
+        ref(ITEM.obsidianShard, 'Obsidian Shard', 50), // wiki-verified 2026-06-18; was wrongly 600 Glob of Ectoplasm
         ref(ITEM.eldritchScroll, 'Eldritch Scroll', 1),
         ref(ITEM.cubeOfStabilizedDarkEnergy, 'Cube of Stabilized Dark Energy', 1),
       ],
@@ -143,6 +179,19 @@ function obsidianPiece(name: string, type: string, slot: 'helm' | 'boots'): Lege
     ),
     node(astralWard, [], { source: 'collection', notes: 'SotO map gifts (Skywatch/Amnytas/Inner Nayos) + Gift of Persistence' }),
     node(arcanum, [], { source: 'collection', notes: 'Per-slot collection unlock, bought from Lyhr for a Lesser Vision Crystal' }),
+    // Vendor cost nodes: surface PT / Spirit Shard costs for material tracking
+    // Gift of Craftsmanship: 50 Provisioner Tokens (wiki-verified 2026-06-18)
+    node(
+      ref(ITEM.giftOfCraftsmanship, 'Gift of Craftsmanship', 1),
+      [ref(ITEM.provisionerToken, 'Provisioner Token', 50)],
+      { source: 'vendor', notes: '50 Provisioner Tokens; crafting provisioner vendors in major cities and SotO maps' }
+    ),
+    // Eldritch Scroll: 50 Spirit Shards from Miyani (wiki-verified 2026-06-18)
+    node(
+      ref(ITEM.eldritchScroll, 'Eldritch Scroll', 1),
+      [ref(currency(CUR.spiritShard), 'Spirit Shard', 50)],
+      { source: 'vendor', notes: 'Miyani / Mystic Forge Attendant: 50 Spirit Shards' }
+    ),
     ...condensed.nodes,
   ]
   return {
@@ -174,9 +223,9 @@ function obsidianPiece(name: string, type: string, slot: 'helm' | 'boots'): Lege
 function eikasiaGloves(): LegendaryPiece {
   const id = synthetic()
   const achievement = ref(synthetic(), 'Incursive Investigation (achievement)', 1)
-  const fractallineSpark = ref(synthetic(), 'Fractalline Spark', 1)
-  const magicalProsp = ref(synthetic(), 'Gift of Magical Prosperity', 1)
-  const mightyProsp = ref(synthetic(), 'Gift of Mighty Prosperity', 1)
+  const fractallineSpark = ref(synthetic(), 'Fractalline Spark', 1) // achievement reward; no stockpile-able id
+  const magicalProsp = ref(ITEM.giftOfMagicalProsperity, 'Gift of Magical Prosperity', 1) // id 100512
+  const mightyProsp = ref(ITEM.giftOfMightyProsperity, 'Gift of Mighty Prosperity', 1) // id 100933
   const cMagic = giftOfCondensedMagic()
   const cMight = giftOfCondensedMight()
   const root = ref(id, 'Eikasia, Mists-Grasper (Gloves)', 1)
@@ -193,14 +242,23 @@ function eikasiaGloves(): LegendaryPiece {
       source: 'achievement',
       notes: 'Infinite Recursion: collect 150 Fractalline Dust from Quickplay Fractals',
     }),
-    node(magicalProsp, [ref(ITEM.mysticClover, 'Mystic Clover', 9), cMagic.out, ref(ITEM.giftOfCraftsmanship, 'Gift of Craftsmanship', 1)], {
+    // Prosperity recipes wiki-verified 2026-06-18: Craftsmanship + 9 Clovers + Condensed gift + Research.
+    // (Gift of Research was previously missing from these nodes.)
+    node(magicalProsp, [ref(ITEM.giftOfCraftsmanship, 'Gift of Craftsmanship', 1), ref(ITEM.mysticClover, 'Mystic Clover', 9), cMagic.out, ref(ITEM.giftOfResearch, 'Gift of Research', 1)], {
       source: 'mystic-forge',
       notes: '9-clover gate',
     }),
-    node(mightyProsp, [ref(ITEM.mysticClover, 'Mystic Clover', 9), cMight.out, ref(ITEM.giftOfCraftsmanship, 'Gift of Craftsmanship', 1)], {
+    node(mightyProsp, [ref(ITEM.giftOfCraftsmanship, 'Gift of Craftsmanship', 1), ref(ITEM.mysticClover, 'Mystic Clover', 9), cMight.out, ref(ITEM.giftOfResearch, 'Gift of Research', 1)], {
       source: 'mystic-forge',
       notes: '9-clover gate',
     }),
+    // Vendor cost node: Gift of Craftsmanship costs 50 Provisioner Tokens
+    // (used in both magicalProsp and mightyProsp above; one node covers both)
+    node(
+      ref(ITEM.giftOfCraftsmanship, 'Gift of Craftsmanship', 1),
+      [ref(ITEM.provisionerToken, 'Provisioner Token', 50)],
+      { source: 'vendor', notes: '50 Provisioner Tokens; crafting provisioner vendors in major cities and SotO maps' }
+    ),
     ...cMagic.nodes,
     ...cMight.nodes,
   ]

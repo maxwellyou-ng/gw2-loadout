@@ -221,7 +221,7 @@ export function mysticTribute(): SubTree {
  * Draconic Tribute (Gen3 / End of Dragons Aurene weapons): 1 Gift of Condensed
  * Might + 1 Gift of Condensed Magic + 38 Mystic Clover + 5 Amalgamated Draconic
  * Lodestone. Wiki-verified (2026-06-17) — Gen3 weapons use this, NOT a Mystic
- * Tribute. (Amalgamated Draconic Lodestone id not yet verified -> synthetic.)
+ * Tribute. Draconic Tribute itself remains synthetic (its api id not yet confirmed).
  */
 export function draconicTribute(): SubTree {
   const cMight = giftOfCondensedMight()
@@ -249,9 +249,10 @@ export function draconicTribute(): SubTree {
 /**
  * Bloodstone Shard — 200 Spirit Shards at the Mystic Forge. Spirit Shards are
  * a wallet currency (handled as a currency-namespaced leaf in piece files).
+ * Real api id 20797, wiki-verified 2026-06-18.
  */
 export function bloodstoneShard(spiritShardLeaf: ItemRef): SubTree {
-  const out = ref(synthetic(), 'Bloodstone Shard', 1)
+  const out = ref(ITEM.bloodstoneShard, 'Bloodstone Shard', 1)
   return {
     out,
     nodes: [node(out, [spiritShardLeaf], { source: 'mystic-forge' })],

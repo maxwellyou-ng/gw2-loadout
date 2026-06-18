@@ -38,7 +38,9 @@ export const CUR = {
   wvwSkirmishClaimTicket: 26,
   badgeOfHonor: 15,
   magnetiteShard: 28, // raid
-  testimonyOfHeroics: 26, // (placeholder grouping; WvW)
+  // TODO: testimonyOfHeroics id needs wiki verification — 26 is wrong (duplicate
+  // of wvwSkirmishClaimTicket). PvP legendary currency; correct id TBD.
+  // testimonyOfHeroics: ???,
 } as const
 
 // --- Well-known real item ids (high confidence) ----------------------------
@@ -135,6 +137,17 @@ export const ITEM = {
   fractallineDust: 105336,
   giftOfWarProwess: 84168,
   giftOfWarDedication: 83259,
+
+  // --- Legendary trinkets with real armory ids ------------------------------
+  prismaticChampionsRegalia: 95380, // api id from wiki infobox (2026-06-18)
+
+  // --- Legendary crafting intermediates (wiki-verified 2026-06-18) ----------
+  bloodstoneShard: 20797,          // Trophy; bought from Miyani / Mystic Forge for 200 Spirit Shards
+  giftOfWarProsperity: 82746,      // WvW armor gift; forged: Gift of Battle + 15 Clovers + 2 Condensed gifts
+  giftOfJadeMastery: 96033,        // EoD Gen3 mastery gift; forged: Dragon Empire + Bloodstone Shard + Cantha + 100 Antique Summoning Stone
+  giftOfExpertise: 100852,         // SotO; forged: 12 Rift Essence + Eldritch Scroll + 50 Obsidian Shard + Cube Dark Energy
+  giftOfMagicalProsperity: 100512, // SotO Obsidian / Eikasia (head/shoulder/chest); forged: Craftsmanship + 9 Clovers + Condensed Magic + Research
+  giftOfMightyProsperity: 100933,  // SotO Obsidian / Eikasia (boots/gloves/legs); forged: Craftsmanship + 9 Clovers + Condensed Might + Research
 } as const
 
 export interface GatedMaterialInfo {
