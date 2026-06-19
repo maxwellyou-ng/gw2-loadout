@@ -32,9 +32,18 @@ class Gw2ApiError extends Error {
 }
 
 async function get<T>(path: string, key?: string): Promise<T> {
-  const headers: Record<string, string> = { Accept: 'application/json' }
-  if (key) headers.Authorization = `Bearer ${key}`
-  const res = await fetch(`${BASE}${path}`, { headers })
+  // Pass the key as the `access_token` query param rather than an
+  // `Authorization: Bearer` header. The header is a non-safelisted CORS header,
+  // which forces the browser to send a preflight OPTIONS — and api.guildwars2.com
+  // returns 404 (no CORS headers) for OPTIONS, so the real request is blocked
+  // with "Failed to fetch". The query param keeps the request "simple" (only the
+  // safelisted Accept header) so no preflight is triggered. ArenaNet documents
+  // and supports access_token for exactly this reason.
+  const url = `${BASE}${path}`
+  const sep = url.includes('?') ? '&' : '?'
+  const res = await fetch(key ? `${url}${sep}access_token=${encodeURIComponent(key)}` : url, {
+    headers: { Accept: 'application/json' },
+  })
   if (!res.ok) throw new Gw2ApiError(path, res.status)
   return res.json() as Promise<T>
 }

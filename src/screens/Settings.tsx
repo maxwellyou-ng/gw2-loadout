@@ -6,7 +6,34 @@ import { formatRelative } from '../lib/format'
 import { DEFAULT_WEIGHTS } from '../types'
 import { encode, decode } from '../lib/buildcode'
 
-const REQUIRED_SCOPES = ['account', 'inventories', 'wallet', 'unlocks', 'characters', 'progression']
+// Ordered as they appear on the GW2 account site (account.arena.net/applications),
+// each paired with ArenaNet's own description of the scope.
+const REQUIRED_SCOPES_INFO: { scope: string; description: string }[] = [
+  {
+    scope: 'account',
+    description:
+      'Your account display name, ID, home world, and list of guilds. Required permission.',
+  },
+  {
+    scope: 'inventories',
+    description:
+      'Your account bank, material storage, recipe unlocks, and character inventories.',
+  },
+  { scope: 'characters', description: 'Basic information about your characters.' },
+  { scope: 'wallet', description: "Your account's wallet." },
+  {
+    scope: 'unlocks',
+    description:
+      'Your wardrobe unlocks—skins, dyes, minipets, finishers, etc.—and currently equipped skins.',
+  },
+  {
+    scope: 'progression',
+    description:
+      'Your achievements, dungeon unlock status, mastery point assignments, and general PvE progress.',
+  },
+]
+
+const REQUIRED_SCOPES = REQUIRED_SCOPES_INFO.map((s) => s.scope)
 
 export default function Settings() {
   const {
@@ -39,8 +66,20 @@ export default function Settings() {
       const info = await validateKey(keyInput.trim())
       setApiKey(keyInput.trim())
       setValidation({ state: 'ok', name: info.name, permissions: info.permissions })
-    } catch {
-      setValidation({ state: 'error', message: 'Key invalid or unreachable.' })
+    } catch (e) {
+      let message = 'Key invalid or unreachable.'
+      if (e && typeof e === 'object' && 'status' in e) {
+        const status = (e as { status: number }).status
+        if (status === 401)
+          message = 'Key rejected (401) — check you pasted the full key with no extra spaces.'
+        else if (status === 403)
+          message = 'Key forbidden (403) — it may be missing required permissions.'
+        else message = `GW2 API returned ${status}.`
+      } else if (e instanceof TypeError) {
+        message =
+          'Could not reach the GW2 API — check your connection, VPN, or an ad/script blocker that may be blocking api.guildwars2.com.'
+      }
+      setValidation({ state: 'error', message })
     }
   }
 
@@ -89,9 +128,17 @@ export default function Settings() {
           >
             account.arena.net/applications
           </a>{' '}
-          with scopes: {REQUIRED_SCOPES.map((s) => <Badge key={s}>{s}</Badge>)}. It's stored only in
-          this browser's localStorage and never sent anywhere but the official GW2 API.
+          with the permissions below. It's stored only in this browser's localStorage and never sent
+          anywhere but the official GW2 API.
         </p>
+        <ul className="mb-3 space-y-2 text-sm text-muted">
+          {REQUIRED_SCOPES_INFO.map(({ scope, description }) => (
+            <li key={scope} className="flex flex-wrap items-baseline gap-2">
+              <Badge>{scope}</Badge>
+              <span>{description}</span>
+            </li>
+          ))}
+        </ul>
         <div className="flex flex-wrap gap-2">
           <input
             type="password"
