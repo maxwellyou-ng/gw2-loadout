@@ -198,7 +198,7 @@ export default function Settings() {
       <Card>
         <h2 className="mb-1 text-lg font-semibold text-ink">Share your loadout</h2>
         <p className="mb-4 text-sm text-muted">
-          A build code captures only your slot goals (chosen pieces, status, priority, candidates)
+          A build code captures only your slot goals (chosen pieces, tracked, flexible, priority, candidates)
           — never your API key or account data. Share it or save it as a backup.
         </p>
 

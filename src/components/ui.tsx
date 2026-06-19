@@ -130,7 +130,8 @@ export function Ring({
     pct >= 0.999 ? 'text-good' : pct >= 0.66 ? 'text-accent' : pct >= 0.33 ? 'text-warn' : 'text-bad'
   return (
     <div className="relative inline-flex items-center justify-center" style={{ width: size, height: size }}>
-      <svg width={size} height={size} className="-rotate-90">
+      <svg width={size} height={size} className="-rotate-90" role="img" aria-label={`${formatPercent(pct)} complete`}>
+        <title>{formatPercent(pct)} complete</title>
         <circle
           cx={size / 2}
           cy={size / 2}

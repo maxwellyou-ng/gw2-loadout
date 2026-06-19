@@ -29,6 +29,8 @@ function SlotToggles({ slot }: { slot: LoadoutSlot }) {
     <div className="flex gap-1.5">
       <button
         type="button"
+        aria-pressed={slot.tracked}
+        aria-label={`Tracked: ${slot.label}`}
         onClick={() => setSlotTracked(slot.key, !slot.tracked)}
         className={pill(slot.tracked)}
         title={slot.tracked ? 'Counts in totals — click to hide' : 'Hidden from totals — click to track'}
@@ -37,6 +39,8 @@ function SlotToggles({ slot }: { slot: LoadoutSlot }) {
       </button>
       <button
         type="button"
+        aria-pressed={slot.flexible}
+        aria-label={`Flexible: ${slot.label}`}
         onClick={() => setSlotFlexible(slot.key, !slot.flexible)}
         className={pill(slot.flexible)}
         title="Weighing candidates for this slot"

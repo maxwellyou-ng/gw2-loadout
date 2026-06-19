@@ -8,6 +8,8 @@ export const STORAGE_KEYS = {
   sync: `${PREFIX}sync`,
   loadout: `${PREFIX}loadout`,
   dailyLog: `${PREFIX}dailyLog`,
+  paceOverrides: `${PREFIX}paceOverrides`,
+  history: `${PREFIX}history`,
 } as const
 
 export function loadJSON<T>(key: string, fallback: T): T {

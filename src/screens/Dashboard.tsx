@@ -138,7 +138,7 @@ export default function Dashboard() {
                 const piece = CATALOG_BY_ID[slot.chosenPieceId!]
                 return (
                   <li key={slot.key} className="flex items-center justify-between gap-2 text-sm">
-                    <Link to={`/piece/${piece.id}`} className="min-w-0 truncate text-ink hover:text-accent">
+                    <Link to={`/piece/${piece.id}`} title={piece.name} className="min-w-0 truncate text-ink hover:text-accent">
                       {piece.name}
                     </Link>
                     <span className="shrink-0 text-muted">

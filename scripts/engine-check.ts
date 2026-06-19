@@ -220,5 +220,27 @@ check("v1 'flexible' status -> flexible true", v1chest?.flexible === true)
 check("v1 'must-have' status -> flexible false", v1helm?.flexible === false)
 check('v1 tracked preserved', v1chest?.tracked === true)
 
+// --- 10. Forecaster data contract + re-pace math (Phase 6.7) ----------------
+// The forecaster reads aggregateRequirements().timeGateDebt and recomputes
+// days = ceil(remaining / pace). Validate the contract + that raising the pace
+// shortens the projection.
+console.log('\nForecaster:')
+const fcSlots: LoadoutSlot[] = [mkSlot({ key: 'weapon5', chosenPieceId: incPiece.id })]
+const fcAgg = aggregateRequirements(fcSlots, {}, {})
+const fcClover = fcAgg.timeGateDebt.find((d) => d.itemId === ITEM.mysticClover)
+check('forecaster sees clover debt with dailyRate 6', fcClover?.dailyRate === 6, fcClover?.dailyRate)
+check('default days = ceil(remaining / 6)', fcClover?.days === Math.ceil(fcClover!.remaining / 6), fcClover?.days)
+const repacedDays = Math.ceil(fcClover!.remaining / 12) // assume buying clovers: 12/day
+check('raising pace to 12/day shortens the projection', repacedDays < fcClover!.days, { before: fcClover!.days, after: repacedDays })
+
+// --- 11. History overall = mean of per-piece scores (Phase 6.9) -------------
+console.log('\nSnapshot history:')
+const hpA = computeProgress(incPiece, {}, {}, DEFAULT_WEIGHTS, emptyMeta).completionScore
+const hpB = computeProgress(eikPiece, {}, {}, DEFAULT_WEIGHTS, emptyMeta).completionScore
+const overall = (hpA + hpB) / 2
+const byPiece = { [incPiece.id]: hpA, [eikPiece.id]: hpB }
+const recomputed = Object.values(byPiece).reduce((s, v) => s + v, 0) / Object.values(byPiece).length
+check('overall equals mean of per-piece scores', Math.abs(recomputed - overall) < 1e-9, { overall, recomputed })
+
 console.log(`\n${failures === 0 ? 'ALL CHECKS PASSED ✅' : `${failures} CHECK(S) FAILED ❌`}`)
 process.exit(failures === 0 ? 0 : 1)

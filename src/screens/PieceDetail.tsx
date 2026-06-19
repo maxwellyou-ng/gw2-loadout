@@ -151,8 +151,9 @@ export default function PieceDetail() {
         <EmptyState title="Already unlocked in your armory 🎉" />
       ) : (
         <>
-          {/* Buy-out callout — timed per Section 6.5. */}
-          {progress.remainingMaterials.length > 0 && (
+          {/* Buy-out callout — timed per Section 6.5. Suppressed pre-sync when
+              there are no prices (buyOutGold === 0 and not finishable). */}
+          {(progress.finishableByGold || progress.buyOutGold > 0) && (
             <Card
               className={
                 progress.finishableByGold ? 'border-good/50 bg-good/5' : 'border-line'

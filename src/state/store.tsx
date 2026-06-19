@@ -9,6 +9,7 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
   type ReactNode,
 } from 'react'
@@ -28,7 +29,7 @@ import {
   type LoadoutSlot,
 } from '../data/loadout'
 import type { SlotKey } from '../types'
-import { computeProgress } from '../engine'
+import { computeProgress, plannedSlots } from '../engine'
 import { syncAccount } from '../api/gw2'
 import { STORAGE_KEYS, loadJSON, saveJSON } from './storage'
 
@@ -37,6 +38,13 @@ interface SyncState {
   prices: PriceMap
   meta: SyncMeta
   warnings: string[]
+}
+
+/** One logged sync, for the snapshot-history momentum chart. */
+export interface HistoryEntry {
+  ts: string // ISO sync timestamp
+  overall: number // mean completion across tracked+chosen slots (0..1)
+  byPiece: Record<number, number> // pieceId -> completionScore
 }
 
 interface AppState {
@@ -153,6 +161,30 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
     return out
   }, [sync, settings.weights])
+
+  // Snapshot history: log one record per *new* sync timestamp. Guarded by a ref
+  // so re-renders (weight tweaks, loadout edits) don't re-log the same sync.
+  const lastLoggedTs = useRef<string | null>(
+    loadJSON<HistoryEntry[]>(STORAGE_KEYS.history, []).at(-1)?.ts ?? null,
+  )
+  useEffect(() => {
+    const ts = sync?.meta.lastSynced
+    if (!ts || ts === lastLoggedTs.current) return
+    const planned = plannedSlots(loadout)
+    const byPiece: Record<number, number> = {}
+    let sum = 0
+    for (const slot of planned) {
+      const p = progressByPiece[slot.chosenPieceId!]
+      if (!p) continue
+      byPiece[p.pieceId] = p.completionScore
+      sum += p.completionScore
+    }
+    const overall = planned.length ? sum / planned.length : 0
+    const hist = loadJSON<HistoryEntry[]>(STORAGE_KEYS.history, [])
+    const next = [...hist.filter((h) => h.ts !== ts), { ts, overall, byPiece }].slice(-100)
+    saveJSON(STORAGE_KEYS.history, next)
+    lastLoggedTs.current = ts
+  }, [sync, progressByPiece, loadout])
 
   const value: AppState = {
     settings,

@@ -8,6 +8,20 @@ This repo implements **Phases 1–5** of the build brief: the data spine (API cl
 curated recipe dataset), the read-only tracker, the daily dashboard + time-gate engine,
 flexible-slot comparison, whole-loadout material aggregation, and portable build codes.
 
+### Core idea
+
+Every tracked piece carries two deliberately-different numbers:
+
+- **Completion score** — a time-weighted measure of how *close* you are (slow, daily-capped
+  materials count for far more than cheap bulk).
+- **Earliest finish date** — the soonest you could *actually* equip it, limited by
+  daily-capped materials.
+
+A piece can be 95% complete by quantity yet weeks out because it still needs Mystic Clovers
+you can only earn a few a day. Surfacing both — and the gap between them — is the whole
+point: start slow grinds early, spend active sessions finishing near-done pieces. The
+Dashboard and Forecast are built around this.
+
 ## Run
 
 ```bash
@@ -35,6 +49,39 @@ src/
   components/    Layout/nav + shared UI
   screens/       Loadout grid · Piece detail · Settings
 ```
+
+### GW2 API
+
+The client (`src/api/gw2.ts`) uses one read-only key with scopes
+`account, inventories, wallet, unlocks, characters, progression`, and merges these endpoints
+into a single `owned[itemId]` snapshot:
+
+| Endpoint | Supplies |
+|---|---|
+| `/v2/account/materials` | Material vault (clovers, ecto, T6, Mystic Coins, …) |
+| `/v2/account/wallet` | Currencies (gold, spirit shards, map/WvW/Fractal currencies) |
+| `/v2/account/bank`, `/v2/account/inventory` | Bank + shared slots (finished gifts, stray stacks) |
+| `/v2/characters/:id/inventory` + `/equipment` | Per-character bags and equipped items |
+| `/v2/account/legendaryarmory` | Already-unlocked legendaries → auto-mark "Done" |
+| `/v2/account/achievements` | Collection/achievement progress for gated pieces |
+| `/v2/commerce/prices` | Live TP prices for buy-out estimates |
+
+Rate limit ~600 req/min; a sync is a handful of cacheable calls, refreshed on demand. Each
+endpoint is fetched tolerantly — a failure is collected as a warning rather than aborting the
+sync.
+
+### localStorage keys
+
+All state is browser-local (`src/state/storage.ts`):
+
+| Key | Holds |
+|---|---|
+| `gw2lt:settings` | API key + completion weights |
+| `gw2lt:sync` | Last merged snapshot, prices, sync meta |
+| `gw2lt:loadout` | Your slots/goals |
+| `gw2lt:dailyLog` | Dashboard "collected today" marks |
+| `gw2lt:paceOverrides` | Forecast per-material pace overrides |
+| `gw2lt:history` | Snapshot-history records (one per sync) |
 
 ### Id-namespace convention
 
@@ -86,6 +133,16 @@ wiki link.
   confirmed as a direct achievement reward (Seasons of the Dragons, 24 Return
   meta-achievements) — no Mystic Forge combine, no clover gate. Real api id 95380.
 
+## Caveats
+
+- **Use a read-only key** and keep the app free of third-party scripts — there's no server,
+  so the key stays in your browser, but anything running on the page can read localStorage.
+  Build codes deliberately exclude the key, so sharing one is safe.
+- **Inventory items are the source of truth.** The API can't report mid-forge progress, so a
+  partially-built gift only counts once it exists as an item in your account.
+- **Recipes are hand-curated and versioned** (the Mystic Forge isn't exposed by the API);
+  they need a re-check when new content ships. See "Data accuracy" above.
+
 ## Verification status (brief checklist)
 
 | Check | Status |
@@ -134,6 +191,14 @@ materials (clovers feed many pieces) are de-duplicated.
   `flexible` flag. Round-trip is lossless for the goal fields (presentational label/family
   are rehydrated from `SLOT_ORDER` on decode, and the loadout is `normalizeLoadout`'d so all
   eight weapon slots exist).
+- **Forecast** (`/forecast`) — time-gate forecaster: a what-if over the de-duplicated
+  whole-loadout time-gate debt. Adjust the assumed daily pace per gated material (sliders)
+  and the projected whole-loadout finish date moves; the binding (slowest) material is
+  highlighted. Pace overrides persist in `gw2lt:paceOverrides` (advisory; never alters
+  computed counts).
+- **History** (`/history`) — snapshot momentum. The store logs one record per new sync
+  (`gw2lt:history`: `{ ts, overall, byPiece }`); the screen charts overall completion across
+  syncs (inline SVG) and shows a per-piece Δ-since-last-sync table.
 
 ### Custom-domain hosting (one-time DNS)
 
@@ -148,8 +213,10 @@ branch. For a **custom domain** instead of `<user>.github.io/gw2-loadout/`:
    domain, add GitHub Pages' `A`/`AAAA` records. Then set the custom domain in the repo's
    **Settings → Pages**. Allow time for DNS propagation and the TLS cert to issue.
 
-## Not yet built (Phase 6, nice-to-have)
+## Phase 6 (polish) — shipped
 
-Weighting sliders already ship in Settings. Still open: time-gate forecaster (project a
-whole-loadout finish date from adjustable pace assumptions) and snapshot history (chart
-momentum per piece per sync).
+Weighting sliders (Settings), the time-gate **forecaster** (`/forecast`), and **snapshot
+history** (`/history`) are all built. Remaining open work is data accuracy and catalog reach,
+not features — see [TODO.md](TODO.md) (unresolved PvP `testimonyOfHeroics` currency id;
+precursor and weapon-themed-gift sub-trees still summarized as synthetic leaves; Draconic
+Tribute id).
