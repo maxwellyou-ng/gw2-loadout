@@ -1,0 +1,238 @@
+{
+  "category": "trinkets",
+  "generatedAt": "2026-06-19T06:58:14.187Z",
+  "sourcePages": [
+    "Legendary trinket"
+  ],
+  "entries": [
+    {
+      "name": "Aurora",
+      "apiId": 81908,
+      "slot": "trinkets",
+      "type": "Accessory",
+      "generation": null,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Aurora",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "9cad03ea55123d63",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Spark of Sentience"
+        },
+        {
+          "qty": 1,
+          "name": "Mystic Tribute"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Sentience"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Draconic Mastery"
+        }
+      ]
+    },
+    {
+      "name": "Coalescence",
+      "apiId": 91234,
+      "slot": "trinkets",
+      "type": "Ring",
+      "generation": null,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Coalescence",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "137cde4eeccd2fd4",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Hateful Sworl"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Patience"
+        },
+        {
+          "qty": 1,
+          "name": "Mystic Tribute"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Compassion"
+        }
+      ]
+    },
+    {
+      "name": "Vision",
+      "apiId": 91048,
+      "slot": "trinkets",
+      "type": "Accessory",
+      "generation": null,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Vision",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "f35145b34056d4fc",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Glimpse"
+        },
+        {
+          "qty": 1,
+          "name": "Mystic Tribute"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Prescience"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Arid Mastery"
+        }
+      ]
+    },
+    {
+      "name": "Transcendence",
+      "apiId": 92991,
+      "slot": "trinkets",
+      "type": "Amulet",
+      "generation": null,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Transcendence",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "367ec706fedf2477",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of the Champion"
+        },
+        {
+          "qty": 1,
+          "name": "Mist Pendant"
+        },
+        {
+          "qty": 1,
+          "name": "Mystic Tribute"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Skirmishing"
+        }
+      ]
+    },
+    {
+      "name": "Conflux",
+      "apiId": 93105,
+      "slot": "trinkets",
+      "type": "Ring",
+      "generation": null,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Conflux",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "eeeee6bacd4e280d",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of the World"
+        },
+        {
+          "qty": 1,
+          "name": "Mist Band (Infused)"
+        },
+        {
+          "qty": 1,
+          "name": "Mystic Tribute"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Conquering"
+        }
+      ]
+    },
+    {
+      "name": "Prismatic Champion's Regalia",
+      "apiId": 95380,
+      "slot": "trinkets",
+      "type": "Amulet",
+      "generation": null,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Prismatic_Champion's_Regalia",
+      "confidence": "low",
+      "source": "auto",
+      "wikitextHash": "650a57821fe7581b",
+      "components": [],
+      "parseNote": "no {{recipe}} template found (likely achievement reward, set, or non-standard layout)"
+    },
+    {
+      "name": "Endless Summer",
+      "apiId": 107022,
+      "slot": "trinkets",
+      "type": "Ring",
+      "generation": null,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Endless_Summer",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "2b723b4129a1d27a",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Rays"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Survivors"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the People"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Hylek"
+        }
+      ]
+    },
+    {
+      "name": "Stella Radians",
+      "apiId": 109070,
+      "slot": "trinkets",
+      "type": "Accessory",
+      "generation": null,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Stella_Radians",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "811c660201c1aab1",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Mystic Tribute"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Galdra"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Shadowstones"
+        },
+        {
+          "qty": 1,
+          "name": "Vial of Liquid Shadowstone"
+        }
+      ]
+    },
+    {
+      "name": "Strife Unending",
+      "apiId": 109012,
+      "slot": "trinkets",
+      "type": "Accessory",
+      "generation": null,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Strife_Unending",
+      "confidence": "low",
+      "source": "auto",
+      "wikitextHash": "355e03e4bf7a75eb",
+      "components": [],
+      "parseNote": "no {{recipe}} template found (likely achievement reward, set, or non-standard layout)"
+    }
+  ]
+}

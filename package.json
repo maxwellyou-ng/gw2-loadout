@@ -5,9 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && npm run wiki:check && vite build",
     "lint": "eslint .",
     "check": "tsx scripts/engine-check.ts",
+    "wiki:fetch": "tsx scripts/wiki-sync/snapshot.ts",
+    "wiki:report": "tsx scripts/wiki-sync/report.ts",
+    "wiki:check": "tsx scripts/wiki-sync/check.ts",
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"

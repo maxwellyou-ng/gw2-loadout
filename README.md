@@ -27,8 +27,9 @@ Dashboard and Forecast are built around this.
 ```bash
 npm install
 npm run dev        # http://localhost:5173
-npm run build      # type-check + production build (base: /gw2-loadout/)
+npm run build      # type-check + wiki:check + production build (base: /gw2-loadout/)
 npm run check      # engine sanity checks (no API key needed)
+npm run wiki:check # gate: catalog must match the committed wiki snapshot
 npm run deploy     # build + publish dist/ to gh-pages
 ```
 
@@ -132,6 +133,27 @@ wiki link.
 - **All catalog entries are `verified: true`.** Prismatic Champion's Regalia (2026-06-18):
   confirmed as a direct achievement reward (Seasons of the Dragons, 24 Return
   meta-achievements) — no Mystic Forge combine, no clover gate. Real api id 95380.
+
+### Wiki reconciliation (automated drift gate)
+
+Hand cross-checking is now backed by an automated, re-runnable system in
+[`scripts/wiki-sync/`](scripts/wiki-sync/README.md) that treats the GW2 Wiki as the
+single source of truth and **prevents the catalog from silently deviating from it**:
+
+- `npm run wiki:fetch` re-downloads the four legendary list pages + each item page from
+  the MediaWiki API and rebuilds a **committed snapshot** (`scripts/wiki-sync/snapshot/*.json`)
+  of what the wiki says each legendary requires (id + top-level recipe components).
+- `npm run wiki:report` prints a drift report: which legendaries are missing from the
+  catalog, which ids/recipes/quantities disagree with the wiki, and what to change.
+- `npm run wiki:check` is a pure, offline gate wired into `npm run build`. It fails on any
+  drift not acknowledged in `scripts/wiki-sync/baseline.json`, and enforces that any
+  `verified: true` recipe **exactly matches** its high-confidence wiki snapshot — so a
+  verified entry cannot drift without breaking the build.
+
+Coverage as installed: the wiki lists ~74 legendaries; the catalog authors 24. The gap and
+the current trinket/back recipe simplifications are recorded in `baseline.json` (reviewable
+in git) so the gate is green today and only *new* divergence fails. Run `wiki:fetch`
+after game updates; see [scripts/wiki-sync/README.md](scripts/wiki-sync/README.md).
 
 ## Caveats
 

@@ -1,0 +1,1589 @@
+{
+  "category": "weapons",
+  "generatedAt": "2026-06-19T06:58:14.183Z",
+  "sourcePages": [
+    "Legendary weapon",
+    "Legendary weapon/table"
+  ],
+  "entries": [
+    {
+      "name": "Frostfang",
+      "apiId": 30684,
+      "slot": "weapons",
+      "type": "Axe",
+      "generation": "Generation 1",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Frostfang",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "7ce1a05e267cf81b",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Tooth of Frostfang"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Frostfang"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Fortune"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Mastery"
+        }
+      ]
+    },
+    {
+      "name": "Incinerator",
+      "apiId": 30687,
+      "slot": "weapons",
+      "type": "Dagger",
+      "generation": "Generation 1",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Incinerator",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "aafcc4860aa35b9a",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Spark (weapon)"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Incinerator"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Fortune"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Mastery"
+        }
+      ]
+    },
+    {
+      "name": "The Moot",
+      "apiId": 30692,
+      "slot": "weapons",
+      "type": "Mace",
+      "generation": "Generation 1",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/The_Moot",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "a126e99308de2a7a",
+      "components": [
+        {
+          "qty": 1,
+          "name": "The Energizer"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of The Moot"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Fortune"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Mastery"
+        }
+      ]
+    },
+    {
+      "name": "Quip",
+      "apiId": 30693,
+      "slot": "weapons",
+      "type": "Pistol",
+      "generation": "Generation 1",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Quip",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "4de21b1eba274d5d",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Chaos Gun"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Quip"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Fortune"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Mastery"
+        }
+      ]
+    },
+    {
+      "name": "Meteorlogicus",
+      "apiId": 30695,
+      "slot": "weapons",
+      "type": "Scepter",
+      "generation": "Generation 1",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Meteorlogicus",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "fda9d944d34c790f",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Storm"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Meteorlogicus"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Fortune"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Mastery"
+        }
+      ]
+    },
+    {
+      "name": "Bolt",
+      "apiId": 30699,
+      "slot": "weapons",
+      "type": "Sword",
+      "generation": "Generation 1",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Bolt",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "470f28002be16c13",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Zap"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Bolt"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Fortune"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Mastery"
+        }
+      ]
+    },
+    {
+      "name": "The Minstrel",
+      "apiId": 30688,
+      "slot": "weapons",
+      "type": "Focus",
+      "generation": "Generation 1",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/The_Minstrel",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "a929c62058acf8de",
+      "components": [
+        {
+          "qty": 1,
+          "name": "The Bard"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of The Minstrel"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Fortune"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Mastery"
+        }
+      ]
+    },
+    {
+      "name": "The Flameseeker Prophecies",
+      "apiId": 30696,
+      "slot": "weapons",
+      "type": "Shield",
+      "generation": "Generation 1",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/The_Flameseeker_Prophecies",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "f9f5848b1e1b4a6c",
+      "components": [
+        {
+          "qty": 1,
+          "name": "The Chosen"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of The Flameseeker Prophecies"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Fortune"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Mastery"
+        }
+      ]
+    },
+    {
+      "name": "Rodgort",
+      "apiId": 30700,
+      "slot": "weapons",
+      "type": "Torch",
+      "generation": "Generation 1",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Rodgort",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "5dbd45cf2a5d5b22",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Rodgort's Flame"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Rodgort"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Fortune"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Mastery"
+        }
+      ]
+    },
+    {
+      "name": "Howler",
+      "apiId": 30702,
+      "slot": "weapons",
+      "type": "Warhorn",
+      "generation": "Generation 1",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Howler",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "1a785a862be9f58e",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Howl"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Howler"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Fortune"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Mastery"
+        }
+      ]
+    },
+    {
+      "name": "Sunrise",
+      "apiId": 30703,
+      "slot": "weapons",
+      "type": "Greatsword",
+      "generation": "Generation 1",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Sunrise",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "b0d3f9de055ca041",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Dawn"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Sunrise"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Fortune"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Mastery"
+        }
+      ]
+    },
+    {
+      "name": "Twilight",
+      "apiId": 30704,
+      "slot": "weapons",
+      "type": "Greatsword",
+      "generation": "Generation 1",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Twilight",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "d0b09a63d05c64d3",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Dusk"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Twilight"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Mastery"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Fortune"
+        }
+      ]
+    },
+    {
+      "name": "Eternity",
+      "apiId": 30689,
+      "slot": "weapons",
+      "type": "Greatsword",
+      "generation": "Generation 1",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Eternity",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "1dd321cb013039a1",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Sunrise"
+        },
+        {
+          "qty": 1,
+          "name": "Twilight"
+        },
+        {
+          "qty": 5,
+          "name": "Pile of Crystalline Dust"
+        },
+        {
+          "qty": 10,
+          "name": "Philosopher's Stone"
+        }
+      ]
+    },
+    {
+      "name": "The Juggernaut",
+      "apiId": 30690,
+      "slot": "weapons",
+      "type": "Hammer",
+      "generation": "Generation 1",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/The_Juggernaut",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "4193b85b7cc645a5",
+      "components": [
+        {
+          "qty": 1,
+          "name": "The Colossus"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of The Juggernaut"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Fortune"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Mastery"
+        }
+      ]
+    },
+    {
+      "name": "Kudzu",
+      "apiId": 30685,
+      "slot": "weapons",
+      "type": "Longbow",
+      "generation": "Generation 1",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Kudzu",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "6d5735dfd6438e60",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Leaf of Kudzu"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Kudzu"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Fortune"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Mastery"
+        }
+      ]
+    },
+    {
+      "name": "The Predator",
+      "apiId": 30694,
+      "slot": "weapons",
+      "type": "Rifle",
+      "generation": "Generation 1",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/The_Predator",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "20f1630e296ecfbb",
+      "components": [
+        {
+          "qty": 1,
+          "name": "The Hunter"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of The Predator"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Fortune"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Mastery"
+        }
+      ]
+    },
+    {
+      "name": "The Dreamer",
+      "apiId": 30686,
+      "slot": "weapons",
+      "type": "Short bow",
+      "generation": "Generation 1",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/The_Dreamer",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "7e3332f1ff31e457",
+      "components": [
+        {
+          "qty": 1,
+          "name": "The Lover"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of The Dreamer"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Fortune"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Mastery"
+        }
+      ]
+    },
+    {
+      "name": "The Bifrost",
+      "apiId": 30698,
+      "slot": "weapons",
+      "type": "Staff",
+      "generation": "Generation 1",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/The_Bifrost",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "36793ef979255a03",
+      "components": [
+        {
+          "qty": 1,
+          "name": "The Legend"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of The Bifrost"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Fortune"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Mastery"
+        }
+      ]
+    },
+    {
+      "name": "Frenzy",
+      "apiId": 30697,
+      "slot": "weapons",
+      "type": "Harpoon gun",
+      "generation": "Generation 1",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Frenzy",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "33adc7e10d5318b1",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Rage (weapon)"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Frenzy"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Fortune"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Mastery"
+        }
+      ]
+    },
+    {
+      "name": "Kamohoali'i Kotaki",
+      "apiId": 30691,
+      "slot": "weapons",
+      "type": "Spear",
+      "generation": "Generation 1",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Kamohoali'i_Kotaki",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "0eb4fd054586ed25",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Carcharias"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Kamohoali'i Kotaki"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Fortune"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Mastery"
+        }
+      ]
+    },
+    {
+      "name": "Kraitkin",
+      "apiId": 30701,
+      "slot": "weapons",
+      "type": "Trident",
+      "generation": "Generation 1",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Kraitkin",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "2dc926fafcb2cce2",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Venom (weapon)"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Kraitkin"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Fortune"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Mastery"
+        }
+      ]
+    },
+    {
+      "name": "Astralaria",
+      "apiId": 76158,
+      "slot": "weapons",
+      "type": "Axe",
+      "generation": "Generation 2",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Astralaria",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "5a8810a1d102d1c6",
+      "components": [
+        {
+          "qty": 1,
+          "name": "The Mechanism"
+        },
+        {
+          "qty": 1,
+          "name": "Mystic Tribute"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Astralaria"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Maguuma Mastery"
+        }
+      ]
+    },
+    {
+      "name": "Claw of the Khan-Ur",
+      "apiId": 87109,
+      "slot": "weapons",
+      "type": "Dagger",
+      "generation": "Generation 2",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Claw_of_the_Khan-Ur",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "6a1862df58c259d9",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Claw of Resolution"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Four Legions"
+        },
+        {
+          "qty": 1,
+          "name": "Mystic Tribute"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Maguuma Mastery"
+        }
+      ]
+    },
+    {
+      "name": "Eureka",
+      "apiId": 79562,
+      "slot": "weapons",
+      "type": "Mace",
+      "generation": "Generation 2",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Eureka",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "03f4cf6570179ce8",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Endeavor"
+        },
+        {
+          "qty": 1,
+          "name": "Mystic Tribute"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Eureka"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Maguuma Mastery"
+        }
+      ]
+    },
+    {
+      "name": "HOPE",
+      "apiId": 72713,
+      "slot": "weapons",
+      "type": "Pistol",
+      "generation": "Generation 2",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/HOPE",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "83e55b220bace04e",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Prototype"
+        },
+        {
+          "qty": 1,
+          "name": "Mystic Tribute"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of HOPE"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Maguuma Mastery"
+        }
+      ]
+    },
+    {
+      "name": "Xiuquatl",
+      "apiId": 88576,
+      "slot": "weapons",
+      "type": "Scepter",
+      "generation": "Generation 2",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Xiuquatl",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "0019446e08fb9287",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Tlehco"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Xiuquatl"
+        },
+        {
+          "qty": 1,
+          "name": "Mystic Tribute"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Maguuma Mastery"
+        }
+      ]
+    },
+    {
+      "name": "The Shining Blade",
+      "apiId": 81957,
+      "slot": "weapons",
+      "type": "Sword",
+      "generation": "Generation 2",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/The_Shining_Blade",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "47c6849487826e5b",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Save the Queen"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Blade"
+        },
+        {
+          "qty": 1,
+          "name": "Mystic Tribute"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Maguuma Mastery"
+        }
+      ]
+    },
+    {
+      "name": "The Binding of Ipos",
+      "apiId": 86098,
+      "slot": "weapons",
+      "type": "Focus",
+      "generation": "Generation 2",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/The_Binding_of_Ipos",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "6b0301d375b9b053",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Ars Goetia"
+        },
+        {
+          "qty": 1,
+          "name": "Mystic Tribute"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Ipos"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Maguuma Mastery"
+        }
+      ]
+    },
+    {
+      "name": "Shooshadoo",
+      "apiId": 79802,
+      "slot": "weapons",
+      "type": "Shield",
+      "generation": "Generation 2",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Shooshadoo",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "a723e3dec0a7c644",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Friendship"
+        },
+        {
+          "qty": 1,
+          "name": "Mystic Tribute"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Shooshadoo"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Maguuma Mastery"
+        }
+      ]
+    },
+    {
+      "name": "Flames of War",
+      "apiId": 81206,
+      "slot": "weapons",
+      "type": "Torch",
+      "generation": "Generation 2",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Flames_of_War",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "6c23ce52ee6c046a",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Liturgy"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Balthazar"
+        },
+        {
+          "qty": 1,
+          "name": "Mystic Tribute"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Maguuma Mastery"
+        }
+      ]
+    },
+    {
+      "name": "Verdarach",
+      "apiId": 87687,
+      "slot": "weapons",
+      "type": "Warhorn",
+      "generation": "Generation 2",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Verdarach",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "a69dee7ff7d95847",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Call of the Void"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Verdarach"
+        },
+        {
+          "qty": 1,
+          "name": "Mystic Tribute"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Maguuma Mastery"
+        }
+      ]
+    },
+    {
+      "name": "Exordium",
+      "apiId": 90551,
+      "slot": "weapons",
+      "type": "Greatsword",
+      "generation": "Generation 2",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Exordium",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "fcf77b73e3af07df",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Exitare"
+        },
+        {
+          "qty": 1,
+          "name": "Mystic Tribute"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Exordium"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Maguuma Mastery"
+        }
+      ]
+    },
+    {
+      "name": "Sharur",
+      "apiId": 81839,
+      "slot": "weapons",
+      "type": "Hammer",
+      "generation": "Generation 2",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Sharur",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "4439a471998dd8d2",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Might of Arah"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Arah"
+        },
+        {
+          "qty": 1,
+          "name": "Mystic Tribute"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Maguuma Mastery"
+        }
+      ]
+    },
+    {
+      "name": "Pharus",
+      "apiId": 89854,
+      "slot": "weapons",
+      "type": "Longbow",
+      "generation": "Generation 2",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Pharus",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "15e7aca8bc42b321",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Spero"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Pharus"
+        },
+        {
+          "qty": 1,
+          "name": "Mystic Tribute"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Maguuma Mastery"
+        }
+      ]
+    },
+    {
+      "name": "The HMS Divinity",
+      "apiId": 80488,
+      "slot": "weapons",
+      "type": "Rifle",
+      "generation": "Generation 2",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/The_HMS_Divinity",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "e87c33ab299a8257",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Man o' War"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Divinity"
+        },
+        {
+          "qty": 1,
+          "name": "Mystic Tribute"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Maguuma Mastery"
+        }
+      ]
+    },
+    {
+      "name": "Chuka and Champawat",
+      "apiId": 78556,
+      "slot": "weapons",
+      "type": "Short bow",
+      "generation": "Generation 2",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Chuka_and_Champawat",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "08902f0f8a79a3c2",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Tigris"
+        },
+        {
+          "qty": 1,
+          "name": "Mystic Tribute"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Chuka and Champawat"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Maguuma Mastery"
+        }
+      ]
+    },
+    {
+      "name": "Nevermore",
+      "apiId": 71383,
+      "slot": "weapons",
+      "type": "Staff",
+      "generation": "Generation 2",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Nevermore",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "7b9c9b0a37688373",
+      "components": [
+        {
+          "qty": 1,
+          "name": "The Raven Staff"
+        },
+        {
+          "qty": 1,
+          "name": "Mystic Tribute"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Nevermore"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Maguuma Mastery"
+        }
+      ]
+    },
+    {
+      "name": "Aurene's Rending",
+      "apiId": 96937,
+      "slot": "weapons",
+      "type": "Axe",
+      "generation": "Generation 3",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Aurene's_Rending",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "10e0ed033a163b95",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Aurene's Rending"
+        },
+        {
+          "qty": 1,
+          "name": "Dragon's Rending"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Jade Mastery"
+        },
+        {
+          "qty": 1,
+          "name": "Draconic Tribute"
+        }
+      ]
+    },
+    {
+      "name": "Aurene's Claw",
+      "apiId": 96203,
+      "slot": "weapons",
+      "type": "Dagger",
+      "generation": "Generation 3",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Aurene's_Claw",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "67f5fff61c443652",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Aurene's Claw"
+        },
+        {
+          "qty": 1,
+          "name": "Dragon's Claw (weapon)"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Jade Mastery"
+        },
+        {
+          "qty": 1,
+          "name": "Draconic Tribute"
+        }
+      ]
+    },
+    {
+      "name": "Aurene's Tail",
+      "apiId": 95612,
+      "slot": "weapons",
+      "type": "Mace",
+      "generation": "Generation 3",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Aurene's_Tail",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "dad544a1003fed3c",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Aurene's Tail"
+        },
+        {
+          "qty": 1,
+          "name": "Dragon's Tail"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Jade Mastery"
+        },
+        {
+          "qty": 1,
+          "name": "Draconic Tribute"
+        }
+      ]
+    },
+    {
+      "name": "Aurene's Argument",
+      "apiId": 95808,
+      "slot": "weapons",
+      "type": "Pistol",
+      "generation": "Generation 3",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Aurene's_Argument",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "2c72210465e0256c",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Aurene's Argument"
+        },
+        {
+          "qty": 1,
+          "name": "Dragon's Argument"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Jade Mastery"
+        },
+        {
+          "qty": 1,
+          "name": "Draconic Tribute"
+        }
+      ]
+    },
+    {
+      "name": "Aurene's Wisdom",
+      "apiId": 96221,
+      "slot": "weapons",
+      "type": "Scepter",
+      "generation": "Generation 3",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Aurene's_Wisdom",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "ed3fa869533fa361",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Aurene's Wisdom"
+        },
+        {
+          "qty": 1,
+          "name": "Dragon's Wisdom"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Jade Mastery"
+        },
+        {
+          "qty": 1,
+          "name": "Draconic Tribute"
+        }
+      ]
+    },
+    {
+      "name": "Aurene's Fang",
+      "apiId": 95675,
+      "slot": "weapons",
+      "type": "Sword",
+      "generation": "Generation 3",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Aurene's_Fang",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "933cd1cf71a713c8",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Aurene's Fang"
+        },
+        {
+          "qty": 1,
+          "name": "Dragon's Fang"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Jade Mastery"
+        },
+        {
+          "qty": 1,
+          "name": "Draconic Tribute"
+        }
+      ]
+    },
+    {
+      "name": "Aurene's Gaze",
+      "apiId": 97165,
+      "slot": "weapons",
+      "type": "Focus",
+      "generation": "Generation 3",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Aurene's_Gaze",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "9689f6a0deb30252",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Aurene's Gaze"
+        },
+        {
+          "qty": 1,
+          "name": "Dragon's Gaze"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Jade Mastery"
+        },
+        {
+          "qty": 1,
+          "name": "Draconic Tribute"
+        }
+      ]
+    },
+    {
+      "name": "Aurene's Scale",
+      "apiId": 96028,
+      "slot": "weapons",
+      "type": "Shield",
+      "generation": "Generation 3",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Aurene's_Scale",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "b5f3efec63c2858a",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Aurene's Scale"
+        },
+        {
+          "qty": 1,
+          "name": "Dragon's Scale"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Jade Mastery"
+        },
+        {
+          "qty": 1,
+          "name": "Draconic Tribute"
+        }
+      ]
+    },
+    {
+      "name": "Aurene's Breath",
+      "apiId": 97099,
+      "slot": "weapons",
+      "type": "Torch",
+      "generation": "Generation 3",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Aurene's_Breath",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "3d3a27063039a9e4",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Aurene's Breath"
+        },
+        {
+          "qty": 1,
+          "name": "Dragon's Breath"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Jade Mastery"
+        },
+        {
+          "qty": 1,
+          "name": "Draconic Tribute"
+        }
+      ]
+    },
+    {
+      "name": "Aurene's Voice",
+      "apiId": 97783,
+      "slot": "weapons",
+      "type": "Warhorn",
+      "generation": "Generation 3",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Aurene's_Voice",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "3585cfc3c307d8ba",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Aurene's Horn"
+        },
+        {
+          "qty": 1,
+          "name": "Dragon's Voice"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Jade Mastery"
+        },
+        {
+          "qty": 1,
+          "name": "Draconic Tribute"
+        }
+      ]
+    },
+    {
+      "name": "Aurene's Bite",
+      "apiId": 96356,
+      "slot": "weapons",
+      "type": "Greatsword",
+      "generation": "Generation 3",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Aurene's_Bite",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "609ff13e50ec1447",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Aurene's Bite"
+        },
+        {
+          "qty": 1,
+          "name": "Dragon's Bite"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Jade Mastery"
+        },
+        {
+          "qty": 1,
+          "name": "Draconic Tribute"
+        }
+      ]
+    },
+    {
+      "name": "Aurene's Weight",
+      "apiId": 95684,
+      "slot": "weapons",
+      "type": "Hammer",
+      "generation": "Generation 3",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Aurene's_Weight",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "43204f525f2e3058",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Aurene's Weight"
+        },
+        {
+          "qty": 1,
+          "name": "Dragon's Weight"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Jade Mastery"
+        },
+        {
+          "qty": 1,
+          "name": "Draconic Tribute"
+        }
+      ]
+    },
+    {
+      "name": "Aurene's Flight",
+      "apiId": 97590,
+      "slot": "weapons",
+      "type": "Longbow",
+      "generation": "Generation 3",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Aurene's_Flight",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "ed53a84e91543046",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Aurene's Flight"
+        },
+        {
+          "qty": 1,
+          "name": "Dragon's Flight"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Jade Mastery"
+        },
+        {
+          "qty": 1,
+          "name": "Draconic Tribute"
+        }
+      ]
+    },
+    {
+      "name": "Aurene's Persuasion",
+      "apiId": 97377,
+      "slot": "weapons",
+      "type": "Rifle",
+      "generation": "Generation 3",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Aurene's_Persuasion",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "5258569bbe7e7881",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Aurene's Persuasion"
+        },
+        {
+          "qty": 1,
+          "name": "Dragon's Persuasion"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Jade Mastery"
+        },
+        {
+          "qty": 1,
+          "name": "Draconic Tribute"
+        }
+      ]
+    },
+    {
+      "name": "Aurene's Wing",
+      "apiId": 97077,
+      "slot": "weapons",
+      "type": "Short Bow",
+      "generation": "Generation 3",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Aurene's_Wing",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "8b57c5b5d2941e54",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Aurene's Wing"
+        },
+        {
+          "qty": 1,
+          "name": "Dragon's Wing"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Jade Mastery"
+        },
+        {
+          "qty": 1,
+          "name": "Draconic Tribute"
+        }
+      ]
+    },
+    {
+      "name": "Aurene's Insight",
+      "apiId": 96652,
+      "slot": "weapons",
+      "type": "Staff",
+      "generation": "Generation 3",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Aurene's_Insight",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "abd68de3e6391dcf",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Aurene's Insight"
+        },
+        {
+          "qty": 1,
+          "name": "Dragon's Insight"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Jade Mastery"
+        },
+        {
+          "qty": 1,
+          "name": "Draconic Tribute"
+        }
+      ]
+    },
+    {
+      "name": "Klobjarne Geirr",
+      "apiId": 103815,
+      "slot": "weapons",
+      "type": "Spear",
+      "generation": "Standalone weapons",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Klobjarne_Geirr",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "78fcff7e0990e416",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Janthir Wilds"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Homesteader"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Klobjarne Geirr"
+        },
+        {
+          "qty": 1,
+          "name": "Nyr Hrammr"
+        }
+      ]
+    },
+    {
+      "name": "Ancora Bellum",
+      "apiId": 106273,
+      "slot": "weapons",
+      "type": "Spear",
+      "generation": "Standalone weapons",
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Ancora_Bellum",
+      "confidence": "low",
+      "source": "auto",
+      "wikitextHash": "a0f610d4d25eb15f",
+      "components": [],
+      "parseNote": "no {{recipe}} template found (likely achievement reward, set, or non-standard layout)"
+    }
+  ]
+}

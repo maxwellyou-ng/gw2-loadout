@@ -59,3 +59,84 @@ All planned features are shipped (Phases 1–6). What's left is data accuracy an
 - **Catalog reach:** only the seed-loadout pieces plus the full trinket/back catalog are
   authored. Extending to the rest of the legendary catalog uses the same builder pattern —
   no schema change.
+
+### Wiki reconciliation (`scripts/wiki-sync/`)
+
+The drift between the catalog and the wiki is now measured and gated automatically — use it
+to drive the work above instead of hand-auditing:
+
+- `npm run wiki:report` is the authoritative "what's missing / wrong" list. It currently
+  shows ~53 missing weapons/armor sets and the trinket/back recipe simplifications
+  (`COMPONENT_MISSING/EXTRA`), all recorded in `scripts/wiki-sync/baseline.json`.
+- To **close an item**: fix its recipe in `src/data/recipes/*` (use
+  `npm run wiki:report -- --scaffold="<Item>"` for a starting stub), then delete its entries
+  from `baseline.json` (or rerun `npm run wiki:check -- --update-baseline`). The gate then
+  enforces that the item stays correct.
+- **Resolve `SYNTHETIC_RESOLVABLE` warnings**: the wiki has real armory ids for every
+  trinket/back the catalog currently mints synthetically (e.g. Aurora 81908, Conflux 93105).
+  Swapping these in improves owned-on-sync matching and clears the warnings.
+- Re-run `npm run wiki:fetch` after each game update; review the `snapshot/` diff and commit.
+- **Deeper accuracy (future):** extend the reconciler to snapshot the shared-gift wiki pages
+  (Gift of Fortune, Mystic/Draconic Tribute, Condensed Might/Magic) and compare flattened
+  leaf quantities — that's where the historical clover/T6/ecto miscounts lived.
+
+### Auto-fix: apply wiki fixes automatically (not yet built)
+
+Today the system is report-first (`wiki:report` + the `wiki:check` gate); fixes are applied
+by hand. The goal here is for missing/incorrect items to be corrected automatically on
+discovery. Auto-writing turns every parse error into shipped-wrong-data, so most of this
+work is about making generation accurate and safe enough to trust — not the writing itself.
+Build in the phases below; each is independently shippable.
+
+**1. Machine-owned data layer (architectural prerequisite).**
+- Add `src/data/recipes/generated/` (TS, or JSON + a thin loader) merged into `CATALOG` in
+  `src/data/recipes/index.ts`. The fixer owns `generated/`; humans own the existing curated
+  files. A piece lives in exactly one place, so auto-fix becomes "regenerate the folder"
+  (clean diff, idempotent) instead of surgical edits into curated code.
+- Migrate or shadow rule: if a curated entry and a generated entry collide by name, curated
+  wins (and the generated one is skipped + noted), so human work is never clobbered.
+
+**2. `wiki:fix` command + validation-gated apply (safety machinery).**
+- New `npm run wiki:fix` (a.k.a. `wiki:report -- --apply`) that regenerates `generated/` for
+  items that are MISSING or have unacknowledged drift.
+- Land every generated recipe as **`verified: false`** by default. Promote to
+  `verified: true` only when: confidence is `high`, *all* component ids resolved (phase 4),
+  and a structural self-check passes.
+- After writing, run `tsc -b`, `npm run check`, and `npm run wiki:check`; **revert all writes
+  if any fail** (never leave a half-written catalog).
+- **Auto-prune `baseline.json`**: drop acknowledgements the fix resolved. The
+  `staleAcknowledgements` logic in `scripts/wiki-sync/gate.ts` already detects these.
+- Output a reviewable diff / PR — "automatic on discovery" should still leave a human a diff
+  to glance at; do not silent-commit to main.
+- This phase alone (with synthetic component ids) closes the ~53 missing-item gap as
+  reviewable `verified:false` drafts. The existing `scaffold()` in
+  `scripts/wiki-sync/report.ts` is the starting point for the emitter.
+
+**3. Component-level item-id resolution.**
+- `parse-recipe.ts` currently reads only the legendary's own infobox `id`. Add a name→id
+  resolver that fetches each component's wiki page infobox `id`, cached to a committed
+  `scripts/wiki-sync/item-ids.json`, and feed resolved ids into the `ITEM` registry.
+- Without this, generated recipes use `synthetic()` ids (correct structure, no inventory
+  matching). With it, the `SYNTHETIC_RESOLVABLE` warnings clear and leaves match on sync.
+
+**4. Recursive recipe expansion + node metadata.**
+- The snapshot captures only top-level components; the engine needs full leaf trees (e.g.
+  top-level "Gift of Fortune" → clovers/ecto/T6) for cost + time-gate math.
+- Add a recursion driver that follows each component whose wiki page has a `{{Recipe}}`,
+  builds the nested `RecipeNode` DAG, with: a stop condition (leaf = no recipe / known base
+  material), cycle protection, and **mapping shared gifts to the existing builders**
+  (`giftOfFortune()`, `mysticTribute()`, `giftOfCondensedMight()` in `_builders.ts`) so they
+  aren't re-expanded inconsistently.
+- Parse `RecipeNode` metadata: `source` (Mystic Forge / craft / vendor), `discipline`,
+  `buyable`; reuse the `TIME_GATED` registry for `timeGate` once ids resolve. This is the
+  largest extraction task and the one that enables auto-promotion to `verified: true`.
+
+**5. Keep an explicit manual lane (scope boundary).**
+- Never auto-write items with no clean `{{Recipe}}`: armor *sets*, achievement-reward
+  trinkets (Prismatic Champion's Regalia), the dual-unlock container (Aetheric Anchor ↔
+  Ancora Bellum/Pax), heart-vendor gifts. The fixer only applies `confidence: 'high'`,
+  fully-resolved items; everything else routes to curated overrides + `aliases.ts`. Auto-fix
+  is necessarily partial (~65 of 74 items).
+
+Suggested order: **1 + 2** first (high payoff, ~closes the missing-item gap as drafts), then
+**3** (real ids), then **4** (leaf-accurate trees + auto-verify).

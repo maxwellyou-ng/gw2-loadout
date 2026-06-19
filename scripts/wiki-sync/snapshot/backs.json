@@ -1,0 +1,125 @@
+{
+  "category": "backs",
+  "generatedAt": "2026-06-19T06:58:14.188Z",
+  "sourcePages": [
+    "Legendary back item"
+  ],
+  "entries": [
+    {
+      "name": "Ad Infinitum",
+      "apiId": 74155,
+      "slot": "backs",
+      "type": "Fractals of the Mists",
+      "generation": null,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Ad_Infinitum",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "8866da1976bedbef",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Unbound"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Infinity"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Fortune"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Ascension"
+        }
+      ]
+    },
+    {
+      "name": "Orrax Manifested",
+      "apiId": 104857,
+      "slot": "backs",
+      "type": "Player versus Environment",
+      "generation": null,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Orrax_Manifested",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "9c0005a8042c3af2",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of the Mistburned Isles"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Shadows"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Feast"
+        },
+        {
+          "qty": 1,
+          "name": "Orrax Contained"
+        }
+      ]
+    },
+    {
+      "name": "The Ascension",
+      "apiId": 77474,
+      "slot": "backs",
+      "type": "PvP League",
+      "generation": null,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/The_Ascension",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "6a15aa6441e42ae3",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of the Competitor"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Skirmishing"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Fortune"
+        },
+        {
+          "qty": 1,
+          "name": "Wings of Ascension"
+        }
+      ]
+    },
+    {
+      "name": "Warbringer",
+      "apiId": 81462,
+      "slot": "backs",
+      "type": "World versus World",
+      "generation": null,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Warbringer",
+      "confidence": "high",
+      "source": "auto",
+      "wikitextHash": "20fa7ae4bf54660a",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Warcry"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Warfare"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Fortune"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Conquering"
+        }
+      ]
+    }
+  ]
+}

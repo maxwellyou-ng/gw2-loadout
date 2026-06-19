@@ -1,0 +1,87 @@
+{
+  "category": "armor",
+  "generatedAt": "2026-06-19T06:58:14.186Z",
+  "sourcePages": [
+    "Legendary armor"
+  ],
+  "entries": [
+    {
+      "name": "Perfected Envoy armor",
+      "apiId": null,
+      "slot": "armor",
+      "type": "Armor set",
+      "generation": null,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Perfected_Envoy_armor",
+      "confidence": "low",
+      "source": "auto",
+      "wikitextHash": "d1e475e6dddfe7a7",
+      "components": [],
+      "parseNote": "no {{recipe}} template found (likely achievement reward, set, or non-standard layout)"
+    },
+    {
+      "name": "Ardent Glorious armor",
+      "apiId": null,
+      "slot": "armor",
+      "type": "Armor set",
+      "generation": null,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Ardent_Glorious_armor",
+      "confidence": "low",
+      "source": "auto",
+      "wikitextHash": "6562d32fd463cbda",
+      "components": [],
+      "parseNote": "no {{recipe}} template found (likely achievement reward, set, or non-standard layout)"
+    },
+    {
+      "name": "Triumphant Hero's armor",
+      "apiId": null,
+      "slot": "armor",
+      "type": "Armor set",
+      "generation": null,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Triumphant_Hero's_armor",
+      "confidence": "low",
+      "source": "auto",
+      "wikitextHash": "34e2f225e2a1b893",
+      "components": [],
+      "parseNote": "no {{recipe}} template found (likely achievement reward, set, or non-standard layout)"
+    },
+    {
+      "name": "Obsidian armor",
+      "apiId": null,
+      "slot": "armor",
+      "type": "Armor set",
+      "generation": null,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Obsidian_armor",
+      "confidence": "low",
+      "source": "auto",
+      "wikitextHash": "c12a375d28e07ea3",
+      "components": [],
+      "parseNote": "no {{recipe}} template found (likely achievement reward, set, or non-standard layout)"
+    },
+    {
+      "name": "Eikasia, Mists-Grasper",
+      "apiId": null,
+      "slot": "armor",
+      "type": "Gloves",
+      "generation": null,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Eikasia%2C_Mists-Grasper",
+      "confidence": "low",
+      "source": "auto",
+      "wikitextHash": "f14221ec9ea49780",
+      "components": [],
+      "parseNote": "no {{recipe}} template found (likely achievement reward, set, or non-standard layout)"
+    },
+    {
+      "name": "Selachimorpha",
+      "apiId": null,
+      "slot": "armor",
+      "type": "Aquatic Headgear",
+      "generation": null,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Selachimorpha",
+      "confidence": "low",
+      "source": "auto",
+      "wikitextHash": "944718664d2a651c",
+      "components": [],
+      "parseNote": "no {{recipe}} template found (likely achievement reward, set, or non-standard layout)"
+    }
+  ]
+}
