@@ -51,9 +51,11 @@ export const CUR = {
   wvwSkirmishClaimTicket: 26,
   badgeOfHonor: 15,
   magnetiteShard: 28, // raid
-  // TODO: testimonyOfHeroics id needs wiki verification — 26 is wrong (duplicate
-  // of wvwSkirmishClaimTicket). PvP legendary currency; correct id TBD.
-  // testimonyOfHeroics: ???,
+  // NOTE (2026-06-19): there is no "Testimony of Heroics" currency. The WvW
+  // ability/heroics currency is Proof of Heroics (31); the expansion variants are
+  // Testimony of Desert/Jade/Castoran Heroics (36/65/82). "Testimony of Heroics"
+  // itself is an item (70985), not a currency. No modeled recipe references it,
+  // so none is registered here; add the specific id above only when a piece needs it.
 } as const
 
 // --- Well-known real item ids (high confidence) ----------------------------
@@ -170,6 +172,27 @@ export const ITEM = {
   giftOfCompetitiveProsperity: 84174,  // PvP: Mist Core Fragment + 15 Clover + Condensed Might/Magic
   giftOfCompetitiveProwess: 82350,     // PvP: Record of League Victories + Eldritch Scroll + 50 Obsidian + Cube
   giftOfCompetitiveDedication: 84203,  // PvP: Record of League Participation + Star of Glory + Glob Spirit Energy + Jar of Distilled Glory
+
+  // --- Recipe-leaf materials resolved to real ids (wiki infobox + /v2/items
+  // cross-confirmed, 2026-06-19). Previously synthetic; real ids let the engine
+  // match these sitting in a player's inventory and price the TP-buyable ones. --
+  chakEgg: 72205,                  // Trophy (Raid Dedication)
+  auricIngot: 73537,               // Crafting material (Raid Dedication)
+  reclaimedMetalPlate: 74356,      // Trophy (Raid Dedication)
+  giftOfThePact: 78793,            // Crafting material (Raid Dedication)
+  recordOfLeagueParticipation: 82471, // Crafting material (PvP Dedication)
+  starOfGlory: 83872,              // Crafting material (PvP Dedication)
+  jarOfDistilledGlory: 82926,      // Crafting material (PvP Dedication)
+  giftOfExploration: 19677,        // Trophy; Gen1 Gift of Mastery (world completion)
+  draconicTribute: 96137,          // Trophy; Gen3/EoD shared tribute (Mystic Forge)
+  giftOfTheAstralWard: 100466,     // Crafting material (SotO Obsidian armor)
+  giftOfTheMistWarrior: 109686,    // Crafting material (Strife Unending trinket)
+  // Aetheric Anchor (Visions of Eternity) heart-vendor gifts
+  giftOfTheSurvivors: 106712,
+  giftOfThePeople: 105804,
+  giftOfTheElders: 106632,
+  giftOfInsight: 105875,           // VoE vendor gift (Lyhr); carries the 100-clover gate
+  fractallineSpark: 105196,        // Eikasia gloves (fractal vendor leaf)
 } as const
 
 export interface GatedMaterialInfo {
@@ -255,7 +278,7 @@ export function gameModeFor(
     if (cur === CUR.fractalRelic || cur === CUR.pristineFractalRelic) return 'Fractal'
   }
   const n = (name ?? '').toLowerCase()
-  if (/gift of battle|memory of battle|war (prosperity|prowess|dedication)|skirmish|badge of honor|testimony of heroics/.test(n))
+  if (/gift of battle|memory of battle|war (prosperity|prowess|dedication)|skirmish|badge of honor|proof of heroics|testimony of \w+ heroics/.test(n))
     return 'WvW'
   if (/league|mist core|star of glory|competitive|distilled glory|ascension to glory/.test(n)) return 'PvP'
   if (/legendary insight|legendary divination|chak egg|magnetite|gift of prowess|gift of dedication/.test(n)) return 'Raid'

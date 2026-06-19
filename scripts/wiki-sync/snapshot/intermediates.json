@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-19T11:58:51.805Z",
+  "generatedAt": "2026-06-19T13:35:11.464Z",
   "entries": [
     {
       "name": "Bloodstone Shard",
@@ -9,7 +9,7 @@
       "confidence": "low",
       "wikitextHash": "6e9ae305effd0755",
       "components": [],
-      "parseNote": "{{recipe}} found but no ingredients parsed"
+      "parseNote": "vendor-sold item — no craftable {{recipe}}; cost not machine-readable from {{Sold by}} (leaf material)"
     },
     {
       "name": "Draconic Tribute",
@@ -45,7 +45,7 @@
       "confidence": "low",
       "wikitextHash": "326e129e7e89ca8f",
       "components": [],
-      "parseNote": "{{recipe}} found but no ingredients parsed"
+      "parseNote": "vendor-sold item — no craftable {{recipe}}; cost not machine-readable from {{Sold by}} (leaf material)"
     },
     {
       "name": "Fractalline Spark",
@@ -55,7 +55,7 @@
       "confidence": "low",
       "wikitextHash": "01953b0d8ab9a49d",
       "components": [],
-      "parseNote": "no {{recipe}} template found (likely achievement reward, set, or non-standard layout)"
+      "parseNote": "vendor-sold item — no craftable {{recipe}}; cost not machine-readable from {{Sold by}} (leaf material)"
     },
     {
       "name": "Gift of Blood",
@@ -273,7 +273,7 @@
       "confidence": "low",
       "wikitextHash": "5220b948497d0f6f",
       "components": [],
-      "parseNote": "{{recipe}} found but no ingredients parsed"
+      "parseNote": "vendor-sold item — no craftable {{recipe}}; cost not machine-readable from {{Sold by}} (leaf material)"
     },
     {
       "name": "Gift of Dedication",
@@ -413,7 +413,7 @@
       "confidence": "low",
       "wikitextHash": "309df6ade534ead5",
       "components": [],
-      "parseNote": "{{recipe}} found but no ingredients parsed"
+      "parseNote": "vendor-sold item — no craftable {{recipe}}; cost not machine-readable from {{Sold by}} (leaf material)"
     },
     {
       "name": "Gift of Magic",

@@ -91,11 +91,19 @@ export function parseItemPage(wikitext: string): ParsedRecipe {
   }
 
   if (bodies.length === 0) {
+    // Distinguish a genuine vendor-sourced leaf from an unhandled layout. Items
+    // bought from a vendor (`{{Sold by}}`) have no craftable `{{recipe}}`, and
+    // their cost is rendered by a semantic DB query (no inline, machine-readable
+    // params) — so they are correctly leaves, not parse failures. Recording the
+    // reason keeps them out of the "unverified recipe" bucket in the report.
+    const isVendorSold = extractTemplates(wikitext, 'sold by').length > 0
     return {
       apiId,
       components: [],
       confidence: 'low',
-      parseNote: 'no {{recipe}} template found (likely achievement reward, set, or non-standard layout)',
+      parseNote: isVendorSold
+        ? 'vendor-sold item — no craftable {{recipe}}; cost not machine-readable from {{Sold by}} (leaf material)'
+        : 'no {{recipe}} template found (likely achievement reward, set, or non-standard layout)',
     }
   }
 

@@ -1,6 +1,6 @@
 {
   "category": "trinkets",
-  "generatedAt": "2026-06-19T11:58:51.798Z",
+  "generatedAt": "2026-06-19T13:35:11.461Z",
   "sourcePages": [
     "Legendary trinket"
   ],
@@ -232,7 +232,7 @@
       "source": "auto",
       "wikitextHash": "355e03e4bf7a75eb",
       "components": [],
-      "parseNote": "no {{recipe}} template found (likely achievement reward, set, or non-standard layout)"
+      "parseNote": "vendor-sold item — no craftable {{recipe}}; cost not machine-readable from {{Sold by}} (leaf material)"
     }
   ]
 }

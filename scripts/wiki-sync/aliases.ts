@@ -55,7 +55,6 @@ export const PIECE_ALIASES: Record<string, string> = {
  * for shared gifts/precursors whose names differ between sources.
  */
 export const COMPONENT_ALIASES: Record<string, string> = {
-  'gift of maguuma mastery': 'gift of maguuma mastery',
   // e.g. wiki "Mystic Tribute" === catalog "Mystic Tribute" (identity, no entry needed)
   // Wiki recipe pages pluralize some ingredients the catalog names in the singular.
   'mystic clovers': 'mystic clover',

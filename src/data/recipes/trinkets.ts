@@ -12,7 +12,7 @@
 // ---------------------------------------------------------------------------
 
 import type { AcquisitionMode, LegendaryPiece } from '../../types'
-import { ITEM, synthetic } from '../items'
+import { ITEM } from '../items'
 import { ref, node, assembleLegendary, type TopComponent } from './_builders'
 
 interface TrinketSpec {
@@ -164,7 +164,7 @@ function prismaticChampionsRegalia(): LegendaryPiece {
 function strifeUnending(): LegendaryPiece {
   const id = 109012
   const root = ref(id, 'Strife Unending', 1)
-  const gift = ref(synthetic(), 'Gift of the Mist Warrior', 1)
+  const gift = ref(ITEM.giftOfTheMistWarrior, 'Gift of the Mist Warrior', 1)
   return {
     id,
     name: 'Strife Unending',

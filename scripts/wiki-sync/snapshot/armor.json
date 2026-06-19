@@ -1,6 +1,6 @@
 {
   "category": "armor",
-  "generatedAt": "2026-06-19T11:58:51.795Z",
+  "generatedAt": "2026-06-19T13:35:11.459Z",
   "sourcePages": [
     "Legendary armor"
   ],
@@ -68,7 +68,7 @@
       "source": "auto",
       "wikitextHash": "f14221ec9ea49780",
       "components": [],
-      "parseNote": "no {{recipe}} template found (likely achievement reward, set, or non-standard layout)"
+      "parseNote": "vendor-sold item — no craftable {{recipe}}; cost not machine-readable from {{Sold by}} (leaf material)"
     },
     {
       "name": "Selachimorpha",

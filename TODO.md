@@ -38,19 +38,20 @@ architecture, see [README.md](README.md).
 
 ## Remaining work
 
-All planned features are shipped (Phases 1–6). What's left is data accuracy and catalog reach.
+All planned features are shipped (Phases 1–6). A full data re-audit ran 2026-06-19 (live wiki
+matched the catalog with zero drift). Most prior data-accuracy items are now closed:
 
-- **Resolve the PvP `testimonyOfHeroics` currency id** in `src/data/items.ts` (the `CUR`
-  TODO — currently a duplicate of the WvW Skirmish Claim Ticket id 26). Needed for accurate
-  PvP legendary-armor costs; no current seed piece uses it.
-- **Resolve remaining synthetic-by-name leaves to real ids** where a real, stockpile-able
-  item exists (improves owned-math on sync). Find them with:
-  ```bash
-  grep -rno "ref(synthetic(), '[^']*'" src/data/recipes/
-  ```
-  Only switch ids you can verify on the wiki. Leave genuinely id-less intermediates
-  (achievements, per-map heart-vendor gifts, precursor *journeys*) synthetic with a `notes:`.
-- **Confirm the Draconic Tribute real item id** (Gen3/EoD weapons) — currently synthetic.
+- ✅ **`testimonyOfHeroics`** — resolved as a misconception: there is no such currency. The WvW
+  heroics currency is Proof of Heroics (31); "Testimony of Desert/Jade/Castoran Heroics"
+  (36/65/82) are the variants; "Testimony of Heroics" is an *item* (70985). No modeled recipe
+  uses it, so none is registered (see the note in `src/data/items.ts`).
+- ✅ **Synthetic-by-name leaves resolved to real ids** (wiki infobox + `/v2/items`
+  cross-confirmed): Auric Ingot, Chak Egg, Reclaimed Metal Plate, Star of Glory, Jar of
+  Distilled Glory, Record of League Participation, Gift of Exploration, the Aetheric Anchor
+  heart-gifts, Gift of the Astral Ward, Gift of the Mist Warrior, Gift of Insight, Fractalline
+  Spark — all in the `ITEM` registry now. Only `Incursive Investigation (achievement)` stays
+  synthetic (genuinely id-less). Re-check with `grep -rno "ref(synthetic(), '[^']*'" src/data/recipes/`.
+- ✅ **Draconic Tribute** real id confirmed: **96137** (in `_builders.ts`).
 - **(Optional, low payoff) Expand weapon themed-gift + precursor sub-trees** to full depth
   (Incinerator, Astralaria, Exordium, Pharus, Aurene's Fang/Scale, Aetheric Anchor). Bulk
   wiki transcription; precursors are TP-buyable and themed-gift collections don't map to
@@ -63,11 +64,33 @@ All planned features are shipped (Phases 1–6). What's left is data accuracy an
 ### Wiki reconciliation (`scripts/wiki-sync/`)
 
 The drift between the catalog and the wiki is now measured and gated automatically — use it
-to drive the work above instead of hand-auditing:
+to drive the work above instead of hand-auditing. The audit toolchain (all read-only except
+`wiki:fetch`/`wiki:fix`):
 
-- `npm run wiki:report` is the authoritative "what's missing / wrong" list. It currently
-  shows ~53 missing weapons/armor sets and the trinket/back recipe simplifications
-  (`COMPONENT_MISSING/EXTRA`), all recorded in `scripts/wiki-sync/baseline.json`.
+- `npm run wiki:report` — authoritative drift + low-confidence list (currently 0 blocking, 0
+  warnings; 3 `LOW_CONFIDENCE` + 7 `VENDOR_LEAF` info items, all excluded from the gate).
+- `npm run wiki:check` — the build gate (also runs inside `npm run build`).
+- `npm run wiki:test` — parser regression test (inline fixtures); guards the `{{recipe list}}`
+  false-match fix and vendor-leaf classification.
+- `npm run wiki:audit` — canon-layer trust audit: fails if two genuinely different items
+  (different ids) collapse to one canonical name, or on no-op aliases. Validates the gate
+  isn't masking drift.
+- `npm run wiki:links` — network link check: every wiki link the app renders (via
+  `lib/format.ts` `wikiUrl`) resolves; reports broken pages + redirects.
+
+Known structural limits (the honest manual lane, all documented in code):
+- **Armor recipes are not machine-verifiable**: legendary armor wiki pages express crafting as
+  prose "Material list"/"Components" tables, not `{{recipe}}` templates, and pieces have no
+  individual pages (the app links them to the set page via `ARMOR_LINK_OVERRIDES`). Sets are
+  verified by enumeration + id; their shared gifts ARE verified as intermediates.
+- **Vendor leaves** (Bloodstone Shard, Eldritch Scroll, Gift of Craftsmanship/Insight, etc.)
+  have no `{{recipe}}` — their cost is a vendor purchase the wiki renders via a DB query. They
+  are classified `VENDOR_LEAF` (a correct terminal leaf), not "unverified".
+- **3 genuinely special items** stay `LOW_CONFIDENCE`: Aetheric Anchor (dual-unlock), Selachimorpha
+  (collection aquabreather), Prismatic Champion's Regalia (achievement reward).
+
+- (Historical) `npm run wiki:report` once showed ~53 missing weapons/armor sets and trinket/back
+  recipe simplifications, all recorded in `scripts/wiki-sync/baseline.json`.
 - To **close an item**: fix its recipe in `src/data/recipes/*` (use
   `npm run wiki:report -- --scaffold="<Item>"` for a starting stub), then delete its entries
   from `baseline.json` (or rerun `npm run wiki:check -- --update-baseline`). The gate then
@@ -76,9 +99,10 @@ to drive the work above instead of hand-auditing:
   trinket/back the catalog currently mints synthetically (e.g. Aurora 81908, Conflux 93105).
   Swapping these in improves owned-on-sync matching and clears the warnings.
 - Re-run `npm run wiki:fetch` after each game update; review the `snapshot/` diff and commit.
-- **Deeper accuracy (future):** extend the reconciler to snapshot the shared-gift wiki pages
-  (Gift of Fortune, Mystic/Draconic Tribute, Condensed Might/Magic) and compare flattened
-  leaf quantities — that's where the historical clover/T6/ecto miscounts lived.
+- ✅ **Deeper accuracy (SHIPPED):** the reconciler now snapshots every distinct catalog
+  intermediate's wiki page (`catalogIntermediates()` + Phase C in `snapshot.ts`) and diffs each
+  by name — 28/33 verify; the other 5 are `VENDOR_LEAF`. This is where the historical
+  clover/T6/ecto miscounts lived (e.g. the Gift of Venom swap).
 
 ### Auto-fix: apply wiki fixes automatically (phases 1–2 SHIPPED)
 

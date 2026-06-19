@@ -31,7 +31,7 @@ import {
 import type { SlotKey } from '../types'
 import { computeProgress, plannedSlots } from '../engine'
 import { syncAccount } from '../api/gw2'
-import { STORAGE_KEYS, loadJSON, saveJSON } from './storage'
+import { STORAGE_KEYS, loadJSON, saveJSON, removeKey } from './storage'
 
 interface SyncState {
   snapshot: InventorySnapshot
@@ -57,6 +57,8 @@ interface AppState {
   progressByPiece: Record<number, DerivedProgress>
   setApiKey: (key: string) => void
   setWeights: (w: Settings['weights']) => void
+  /** Wipe the stored API key and all synced account data (key, snapshot, history). */
+  forgetAccount: () => void
   runSync: () => Promise<void>
   // Loadout mutators (pure/immutable; progress re-derives via the useMemo below).
   setLoadout: (loadout: Loadout) => void
@@ -98,6 +100,19 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   const setWeights = useCallback((weights: Settings['weights']) => {
     setSettings((s) => ({ ...s, weights }))
+  }, [])
+
+  const forgetAccount = useCallback(() => {
+    setSettings((s) => ({ ...s, apiKey: '' }))
+    setSync(null)
+    setSyncError(null)
+    setSyncMessage('')
+    // setSettings persists via the settings effect; sync/history have no
+    // clear-on-null effect, so remove them from localStorage directly. The
+    // next sync carries a fresh timestamp, so the history-logging ref needs
+    // no reset here.
+    removeKey(STORAGE_KEYS.sync)
+    removeKey(STORAGE_KEYS.history)
   }, [])
 
   // Immutable per-slot patch helper: replaces one slot, leaving the rest intact.
@@ -210,6 +225,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     progressByPiece,
     setApiKey,
     setWeights,
+    forgetAccount,
     runSync,
     setLoadout,
     setLoadoutName,

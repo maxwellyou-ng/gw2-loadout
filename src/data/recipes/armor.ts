@@ -171,10 +171,10 @@ const envoy = gameModeArmorLine({
         node(
           out,
           [
-            ref(synthetic(), 'Chak Egg', 5),
-            ref(synthetic(), 'Auric Ingot', 5),
-            ref(synthetic(), 'Reclaimed Metal Plate', 5),
-            ref(synthetic(), 'Gift of the Pact', 1),
+            ref(ITEM.chakEgg, 'Chak Egg', 5),
+            ref(ITEM.auricIngot, 'Auric Ingot', 5),
+            ref(ITEM.reclaimedMetalPlate, 'Reclaimed Metal Plate', 5),
+            ref(ITEM.giftOfThePact, 'Gift of the Pact', 1),
           ],
           { source: 'mystic-forge', notes: 'Heart of Thorns map mats + Gift of the Pact' }
         ),
@@ -199,10 +199,10 @@ const ardent = gameModeArmorLine({
         node(
           out,
           [
-            ref(synthetic(), 'Record of League Participation', 1),
-            ref(synthetic(), 'Star of Glory', 1),
+            ref(ITEM.recordOfLeagueParticipation, 'Record of League Participation', 1),
+            ref(ITEM.starOfGlory, 'Star of Glory', 1),
             ref(ITEM.globOfCondensedSpiritEnergy, 'Glob of Condensed Spirit Energy', 1),
-            ref(synthetic(), 'Jar of Distilled Glory', 1),
+            ref(ITEM.jarOfDistilledGlory, 'Jar of Distilled Glory', 1),
           ],
           { source: 'mystic-forge', notes: 'PvP League reward gifts' }
         ),
@@ -223,7 +223,7 @@ function obsidianPiece(slot: (typeof ARMOR_SLOTS)[number]): LegendaryPiece {
     1
   )
   const expertise = ref(ITEM.giftOfExpertise, 'Gift of Expertise', 1)
-  const astralWard = ref(synthetic(), 'Gift of the Astral Ward', 1)
+  const astralWard = ref(ITEM.giftOfTheAstralWard, 'Gift of the Astral Ward', 1)
   const arcanum = ref(synthetic(), `Arcanum (${slot.label})`, 1)
   const name = `Obsidian ${slot.label}`
   const root = ref(id, name, 1)
@@ -282,7 +282,7 @@ const obsidian = ARMOR_SLOTS.map(obsidianPiece)
 function eikasiaGloves(): LegendaryPiece {
   const id = synthetic()
   const achievement = ref(synthetic(), 'Incursive Investigation (achievement)', 1)
-  const fractallineSpark = ref(synthetic(), 'Fractalline Spark', 1)
+  const fractallineSpark = ref(ITEM.fractallineSpark, 'Fractalline Spark', 1)
   const magicalProsp = ref(ITEM.giftOfMagicalProsperity, 'Gift of Magical Prosperity', 1)
   const mightyProsp = ref(ITEM.giftOfMightyProsperity, 'Gift of Mighty Prosperity', 1)
   const cMagic = giftOfCondensedMagic()

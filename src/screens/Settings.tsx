@@ -41,6 +41,7 @@ export default function Settings() {
     settings,
     setApiKey,
     setWeights,
+    forgetAccount,
     runSync,
     syncing,
     syncMessage,
@@ -59,6 +60,18 @@ export default function Settings() {
 
   const saveKey = () => {
     setApiKey(keyInput.trim())
+  }
+
+  const forget = () => {
+    if (
+      confirm(
+        'Remove your API key and all synced account data from this browser? Your loadout goals are kept.',
+      )
+    ) {
+      forgetAccount()
+      setKeyInput('')
+      setValidation({ state: 'idle' })
+    }
   }
 
   const check = async () => {
@@ -184,6 +197,14 @@ export default function Settings() {
           >
             Save
           </button>
+          {settings.apiKey && (
+            <button
+              onClick={forget}
+              className="rounded-lg border border-line px-3 py-2 text-sm font-medium text-ink hover:border-bad hover:text-bad"
+            >
+              Forget key & data
+            </button>
+          )}
         </div>
 
         {validation.state === 'ok' && (

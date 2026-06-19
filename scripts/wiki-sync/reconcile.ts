@@ -17,6 +17,9 @@ import { catalogIntermediates, catalogPieces, type CatalogPiece } from './catalo
 import { readIntermediates, readSnapshot } from './store'
 import { diffComponents } from './compare'
 
+/** A low-confidence parse that the parser positively identified as vendor-sold. */
+const isVendorLeaf = (parseNote?: string): boolean => /vendor-sold item/.test(parseNote ?? '')
+
 function finding(
   type: FindingType,
   category: Category | 'intermediates',
@@ -89,12 +92,15 @@ function reconcileIntermediates(): Finding[] {
   for (const it of catalogIntermediates()) {
     const wiki = byName.get(canonComponent(it.name))
     if (!wiki || wiki.confidence === 'low' || wiki.components.length === 0) {
+      const vendor = isVendorLeaf(wiki?.parseNote)
       out.push(
         finding(
-          'LOW_CONFIDENCE',
+          vendor ? 'VENDOR_LEAF' : 'LOW_CONFIDENCE',
           'intermediates',
           it.name,
-          `intermediate recipe not verified (${wiki?.parseNote ?? 'no wiki snapshot — run npm run wiki:fetch'}); not compared`,
+          vendor
+            ? `vendor-sold leaf (no craftable {{recipe}}); counted as a terminal material, not deep-verified`
+            : `intermediate recipe not verified (${wiki?.parseNote ?? 'no wiki snapshot — run npm run wiki:fetch'}); not compared`,
           { detail: wiki?.parseNote },
         ),
       )
@@ -184,10 +190,17 @@ export function reconcile(): ReconcileResult {
       // --- recipe reconciliation --------------------------------------------
       if (isSet) continue // sets: enumeration + id only; per-piece recipes compared via members' own pages
       if (wiki.confidence === 'low') {
+        const vendor = isVendorLeaf(wiki.parseNote)
         findings.push(
-          finding('LOW_CONFIDENCE', category, primary.name, `wiki recipe not parsed (${wiki.parseNote ?? 'unknown'}); recipe not compared`, {
-            detail: wiki.parseNote,
-          }),
+          finding(
+            vendor ? 'VENDOR_LEAF' : 'LOW_CONFIDENCE',
+            category,
+            primary.name,
+            vendor
+              ? `vendor-sold item (no craftable {{recipe}}); a correct terminal leaf, not a parse gap`
+              : `wiki recipe not parsed (${wiki.parseNote ?? 'unknown'}); recipe not compared`,
+            { detail: wiki.parseNote },
+          ),
         )
         continue
       }

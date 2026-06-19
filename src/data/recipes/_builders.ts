@@ -232,12 +232,13 @@ export function mysticTribute(): SubTree {
  * Draconic Tribute (Gen3 / End of Dragons Aurene weapons): 1 Gift of Condensed
  * Might + 1 Gift of Condensed Magic + 38 Mystic Clover + 5 Amalgamated Draconic
  * Lodestone. Wiki-verified (2026-06-17) — Gen3 weapons use this, NOT a Mystic
- * Tribute. Draconic Tribute itself remains synthetic (its api id not yet confirmed).
+ * Tribute. Draconic Tribute carries its real API id (96137, wiki + /v2/items
+ * cross-confirmed 2026-06-19) so a pre-built one matches inventory on sync.
  */
 export function draconicTribute(): SubTree {
   const cMight = giftOfCondensedMight()
   const cMagic = giftOfCondensedMagic()
-  const out = ref(synthetic(), 'Draconic Tribute', 1)
+  const out = ref(ITEM.draconicTribute, 'Draconic Tribute', 1)
   return {
     out,
     nodes: [
@@ -277,7 +278,7 @@ export function bloodstoneShard(spiritShardLeaf: ItemRef): SubTree {
  */
 export function giftOfMastery(): SubTree {
   const blood = bloodstoneShard(ref(currency(CUR.spiritShard), 'Spirit Shard', 200))
-  const exploration = ref(synthetic(), 'Gift of Exploration', 1)
+  const exploration = ref(ITEM.giftOfExploration, 'Gift of Exploration', 1)
   const battle = ref(ITEM.giftOfBattle, 'Gift of Battle', 1) // id 19678
   const out = ref(ITEM.giftOfMastery, 'Gift of Mastery', 1)
   return {

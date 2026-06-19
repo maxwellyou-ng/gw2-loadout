@@ -17,10 +17,15 @@ export function extractTemplates(text: string, name: string): string[] {
   while (i < text.length) {
     const start = lower.indexOf(needle, i)
     if (start === -1) break
-    // The char after the name must be a delimiter (| } or whitespace), so
-    // `{{recipe}}` doesn't also match `{{recipementum}}`.
-    const after = text[start + needle.length]
-    if (after !== undefined && !'|} \n\t'.includes(after)) {
+    // The template name ends here: skip any trailing whitespace, then the next
+    // char MUST be a param pipe `|` or the closing `}`. This rejects both
+    // `{{recipementum}}` (no boundary) AND `{{recipe list}}` (a DIFFERENT
+    // template — "recipe list" — whose name merely shares the `recipe` prefix;
+    // matching it as `{{recipe}}` was yielding empty, "no ingredients" recipes).
+    let k = start + needle.length
+    while (k < text.length && (text[k] === ' ' || text[k] === '\t' || text[k] === '\n' || text[k] === '\r')) k++
+    const after = text[k]
+    if (after !== '|' && after !== '}') {
       i = start + needle.length
       continue
     }

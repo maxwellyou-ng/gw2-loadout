@@ -330,7 +330,11 @@ export function buildRecipeTree(
 
     let provenance: Provenance
     if (hasChildren) {
-      provenance = recipeVerified ? 'verified' : 'unverified'
+      // A vendor purchase isn't a craftable {{recipe}} (the wiki renders its cost
+      // via a DB query, not machine-readable params), so it can never be wiki-
+      // "verified" — but its modelled cost is the known vendor price, not an
+      // unverified guess. Treat it as a summarized stand-in, like a vendor leaf.
+      provenance = recipeVerified ? 'verified' : source === 'vendor' ? 'summarized' : 'unverified'
     } else if (
       node &&
       (source === 'achievement' || source === 'collection' || source === 'reward-track' || source === 'vendor')

@@ -92,19 +92,44 @@ function rehydrateSlot(
   }
 }
 
+// Build codes are tiny (~23 slots of small fields). Reject anything wildly larger
+// than a legitimate code before we base64-decode and JSON.parse untrusted input —
+// a cheap guard against a pasted megabyte triggering pathological parse cost.
+const MAX_CODE_LENGTH = 16_384
+
+const VALID_SLOT_KEYS = new Set<SlotKey>(SLOT_ORDER.map((o) => o.key))
+
+/** Shape-check an untrusted decoded wire object; throws a clear error if malformed. */
+function assertWire(value: unknown): asserts value is Wire<{ k: SlotKey; n?: number[] }> {
+  if (typeof value !== 'object' || value === null) throw new Error('Build code is not an object.')
+  const v = value as Record<string, unknown>
+  if (typeof v.n !== 'string') throw new Error('Build code is missing its loadout name.')
+  if (!Array.isArray(v.s)) throw new Error('Build code is missing its slot list.')
+  for (const sw of v.s) {
+    if (typeof sw !== 'object' || sw === null) throw new Error('Build code has a malformed slot.')
+    const s = sw as Record<string, unknown>
+    if (!VALID_SLOT_KEYS.has(s.k as SlotKey)) throw new Error(`Build code has an unknown slot key.`)
+    if (s.n !== undefined && !(Array.isArray(s.n) && s.n.every((x) => typeof x === 'number')))
+      throw new Error('Build code has malformed candidate ids.')
+  }
+}
+
 export function decode(code: string): Loadout {
   const trimmed = code.trim()
+  if (trimmed.length > MAX_CODE_LENGTH) throw new Error('Build code is too large.')
 
   if (trimmed.startsWith(PREFIX_V2)) {
-    const wire = JSON.parse(fromBase64Url(trimmed.slice(PREFIX_V2.length))) as Wire<SlotWireV2>
-    const slots = wire.s.map((sw) => rehydrateSlot(sw, sw.f === 1))
+    const wire = JSON.parse(fromBase64Url(trimmed.slice(PREFIX_V2.length)))
+    assertWire(wire)
+    const slots = (wire.s as SlotWireV2[]).map((sw) => rehydrateSlot(sw, sw.f === 1))
     return normalizeLoadout({ name: wire.n, slots })
   }
 
   if (trimmed.startsWith(PREFIX_V1)) {
     // Legacy: derive `flexible` from the old status index.
-    const wire = JSON.parse(fromBase64Url(trimmed.slice(PREFIX_V1.length))) as Wire<SlotWireV1>
-    const slots = wire.s.map((sw) => rehydrateSlot(sw, V1_STATUS[sw.s] === 'flexible'))
+    const wire = JSON.parse(fromBase64Url(trimmed.slice(PREFIX_V1.length)))
+    assertWire(wire)
+    const slots = (wire.s as SlotWireV1[]).map((sw) => rehydrateSlot(sw, V1_STATUS[sw.s] === 'flexible'))
     return normalizeLoadout({ name: wire.n, slots })
   }
 

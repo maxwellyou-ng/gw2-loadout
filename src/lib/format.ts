@@ -1,19 +1,44 @@
 // Display formatting helpers.
 
 /**
+ * Legendary/ascended armor PIECES have no individual wiki page — only the set
+ * does (e.g. the wiki documents "Obsidian Helm" under "Obsidian armor", and the
+ * weight-specific craftables like "Obsidian Heavy Helmet"). So a per-piece title
+ * 404s. These rules redirect armor piece + precursor names to their set page.
+ * Slot-anchored so they can't swallow real items like "Obsidian Shard".
+ * (Verified against the live wiki, 2026-06-19.)
+ */
+const ARMOR_SLOT = /\b(helm|shoulders|chest|gloves|leggings|boots)$/i
+const ARMOR_LINK_OVERRIDES: Array<[RegExp, string]> = [
+  [/^obsidian /i, 'Obsidian armor'],
+  [/^arcanum\b/i, 'Obsidian armor'], // Obsidian precursor ("Arcanum of Astral …") components
+  [/^(ascended )?triumphant hero's /i, "Triumphant Hero's armor"],
+  [/^perfected envoy /i, 'Perfected Envoy armor'],
+  [/^refined envoy /i, 'Refined Envoy armor'], // ascended precursor for Perfected Envoy
+  [/^ardent glorious /i, 'Ardent Glorious armor'],
+]
+
+/**
  * GW2 wiki URL for a material/ingredient by name. The wiki uses deterministic
  * title URLs (spaces → underscores, percent-encoded otherwise, matching e.g.
  * `Aurene%27s_Fang`), so an accurate name is enough to link — including the
  * curated intermediates carrying synthetic ids (Gift of the Astral Ward,
  * Draconic Tribute, …), whose names are real wiki page titles. We strip a
  * trailing parenthetical disambiguator we add for display (e.g. " (achievement)",
- * " (base)", " (helm)") since it isn't part of the page title. Returns null only
- * when there's no usable title (e.g. an empty name).
+ * " (base)", " (helm)") since it isn't part of the page title. Armor pieces are
+ * redirected to their set page (see ARMOR_LINK_OVERRIDES). Returns null only when
+ * there's no usable title (e.g. an empty name).
  */
 export function wikiUrl(name: string): string | null {
   const title = name.replace(/\s*\([^)]*\)\s*$/, '').trim()
   if (!title) return null
-  return `https://wiki.guildwars2.com/wiki/${encodeURIComponent(title).replace(/%20/g, '_')}`
+  const link = (t: string) => `https://wiki.guildwars2.com/wiki/${encodeURIComponent(t).replace(/%20/g, '_')}`
+  // "Arcanum" has no slot suffix; match it before the slot guard.
+  if (/^arcanum\b/i.test(title)) return link('Obsidian armor')
+  if (ARMOR_SLOT.test(title)) {
+    for (const [re, page] of ARMOR_LINK_OVERRIDES) if (re.test(title)) return link(page)
+  }
+  return link(title)
 }
 
 /** Copper -> "12g 34s 56c" (GW2 coin: 1g = 100s = 10000c). */

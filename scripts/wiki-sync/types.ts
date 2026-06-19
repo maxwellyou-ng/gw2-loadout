@@ -92,6 +92,7 @@ export type FindingType =
   | 'QTY_MISMATCH' // a matched component's quantity differs
   | 'SYNTHETIC_RESOLVABLE' // catalog uses a synthetic id the wiki now resolves
   | 'UNVERIFIED' // catalog entry is verified:false
+  | 'VENDOR_LEAF' // vendor-sold item: a correct terminal leaf, no craftable {{recipe}} to verify
   | 'LOW_CONFIDENCE' // wiki entry could not be parsed confidently
 
 export type Severity = 'error' | 'warn' | 'info'
@@ -120,6 +121,7 @@ export const DEFAULT_SEVERITY: Record<FindingType, Severity> = {
   QTY_MISMATCH: 'error',
   SYNTHETIC_RESOLVABLE: 'warn',
   UNVERIFIED: 'warn',
+  VENDOR_LEAF: 'info',
   LOW_CONFIDENCE: 'info',
 }
 

@@ -2,6 +2,18 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <!--
+      Content-Security-Policy (defense-in-depth). This is a static client-side SPA:
+      scripts/styles are same-origin, account data is fetched only from the official
+      GW2 API, and item icons load from ArenaNet's render CDN. Locking connect-src to
+      api.guildwars2.com means even a hypothetical XSS could not exfiltrate the stored
+      API key to an attacker-controlled domain. style-src allows 'unsafe-inline' for
+      React inline styles / Tailwind; script-src stays strict ('self', no inline).
+    -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://render.guildwars2.com; connect-src 'self' https://api.guildwars2.com; font-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'"
+    />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GW2 Legendary Loadout Tracker</title>

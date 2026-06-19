@@ -14,7 +14,7 @@
 // ---------------------------------------------------------------------------
 
 import type { AcquisitionMode, LegendaryPiece, RecipeNode } from '../../types'
-import { ITEM, synthetic } from '../items'
+import { ITEM } from '../items'
 import {
   ref,
   node,
@@ -47,10 +47,10 @@ function aethericAnchor(): LegendaryPiece {
   const staffUnlock = 105653 // Ancora Pax (wiki armory id)
   const cMightX4 = giftOfCondensedMight()
   const cMagicX4 = giftOfCondensedMagic()
-  const survivors = ref(synthetic(), 'Gift of the Survivors', 1)
-  const people = ref(synthetic(), 'Gift of the People', 1)
-  const insight = ref(synthetic(), 'Gift of Insight', 1)
-  const elders = ref(synthetic(), 'Gift of the Elders', 1)
+  const survivors = ref(ITEM.giftOfTheSurvivors, 'Gift of the Survivors', 1)
+  const people = ref(ITEM.giftOfThePeople, 'Gift of the People', 1)
+  const insight = ref(ITEM.giftOfInsight, 'Gift of Insight', 1)
+  const elders = ref(ITEM.giftOfTheElders, 'Gift of the Elders', 1)
   const root = ref(id, 'Aetheric Anchor', 1)
   const nodes: RecipeNode[] = [
     node(root, [survivors, people, insight, elders], {
