@@ -17,6 +17,7 @@ discrepancies visible and enforced instead of relying on manual cross-checking.
 | `npm run wiki:check` | no | — | The gate. Exits non-zero on unacknowledged drift. Runs inside `npm run build`. |
 | `npm run wiki:check -- --update-baseline` | no | `baseline.json` | Accept the current state as the baseline. |
 | `npm run wiki:report -- --scaffold="<Item>"` | no | — | Print a draft recipe stub (verified:false) for a missing item. |
+| `npm run wiki:fix` | no | `generated/`, `baseline.json` | Auto-fixer. Regenerate `verified:false` drafts for all generatable missing items, validate (`tsc`/`check`/`wiki:check`), revert on failure, auto-prune resolved baseline acks. `-- --dry-run` previews. Alias: `wiki:report -- --apply`. |
 
 ## How it works
 
@@ -65,6 +66,12 @@ fix its recipe in `src/data/recipes/*`, then remove its entries from
 `baseline.json` (or rerun `--update-baseline`). If a fixed item later regresses,
 the gate catches it. `--scaffold` drafts a starting point for missing items.
 
+**Automated path:** `npm run wiki:fix` regenerates `verified:false` drafts for every
+generatable missing item into the machine-owned `src/data/recipes/generated/` layer
+(merged into `CATALOG`; curated entries win any collision). It self-validates and reverts
+on failure, so a bad generation can't land. Drafts use synthetic component ids until
+phase 3 resolves real ones; armor sets and id-less items stay in the curated lane.
+
 ## Files
 
 - `types.ts` — shared shapes (`SnapshotEntry`, `Finding`, `Baseline`).
@@ -73,7 +80,8 @@ the gate catches it. `--scaffold` drafts a starting point for missing items.
 - `snapshot.ts` — `wiki:fetch` entrypoint. `store.ts` — snapshot/baseline IO.
 - `catalog-view.ts` — comparison view over the live `CATALOG`.
 - `reconcile.ts` — the pure diff. `gate.ts` — baseline classification.
-- `report.ts` / `check.ts` — `wiki:report` / `wiki:check` entrypoints.
+- `report.ts` / `check.ts` / `fix.ts` — `wiki:report` / `wiki:check` / `wiki:fix` entrypoints.
+- `../../src/data/recipes/generated/` — machine-owned draft layer written by `fix.ts`.
 - `aliases.ts` — name normalization + wiki↔catalog name aliases.
 - `snapshot/*.json`, `baseline.json` — **committed**. `cache/` — git-ignored.
 

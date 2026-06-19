@@ -80,39 +80,38 @@ to drive the work above instead of hand-auditing:
   (Gift of Fortune, Mystic/Draconic Tribute, Condensed Might/Magic) and compare flattened
   leaf quantities — that's where the historical clover/T6/ecto miscounts lived.
 
-### Auto-fix: apply wiki fixes automatically (not yet built)
+### Auto-fix: apply wiki fixes automatically (phases 1–2 SHIPPED)
 
-Today the system is report-first (`wiki:report` + the `wiki:check` gate); fixes are applied
-by hand. The goal here is for missing/incorrect items to be corrected automatically on
-discovery. Auto-writing turns every parse error into shipped-wrong-data, so most of this
-work is about making generation accurate and safe enough to trust — not the writing itself.
-Build in the phases below; each is independently shippable.
+Today the system is report-first (`wiki:report` + the `wiki:check` gate); fixes for the
+remaining gap (component ids + deep trees) are still applied by hand. The goal is for
+missing/incorrect items to be corrected automatically on discovery. Auto-writing turns every
+parse error into shipped-wrong-data, so most of this work is about making generation accurate
+and safe enough to trust — not the writing itself. Each phase is independently shippable.
 
-**1. Machine-owned data layer (architectural prerequisite).**
-- Add `src/data/recipes/generated/` (TS, or JSON + a thin loader) merged into `CATALOG` in
-  `src/data/recipes/index.ts`. The fixer owns `generated/`; humans own the existing curated
-  files. A piece lives in exactly one place, so auto-fix becomes "regenerate the folder"
-  (clean diff, idempotent) instead of surgical edits into curated code.
-- Migrate or shadow rule: if a curated entry and a generated entry collide by name, curated
-  wins (and the generated one is skipped + noted), so human work is never clobbered.
+**1. Machine-owned data layer — ✅ DONE (2026-06-19).**
+- `src/data/recipes/generated/` holds `recipes.generated.json` (the fixer owns it) + a thin
+  `index.ts` loader. `src/data/recipes/index.ts` merges `GENERATED` into `CATALOG` with
+  curated-wins-on-collision (by name *and* id), so authored work is never clobbered. Auto-fix
+  is "regenerate the file" — clean diff, idempotent.
+- Generated synthetic ids are minted into a reserved sub-range (`GENERATED_SYNTHETIC_BASE`,
+  9.5M–10M, see `src/data/items.ts`) so they can't collide with curated `synthetic()` ids,
+  and shared gifts (e.g. "Gift of Fortune") hash to one id so the aggregate view de-dups them.
 
-**2. `wiki:fix` command + validation-gated apply (safety machinery).**
-- New `npm run wiki:fix` (a.k.a. `wiki:report -- --apply`) that regenerates `generated/` for
-  items that are MISSING or have unacknowledged drift.
-- Land every generated recipe as **`verified: false`** by default. Promote to
-  `verified: true` only when: confidence is `high`, *all* component ids resolved (phase 4),
-  and a structural self-check passes.
-- After writing, run `tsc -b`, `npm run check`, and `npm run wiki:check`; **revert all writes
-  if any fail** (never leave a half-written catalog).
-- **Auto-prune `baseline.json`**: drop acknowledgements the fix resolved. The
-  `staleAcknowledgements` logic in `scripts/wiki-sync/gate.ts` already detects these.
-- Output a reviewable diff / PR — "automatic on discovery" should still leave a human a diff
-  to glance at; do not silent-commit to main.
-- This phase alone (with synthetic component ids) closes the ~53 missing-item gap as
-  reviewable `verified:false` drafts. The existing `scaffold()` in
-  `scripts/wiki-sync/report.ts` is the starting point for the emitter.
+**2. `wiki:fix` command + validation-gated apply — ✅ DONE (2026-06-19).**
+- `npm run wiki:fix` (a.k.a. `npm run wiki:report -- --apply`; `--dry-run` previews) in
+  `scripts/wiki-sync/fix.ts`. Regenerates `generated/` for every MISSING wiki entry that is
+  high-confidence + has a real API id + a non-empty top-level recipe + isn't an armor *set*.
+  First apply created 48 drafts (catalog 24 → 72); 6 entries route to the manual lane
+  (armor sets, low-confidence Ancora Bellum, no-id Selachimorpha) — i.e. phase 5's boundary.
+- Every draft ships **`verified: false`** (only an `UNVERIFIED` advisory warning, never a
+  blocking finding). Promote to `verified: true` only when confidence is `high`, *all*
+  component ids resolved (phase 3), and a structural self-check passes (phase 4).
+- After writing it runs `tsc -b`, `npm run check`, `npm run wiki:check` and **reverts all
+  writes if any fail** (verified with a forced-failure test — leaves no half-written catalog).
+- **Auto-prunes `baseline.json`**: drops the `acknowledgedMissing` entries the fix resolved.
+- Output is a reviewable JSON diff (no silent-commit); the JSON file *is* the review surface.
 
-**3. Component-level item-id resolution.**
+**3. Component-level item-id resolution.** _(next — clears the `SYNTHETIC_RESOLVABLE` gap)_
 - `parse-recipe.ts` currently reads only the legendary's own infobox `id`. Add a name→id
   resolver that fetches each component's wiki page infobox `id`, cached to a committed
   `scripts/wiki-sync/item-ids.json`, and feed resolved ids into the `ITEM` registry.
@@ -138,5 +137,6 @@ Build in the phases below; each is independently shippable.
   fully-resolved items; everything else routes to curated overrides + `aliases.ts`. Auto-fix
   is necessarily partial (~65 of 74 items).
 
-Suggested order: **1 + 2** first (high payoff, ~closes the missing-item gap as drafts), then
-**3** (real ids), then **4** (leaf-accurate trees + auto-verify).
+Suggested order: **1 + 2** ✅ done (the missing-item gap now ships as `verified:false` drafts);
+next **3** (real component ids → clears `SYNTHETIC_RESOLVABLE`, enables inventory matching),
+then **4** (leaf-accurate trees + auto-promotion to `verified:true`).

@@ -10,6 +10,7 @@
     "check": "tsx scripts/engine-check.ts",
     "wiki:fetch": "tsx scripts/wiki-sync/snapshot.ts",
     "wiki:report": "tsx scripts/wiki-sync/report.ts",
+    "wiki:fix": "tsx scripts/wiki-sync/fix.ts",
     "wiki:check": "tsx scripts/wiki-sync/check.ts",
     "preview": "vite preview",
     "predeploy": "npm run build",

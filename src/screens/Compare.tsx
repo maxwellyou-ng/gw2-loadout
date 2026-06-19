@@ -14,7 +14,7 @@
 import { useMemo } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useApp, CATALOG_BY_ID } from '../state/store'
-import { CATALOG } from '../data/recipes'
+import { piecesForSlot } from '../lib/slotPieces'
 import { computeProgress } from '../engine'
 import { DEFAULT_WEIGHTS } from '../types'
 import { Card, Badge, EmptyState } from '../components/ui'
@@ -90,7 +90,7 @@ export default function Compare() {
     )
   }
 
-  const familyPieces = CATALOG.filter((p) => p.slot === slot.family)
+  const familyPieces = piecesForSlot(slot)
   const toggleCandidate = (pieceId: number) => {
     const next = slot.candidateIds.includes(pieceId)
       ? slot.candidateIds.filter((id) => id !== pieceId)

@@ -40,6 +40,13 @@ export function formatDate(iso: string | null): string {
   return d.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })
 }
 
+/** Short date — month + day only (e.g. "Jul 5"), no year. */
+export function formatDateShort(iso: string | null): string {
+  if (!iso) return '—'
+  const d = new Date(iso)
+  return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' })
+}
+
 export function formatRelative(iso: string | null): string {
   if (!iso) return 'never'
   const then = new Date(iso).getTime()

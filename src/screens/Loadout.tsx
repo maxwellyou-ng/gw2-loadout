@@ -1,58 +1,85 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useApp, CATALOG_BY_ID } from '../state/store'
-import { CATALOG } from '../data/recipes'
-import { Card, ProgressBar, ScorePill, Badge } from '../components/ui'
-import { formatDate } from '../lib/format'
+import { Card, ProgressBar, ScorePill, Badge, InfoTooltip } from '../components/ui'
+import { formatDate, formatDateShort } from '../lib/format'
+import { piecesForSlot } from '../lib/slotPieces'
 import type { SlotFamily } from '../types'
 import type { LoadoutSlot } from '../data/loadout'
 
-const FAMILY_ORDER: { family: SlotFamily; title: string }[] = [
-  { family: 'weapon', title: 'Weapons' },
-  { family: 'armor', title: 'Armor' },
-  { family: 'trinket', title: 'Trinkets' },
-  { family: 'back', title: 'Back' },
-  { family: 'misc', title: 'Relic / Runes / Aquabreather' },
+/** Sections of the loadout grid. Trinkets and Back share a section so the grid
+ *  is a tidy multiple of 2/3 (5 trinkets + 1 back = 6 cards). */
+const SECTIONS: { families: SlotFamily[]; title: string }[] = [
+  { families: ['weapon'], title: 'Weapons' },
+  { families: ['armor'], title: 'Armor' },
+  { families: ['trinket', 'back'], title: 'Trinkets and Back' },
+  { families: ['misc'], title: 'Relic / Runes / Aquabreather' },
 ]
 
 const MAX_WEAPONS = 8
-const WEAPON_PIECES = CATALOG.filter((p) => p.slot === 'weapon')
 
-/** Tracked / Flexible toggle pills (the two orthogonal slot states). */
-function SlotToggles({ slot }: { slot: LoadoutSlot }) {
-  const { setSlotTracked, setSlotFlexible } = useApp()
-  const pill = (on: boolean) =>
-    `rounded px-2 py-0.5 text-xs font-medium transition-colors ${
-      on ? 'bg-accent-soft text-accent' : 'bg-surface-2 text-muted hover:text-ink'
-    }`
+/** Short "earliest finish" date (month + day) with an info dot whose tooltip
+ *  spells out the full date. */
+function EarliestFinish({ iso }: { iso: string }) {
   return (
-    <div className="flex gap-1.5">
-      <button
-        type="button"
-        aria-pressed={slot.tracked}
-        aria-label={`Tracked: ${slot.label}`}
-        onClick={() => setSlotTracked(slot.key, !slot.tracked)}
-        className={pill(slot.tracked)}
-        title={slot.tracked ? 'Counts in totals — click to hide' : 'Hidden from totals — click to track'}
+    <span className="inline-flex items-center gap-1">
+      <span>{formatDateShort(iso)}</span>
+      <InfoTooltip label={`If you hit every time gate, the absolute earliest you could finish is ${formatDate(iso)}`} />
+    </span>
+  )
+}
+
+/** A small on/off switch for the slot's tracked state. */
+function TrackedToggle({ slot }: { slot: LoadoutSlot }) {
+  const { setSlotTracked } = useApp()
+  const on = slot.tracked
+  return (
+    <button
+      type="button"
+      role="switch"
+      aria-checked={on}
+      aria-label={`Tracked: ${slot.label}`}
+      onClick={() => setSlotTracked(slot.key, !on)}
+      title={on ? 'Counts in totals — click to stop tracking' : 'Not counted — click to track'}
+      className="flex items-center gap-2 text-xs font-medium"
+    >
+      <span
+        className={`relative inline-flex h-4 w-7 shrink-0 items-center rounded-full transition-colors ${
+          on ? 'bg-accent' : 'bg-surface-2'
+        }`}
       >
-        {slot.tracked ? 'Tracked' : 'Hidden'}
-      </button>
-      <button
-        type="button"
-        aria-pressed={slot.flexible}
-        aria-label={`Flexible: ${slot.label}`}
-        onClick={() => setSlotFlexible(slot.key, !slot.flexible)}
-        className={pill(slot.flexible)}
-        title="Weighing candidates for this slot"
-      >
-        Flexible
-      </button>
+        <span
+          className={`inline-block h-3 w-3 transform rounded-full bg-ink transition-transform ${
+            on ? 'translate-x-3.5' : 'translate-x-0.5'
+          }`}
+        />
+      </span>
+      <span className={on ? 'text-ink' : 'text-muted'}>{on ? 'Tracked' : 'Untracked'}</span>
+    </button>
+  )
+}
+
+/** Static link to weigh candidates for this slot on the Compare screen. */
+function CompareLink({ slot }: { slot: LoadoutSlot }) {
+  return (
+    <Link to={`/compare/${slot.key}`} className="text-xs font-medium text-accent hover:underline">
+      Compare →
+    </Link>
+  )
+}
+
+/** The footer common to every card: tracked switch + compare link. */
+function SlotControls({ slot }: { slot: LoadoutSlot }) {
+  return (
+    <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
+      <TrackedToggle slot={slot} />
+      <CompareLink slot={slot} />
     </div>
   )
 }
 
 /** A chosen-piece card body (name links to detail; no full-card link so the
- *  toggle buttons stay clickable). `eyebrow` is omitted for weapons. */
+ *  controls stay clickable). `eyebrow` is omitted for weapons. */
 function PieceBody({
   slot,
   eyebrow,
@@ -80,7 +107,7 @@ function PieceBody({
           )}
         </div>
         <p className="mt-2 flex-1 text-xs text-muted">Unknown piece (data updated). Remove and re-pick.</p>
-        <div className="mt-3"><SlotToggles slot={slot} /></div>
+        <SlotControls slot={slot} />
       </Card>
     )
   }
@@ -115,53 +142,66 @@ function PieceBody({
       </div>
 
       <div className="mt-3 flex flex-wrap items-center gap-2 text-xs text-muted">
-        {!slot.tracked && <Badge>untracked</Badge>}
         {slot.priority === 'defer' && <Badge tone="warn">defer</Badge>}
         {progress && !progress.owned && progress.earliestFinishDate && (
-          <span>· earliest finish {formatDate(progress.earliestFinishDate)}</span>
+          <EarliestFinish iso={progress.earliestFinishDate} />
         )}
         {progress?.finishableByGold && <Badge tone="good">finish for gold</Badge>}
         {piece && !piece.recipe.verified && <Badge tone="warn">unverified</Badge>}
       </div>
 
-      <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
-        <SlotToggles slot={slot} />
-        {slot.flexible && (
-          <Link to={`/compare/${slot.key}`} className="text-xs text-accent underline">
-            Compare →
-          </Link>
-        )}
-      </div>
+      <SlotControls slot={slot} />
     </Card>
   )
 }
 
-/** Non-weapon slot: chosen piece, or a minimal blank placeholder. */
+/**
+ * Non-weapon slot (armor / trinket / back). Mirrors the Weapons UX:
+ *  - a chosen piece shows an X to clear the slot, and
+ *  - an empty slot offers a dropdown of the pieces that fit this slot to track.
+ * Every card also exposes a static Compare link to weigh candidates.
+ */
 function SlotCard({ slot }: { slot: LoadoutSlot }) {
+  const { setSlotPiece } = useApp()
+  const [pick, setPick] = useState('')
   const piece = slot.chosenPieceId != null ? CATALOG_BY_ID[slot.chosenPieceId] : undefined
 
-  if (!piece) {
-    return (
-      <Card className="flex h-full flex-col border-dashed">
-        <div className="flex items-center justify-between gap-2">
-          <span className="truncate text-sm font-medium text-muted">{slot.label}</span>
-        </div>
-        <p className="mt-2 flex-1 text-xs text-muted">
-          {slot.flexible ? 'Weigh candidates to pick one.' : 'Empty.'}
-        </p>
-        <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
-          <SlotToggles slot={slot} />
-          {slot.flexible && (
-            <Link to={`/compare/${slot.key}`} className="text-xs text-accent underline">
-              Compare →
-            </Link>
-          )}
-        </div>
-      </Card>
-    )
+  if (piece) {
+    return <PieceBody slot={slot} eyebrow onRemove={() => setSlotPiece(slot.key, null)} />
   }
 
-  return <PieceBody slot={slot} eyebrow />
+  const options = piecesForSlot(slot)
+
+  return (
+    <Card className="flex h-full flex-col border-dashed">
+      <span className="truncate text-sm font-medium text-muted">{slot.label}</span>
+
+      <div className="mt-2 flex-1">
+        {options.length === 0 ? (
+          <p className="text-xs text-muted">No catalog pieces for this slot yet.</p>
+        ) : (
+          <select
+            value={pick}
+            onChange={(e) => {
+              const id = Number(e.target.value)
+              if (id) setSlotPiece(slot.key, id)
+              setPick('')
+            }}
+            className="w-full rounded-lg border border-line bg-surface-2 px-2 py-2 text-sm text-ink outline-none focus:border-accent"
+          >
+            <option value="">+ Choose a piece…</option>
+            {options.map((p) => (
+              <option key={p.id} value={p.id}>
+                {p.name} — {p.type}
+              </option>
+            ))}
+          </select>
+        )}
+      </div>
+
+      <SlotControls slot={slot} />
+    </Card>
+  )
 }
 
 /** Weapons: compact, removable, up to 8; empty slots collapse. */
@@ -171,6 +211,7 @@ function WeaponsSection({ slots }: { slots: LoadoutSlot[] }) {
 
   const filled = slots.filter((s) => s.chosenPieceId != null)
   const firstEmpty = slots.find((s) => s.chosenPieceId == null)
+  const weaponOptions = firstEmpty ? piecesForSlot(firstEmpty) : []
 
   const addWeapon = (pieceId: number) => {
     if (firstEmpty) setSlotPiece(firstEmpty.key, pieceId)
@@ -195,7 +236,7 @@ function WeaponsSection({ slots }: { slots: LoadoutSlot[] }) {
             className="mt-2 w-full rounded-lg border border-line bg-surface-2 px-2 py-2 text-sm text-ink outline-none focus:border-accent"
           >
             <option value="">+ Choose a weapon…</option>
-            {WEAPON_PIECES.map((p) => (
+            {weaponOptions.map((p) => (
               <option key={p.id} value={p.id}>
                 {p.name} — {p.type}
               </option>
@@ -225,13 +266,13 @@ export default function Loadout() {
         </div>
       </div>
 
-      {FAMILY_ORDER.map(({ family, title }) => {
-        const slots = loadout.slots.filter((s) => s.family === family)
+      {SECTIONS.map(({ families, title }) => {
+        const slots = loadout.slots.filter((s) => families.includes(s.family))
         if (slots.length === 0) return null
         return (
-          <section key={family}>
+          <section key={title}>
             <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-muted">{title}</h3>
-            {family === 'weapon' ? (
+            {families.includes('weapon') ? (
               <WeaponsSection slots={slots} />
             ) : (
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">

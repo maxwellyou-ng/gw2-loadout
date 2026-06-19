@@ -125,8 +125,13 @@ ${comps || '        // TODO: components (wiki recipe not parsed — confidence l
 }`)
 }
 
-const scaffoldArg = process.argv.slice(2).find((a) => a.startsWith('--scaffold'))
-if (scaffoldArg) {
+const args = process.argv.slice(2)
+const scaffoldArg = args.find((a) => a.startsWith('--scaffold'))
+if (args.includes('--apply')) {
+  // `wiki:report -- --apply` is the documented alias for the auto-fixer.
+  const { runFix } = await import('./fix')
+  runFix(args.includes('--dry-run'))
+} else if (scaffoldArg) {
   const eq = scaffoldArg.indexOf('=')
   const name = eq !== -1 ? scaffoldArg.slice(eq + 1) : process.argv[process.argv.indexOf(scaffoldArg) + 1]
   scaffold((name ?? '').replace(/^["']|["']$/g, ''))

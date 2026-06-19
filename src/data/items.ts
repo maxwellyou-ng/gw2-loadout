@@ -9,6 +9,10 @@
 //   8_000_000 + currencyId  wallet currencies (/v2/account/wallet)
 //   9_000_000 + n           synthetic intermediates (gifts / precursors whose
 //                           exact item id is not yet wiki-verified)
+//   9_500_000 + hash        machine-generated synthetic intermediates, minted by
+//                           the wiki:fix auto-fixer (kept in their own sub-range
+//                           so a generated draft can never collide with a curated
+//                           synthetic id minted at load — see GENERATED_SYNTHETIC_BASE)
 //
 // The API client writes currencies at CURRENCY_BASE + id; recipe inputs that
 // are currencies reference the same. Synthetic ids never match real inventory,
@@ -17,6 +21,13 @@
 
 export const CURRENCY_BASE = 8_000_000
 export const SYNTHETIC_BASE = 9_000_000
+/**
+ * Start of the sub-range the wiki:fix auto-fixer mints generated synthetic ids
+ * into. Curated `synthetic()` ids count up from SYNTHETIC_BASE (a few dozen of
+ * them); generated ids are hashed into [GENERATED_SYNTHETIC_BASE, 10_000_000),
+ * so the two never collide and `isSynthetic` still treats both as synthetic.
+ */
+export const GENERATED_SYNTHETIC_BASE = 9_500_000
 
 export const currency = (id: number) => CURRENCY_BASE + id
 export const isCurrency = (itemId: number) =>

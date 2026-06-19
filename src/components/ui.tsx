@@ -1,8 +1,74 @@
 // Small shared presentational components.
 
-import type { ReactNode } from 'react'
+import {
+  useEffect,
+  useRef,
+  useState,
+  type PointerEvent as ReactPointerEvent,
+  type ReactNode,
+} from 'react'
 import type { TimeGateSeverity } from '../types'
 import { formatPercent, wikiUrl } from '../lib/format'
+
+/**
+ * An "ⓘ" info dot with a custom tooltip that works on every device:
+ *  - mouse: opens on hover, closes on leave,
+ *  - touch/pen: tap toggles (we suppress the synthesized focus/click so it
+ *    doesn't immediately re-close), tap elsewhere dismisses,
+ *  - keyboard: opens on focus, closes on blur.
+ * No native `title`, so there's no hover delay and it shows on touch.
+ */
+export function InfoTooltip({ label }: { label: string }) {
+  const [open, setOpen] = useState(false)
+  const ref = useRef<HTMLSpanElement>(null)
+
+  // Tap-outside (or any outside pointer press) dismisses an open tooltip.
+  useEffect(() => {
+    if (!open) return
+    const onAway = (e: Event) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
+    }
+    document.addEventListener('pointerdown', onAway)
+    return () => document.removeEventListener('pointerdown', onAway)
+  }, [open])
+
+  const onPointerDown = (e: ReactPointerEvent<HTMLButtonElement>) => {
+    if (e.pointerType === 'touch' || e.pointerType === 'pen') {
+      e.preventDefault() // stop the synthesized focus + click that would fight the toggle
+      setOpen((v) => !v)
+    }
+  }
+  const onHover = (e: ReactPointerEvent<HTMLButtonElement>, next: boolean) => {
+    if (e.pointerType === 'mouse') setOpen(next)
+  }
+
+  return (
+    <span ref={ref} className="relative inline-flex align-middle">
+      <button
+        type="button"
+        aria-label={label}
+        aria-expanded={open}
+        onPointerDown={onPointerDown}
+        onPointerEnter={(e) => onHover(e, true)}
+        onPointerLeave={(e) => onHover(e, false)}
+        onFocus={() => setOpen(true)}
+        onBlur={() => setOpen(false)}
+        className="inline-flex h-3.5 w-3.5 items-center justify-center rounded-full border border-line text-[9px] font-semibold leading-none text-muted transition-colors hover:border-accent hover:text-accent"
+      >
+        i
+      </button>
+      <span
+        role="tooltip"
+        aria-hidden={!open}
+        className={`pointer-events-none absolute bottom-full left-1/2 z-30 mb-1.5 -translate-x-1/2 whitespace-nowrap rounded-md border border-line bg-surface-2 px-2 py-1 text-[11px] font-normal normal-case text-ink shadow-lg transition-opacity duration-100 ${
+          open ? 'opacity-100' : 'opacity-0'
+        }`}
+      >
+        {label}
+      </span>
+    </span>
+  )
+}
 
 /**
  * A material/ingredient name that links to its GW2 wiki page when one exists.
