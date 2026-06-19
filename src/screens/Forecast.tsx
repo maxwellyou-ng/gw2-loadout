@@ -14,7 +14,7 @@ import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useApp } from '../state/store'
 import { aggregateRequirements, trackedSlots } from '../engine'
-import { Card, Badge, SeverityDot, EmptyState, WikiName } from '../components/ui'
+import { Card, Badge, SeverityDot, EmptyState, WikiName, ItemIcon, PageHeader } from '../components/ui'
 import { formatDate } from '../lib/format'
 import { STORAGE_KEYS, loadJSON, saveJSON } from '../state/storage'
 
@@ -73,14 +73,11 @@ export default function Forecast() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h2 className="text-lg font-semibold text-ink">Time-gate forecaster</h2>
-        <p className="text-sm text-muted">
-          The loadout finishes no sooner than its slowest daily-capped material. Tweak the
-          assumed daily pace below and the projected date moves.
-          {!sync && ' Sync to factor in what you already own.'}
-        </p>
-      </div>
+      <PageHeader
+        title="Time-gate forecaster"
+        subtitle={`Tweak the assumed daily pace below and the projected finish date moves.${!sync ? ' Sync to factor in what you already own.' : ''}`}
+        help="The loadout finishes no sooner than its slowest daily-capped material. Raising a material's assumed pace may change which one is binding."
+      />
 
       <Card className="flex flex-wrap items-end justify-between gap-3 border-good/40 bg-good/5">
         <div>
@@ -104,6 +101,7 @@ export default function Forecast() {
             >
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div className="flex min-w-0 items-center gap-2">
+                  <ItemIcon itemId={r.itemId} name={r.name} size={24} />
                   <SeverityDot severity={r.severity} />
                   <WikiName name={r.name} itemId={r.itemId} className="truncate text-sm font-medium text-ink" />
                   {isBinding && <Badge tone="gate">binding</Badge>}

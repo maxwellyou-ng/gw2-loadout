@@ -17,7 +17,7 @@ import {
   trackedSlots,
   type AggregatedMaterial,
 } from '../engine'
-import { Card, Badge, SeverityDot, EmptyState, WikiName } from '../components/ui'
+import { Card, Badge, SeverityDot, EmptyState, WikiName, ItemIcon, PageHeader } from '../components/ui'
 import { formatGold } from '../lib/format'
 import type { GameMode, MaterialCategory } from '../types'
 
@@ -54,29 +54,26 @@ const subtotal = (materials: AggregatedMaterial[]): number =>
   materials.reduce((s, m) => s + (m.buyable && m.unitPrice != null ? m.remaining * m.unitPrice : 0), 0)
 
 function MaterialRow({ m }: { m: AggregatedMaterial }) {
+  const days = m.timeGate.isGated && m.timeGate.dailyRate
+    ? Math.ceil(m.remaining / m.timeGate.dailyRate)
+    : null
   return (
-    <div className="flex items-center justify-between gap-3 border-b border-line/60 py-2 last:border-0">
-      <div className="flex min-w-0 items-center gap-2">
+    <div className="flex items-center gap-3 border-b border-line/60 py-1.5 last:border-0">
+      <ItemIcon itemId={m.itemId} name={m.name} size={24} />
+      <div className="flex min-w-0 flex-1 items-center gap-2">
         {m.timeGate.isGated && m.timeGate.severity && <SeverityDot severity={m.timeGate.severity} />}
         <WikiName name={m.name} itemId={m.itemId} className="truncate text-sm text-ink" />
         {m.gameMode && <Badge tone="accent">{m.gameMode}</Badge>}
       </div>
-      <div className="flex shrink-0 items-center gap-3 text-sm">
-        {m.timeGate.isGated && m.timeGate.dailyRate ? (
-          <span className="text-gate">
-            {m.remaining} left · {Math.ceil(m.remaining / m.timeGate.dailyRate)}d
-          </span>
-        ) : (
-          <span className="text-muted">
-            {m.owned}/{m.required}
-          </span>
-        )}
-        {m.buyable && m.unitPrice != null && m.unitPrice > 0 && (
-          <span className="w-28 text-right font-mono text-xs text-muted">
-            {formatGold(m.remaining * m.unitPrice)}
-          </span>
-        )}
-      </div>
+      <span className="w-20 shrink-0 text-right text-sm tabular-nums text-muted">
+        {m.owned}/{m.required}
+      </span>
+      <span className="hidden w-14 shrink-0 text-right text-sm tabular-nums text-gate sm:block">
+        {days != null ? `${days}d` : ''}
+      </span>
+      <span className="hidden w-24 shrink-0 text-right font-mono text-xs text-muted sm:block">
+        {m.buyable && m.unitPrice != null && m.unitPrice > 0 ? formatGold(m.remaining * m.unitPrice) : ''}
+      </span>
     </div>
   )
 }
@@ -96,14 +93,21 @@ function Group({
   const cost = subtotal(materials)
   return (
     <Card>
-      <div className="mb-1 flex items-center justify-between gap-2">
-        <div className="flex items-center gap-2">
+      <div className="flex items-baseline justify-between gap-2">
+        <div className="flex items-baseline gap-2">
           <h3 className="text-sm font-semibold text-ink">{title}</h3>
           <Badge tone={tone}>{materials.length}</Badge>
+          {hint && <span className="hidden text-xs text-muted sm:inline">{hint}</span>}
         </div>
         {cost > 0 && <span className="font-mono text-xs text-muted">≈{formatGold(cost)}</span>}
       </div>
-      {hint && <p className="mb-2 text-xs text-muted">{hint}</p>}
+      <div className="mt-2 flex items-center gap-3 border-b border-line pb-1 text-[10px] uppercase tracking-wide text-muted">
+        <span className="w-6 shrink-0" />
+        <span className="flex-1">Material</span>
+        <span className="w-20 shrink-0 text-right">Have</span>
+        <span className="hidden w-14 shrink-0 text-right sm:block">Days</span>
+        <span className="hidden w-24 shrink-0 text-right sm:block">TP cost</span>
+      </div>
       <div>
         {materials.map((m) => (
           <MaterialRow key={m.itemId} m={m} />
@@ -222,22 +226,20 @@ export default function Materials() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-wrap items-end justify-between gap-3">
-        <div>
-          <h2 className="text-lg font-semibold text-ink">Whole-loadout materials</h2>
-          <p className="text-sm text-muted">
-            {trackedWithPiece} tracked pieces · shared materials de-duplicated, owned counted once
-            {!sync && ' · sync to credit your inventory'}
-          </p>
-        </div>
-        <Card className="px-4 py-3 text-right">
-          <p className="text-xs text-muted">Total buy-out (buyables left)</p>
-          <p className="text-xl font-semibold text-ink">≈{formatGold(agg.buyOutGold)}</p>
-        </Card>
-      </div>
+      <PageHeader
+        title="Whole-loadout materials"
+        subtitle={`${trackedWithPiece} tracked pieces · shared materials de-duplicated${!sync ? ' · sync to credit your inventory' : ''}`}
+        help="Every tracked piece rolled into one list: required is summed across pieces and owned is subtracted once, so a shared material like Mystic Clovers is never double-counted."
+        actions={
+          <div className="text-right">
+            <p className="text-xs text-muted">Total buy-out</p>
+            <p className="text-xl font-semibold text-ink">≈{formatGold(agg.buyOutGold)}</p>
+          </div>
+        }
+      />
 
-      {/* Granularity + grouping + sort selectors */}
-      <div className="flex flex-wrap items-center gap-3">
+      {/* Toolbar: granularity / grouping / sort + search + filter chips */}
+      <div className="flex flex-wrap items-center gap-2">
         <Segmented
           value={view}
           onChange={setView}
@@ -263,23 +265,20 @@ export default function Materials() {
             ['qty', 'Sort: quantity'],
           ]}
         />
-      </div>
-
-      {/* Search + filter chips */}
-      <div className="flex flex-wrap items-center gap-2">
+        <span className="mx-1 h-5 w-px bg-line" />
         <input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search materials…"
-          className="w-48 rounded-lg border border-line bg-surface px-3 py-1.5 text-sm text-ink placeholder:text-muted focus:border-accent focus:outline-none"
+          className="w-40 rounded-lg border border-line bg-surface px-3 py-1.5 text-sm text-ink placeholder:text-muted focus:border-accent focus:outline-none"
         />
         <Chip active={buyableOnly} onClick={() => setBuyableOnly((v) => !v)}>
-          Buyable only
+          Buyable
         </Chip>
         <Chip active={gatedOnly} onClick={() => setGatedOnly((v) => !v)}>
-          Time-gated only
+          Time-gated
         </Chip>
-        <span className="mx-1 h-4 w-px bg-line" />
+        <span className="mx-1 h-5 w-px bg-line" />
         {GAME_MODES.map((mode) => (
           <Chip key={mode} active={modes.has(mode)} onClick={() => toggleMode(mode)}>
             {mode}

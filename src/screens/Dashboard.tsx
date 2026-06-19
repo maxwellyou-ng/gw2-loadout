@@ -23,7 +23,17 @@ import {
   priorityRank,
   progressForSlot,
 } from '../engine'
-import { Card, Ring, SeverityDot, EmptyState, ScorePill, OverlayLink } from '../components/ui'
+import {
+  Card,
+  Ring,
+  SeverityDot,
+  EmptyState,
+  ScorePill,
+  OverlayLink,
+  ItemIcon,
+  ProgressBar,
+  PageHeader,
+} from '../components/ui'
 import { formatGold, formatDate, formatPercent, daysUntil } from '../lib/format'
 import { STORAGE_KEYS, loadJSON, saveJSON } from '../state/storage'
 import type { LoadoutSlot } from '../data/loadout'
@@ -117,7 +127,7 @@ export default function Dashboard() {
   )
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       {!sync && (
         <div className="rounded-lg border border-line bg-surface/50 p-3 text-sm text-muted">
           No account synced yet — these are the plan's standing requirements. Sync on{' '}
@@ -128,31 +138,42 @@ export default function Dashboard() {
         </div>
       )}
 
-      {/* --- Summary cards --- */}
-      <section className="grid grid-cols-1 gap-4 md:grid-cols-3">
-        <Card className="flex flex-col items-center justify-center gap-2">
+      {/* --- Summary strip --- */}
+      <Card className="grid gap-5 md:grid-cols-[auto_1fr_auto] md:gap-6 md:divide-x md:divide-line">
+        <div className="flex items-center gap-3 md:pr-6">
           <Ring
             value={avgScore}
+            size={84}
+            stroke={9}
             label={formatPercent(avgScore)}
-            sublabel={`${doneCount}/${slots.length} done`}
           />
-          <p className="text-sm font-medium text-ink">Loadout completion</p>
-        </Card>
+          <div>
+            <p className="text-sm font-medium text-ink">Loadout completion</p>
+            <p className="text-xs text-muted">{doneCount}/{slots.length} pieces done</p>
+          </div>
+        </div>
 
-        <Card>
-          <h3 className="mb-2 text-sm font-semibold text-ink">Nearest finishes</h3>
+        <div className="md:px-6">
+          <h3 className="mb-1.5 text-xs font-semibold uppercase tracking-wide text-muted">
+            Nearest finishes
+          </h3>
           {nearest.length === 0 ? (
             <p className="text-sm text-muted">No projected finish dates yet.</p>
           ) : (
-            <ul className="space-y-2">
+            <ul className="space-y-1">
               {nearest.map(({ slot, prog }) => {
                 const piece = CATALOG_BY_ID[slot.chosenPieceId!]
                 return (
                   <li key={slot.key} className="flex items-center justify-between gap-2 text-sm">
-                    <OverlayLink to={`/piece/${piece.id}`} title={piece.name} className="min-w-0 truncate text-ink hover:text-accent">
-                      {piece.name}
+                    <OverlayLink
+                      to={`/piece/${piece.id}`}
+                      title={piece.name}
+                      className="flex min-w-0 items-center gap-2 text-ink hover:text-accent"
+                    >
+                      <ItemIcon itemId={piece.id} name={piece.name} size={20} />
+                      <span className="truncate">{piece.name}</span>
                     </OverlayLink>
-                    <span className="shrink-0 text-muted">
+                    <span className="shrink-0 tabular-nums text-muted">
                       {formatDate(prog!.earliestFinishDate)}
                       <span className="ml-1 text-gate">· {daysUntil(prog!.earliestFinishDate)}d</span>
                     </span>
@@ -161,44 +182,46 @@ export default function Dashboard() {
               })}
             </ul>
           )}
-        </Card>
+        </div>
 
-        <Card className="flex flex-col justify-center">
-          <h3 className="mb-1 text-sm font-semibold text-ink">Total time-gate debt</h3>
+        <div className="flex flex-col justify-center md:pl-6">
+          <h3 className="text-xs font-semibold uppercase tracking-wide text-muted">
+            Time-gate debt
+          </h3>
           <p className="text-3xl font-semibold text-gate">{totalDebtDays}d</p>
-          <p className="mt-1 text-xs text-muted">
-            Soonest the whole loadout could finish if you collect every daily cap starting today
-            (shared mats de-duplicated). {agg.timeGateDebt.length} gated material
-            {agg.timeGateDebt.length === 1 ? '' : 's'} on the critical path.
+          <p className="text-xs text-muted">
+            {agg.timeGateDebt.length} gated material{agg.timeGateDebt.length === 1 ? '' : 's'} on the
+            critical path
           </p>
-          <Link to="/materials" className="mt-2 text-xs text-accent underline">
-            See whole-loadout materials →
+          <Link to="/materials" className="mt-1 text-xs text-accent hover:underline">
+            Whole-loadout materials →
           </Link>
-        </Card>
-      </section>
+        </div>
+      </Card>
 
       {/* --- Time-gate hygiene list --- */}
-      <section>
-        <h2 className="mb-1 text-lg font-semibold text-ink">Do today</h2>
-        <p className="mb-3 text-sm text-muted">
-          Daily-capped materials on a critical path. Collect these every day so the finish date
-          doesn't slip — they can't be rushed with gold.
-        </p>
+      <section className="space-y-3">
+        <PageHeader
+          title="Do today"
+          subtitle="Daily-capped materials on a critical path — collect these so the finish date doesn't slip."
+          help="These are daily-capped and can't be rushed with gold; missing a day pushes the whole loadout's finish date out."
+        />
         {debtRows.length === 0 ? (
           <EmptyState title="No daily-capped materials outstanding 🎉">
             Either you've covered the gated mats or nothing tracked needs them.
           </EmptyState>
         ) : (
-          <div className="space-y-2">
+          <Card className="divide-y divide-line/60 p-0">
             {debtRows.map((d) => {
               const done = collectedToday(d.itemId)
               return (
-                <Card
+                <div
                   key={d.itemId}
-                  className={`flex items-center justify-between gap-3 ${done ? 'opacity-50' : ''}`}
+                  className={`flex items-center justify-between gap-3 px-3 py-2 ${done ? 'opacity-50' : ''}`}
                 >
-                  <div className="flex min-w-0 items-center gap-2">
+                  <div className="flex min-w-0 items-center gap-2.5">
                     <SeverityDot severity={d.severity} />
+                    <ItemIcon itemId={d.itemId} name={d.name} size={28} />
                     <div className="min-w-0">
                       <p className={`truncate font-medium text-ink ${done ? 'line-through' : ''}`}>
                         {hygieneVerb(d.name)} {d.name}
@@ -218,21 +241,20 @@ export default function Dashboard() {
                   >
                     {done ? '✓ Collected today' : 'Mark collected today'}
                   </button>
-                </Card>
+                </div>
               )
             })}
-          </div>
+          </Card>
         )}
       </section>
 
       {/* --- Finish-line pushes --- */}
       {pushes.length > 0 && (
-        <section>
-          <h2 className="mb-1 text-lg font-semibold text-ink">Push to finish</h2>
-          <p className="mb-3 text-sm text-muted">
-            Close to done with no long time-gate wall — a focused session (or some gold) closes
-            these out.
-          </p>
+        <section className="space-y-3">
+          <PageHeader
+            title="Push to finish"
+            subtitle="Close to done with no long time-gate wall — a focused session (or some gold) closes these out."
+          />
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             {pushes.map(({ slot, prog }) => {
               const piece = CATALOG_BY_ID[slot.chosenPieceId!]
@@ -240,9 +262,12 @@ export default function Dashboard() {
                 <OverlayLink key={slot.key} to={`/piece/${piece.id}`} className="block">
                   <Card className="transition-colors hover:border-accent/60">
                     <div className="flex items-start justify-between gap-2">
-                      <div className="min-w-0">
-                        <p className="truncate font-semibold text-ink">{piece.name}</p>
-                        <p className="truncate text-xs text-muted">{slot.label}</p>
+                      <div className="flex min-w-0 items-center gap-2.5">
+                        <ItemIcon itemId={piece.id} name={piece.name} size={32} />
+                        <div className="min-w-0">
+                          <p className="truncate font-semibold text-ink">{piece.name}</p>
+                          <p className="truncate text-xs text-muted">{slot.label}</p>
+                        </div>
                       </div>
                       <ScorePill value={prog!.completionScore} />
                     </div>
@@ -317,11 +342,11 @@ function PriorityLadder({
   if (tracked.length === 0 && untracked.length === 0) return null
 
   return (
-    <section>
-      <h2 className="mb-1 text-lg font-semibold text-ink">Priority order</h2>
-      <p className="mb-3 text-sm text-muted">
-        Drag, or use the ↑/↓ buttons, to set which tracked pieces you want to finish first.
-      </p>
+    <section className="space-y-3">
+      <PageHeader
+        title="Priority order"
+        subtitle="Drag, or use the ↑/↓ buttons, to set which tracked pieces you want to finish first."
+      />
 
       <div className="space-y-2">
         {tracked.map((slot, i) => (
@@ -418,9 +443,10 @@ function LadderRow({
         ) : (
           <span aria-hidden className="w-3 shrink-0" />
         )}
-        <span className="w-6 shrink-0 text-center text-sm font-mono text-muted">
+        <span className="w-5 shrink-0 text-center text-sm font-mono text-muted">
           {tracked ? rank : '—'}
         </span>
+        <ItemIcon itemId={piece.id} name={piece.name} size={32} />
         <div className="min-w-0">
           <OverlayLink
             to={`/piece/${piece.id}`}
@@ -433,7 +459,11 @@ function LadderRow({
         </div>
       </div>
 
-      <div className="flex shrink-0 items-center gap-1.5">
+      <div className="flex shrink-0 items-center gap-2">
+        <ProgressBar
+          value={prog?.owned ? 1 : prog?.completionScore ?? 0}
+          className="hidden h-1.5 w-24 sm:block"
+        />
         {tracked && (
           <div className="flex flex-col gap-0.5">
             <button

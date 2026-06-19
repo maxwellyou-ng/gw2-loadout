@@ -143,14 +143,25 @@ export default function Settings() {
           with the permissions below. It's stored only in this browser's localStorage and never sent
           anywhere but the official GW2 API.
         </p>
-        <ul className="mb-3 space-y-2 text-sm text-muted">
-          {REQUIRED_SCOPES_INFO.map(({ scope, description }) => (
-            <li key={scope} className="flex flex-wrap items-baseline gap-2">
-              <Badge>{scope}</Badge>
-              <span>{description}</span>
-            </li>
-          ))}
-        </ul>
+        <details className="group mb-3 text-sm text-muted">
+          <summary className="flex cursor-pointer select-none flex-wrap items-center gap-1.5 text-ink marker:content-none">
+            <span className="text-xs text-muted transition-transform group-open:rotate-90">▶</span>
+            Required permissions
+            <span className="flex flex-wrap gap-1">
+              {REQUIRED_SCOPES.map((s) => (
+                <Badge key={s}>{s}</Badge>
+              ))}
+            </span>
+          </summary>
+          <ul className="mt-2 space-y-2 pl-4">
+            {REQUIRED_SCOPES_INFO.map(({ scope, description }) => (
+              <li key={scope} className="flex flex-wrap items-baseline gap-2">
+                <Badge>{scope}</Badge>
+                <span>{description}</span>
+              </li>
+            ))}
+          </ul>
+        </details>
         <div className="flex flex-wrap gap-2">
           <input
             type="password"

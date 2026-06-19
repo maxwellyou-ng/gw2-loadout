@@ -6,7 +6,7 @@
 
 import { useState } from 'react'
 import type { MaterialCategory, Provenance, RecipeTreeNode } from '../types'
-import { Badge, SeverityDot, WikiName } from './ui'
+import { Badge, SeverityDot, WikiName, ItemIcon } from './ui'
 import { formatGold } from '../lib/format'
 
 const CATEGORY_LABEL: Record<MaterialCategory, string> = {
@@ -47,20 +47,16 @@ const PROVENANCE: Record<Provenance, { label: string; tone: 'good' | 'neutral' |
 
 function Right({ node }: { node: RecipeTreeNode }) {
   const { timeGate, remaining, owned, ref, buyable, unitPrice } = node
+  const days = timeGate.isGated && timeGate.dailyRate ? Math.ceil(remaining / timeGate.dailyRate) : null
   return (
     <div className="flex shrink-0 items-center gap-3 text-xs">
-      {timeGate.isGated && timeGate.dailyRate ? (
-        <span className="text-gate">
-          {remaining} left · {Math.ceil(remaining / timeGate.dailyRate)}d
-        </span>
-      ) : (
-        <span className={remaining === 0 ? 'text-good' : 'text-muted'}>
-          {owned}/{ref.qty}
-        </span>
-      )}
-      {buyable && unitPrice != null && unitPrice > 0 && (
-        <span className="w-24 text-right font-mono text-muted">{formatGold(remaining * unitPrice)}</span>
-      )}
+      <span className={`w-16 text-right tabular-nums ${remaining === 0 ? 'text-good' : 'text-muted'}`}>
+        {owned}/{ref.qty}
+      </span>
+      <span className="hidden w-10 text-right tabular-nums text-gate sm:block">{days != null ? `${days}d` : ''}</span>
+      <span className="hidden w-24 text-right font-mono text-muted sm:block">
+        {buyable && unitPrice != null && unitPrice > 0 ? formatGold(remaining * unitPrice) : ''}
+      </span>
     </div>
   )
 }
@@ -88,6 +84,8 @@ function TreeRow({ node, depth }: { node: RecipeTreeNode; depth: number }) {
           ) : (
             <span className="h-4 w-4 shrink-0 text-center text-line">·</span>
           )}
+
+          <ItemIcon itemId={node.ref.itemId} name={node.ref.name} size={20} />
 
           {node.timeGate.isGated && node.timeGate.severity && <SeverityDot severity={node.timeGate.severity} />}
 

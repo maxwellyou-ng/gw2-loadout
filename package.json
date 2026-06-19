@@ -8,6 +8,7 @@
     "build": "tsc -b && npm run wiki:check && vite build",
     "lint": "eslint .",
     "check": "tsx scripts/engine-check.ts",
+    "gen:icons": "tsx scripts/gen-icons.ts",
     "wiki:fetch": "tsx scripts/wiki-sync/snapshot.ts",
     "wiki:report": "tsx scripts/wiki-sync/report.ts",
     "wiki:fix": "tsx scripts/wiki-sync/fix.ts",

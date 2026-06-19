@@ -15,24 +15,24 @@ export default function Layout() {
   const { sync, syncing, runSync, settings } = useApp()
 
   return (
-    <div className="mx-auto flex min-h-full max-w-5xl flex-col px-4">
-      <header className="flex flex-wrap items-center justify-between gap-3 border-b border-line py-4">
-        <div>
-          <h1 className="text-xl font-semibold text-ink">
+    <div className="mx-auto flex min-h-full max-w-6xl flex-col px-4">
+      <header className="sticky top-0 z-20 -mx-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-b border-line bg-canvas/90 px-4 py-3 backdrop-blur">
+        <div className="min-w-0">
+          <h1 className="truncate text-base font-semibold text-ink">
             GW2 Legendary Loadout Tracker
           </h1>
           <p className="text-xs text-muted">
             Last synced: {formatRelative(sync?.meta.lastSynced ?? null)}
           </p>
         </div>
-        <div className="flex items-center gap-2">
-          <nav className="flex rounded-lg border border-line bg-surface p-0.5">
+        <div className="flex min-w-0 items-center gap-2">
+          <nav className="flex max-w-full overflow-x-auto rounded-lg border border-line bg-surface p-0.5">
             {tabs.map((t) => (
               <NavLink
                 key={t.to}
                 to={t.to}
                 className={({ isActive }) =>
-                  `rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
+                  `shrink-0 rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
                     isActive ? 'bg-accent-soft text-accent' : 'text-muted hover:text-ink'
                   }`
                 }
@@ -44,7 +44,7 @@ export default function Layout() {
           <button
             onClick={runSync}
             disabled={syncing || !settings.apiKey}
-            className="rounded-lg bg-accent px-3 py-1.5 text-sm font-semibold text-canvas disabled:cursor-not-allowed disabled:opacity-40"
+            className="shrink-0 rounded-lg bg-accent px-3 py-1.5 text-sm font-semibold text-canvas disabled:cursor-not-allowed disabled:opacity-40"
           >
             {syncing ? 'Syncing…' : 'Sync'}
           </button>

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useApp, CATALOG_BY_ID } from '../state/store'
-import { Card, ProgressBar, ScorePill, Badge, InfoTooltip, OverlayLink } from '../components/ui'
+import { Card, ProgressBar, ScorePill, Badge, InfoTooltip, OverlayLink, ItemIcon } from '../components/ui'
 import { formatDate, formatDateShort } from '../lib/format'
 import { piecesForSlot } from '../lib/slotPieces'
 import type { SlotFamily } from '../types'
@@ -164,12 +164,15 @@ function PieceBody({
   return (
     <Card className="flex h-full flex-col">
       <div className="flex items-start justify-between gap-2">
-        <div className="min-w-0">
-          {eyebrow && <p className="truncate text-xs text-muted">{slot.label}</p>}
-          <OverlayLink to={`/piece/${piece.id}`} className="block truncate font-semibold text-ink hover:text-accent">
-            {piece.name}
-          </OverlayLink>
-          <p className="truncate text-xs text-muted">{piece.type}</p>
+        <div className="flex min-w-0 items-start gap-2.5">
+          <ItemIcon itemId={piece.id} name={piece.name} size={36} className="mt-0.5" />
+          <div className="min-w-0">
+            {eyebrow && <p className="truncate text-xs text-muted">{slot.label}</p>}
+            <OverlayLink to={`/piece/${piece.id}`} className="block truncate font-semibold text-ink hover:text-accent">
+              {piece.name}
+            </OverlayLink>
+            <p className="truncate text-xs text-muted">{piece.type}</p>
+          </div>
         </div>
         <div className="flex shrink-0 items-center gap-1.5">
           <ScorePill value={progress?.completionScore ?? 0} done={progress?.owned} />
@@ -186,8 +189,11 @@ function PieceBody({
         </div>
       </div>
 
-      <div className="mt-3">
-        <ProgressBar value={progress?.owned ? 1 : progress?.completionScore ?? 0} />
+      <div className="mt-3 flex items-center gap-2">
+        <ProgressBar value={progress?.owned ? 1 : progress?.completionScore ?? 0} className="h-1.5" />
+        {!progress?.owned && (progress?.completionScore ?? 0) === 0 && (
+          <span className="shrink-0 text-[10px] uppercase tracking-wide text-muted">Not started</span>
+        )}
       </div>
 
       <div className="mt-3 flex flex-wrap items-center gap-2 text-xs text-muted">
@@ -303,7 +309,7 @@ export default function Loadout() {
   const doneCount = tracked.filter((s) => progressByPiece[s.chosenPieceId!]?.owned).length
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div>
           <LoadoutName name={loadout.name} />

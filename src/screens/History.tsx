@@ -10,7 +10,7 @@ import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useApp, CATALOG_BY_ID, type HistoryEntry } from '../state/store'
 import { plannedSlots } from '../engine'
-import { Card, ScorePill, EmptyState, OverlayLink } from '../components/ui'
+import { Card, ScorePill, EmptyState, OverlayLink, ItemIcon, PageHeader } from '../components/ui'
 import { formatDate, formatPercent } from '../lib/format'
 import { STORAGE_KEYS, loadJSON } from '../state/storage'
 
@@ -92,19 +92,21 @@ export default function History() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h2 className="text-lg font-semibold text-ink">Momentum</h2>
-        <p className="text-sm text-muted">
-          {history.length} syncs logged · overall completion {formatPercent(latest.overall)}
-          {overallDelta !== 0 && (
-            <span className={overallDelta > 0 ? 'text-good' : 'text-bad'}>
-              {' '}
-              ({overallDelta > 0 ? '+' : ''}
-              {formatPercent(overallDelta)} since last sync)
-            </span>
-          )}
-        </p>
-      </div>
+      <PageHeader
+        title="Momentum"
+        subtitle={
+          <>
+            {history.length} syncs logged · overall completion {formatPercent(latest.overall)}
+            {overallDelta !== 0 && (
+              <span className={overallDelta > 0 ? 'text-good' : 'text-bad'}>
+                {' '}
+                ({overallDelta > 0 ? '+' : ''}
+                {formatPercent(overallDelta)} since last sync)
+              </span>
+            )}
+          </>
+        }
+      />
 
       <Card>
         <LineChart entries={history} />
@@ -116,10 +118,11 @@ export default function History() {
           {momentum.map((m) => (
             <div
               key={m.id}
-              className="flex items-center justify-between gap-3 border-b border-line/60 py-2 last:border-0"
+              className="flex items-center justify-between gap-3 border-b border-line/60 py-1.5 last:border-0"
             >
-              <OverlayLink to={`/piece/${m.id}`} className="min-w-0 truncate text-sm text-ink hover:text-accent">
-                {m.name}
+              <OverlayLink to={`/piece/${m.id}`} className="flex min-w-0 items-center gap-2.5 text-sm text-ink hover:text-accent">
+                <ItemIcon itemId={m.id} name={m.name} size={24} />
+                <span className="truncate">{m.name}</span>
               </OverlayLink>
               <div className="flex shrink-0 items-center gap-3 text-sm">
                 <span

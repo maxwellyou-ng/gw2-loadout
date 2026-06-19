@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useApp, CATALOG_BY_ID } from '../state/store'
-import { Card, ProgressBar, ScorePill, SeverityDot, Badge, EmptyState, WikiName } from '../components/ui'
+import { Card, ProgressBar, ScorePill, SeverityDot, Badge, EmptyState, WikiName, ItemIcon, StatStrip } from '../components/ui'
 import RecipeTree from '../components/RecipeTree'
 import { buildRecipeTree } from '../engine'
 import { VERIFIED_INTERMEDIATES } from '../data/verified-intermediates'
@@ -11,28 +11,25 @@ import type { RemainingMaterial } from '../types'
 type View = 'tree' | 'list'
 
 function MaterialRow({ m }: { m: RemainingMaterial }) {
+  const days = m.timeGate.isGated && m.timeGate.dailyRate
+    ? Math.ceil(m.remaining / m.timeGate.dailyRate)
+    : null
   return (
-    <div className="flex items-center justify-between gap-3 border-b border-line/60 py-2 last:border-0">
-      <div className="flex min-w-0 items-center gap-2">
+    <div className="flex items-center gap-3 border-b border-line/60 py-1.5 last:border-0">
+      <ItemIcon itemId={m.itemId} name={m.name} size={24} />
+      <div className="flex min-w-0 flex-1 items-center gap-2">
         {m.timeGate.isGated && m.timeGate.severity && <SeverityDot severity={m.timeGate.severity} />}
         <WikiName name={m.name} itemId={m.itemId} className="truncate text-sm text-ink" />
       </div>
-      <div className="flex shrink-0 items-center gap-3 text-sm">
-        {m.timeGate.isGated && m.timeGate.dailyRate ? (
-          <span className="text-gate">
-            {m.remaining} left · {Math.ceil(m.remaining / m.timeGate.dailyRate)}d
-          </span>
-        ) : (
-          <span className="text-muted">
-            {m.owned}/{m.required}
-          </span>
-        )}
-        {m.buyable && m.unitPrice != null && m.unitPrice > 0 && (
-          <span className="w-28 text-right font-mono text-xs text-muted">
-            {formatGold(m.remaining * m.unitPrice)}
-          </span>
-        )}
-      </div>
+      <span className="w-20 shrink-0 text-right text-sm tabular-nums text-muted">
+        {m.owned}/{m.required}
+      </span>
+      <span className="hidden w-14 shrink-0 text-right text-sm tabular-nums text-gate sm:block">
+        {days != null ? `${days}d` : ''}
+      </span>
+      <span className="hidden w-24 shrink-0 text-right font-mono text-xs text-muted sm:block">
+        {m.buyable && m.unitPrice != null && m.unitPrice > 0 ? formatGold(m.remaining * m.unitPrice) : ''}
+      </span>
     </div>
   )
 }
@@ -104,16 +101,19 @@ export default function PieceDetail({ inModal = false }: { inModal?: boolean }) 
 
       <Card>
         <div className="flex flex-wrap items-start justify-between gap-3">
-          <div>
-            <div className="flex items-center gap-2">
-              <h2 className="text-xl font-semibold text-ink">{piece.name}</h2>
-              <ScorePill value={progress.completionScore} done={progress.owned} />
+          <div className="flex min-w-0 items-start gap-3">
+            <ItemIcon itemId={piece.id} name={piece.name} size={44} className="mt-0.5" />
+            <div className="min-w-0">
+              <div className="flex items-center gap-2">
+                <h2 className="text-xl font-semibold text-ink">{piece.name}</h2>
+                <ScorePill value={progress.completionScore} done={progress.owned} />
+              </div>
+              <p className="text-sm text-muted">
+                {piece.type} · {piece.acquisitionMode}
+                {piece.unlocks.length > 1 && ` · ${piece.unlocks.length} armory unlocks`}
+              </p>
+              {piece.blurb && <p className="mt-2 max-w-xl text-sm text-muted">{piece.blurb}</p>}
             </div>
-            <p className="text-sm text-muted">
-              {piece.type} · {piece.acquisitionMode}
-              {piece.unlocks.length > 1 && ` · ${piece.unlocks.length} armory unlocks`}
-            </p>
-            {piece.blurb && <p className="mt-2 max-w-xl text-sm text-muted">{piece.blurb}</p>}
           </div>
           <div className="text-right text-sm">
             <p className="text-muted">Earliest finish</p>
@@ -127,24 +127,20 @@ export default function PieceDetail({ inModal = false }: { inModal?: boolean }) 
           <ProgressBar value={progress.owned ? 1 : progress.completionScore} />
         </div>
 
-        <div className="mt-4 grid grid-cols-3 gap-3 text-center text-xs">
-          <div>
-            <p className="text-muted">Time</p>
-            <p className="font-semibold text-ink">
-              {progress.hasTimeBasis ? formatPercent(progress.timeProgress) : '—'}
-            </p>
-          </div>
-          <div>
-            <p className="text-muted">Gold</p>
-            <p className="font-semibold text-ink">
-              {progress.hasGoldBasis ? formatPercent(progress.goldProgress) : '—'}
-            </p>
-          </div>
-          <div>
-            <p className="text-muted">Quantity</p>
-            <p className="font-semibold text-ink">{formatPercent(progress.qtyProgress)}</p>
-          </div>
-        </div>
+        <StatStrip
+          className="mt-4"
+          stats={[
+            {
+              label: 'Time',
+              value: progress.hasTimeBasis ? formatPercent(progress.timeProgress) : '—',
+            },
+            {
+              label: 'Gold',
+              value: progress.hasGoldBasis ? formatPercent(progress.goldProgress) : '—',
+            },
+            { label: 'Quantity', value: formatPercent(progress.qtyProgress) },
+          ]}
+        />
 
         {!piece.recipe.verified && (
           <p className="mt-4 rounded-lg border border-warn/30 bg-warn/10 p-2 text-xs text-warn">

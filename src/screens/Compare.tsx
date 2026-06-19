@@ -17,7 +17,7 @@ import { useApp, CATALOG_BY_ID } from '../state/store'
 import { piecesForSlot } from '../lib/slotPieces'
 import { computeProgress } from '../engine'
 import { DEFAULT_WEIGHTS } from '../types'
-import { Card, Badge, EmptyState, OverlayLink } from '../components/ui'
+import { Card, Badge, EmptyState, OverlayLink, ItemIcon, PageHeader } from '../components/ui'
 import { formatGold } from '../lib/format'
 import type { SlotKey } from '../types'
 
@@ -106,13 +106,11 @@ export default function Compare({ inModal = false }: { inModal?: boolean }) {
         </Link>
       )}
 
-      <div>
-        <h2 className="text-lg font-semibold text-ink">Compare candidates · {slot.label}</h2>
-        <p className="text-sm text-muted">
-          Lowest remaining effort wins. Sorted by time-gate days, then gold, then how much you
-          already own.{!sync && ' Sync to factor in your inventory.'}
-        </p>
-      </div>
+      <PageHeader
+        title={`Compare candidates · ${slot.label}`}
+        subtitle={`Lowest remaining effort wins.${!sync ? ' Sync to factor in your inventory.' : ''}`}
+        help="Sorted by remaining time-gate days, then buy-out gold, then how many required materials you already own."
+      />
 
       {rows.length === 0 ? (
         <EmptyState title="No candidates yet">
@@ -140,15 +138,20 @@ export default function Compare({ inModal = false }: { inModal?: boolean }) {
                   }`}
                 >
                   <td className="p-3">
-                    <div className="flex items-center gap-2">
-                      <OverlayLink to={`/piece/${r.pieceId}`} className="font-medium text-ink hover:text-accent">
-                        {r.name}
-                      </OverlayLink>
-                      {r.recommended && <Badge tone="good">lowest effort</Badge>}
-                      {r.owned && <Badge tone="accent">owned</Badge>}
-                      {slot.chosenPieceId === r.pieceId && <Badge>chosen</Badge>}
+                    <div className="flex items-center gap-2.5">
+                      <ItemIcon itemId={r.pieceId} name={r.name} size={28} />
+                      <div className="min-w-0">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <OverlayLink to={`/piece/${r.pieceId}`} className="font-medium text-ink hover:text-accent">
+                            {r.name}
+                          </OverlayLink>
+                          {r.recommended && <Badge tone="good">lowest effort</Badge>}
+                          {r.owned && <Badge tone="accent">owned</Badge>}
+                          {slot.chosenPieceId === r.pieceId && <Badge>chosen</Badge>}
+                        </div>
+                        <p className="text-xs text-muted">{r.type}</p>
+                      </div>
                     </div>
-                    <p className="text-xs text-muted">{r.type}</p>
                   </td>
                   <td className="p-3 text-gate">{r.timeGateDays}d</td>
                   <td className="p-3 font-mono text-xs text-muted">≈{formatGold(r.gold)}</td>
@@ -193,6 +196,7 @@ export default function Compare({ inModal = false }: { inModal?: boolean }) {
                   onChange={() => toggleCandidate(p.id)}
                   className="accent-accent"
                 />
+                <ItemIcon itemId={p.id} name={p.name} size={22} />
                 <span className="min-w-0 truncate">{p.name}</span>
               </label>
             )
