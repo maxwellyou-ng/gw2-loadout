@@ -58,6 +58,29 @@ export interface SnapshotFile {
   entries: SnapshotEntry[]
 }
 
+/**
+ * One crafted *intermediate* (a shared gift / sub-gift the catalog deep-expands,
+ * e.g. Gift of Fortune, Gift of Condensed Might, Gift of Claws). Sourced from the
+ * intermediate's own wiki page so the gate can verify the tree below the top
+ * level. `name` is the catalog's authored output name (matched exactly by the app
+ * for provenance badging). Low-confidence entries had no parseable `{{recipe}}`.
+ */
+export interface IntermediateEntry {
+  name: string
+  apiId: number | null
+  syntheticId: boolean
+  wikiUrl: string
+  confidence: Confidence
+  wikitextHash: string | null
+  components: WikiComponent[]
+  parseNote?: string
+}
+
+export interface IntermediateSnapshotFile {
+  generatedAt: string
+  entries: IntermediateEntry[]
+}
+
 // --- Reconciliation --------------------------------------------------------
 
 export type FindingType =
@@ -76,7 +99,8 @@ export type Severity = 'error' | 'warn' | 'info'
 export interface Finding {
   type: FindingType
   severity: Severity
-  category: Category
+  /** Real wiki category, or 'intermediates' for shared-gift sub-recipe findings. */
+  category: Category | 'intermediates'
   /** Canonical item name (catalog name when matched, else wiki name). */
   item: string
   message: string

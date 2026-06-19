@@ -59,6 +59,49 @@ export interface ItemRef {
   qty: number
 }
 
+/**
+ * Acquisition bucket for a material, derived from its recipe source + id
+ * namespace. Drives the Materials tab's "by acquisition" grouping.
+ */
+export type MaterialCategory =
+  | 'currency'
+  | 'time-gated'
+  | 'crafting'
+  | 'gift'
+  | 'reward-track'
+  | 'achievement'
+  | 'collection'
+  | 'vendor'
+
+/** Best-effort game mode a material is tied to (when derivable). */
+export type GameMode = 'PvP' | 'WvW' | 'Raid' | 'Fractal' | 'Strike' | 'OpenWorld' | 'Story'
+
+/**
+ * How much to trust a rendered recipe node:
+ *  - verified: its recipe matches the wiki (gate-enforced),
+ *  - summarized: a terminal leaf standing in for a deeper journey (collection/achievement),
+ *  - unverified: hand-entered / synthetic, not machine-checked — cross-check on the wiki.
+ */
+export type Provenance = 'verified' | 'summarized' | 'unverified'
+
+/** A node in the renderable recipe tree (qty already scaled for this instance). */
+export interface RecipeTreeNode {
+  ref: ItemRef
+  source: RecipeSource
+  buyable: boolean
+  timeGate: TimeGate
+  discipline?: string
+  notes?: string
+  category: MaterialCategory
+  gameMode?: GameMode
+  provenance: Provenance
+  owned: number
+  remaining: number
+  unitPrice?: number
+  /** Empty ⇒ leaf (base material or summarized terminal). */
+  children: RecipeTreeNode[]
+}
+
 export interface TimeGate {
   isGated: boolean
   /** Max obtainable per day (e.g. 1 Charged Quartz, ~5-6 Mystic Clovers via fractals). */
@@ -152,6 +195,12 @@ export interface RemainingMaterial {
   timeGate: TimeGate
   /** Unit TP price in copper, when known and buyable. */
   unitPrice?: number
+  /** Recipe source of the leaf's terminal node, when it had one. */
+  source?: RecipeSource
+  /** Acquisition bucket (for grouping/filtering). */
+  category: MaterialCategory
+  /** Game mode tie, when derivable. */
+  gameMode?: GameMode
 }
 
 export interface TimeGateDebt {

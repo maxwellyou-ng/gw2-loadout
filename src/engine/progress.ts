@@ -12,16 +12,27 @@ import type {
   CompletionWeights,
   DerivedProgress,
   InventorySnapshot,
+  ItemRef,
   LegendaryPiece,
   PriceMap,
+  Provenance,
   RecipeNode,
+  RecipeSource,
+  RecipeTreeNode,
   RemainingMaterial,
   SyncMeta,
   TimeGate,
   TimeGateDebt,
   TimeGateSeverity,
 } from '../types'
-import { isCurrency, isSynthetic, isTimeGated, TIME_GATED } from '../data/items'
+import {
+  gameModeFor,
+  isCurrency,
+  isSynthetic,
+  isTimeGated,
+  materialCategory,
+  TIME_GATED,
+} from '../data/items'
 
 const SEVERITY_WEIGHT: Record<TimeGateSeverity, number> = { low: 1, medium: 2, high: 4 }
 
@@ -120,6 +131,7 @@ function toMaterial(
   const buyable = leafBuyable(leaf.itemId, leaf.node)
   const gate = leafGate(leaf.itemId, leaf.node)
   const unitPrice = buyable ? prices[leaf.itemId] : undefined
+  const source = leaf.node?.source
   return {
     itemId: leaf.itemId,
     name: leaf.name,
@@ -129,6 +141,9 @@ function toMaterial(
     buyable,
     timeGate: gate,
     unitPrice,
+    source,
+    category: materialCategory(leaf.itemId, source, leaf.name),
+    gameMode: gameModeFor(leaf.itemId, source, leaf.name),
   }
 }
 
@@ -260,4 +275,87 @@ function addDaysISO(from: Date, days: number): string {
   const d = new Date(from)
   d.setDate(d.getDate() + days)
   return d.toISOString().slice(0, 10)
+}
+
+/**
+ * Reconstruct the nested recipe tree for display (PieceDetail). Walks the flat
+ * `recipe.nodes` from the root, scaling quantities down through each combine, and
+ * stamps every node with owned/remaining/price, its acquisition category + game
+ * mode, and a provenance flag so the UI never shows unverified data as authoritative.
+ *
+ * `verified` is the wiki-matched intermediate manifest (src/data/verified-intermediates):
+ * an intermediate node is `verified` only when the piece is verified AND either it's
+ * the root or its output name is in that set. Base leaves inherit their container's
+ * trust; terminal collection/achievement leaves are `summarized` (a stand-in for a
+ * deeper journey); synthetic or unmatched intermediates are `unverified`.
+ */
+export function buildRecipeTree(
+  piece: LegendaryPiece,
+  snapshot: InventorySnapshot,
+  prices: PriceMap,
+  verified: ReadonlySet<string>,
+): RecipeTreeNode {
+  const nodeByOutput = new Map<number, RecipeNode>()
+  for (const n of piece.recipe.nodes) nodeByOutput.set(n.output.itemId, n)
+  const pieceVerified = piece.recipe.verified
+
+  const build = (
+    item: ItemRef,
+    isRoot: boolean,
+    parentVerified: boolean,
+    seen: Set<number>,
+  ): RecipeTreeNode => {
+    const node = nodeByOutput.get(item.itemId)
+    const hasChildren = !!node && node.inputs.length > 0 && !seen.has(item.itemId)
+    const source: RecipeSource = node?.source ?? 'mystic-forge'
+    const buyable = node ? node.buyable : leafBuyable(item.itemId)
+    const timeGate = node?.timeGate ?? leafGate(item.itemId)
+    const have = isSynthetic(item.itemId) ? 0 : snapshot[item.itemId] ?? 0
+    const remaining = Math.max(0, item.qty - have)
+    const unitPrice = buyable && !isSynthetic(item.itemId) ? prices[item.itemId] : undefined
+
+    // Does this combine's ingredient list match the wiki?
+    const recipeVerified = hasChildren && pieceVerified && (isRoot || verified.has(item.name))
+
+    let children: RecipeTreeNode[] = []
+    if (hasChildren) {
+      const next = new Set(seen)
+      next.add(item.itemId)
+      const per = node!.output.qty || 1
+      const crafts = Math.ceil(item.qty / per)
+      children = node!.inputs.map((inp) =>
+        build({ ...inp, qty: inp.qty * crafts }, false, recipeVerified, next),
+      )
+    }
+
+    let provenance: Provenance
+    if (hasChildren) {
+      provenance = recipeVerified ? 'verified' : 'unverified'
+    } else if (
+      node &&
+      (source === 'achievement' || source === 'collection' || source === 'reward-track' || source === 'vendor')
+    ) {
+      provenance = 'summarized'
+    } else {
+      provenance = isSynthetic(item.itemId) ? 'unverified' : parentVerified ? 'verified' : 'unverified'
+    }
+
+    return {
+      ref: { ...item },
+      source,
+      buyable,
+      timeGate,
+      discipline: node?.discipline,
+      notes: node?.notes,
+      category: materialCategory(item.itemId, source, item.name),
+      gameMode: gameModeFor(item.itemId, source, item.name),
+      provenance,
+      owned: Math.min(have, item.qty),
+      remaining,
+      unitPrice,
+      children,
+    }
+  }
+
+  return build({ itemId: piece.id, name: piece.name, qty: 1 }, true, pieceVerified, new Set())
 }

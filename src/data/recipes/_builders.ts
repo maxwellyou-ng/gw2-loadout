@@ -187,7 +187,10 @@ export function giftOfCondensedMight(): SubTree {
 export function giftOfCondensedMagic(): SubTree {
   const out = ref(ITEM.giftOfCondensedMagic, 'Gift of Condensed Magic', 1) // id 76530
   const blood = condensedSubGift('Gift of Blood', [ITEM.vialOfPowerfulBlood, 'Vial of Powerful Blood'], [ITEM.vialOfPotentBlood, 'Vial of Potent Blood'], [ITEM.vialOfThickBlood, 'Vial of Thick Blood'], [ITEM.vialOfBlood, 'Vial of Blood'])
-  const venom = condensedSubGift('Gift of Venom', [ITEM.powerfulVenomSac, 'Powerful Venom Sac'], [ITEM.fullVenomSac, 'Full Venom Sac'], [ITEM.potentVenomSac, 'Potent Venom Sac'], [ITEM.venomSac, 'Venom Sac'])
+  // Venom tiers are out of alphabetical order (Full < Potent by rarity): the
+  // large-tier (x250) is Potent, the sharp-tier (x50) is Full. Wiki-verified via
+  // wiki:check intermediate gate (Gift of Venom). Earlier data had these swapped.
+  const venom = condensedSubGift('Gift of Venom', [ITEM.powerfulVenomSac, 'Powerful Venom Sac'], [ITEM.potentVenomSac, 'Potent Venom Sac'], [ITEM.fullVenomSac, 'Full Venom Sac'], [ITEM.venomSac, 'Venom Sac'])
   const totems = condensedSubGift('Gift of Totems', [ITEM.elaborateTotem, 'Elaborate Totem'], [ITEM.intricateTotem, 'Intricate Totem'], [ITEM.engravedTotem, 'Engraved Totem'], [ITEM.totem, 'Totem'])
   const dust = condensedSubGift('Gift of Dust', [ITEM.pileOfCrystallineDust, 'Pile of Crystalline Dust'], [ITEM.pileOfIncandescentDust, 'Pile of Incandescent Dust'], [ITEM.pileOfRadiantDust, 'Pile of Radiant Dust'], [ITEM.pileOfLuminousDust, 'Pile of Luminous Dust'])
   return {

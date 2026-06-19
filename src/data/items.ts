@@ -19,6 +19,8 @@
 // so the engine always expands them into their leaf materials.
 // ---------------------------------------------------------------------------
 
+import type { GameMode, MaterialCategory, RecipeSource } from '../types'
+
 export const CURRENCY_BASE = 8_000_000
 export const SYNTHETIC_BASE = 9_000_000
 /**
@@ -211,3 +213,52 @@ export const TIME_GATED: Record<number, GatedMaterialInfo> = {
 }
 
 export const isTimeGated = (itemId: number) => itemId in TIME_GATED
+
+// --- Material classification (grouping + game-mode tags) --------------------
+
+/**
+ * Acquisition bucket for a material, from its id namespace + recipe source.
+ * Currencies and time-gated dailies are recognized by id; everything else maps
+ * from the producing node's source, with gift names falling back to 'gift'.
+ */
+export function materialCategory(
+  itemId: number,
+  source?: RecipeSource,
+  name?: string,
+): MaterialCategory {
+  if (isCurrency(itemId)) return 'currency'
+  if (isTimeGated(itemId)) return 'time-gated'
+  switch (source) {
+    case 'reward-track':
+      return 'reward-track'
+    case 'achievement':
+      return 'achievement'
+    case 'collection':
+      return 'collection'
+    case 'vendor':
+      return 'vendor'
+  }
+  if (name && /^gift of\b/i.test(name)) return 'gift'
+  return 'crafting'
+}
+
+/** Best-effort game-mode tag from currency id or ingredient name. Undefined when unknown. */
+export function gameModeFor(
+  itemId: number,
+  _source?: RecipeSource,
+  name?: string,
+): GameMode | undefined {
+  if (isCurrency(itemId)) {
+    const cur = itemId - CURRENCY_BASE
+    if (cur === CUR.badgeOfHonor || cur === CUR.wvwSkirmishClaimTicket) return 'WvW'
+    if (cur === CUR.magnetiteShard) return 'Raid'
+    if (cur === CUR.fractalRelic || cur === CUR.pristineFractalRelic) return 'Fractal'
+  }
+  const n = (name ?? '').toLowerCase()
+  if (/gift of battle|memory of battle|war (prosperity|prowess|dedication)|skirmish|badge of honor|testimony of heroics/.test(n))
+    return 'WvW'
+  if (/league|mist core|star of glory|competitive|distilled glory|ascension to glory/.test(n)) return 'PvP'
+  if (/legendary insight|legendary divination|chak egg|magnetite|gift of prowess|gift of dedication/.test(n)) return 'Raid'
+  if (/fractal/.test(n)) return 'Fractal'
+  return undefined
+}

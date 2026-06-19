@@ -1,6 +1,6 @@
 export { mergeInventory } from './inventory'
 export type { RawAccountData } from './inventory'
-export { computeProgress, intermediateRequirements } from './progress'
+export { computeProgress, intermediateRequirements, buildRecipeTree } from './progress'
 export {
   trackedSlots,
   pieceForSlot,

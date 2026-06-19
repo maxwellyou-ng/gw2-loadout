@@ -1,8 +1,14 @@
+import { useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useApp, CATALOG_BY_ID } from '../state/store'
 import { Card, ProgressBar, ScorePill, SeverityDot, Badge, EmptyState, WikiName } from '../components/ui'
+import RecipeTree from '../components/RecipeTree'
+import { buildRecipeTree } from '../engine'
+import { VERIFIED_INTERMEDIATES } from '../data/verified-intermediates'
 import { formatGold, formatDate, formatPercent } from '../lib/format'
 import type { RemainingMaterial } from '../types'
+
+type View = 'tree' | 'list'
 
 function MaterialRow({ m }: { m: RemainingMaterial }) {
   return (
@@ -62,7 +68,16 @@ function Group({
 export default function PieceDetail({ inModal = false }: { inModal?: boolean }) {
   const { id } = useParams()
   const { progressByPiece, sync } = useApp()
+  const [view, setView] = useState<View>('tree')
   const piece = id ? CATALOG_BY_ID[Number(id)] : undefined
+
+  const tree = useMemo(
+    () =>
+      piece
+        ? buildRecipeTree(piece, sync?.snapshot ?? {}, sync?.prices ?? {}, VERIFIED_INTERMEDIATES)
+        : null,
+    [piece, sync],
+  )
 
   if (!piece) {
     return (
@@ -153,9 +168,36 @@ export default function PieceDetail({ inModal = false }: { inModal?: boolean }) 
         <EmptyState title="Already unlocked in your armory 🎉" />
       ) : (
         <>
+          <div className="flex flex-wrap items-center gap-3">
+            <div className="inline-flex rounded-lg border border-line bg-surface p-0.5">
+              {(['tree', 'list'] as const).map((v) => (
+                <button
+                  key={v}
+                  onClick={() => setView(v)}
+                  className={`rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
+                    view === v ? 'bg-accent-soft text-accent' : 'text-muted hover:text-ink'
+                  }`}
+                >
+                  {v === 'tree' ? 'Crafting tree' : 'Shopping list'}
+                </button>
+              ))}
+            </div>
+            <p className="text-xs text-muted">
+              {view === 'tree'
+                ? 'Full recipe structure — expand a gift to see what it combines.'
+                : 'Flat list of what you still need, grouped by how you get it.'}
+            </p>
+          </div>
+
+          {view === 'tree' && tree && (
+            <Card>
+              <RecipeTree root={tree} />
+            </Card>
+          )}
+
           {/* Buy-out callout — timed per Section 6.5. Suppressed pre-sync when
               there are no prices (buyOutGold === 0 and not finishable). */}
-          {(progress.finishableByGold || progress.buyOutGold > 0) && (
+          {view === 'list' && (progress.finishableByGold || progress.buyOutGold > 0) && (
             <Card
               className={
                 progress.finishableByGold ? 'border-good/50 bg-good/5' : 'border-line'
@@ -175,22 +217,26 @@ export default function PieceDetail({ inModal = false }: { inModal?: boolean }) 
             </Card>
           )}
 
-          <Group
-            title="Time-gated"
-            tone="gate"
-            materials={timeGated}
-            hint="Daily-capped — collect every day so the finish date doesn't slip."
-          />
-          <Group
-            title="Grind-only (account-bound)"
-            tone="warn"
-            materials={grind}
-            hint="Can't be bought on the Trading Post."
-          />
-          <Group title="Buyable" tone="good" materials={buyable} hint="Available on the Trading Post." />
+          {view === 'list' && (
+            <>
+              <Group
+                title="Time-gated"
+                tone="gate"
+                materials={timeGated}
+                hint="Daily-capped — collect every day so the finish date doesn't slip."
+              />
+              <Group
+                title="Grind-only (account-bound)"
+                tone="warn"
+                materials={grind}
+                hint="Can't be bought on the Trading Post."
+              />
+              <Group title="Buyable" tone="good" materials={buyable} hint="Available on the Trading Post." />
 
-          {progress.remainingMaterials.length === 0 && sync && (
-            <EmptyState title="No remaining materials — ready to forge!" />
+              {progress.remainingMaterials.length === 0 && sync && (
+                <EmptyState title="No remaining materials — ready to forge!" />
+              )}
+            </>
           )}
         </>
       )}

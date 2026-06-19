@@ -27,7 +27,7 @@ function renderList(findings: Finding[]): string {
   if (findings.length === 0) return '_none_\n'
   const lines: string[] = []
   const byCat = groupByCategory(findings)
-  for (const category of CATEGORIES) {
+  for (const category of [...CATEGORIES, 'intermediates'] as const) {
     const fs = byCat.get(category)
     if (!fs || fs.length === 0) continue
     lines.push(`\n**${category}**`)

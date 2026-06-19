@@ -1,17 +1,16 @@
 // Display formatting helpers.
 
-import { isSynthetic } from '../data/items'
-
 /**
- * GW2 wiki URL for a material/ingredient, or null when there's no page to link
- * (synthetic intermediates whose real item id isn't resolved). The wiki uses
- * deterministic title URLs (spaces → underscores, percent-encoded otherwise,
- * matching e.g. `Aurene%27s_Fang`). We strip a trailing parenthetical
- * disambiguator we add for display (e.g. " (achievement)", " (base)", " (helm)")
- * since it isn't part of the page title.
+ * GW2 wiki URL for a material/ingredient by name. The wiki uses deterministic
+ * title URLs (spaces → underscores, percent-encoded otherwise, matching e.g.
+ * `Aurene%27s_Fang`), so an accurate name is enough to link — including the
+ * curated intermediates carrying synthetic ids (Gift of the Astral Ward,
+ * Draconic Tribute, …), whose names are real wiki page titles. We strip a
+ * trailing parenthetical disambiguator we add for display (e.g. " (achievement)",
+ * " (base)", " (helm)") since it isn't part of the page title. Returns null only
+ * when there's no usable title (e.g. an empty name).
  */
-export function wikiUrl(name: string, itemId: number): string | null {
-  if (isSynthetic(itemId)) return null
+export function wikiUrl(name: string): string | null {
   const title = name.replace(/\s*\([^)]*\)\s*$/, '').trim()
   if (!title) return null
   return `https://wiki.guildwars2.com/wiki/${encodeURIComponent(title).replace(/%20/g, '_')}`

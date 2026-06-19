@@ -57,6 +57,14 @@ export const PIECE_ALIASES: Record<string, string> = {
 export const COMPONENT_ALIASES: Record<string, string> = {
   'gift of maguuma mastery': 'gift of maguuma mastery',
   // e.g. wiki "Mystic Tribute" === catalog "Mystic Tribute" (identity, no entry needed)
+  // Wiki recipe pages pluralize some ingredients the catalog names in the singular.
+  'mystic clovers': 'mystic clover',
+  'obsidian shards': 'obsidian shard',
+  'mystic coins': 'mystic coin',
+  'globs of ectoplasm': 'glob of ectoplasm',
+  'spirit shards': 'spirit shard',
+  // Wiki disambiguates the raid currency as "(consumable)"; the catalog doesn't.
+  'legendary insight (consumable)': 'legendary insight',
 }
 
 /**

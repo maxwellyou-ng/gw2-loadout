@@ -9,9 +9,12 @@
 
 import type {
   DerivedProgress,
+  GameMode,
   InventorySnapshot,
   LegendaryPiece,
+  MaterialCategory,
   PriceMap,
+  RecipeSource,
   RemainingMaterial,
   SyncMeta,
   TimeGate,
@@ -69,6 +72,9 @@ export interface AggregatedMaterial {
   buyable: boolean
   timeGate: TimeGate
   unitPrice?: number
+  source?: RecipeSource
+  category: MaterialCategory
+  gameMode?: GameMode
 }
 
 export interface AggregateResult {
@@ -149,6 +155,9 @@ function aggregateBy(
           buyable: m.buyable,
           timeGate: m.timeGate,
           unitPrice: m.unitPrice,
+          source: m.source,
+          category: m.category,
+          gameMode: m.gameMode,
         })
       }
     }

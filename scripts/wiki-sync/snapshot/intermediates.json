@@ -1,0 +1,783 @@
+{
+  "generatedAt": "2026-06-19T11:58:51.805Z",
+  "entries": [
+    {
+      "name": "Bloodstone Shard",
+      "apiId": 20797,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Bloodstone_Shard",
+      "confidence": "low",
+      "wikitextHash": "6e9ae305effd0755",
+      "components": [],
+      "parseNote": "{{recipe}} found but no ingredients parsed"
+    },
+    {
+      "name": "Draconic Tribute",
+      "apiId": 96137,
+      "syntheticId": true,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Draconic_Tribute",
+      "confidence": "high",
+      "wikitextHash": "72f5c47801b7a8b2",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Condensed Might"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Condensed Magic"
+        },
+        {
+          "qty": 38,
+          "name": "Mystic Clover"
+        },
+        {
+          "qty": 5,
+          "name": "Amalgamated Draconic Lodestone"
+        }
+      ]
+    },
+    {
+      "name": "Eldritch Scroll",
+      "apiId": 20852,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Eldritch_Scroll",
+      "confidence": "low",
+      "wikitextHash": "326e129e7e89ca8f",
+      "components": [],
+      "parseNote": "{{recipe}} found but no ingredients parsed"
+    },
+    {
+      "name": "Fractalline Spark",
+      "apiId": 105196,
+      "syntheticId": true,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Fractalline_Spark",
+      "confidence": "low",
+      "wikitextHash": "01953b0d8ab9a49d",
+      "components": [],
+      "parseNote": "no {{recipe}} template found (likely achievement reward, set, or non-standard layout)"
+    },
+    {
+      "name": "Gift of Blood",
+      "apiId": 71655,
+      "syntheticId": true,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Blood",
+      "confidence": "high",
+      "wikitextHash": "4d62bfce25915774",
+      "components": [
+        {
+          "qty": 100,
+          "name": "Vial of Powerful Blood"
+        },
+        {
+          "qty": 250,
+          "name": "Vial of Potent Blood"
+        },
+        {
+          "qty": 50,
+          "name": "Vial of Thick Blood"
+        },
+        {
+          "qty": 50,
+          "name": "Vial of Blood"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Bones",
+      "apiId": 71123,
+      "syntheticId": true,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Bones",
+      "confidence": "high",
+      "wikitextHash": "399a45c3750813c1",
+      "components": [
+        {
+          "qty": 100,
+          "name": "Ancient Bone"
+        },
+        {
+          "qty": 250,
+          "name": "Large Bone"
+        },
+        {
+          "qty": 50,
+          "name": "Heavy Bone"
+        },
+        {
+          "qty": 50,
+          "name": "Bone"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Claws",
+      "apiId": 70801,
+      "syntheticId": true,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Claws",
+      "confidence": "high",
+      "wikitextHash": "dd5da193edaed26e",
+      "components": [
+        {
+          "qty": 100,
+          "name": "Vicious Claw"
+        },
+        {
+          "qty": 250,
+          "name": "Large Claw"
+        },
+        {
+          "qty": 50,
+          "name": "Sharp Claw"
+        },
+        {
+          "qty": 50,
+          "name": "Claw"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Competitive Dedication",
+      "apiId": 84203,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Competitive_Dedication",
+      "confidence": "high",
+      "wikitextHash": "abf0e6eb28a7e046",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Record of League Participation"
+        },
+        {
+          "qty": 1,
+          "name": "Star of Glory"
+        },
+        {
+          "qty": 1,
+          "name": "Glob of Condensed Spirit Energy"
+        },
+        {
+          "qty": 1,
+          "name": "Jar of Distilled Glory"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Competitive Prosperity",
+      "apiId": 84174,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Competitive_Prosperity",
+      "confidence": "high",
+      "wikitextHash": "34c135b02c239a23",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Mist Core Fragment"
+        },
+        {
+          "qty": 15,
+          "name": "Mystic Clover"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Condensed Might"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Condensed Magic"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Competitive Prowess",
+      "apiId": 82350,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Competitive_Prowess",
+      "confidence": "high",
+      "wikitextHash": "0b7eb53ae934743f",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Record of League Victories"
+        },
+        {
+          "qty": 1,
+          "name": "Eldritch Scroll"
+        },
+        {
+          "qty": 50,
+          "name": "Obsidian Shard"
+        },
+        {
+          "qty": 1,
+          "name": "Cube of Stabilized Dark Energy"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Condensed Magic",
+      "apiId": 76530,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Condensed_Magic",
+      "confidence": "high",
+      "wikitextHash": "c43618f3db8deda0",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Blood"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Venom"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Totems"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Dust"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Condensed Might",
+      "apiId": 70867,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Condensed_Might",
+      "confidence": "high",
+      "wikitextHash": "417f2781fd9527b8",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Claws"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Scales"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Bones"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Fangs"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Craftsmanship",
+      "apiId": 77451,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Craftsmanship",
+      "confidence": "low",
+      "wikitextHash": "5220b948497d0f6f",
+      "components": [],
+      "parseNote": "{{recipe}} found but no ingredients parsed"
+    },
+    {
+      "name": "Gift of Dedication",
+      "apiId": 78936,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Dedication",
+      "confidence": "high",
+      "wikitextHash": "8d1fe2c7d9869f4d",
+      "components": [
+        {
+          "qty": 5,
+          "name": "Chak Egg"
+        },
+        {
+          "qty": 5,
+          "name": "Auric Ingot"
+        },
+        {
+          "qty": 5,
+          "name": "Reclaimed Metal Plate"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Pact"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Dust",
+      "apiId": 73196,
+      "syntheticId": true,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Dust",
+      "confidence": "high",
+      "wikitextHash": "c62593f26d58677f",
+      "components": [
+        {
+          "qty": 100,
+          "name": "Pile of Crystalline Dust"
+        },
+        {
+          "qty": 250,
+          "name": "Pile of Incandescent Dust"
+        },
+        {
+          "qty": 50,
+          "name": "Pile of Luminous Dust"
+        },
+        {
+          "qty": 50,
+          "name": "Pile of Radiant Dust"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Expertise",
+      "apiId": 100852,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Expertise",
+      "confidence": "high",
+      "wikitextHash": "feb8776537f581f5",
+      "components": [
+        {
+          "qty": 12,
+          "name": "Amalgamated Rift Essence"
+        },
+        {
+          "qty": 1,
+          "name": "Eldritch Scroll"
+        },
+        {
+          "qty": 50,
+          "name": "Obsidian Shards"
+        },
+        {
+          "qty": 1,
+          "name": "Cube of Stabilized Dark Energy"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Fangs",
+      "apiId": 75744,
+      "syntheticId": true,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Fangs",
+      "confidence": "high",
+      "wikitextHash": "9e1f8c684203a08e",
+      "components": [
+        {
+          "qty": 100,
+          "name": "Vicious Fang"
+        },
+        {
+          "qty": 250,
+          "name": "Large Fang"
+        },
+        {
+          "qty": 50,
+          "name": "Sharp Fang"
+        },
+        {
+          "qty": 50,
+          "name": "Fang"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Fortune",
+      "apiId": 19626,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Fortune",
+      "confidence": "high",
+      "wikitextHash": "62ed09effcf47b14",
+      "components": [
+        {
+          "qty": 77,
+          "name": "Mystic Clover"
+        },
+        {
+          "qty": 250,
+          "name": "Glob of Ectoplasm"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Magic"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Might"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Insight",
+      "apiId": 105875,
+      "syntheticId": true,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Insight",
+      "confidence": "low",
+      "wikitextHash": "309df6ade534ead5",
+      "components": [],
+      "parseNote": "{{recipe}} found but no ingredients parsed"
+    },
+    {
+      "name": "Gift of Magic",
+      "apiId": 19673,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Magic",
+      "confidence": "high",
+      "wikitextHash": "a44d6374e7b5cd8e",
+      "components": [
+        {
+          "qty": 250,
+          "name": "Vial of Powerful Blood"
+        },
+        {
+          "qty": 250,
+          "name": "Powerful Venom Sac"
+        },
+        {
+          "qty": 250,
+          "name": "Elaborate Totem"
+        },
+        {
+          "qty": 250,
+          "name": "Pile of Crystalline Dust"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Magical Prosperity",
+      "apiId": 100512,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Magical_Prosperity",
+      "confidence": "high",
+      "wikitextHash": "b570ceb82a800636",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Craftsmanship"
+        },
+        {
+          "qty": 9,
+          "name": "Mystic Clovers"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Condensed Magic"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Research"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Mastery",
+      "apiId": 19674,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Mastery",
+      "confidence": "high",
+      "wikitextHash": "193b4923bc337a0f",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Bloodstone Shard"
+        },
+        {
+          "qty": 250,
+          "name": "Obsidian Shard"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Exploration"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Battle"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Might",
+      "apiId": 19672,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Might",
+      "confidence": "high",
+      "wikitextHash": "e49ebd14d519ec9e",
+      "components": [
+        {
+          "qty": 250,
+          "name": "Vicious Fang"
+        },
+        {
+          "qty": 250,
+          "name": "Armored Scale"
+        },
+        {
+          "qty": 250,
+          "name": "Vicious Claw"
+        },
+        {
+          "qty": 250,
+          "name": "Ancient Bone"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Mighty Prosperity",
+      "apiId": 100933,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Mighty_Prosperity",
+      "confidence": "high",
+      "wikitextHash": "f58f4a0b0b96fe8b",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Craftsmanship"
+        },
+        {
+          "qty": 9,
+          "name": "Mystic Clovers"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Condensed Might"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Research"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Prosperity",
+      "apiId": 78866,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Prosperity",
+      "confidence": "high",
+      "wikitextHash": "892680c3fe749e85",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Craftsmanship"
+        },
+        {
+          "qty": 15,
+          "name": "Mystic Clover"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Condensed Magic"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Condensed Might"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Prowess",
+      "apiId": 78989,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Prowess",
+      "confidence": "high",
+      "wikitextHash": "172fea040560f283",
+      "components": [
+        {
+          "qty": 25,
+          "name": "Legendary Insight (consumable)"
+        },
+        {
+          "qty": 1,
+          "name": "Eldritch Scroll"
+        },
+        {
+          "qty": 50,
+          "name": "Obsidian Shard"
+        },
+        {
+          "qty": 1,
+          "name": "Cube of Stabilized Dark Energy"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Scales",
+      "apiId": 75299,
+      "syntheticId": true,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Scales",
+      "confidence": "high",
+      "wikitextHash": "a545df196bd979a3",
+      "components": [
+        {
+          "qty": 100,
+          "name": "Armored Scale"
+        },
+        {
+          "qty": 250,
+          "name": "Large Scale"
+        },
+        {
+          "qty": 50,
+          "name": "Smooth Scale"
+        },
+        {
+          "qty": 50,
+          "name": "Scale"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Totems",
+      "apiId": 73236,
+      "syntheticId": true,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Totems",
+      "confidence": "high",
+      "wikitextHash": "01396755c3f7a2da",
+      "components": [
+        {
+          "qty": 100,
+          "name": "Elaborate Totem"
+        },
+        {
+          "qty": 250,
+          "name": "Intricate Totem"
+        },
+        {
+          "qty": 50,
+          "name": "Engraved Totem"
+        },
+        {
+          "qty": 50,
+          "name": "Totem"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Venom",
+      "apiId": 71787,
+      "syntheticId": true,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Venom",
+      "confidence": "high",
+      "wikitextHash": "3932a9fe1615baa0",
+      "components": [
+        {
+          "qty": 100,
+          "name": "Powerful Venom Sac"
+        },
+        {
+          "qty": 250,
+          "name": "Potent Venom Sac"
+        },
+        {
+          "qty": 50,
+          "name": "Full Venom Sac"
+        },
+        {
+          "qty": 50,
+          "name": "Venom Sac"
+        }
+      ]
+    },
+    {
+      "name": "Gift of War Dedication",
+      "apiId": 83259,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_War_Dedication",
+      "confidence": "high",
+      "wikitextHash": "c118db5fecbc171f",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Certificate of Honor"
+        },
+        {
+          "qty": 1,
+          "name": "Certificate of Heroics"
+        },
+        {
+          "qty": 1,
+          "name": "Glob of Condensed Spirit Energy"
+        },
+        {
+          "qty": 250,
+          "name": "Memory of Battle"
+        }
+      ]
+    },
+    {
+      "name": "Gift of War Prosperity",
+      "apiId": 82746,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_War_Prosperity",
+      "confidence": "high",
+      "wikitextHash": "69a437e54cec30d0",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Battle"
+        },
+        {
+          "qty": 15,
+          "name": "Mystic Clover"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Condensed Might"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Condensed Magic"
+        }
+      ]
+    },
+    {
+      "name": "Gift of War Prowess",
+      "apiId": 84168,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_War_Prowess",
+      "confidence": "high",
+      "wikitextHash": "fdd41073f06525d9",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Legendary War Insight"
+        },
+        {
+          "qty": 1,
+          "name": "Eldritch Scroll"
+        },
+        {
+          "qty": 50,
+          "name": "Obsidian Shard"
+        },
+        {
+          "qty": 1,
+          "name": "Cube of Stabilized Dark Energy"
+        }
+      ]
+    },
+    {
+      "name": "Mystic Tribute",
+      "apiId": 71820,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Mystic_Tribute",
+      "confidence": "high",
+      "wikitextHash": "25a128b10c4308be",
+      "components": [
+        {
+          "qty": 2,
+          "name": "Gift of Condensed Magic"
+        },
+        {
+          "qty": 2,
+          "name": "Gift of Condensed Might"
+        },
+        {
+          "qty": 77,
+          "name": "Mystic Clover"
+        },
+        {
+          "qty": 250,
+          "name": "Mystic Coin"
+        }
+      ]
+    }
+  ]
+}

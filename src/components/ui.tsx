@@ -89,14 +89,14 @@ export function InfoTooltip({ label }: { label: string }) {
  */
 export function WikiName({
   name,
-  itemId,
   className = '',
 }: {
   name: string
-  itemId: number
+  /** Accepted for call-site convenience; linking is purely name-based now. */
+  itemId?: number
   className?: string
 }) {
-  const url = wikiUrl(name, itemId)
+  const url = wikiUrl(name)
   if (!url) return <span className={className}>{name}</span>
   return (
     <a

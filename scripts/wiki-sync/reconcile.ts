@@ -13,12 +13,13 @@ import {
   type SnapshotEntry,
 } from './types'
 import { ARMOR_SET_MEMBERS, canonComponent, canonPiece } from './aliases'
-import { catalogPieces, type CatalogPiece } from './catalog-view'
-import { readSnapshot } from './store'
+import { catalogIntermediates, catalogPieces, type CatalogPiece } from './catalog-view'
+import { readIntermediates, readSnapshot } from './store'
+import { diffComponents } from './compare'
 
 function finding(
   type: FindingType,
-  category: Category,
+  category: Category | 'intermediates',
   item: string,
   message: string,
   extra: { detail?: string; wiki?: unknown; catalog?: unknown } = {},
@@ -26,14 +27,41 @@ function finding(
   return { type, severity: DEFAULT_SEVERITY[type], category, item, message, ...extra }
 }
 
-/** Sum component quantities keyed by canonical component name. */
-function componentMap(comps: { name: string; qty: number }[]): Map<string, number> {
-  const m = new Map<string, number>()
-  for (const c of comps) {
-    const k = canonComponent(c.name)
-    m.set(k, (m.get(k) ?? 0) + c.qty)
+/** Turn a component diff (wiki vs catalog) into findings for one recipe. */
+function diffFindings(
+  category: Category | 'intermediates',
+  itemName: string,
+  wiki: { name: string; qty: number }[],
+  catalog: { name: string; qty: number }[],
+): Finding[] {
+  const out: Finding[] = []
+  const d = diffComponents(wiki, catalog)
+  for (const m of d.missing) {
+    out.push(
+      finding('COMPONENT_MISSING', category, itemName, `wiki lists "${m.name}" (x${m.qty}) but the catalog recipe omits it`, {
+        detail: m.name,
+        wiki: { name: m.name, qty: m.qty },
+      }),
+    )
   }
-  return m
+  for (const m of d.mismatched) {
+    out.push(
+      finding('QTY_MISMATCH', category, itemName, `"${m.name}": wiki ${m.wiki} vs catalog ${m.catalog}`, {
+        detail: m.name,
+        wiki: m.wiki,
+        catalog: m.catalog,
+      }),
+    )
+  }
+  for (const m of d.extra) {
+    out.push(
+      finding('COMPONENT_EXTRA', category, itemName, `catalog recipe has "${m.name}" (x${m.qty}) which the wiki recipe doesn't list`, {
+        detail: m.name,
+        catalog: { name: m.name, qty: m.qty },
+      }),
+    )
+  }
+  return out
 }
 
 function compareComponents(
@@ -42,37 +70,37 @@ function compareComponents(
   wiki: SnapshotEntry,
   cat: CatalogPiece,
 ): Finding[] {
-  const out: Finding[] = []
-  const wikiMap = componentMap(wiki.components)
-  const catMap = componentMap(cat.components)
+  return diffFindings(category, itemName, wiki.components, cat.components)
+}
 
-  for (const [name, qty] of wikiMap) {
-    if (!catMap.has(name)) {
+/**
+ * Verify each distinct catalog intermediate (shared gift / sub-gift) against its
+ * own wiki recipe page — the depth the new detail tree surfaces and the existing
+ * top-level check never covered. Compared by canonical name (so even synthetic-id
+ * gifts are checked). Missing/low-confidence wiki pages degrade to info, never
+ * block (mirrors the LOW_CONFIDENCE policy for unparsable legendary recipes).
+ */
+function reconcileIntermediates(): Finding[] {
+  const out: Finding[] = []
+  const snap = readIntermediates()
+  const byName = new Map<string, NonNullable<typeof snap>['entries'][number]>()
+  if (snap) for (const e of snap.entries) byName.set(canonComponent(e.name), e)
+
+  for (const it of catalogIntermediates()) {
+    const wiki = byName.get(canonComponent(it.name))
+    if (!wiki || wiki.confidence === 'low' || wiki.components.length === 0) {
       out.push(
-        finding('COMPONENT_MISSING', category, itemName, `wiki lists "${name}" (x${qty}) but the catalog recipe omits it`, {
-          detail: name,
-          wiki: { name, qty },
-        }),
+        finding(
+          'LOW_CONFIDENCE',
+          'intermediates',
+          it.name,
+          `intermediate recipe not verified (${wiki?.parseNote ?? 'no wiki snapshot — run npm run wiki:fetch'}); not compared`,
+          { detail: wiki?.parseNote },
+        ),
       )
-    } else if (catMap.get(name) !== qty) {
-      out.push(
-        finding('QTY_MISMATCH', category, itemName, `"${name}": wiki ${qty} vs catalog ${catMap.get(name)}`, {
-          detail: name,
-          wiki: qty,
-          catalog: catMap.get(name),
-        }),
-      )
+      continue
     }
-  }
-  for (const [name, qty] of catMap) {
-    if (!wikiMap.has(name)) {
-      out.push(
-        finding('COMPONENT_EXTRA', category, itemName, `catalog recipe has "${name}" (x${qty}) which the wiki recipe doesn't list`, {
-          detail: name,
-          catalog: { name, qty },
-        }),
-      )
-    }
+    out.push(...diffFindings('intermediates', it.name, wiki.components, it.inputs))
   }
   return out
 }
@@ -181,6 +209,9 @@ export function reconcile(): ReconcileResult {
       )
     }
   }
+
+  // --- intermediate (shared-gift) sub-recipes, one level deep each -----------
+  findings.push(...reconcileIntermediates())
 
   return {
     findings,
