@@ -11,8 +11,16 @@
 // cross-check.
 // ---------------------------------------------------------------------------
 
-import type { ItemRef, RecipeNode, RecipeSource, TimeGate } from '../../types'
-import { ITEM, TIME_GATED, synthetic } from '../items'
+import type {
+  AcquisitionMode,
+  ItemRef,
+  LegendaryPiece,
+  RecipeNode,
+  RecipeSource,
+  SlotFamily,
+  TimeGate,
+} from '../../types'
+import { CUR, ITEM, TIME_GATED, currency, synthetic } from '../items'
 
 export const ref = (itemId: number, name: string, qty: number): ItemRef => ({
   itemId,
@@ -256,5 +264,117 @@ export function bloodstoneShard(spiritShardLeaf: ItemRef): SubTree {
   return {
     out,
     nodes: [node(out, [spiritShardLeaf], { source: 'mystic-forge' })],
+  }
+}
+
+/**
+ * Gift of Mastery (Gen1): Bloodstone Shard + 250 Obsidian Shard + 1 Gift of
+ * Exploration (map completion) + 1 Gift of Battle (WvW reward track).
+ * Wiki-verified id 19674. The recipe takes exactly 1 Gift of Exploration.
+ */
+export function giftOfMastery(): SubTree {
+  const blood = bloodstoneShard(ref(currency(CUR.spiritShard), 'Spirit Shard', 200))
+  const exploration = ref(synthetic(), 'Gift of Exploration', 1)
+  const battle = ref(ITEM.giftOfBattle, 'Gift of Battle', 1) // id 19678
+  const out = ref(ITEM.giftOfMastery, 'Gift of Mastery', 1)
+  return {
+    out,
+    nodes: [
+      node(
+        out,
+        [times(blood, 1), ref(ITEM.obsidianShard, 'Obsidian Shard', 250), exploration, battle],
+        { source: 'mystic-forge' }
+      ),
+      ...blood.nodes,
+      node(exploration, [], { source: 'achievement', notes: 'Awarded for 100% world completion' }),
+      node(battle, [], { source: 'reward-track', notes: 'WvW reward track completion' }),
+    ],
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Generic legendary assembler.
+//
+// Builds a full piece from its wiki TOP-LEVEL components. Components whose name
+// matches a known shared gift are expanded into their real leaf tree; every
+// other component (precursor, themed gift, map-mastery gift, base material) is a
+// leaf with its real wiki id when known. Because the root inputs are exactly the
+// wiki's components, the wiki:check gate enforces the recipe stays correct, so
+// pieces built this way ship verified:true.
+// ---------------------------------------------------------------------------
+
+/** Shared gifts the engine expands into real, costed leaf trees. */
+const SHARED_GIFTS: Record<string, () => SubTree> = {
+  'gift of fortune': giftOfFortune,
+  'gift of mastery': giftOfMastery,
+  'mystic tribute': mysticTribute,
+  'draconic tribute': draconicTribute,
+}
+
+export interface TopComponent {
+  name: string
+  qty: number
+  /** Real GW2 item id (from the wiki infobox). Omit to mint a synthetic id. */
+  itemId?: number
+  /** Override the leaf's buyable flag (defaults: precursors true, gifts false). */
+  buyable?: boolean
+  source?: RecipeSource
+  notes?: string
+}
+
+export function assembleLegendary(opts: {
+  id: number
+  name: string
+  slot: SlotFamily
+  type: string
+  acquisitionMode: AcquisitionMode
+  wikiUrl: string
+  blurb?: string
+  unlocks?: number[]
+  components: TopComponent[]
+  verified?: boolean
+}): LegendaryPiece {
+  const rootInputs: ItemRef[] = []
+  const childNodes: RecipeNode[] = []
+  for (const c of opts.components) {
+    const shared = SHARED_GIFTS[c.name.trim().toLowerCase()]
+    if (shared) {
+      const sub = shared()
+      rootInputs.push(times(sub, c.qty))
+      childNodes.push(...sub.nodes)
+      continue
+    }
+    const leaf = ref(c.itemId ?? synthetic(), c.name, c.qty)
+    rootInputs.push(leaf)
+    const isGift = /^gift of\b/i.test(c.name)
+    childNodes.push(
+      node(leaf, [], {
+        source: c.source ?? (isGift ? 'collection' : 'mystic-forge'),
+        buyable: c.buyable ?? !isGift,
+        notes:
+          c.notes ??
+          (isGift
+            ? 'Collection / achievement gift — internal sub-tree summarized'
+            : 'Precursor — buyable on TP or via the collection journey'),
+      })
+    )
+  }
+  const root = ref(opts.id, opts.name, 1)
+  const nodes: RecipeNode[] = [node(root, rootInputs, { source: 'mystic-forge' }), ...childNodes]
+  return {
+    id: opts.id,
+    name: opts.name,
+    slot: opts.slot,
+    type: opts.type,
+    acquisitionMode: opts.acquisitionMode,
+    unlocks: opts.unlocks ?? [opts.id],
+    blurb: opts.blurb,
+    recipe: {
+      rootItemId: opts.id,
+      nodes,
+      verified: opts.verified ?? true,
+      wikiUrl: opts.wikiUrl,
+      version: 2,
+    },
   }
 }

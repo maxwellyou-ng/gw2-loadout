@@ -1,0 +1,737 @@
+{
+  "tooth of frostfang": {
+    "name": "Tooth of Frostfang",
+    "id": 29166,
+    "wikiTitle": "Tooth of Frostfang"
+  },
+  "gift of frostfang": {
+    "name": "Gift of Frostfang",
+    "id": 19625,
+    "wikiTitle": "Gift of Frostfang"
+  },
+  "spark (weapon)": {
+    "name": "Spark (weapon)",
+    "id": 29167,
+    "wikiTitle": "Spark (weapon)"
+  },
+  "gift of incinerator": {
+    "name": "Gift of Incinerator",
+    "id": 19645,
+    "wikiTitle": "Gift of Incinerator"
+  },
+  "the energizer": {
+    "name": "The Energizer",
+    "id": 29173,
+    "wikiTitle": "The Energizer"
+  },
+  "gift of the moot": {
+    "name": "Gift of The Moot",
+    "id": 19650,
+    "wikiTitle": "Gift of The Moot"
+  },
+  "chaos gun": {
+    "name": "Chaos Gun",
+    "id": 29174,
+    "wikiTitle": "Chaos Gun"
+  },
+  "gift of quip": {
+    "name": "Gift of Quip",
+    "id": 19651,
+    "wikiTitle": "Gift of Quip"
+  },
+  "storm": {
+    "name": "Storm",
+    "id": 29176,
+    "wikiTitle": "Storm"
+  },
+  "gift of meteorlogicus": {
+    "name": "Gift of Meteorlogicus",
+    "id": 19652,
+    "wikiTitle": "Gift of Meteorlogicus"
+  },
+  "zap": {
+    "name": "Zap",
+    "id": 29181,
+    "wikiTitle": "Zap"
+  },
+  "gift of bolt": {
+    "name": "Gift of Bolt",
+    "id": 19655,
+    "wikiTitle": "Gift of Bolt"
+  },
+  "the bard": {
+    "name": "The Bard",
+    "id": 29168,
+    "wikiTitle": "The Bard"
+  },
+  "gift of the minstrel": {
+    "name": "Gift of The Minstrel",
+    "id": 19646,
+    "wikiTitle": "Gift of The Minstrel"
+  },
+  "the chosen": {
+    "name": "The Chosen",
+    "id": 29177,
+    "wikiTitle": "The Chosen"
+  },
+  "gift of the flameseeker prophecies": {
+    "name": "Gift of The Flameseeker Prophecies",
+    "id": 19653,
+    "wikiTitle": "Gift of The Flameseeker Prophecies"
+  },
+  "rodgort's flame": {
+    "name": "Rodgort's Flame",
+    "id": 29182,
+    "wikiTitle": "Rodgort's Flame"
+  },
+  "gift of rodgort": {
+    "name": "Gift of Rodgort",
+    "id": 19656,
+    "wikiTitle": "Gift of Rodgort"
+  },
+  "howl": {
+    "name": "Howl",
+    "id": 29184,
+    "wikiTitle": "Howl"
+  },
+  "gift of howler": {
+    "name": "Gift of Howler",
+    "id": 19662,
+    "wikiTitle": "Gift of Howler"
+  },
+  "dawn": {
+    "name": "Dawn",
+    "id": 29169,
+    "wikiTitle": "Dawn"
+  },
+  "gift of sunrise": {
+    "name": "Gift of Sunrise",
+    "id": 19647,
+    "wikiTitle": "Gift of Sunrise"
+  },
+  "dusk": {
+    "name": "Dusk",
+    "id": 29185,
+    "wikiTitle": "Dusk"
+  },
+  "gift of twilight": {
+    "name": "Gift of Twilight",
+    "id": 19648,
+    "wikiTitle": "Gift of Twilight"
+  },
+  "sunrise": {
+    "name": "Sunrise",
+    "id": 30703,
+    "wikiTitle": "Sunrise"
+  },
+  "twilight": {
+    "name": "Twilight",
+    "id": 30704,
+    "wikiTitle": "Twilight"
+  },
+  "pile of crystalline dust": {
+    "name": "Pile of Crystalline Dust",
+    "id": 24277,
+    "wikiTitle": "Pile of Crystalline Dust"
+  },
+  "philosopher's stone": {
+    "name": "Philosopher's Stone",
+    "id": 20796,
+    "wikiTitle": "Philosopher's Stone"
+  },
+  "the colossus": {
+    "name": "The Colossus",
+    "id": 29170,
+    "wikiTitle": "The Colossus"
+  },
+  "gift of the juggernaut": {
+    "name": "Gift of The Juggernaut",
+    "id": 19649,
+    "wikiTitle": "Gift of The Juggernaut"
+  },
+  "leaf of kudzu": {
+    "name": "Leaf of Kudzu",
+    "id": 29172,
+    "wikiTitle": "Leaf of Kudzu"
+  },
+  "gift of kudzu": {
+    "name": "Gift of Kudzu",
+    "id": 19644,
+    "wikiTitle": "Gift of Kudzu"
+  },
+  "the hunter": {
+    "name": "The Hunter",
+    "id": 29175,
+    "wikiTitle": "The Hunter"
+  },
+  "gift of the predator": {
+    "name": "Gift of The Predator",
+    "id": 19661,
+    "wikiTitle": "Gift of The Predator"
+  },
+  "the lover": {
+    "name": "The Lover",
+    "id": 29178,
+    "wikiTitle": "The Lover"
+  },
+  "gift of the dreamer": {
+    "name": "Gift of The Dreamer",
+    "id": 19660,
+    "wikiTitle": "Gift of The Dreamer"
+  },
+  "the legend": {
+    "name": "The Legend",
+    "id": 29180,
+    "wikiTitle": "The Legend"
+  },
+  "gift of the bifrost": {
+    "name": "Gift of The Bifrost",
+    "id": 19654,
+    "wikiTitle": "Gift of The Bifrost"
+  },
+  "rage (weapon)": {
+    "name": "Rage (weapon)",
+    "id": 29179,
+    "wikiTitle": "Rage (weapon)"
+  },
+  "gift of frenzy": {
+    "name": "Gift of Frenzy",
+    "id": 19659,
+    "wikiTitle": "Gift of Frenzy"
+  },
+  "carcharias": {
+    "name": "Carcharias",
+    "id": 29171,
+    "wikiTitle": "Carcharias"
+  },
+  "gift of kamohoali'i kotaki": {
+    "name": "Gift of Kamohoali'i Kotaki",
+    "id": 19657,
+    "wikiTitle": "Gift of Kamohoali'i Kotaki"
+  },
+  "venom (weapon)": {
+    "name": "Venom (weapon)",
+    "id": 29183,
+    "wikiTitle": "Venom (weapon)"
+  },
+  "gift of kraitkin": {
+    "name": "Gift of Kraitkin",
+    "id": 19658,
+    "wikiTitle": "Gift of Kraitkin"
+  },
+  "the mechanism": {
+    "name": "The Mechanism",
+    "id": 71426,
+    "wikiTitle": "The Mechanism"
+  },
+  "gift of astralaria": {
+    "name": "Gift of Astralaria",
+    "id": 71972,
+    "wikiTitle": "Gift of Astralaria"
+  },
+  "gift of maguuma mastery": {
+    "name": "Gift of Maguuma Mastery",
+    "id": 73239,
+    "wikiTitle": "Gift of Maguuma Mastery"
+  },
+  "claw of resolution": {
+    "name": "Claw of Resolution",
+    "id": 87037,
+    "wikiTitle": "Claw of Resolution"
+  },
+  "gift of the four legions": {
+    "name": "Gift of the Four Legions",
+    "id": 87115,
+    "wikiTitle": "Gift of the Four Legions"
+  },
+  "endeavor": {
+    "name": "Endeavor",
+    "id": 79570,
+    "wikiTitle": "Endeavor"
+  },
+  "gift of eureka": {
+    "name": "Gift of Eureka",
+    "id": 79419,
+    "wikiTitle": "Gift of Eureka"
+  },
+  "prototype": {
+    "name": "Prototype",
+    "id": 76399,
+    "wikiTitle": "Prototype"
+  },
+  "gift of hope": {
+    "name": "Gift of HOPE",
+    "id": 77086,
+    "wikiTitle": "Gift of HOPE"
+  },
+  "tlehco": {
+    "name": "Tlehco",
+    "id": 88851,
+    "wikiTitle": "Tlehco"
+  },
+  "gift of xiuquatl": {
+    "name": "Gift of Xiuquatl",
+    "id": 88500,
+    "wikiTitle": "Gift of Xiuquatl"
+  },
+  "save the queen": {
+    "name": "Save the Queen",
+    "id": 81812,
+    "wikiTitle": "Save the Queen"
+  },
+  "gift of the blade": {
+    "name": "Gift of the Blade",
+    "id": 82003,
+    "wikiTitle": "Gift of the Blade"
+  },
+  "ars goetia": {
+    "name": "Ars Goetia",
+    "id": 86097,
+    "wikiTitle": "Ars Goetia"
+  },
+  "gift of ipos": {
+    "name": "Gift of Ipos",
+    "id": 85744,
+    "wikiTitle": "Gift of Ipos"
+  },
+  "friendship": {
+    "name": "Friendship",
+    "id": 79836,
+    "wikiTitle": "Friendship"
+  },
+  "gift of shooshadoo": {
+    "name": "Gift of Shooshadoo",
+    "id": 79839,
+    "wikiTitle": "Gift of Shooshadoo"
+  },
+  "liturgy": {
+    "name": "Liturgy",
+    "id": 81022,
+    "wikiTitle": "Liturgy"
+  },
+  "gift of balthazar": {
+    "name": "Gift of Balthazar",
+    "id": 81144,
+    "wikiTitle": "Gift of Balthazar"
+  },
+  "call of the void": {
+    "name": "Call of the Void",
+    "id": 87764,
+    "wikiTitle": "Call of the Void"
+  },
+  "gift of verdarach": {
+    "name": "Gift of Verdarach",
+    "id": 88060,
+    "wikiTitle": "Gift of Verdarach"
+  },
+  "exitare": {
+    "name": "Exitare",
+    "id": 90883,
+    "wikiTitle": "Exitare"
+  },
+  "gift of exordium": {
+    "name": "Gift of Exordium",
+    "id": 90893,
+    "wikiTitle": "Gift of Exordium"
+  },
+  "might of arah": {
+    "name": "Might of Arah",
+    "id": 81634,
+    "wikiTitle": "Might of Arah"
+  },
+  "gift of arah": {
+    "name": "Gift of Arah",
+    "id": 81684,
+    "wikiTitle": "Gift of Arah"
+  },
+  "spero": {
+    "name": "Spero",
+    "id": 89886,
+    "wikiTitle": "Spero"
+  },
+  "gift of pharus": {
+    "name": "Gift of Pharus",
+    "id": 89445,
+    "wikiTitle": "Gift of Pharus"
+  },
+  "man o' war": {
+    "name": "Man o' War",
+    "id": 80135,
+    "wikiTitle": "Man o' War"
+  },
+  "gift of divinity": {
+    "name": "Gift of Divinity",
+    "id": 80650,
+    "wikiTitle": "Gift of Divinity"
+  },
+  "tigris": {
+    "name": "Tigris",
+    "id": 78425,
+    "wikiTitle": "Tigris"
+  },
+  "gift of chuka and champawat": {
+    "name": "Gift of Chuka and Champawat",
+    "id": 78627,
+    "wikiTitle": "Gift of Chuka and Champawat"
+  },
+  "the raven staff": {
+    "name": "The Raven Staff",
+    "id": 74068,
+    "wikiTitle": "The Raven Staff"
+  },
+  "gift of nevermore": {
+    "name": "Gift of Nevermore",
+    "id": 74300,
+    "wikiTitle": "Gift of Nevermore"
+  },
+  "gift of aurene's rending": {
+    "name": "Gift of Aurene's Rending",
+    "id": 97804,
+    "wikiTitle": "Gift of Aurene's Rending"
+  },
+  "dragon's rending": {
+    "name": "Dragon's Rending",
+    "id": 97449,
+    "wikiTitle": "Dragon's Rending"
+  },
+  "gift of jade mastery": {
+    "name": "Gift of Jade Mastery",
+    "id": 96033,
+    "wikiTitle": "Gift of Jade Mastery"
+  },
+  "gift of aurene's claw": {
+    "name": "Gift of Aurene's Claw",
+    "id": 97066,
+    "wikiTitle": "Gift of Aurene's Claw"
+  },
+  "dragon's claw (weapon)": {
+    "name": "Dragon's Claw (weapon)",
+    "id": 95967,
+    "wikiTitle": "Dragon's Claw (weapon)"
+  },
+  "gift of aurene's tail": {
+    "name": "Gift of Aurene's Tail",
+    "id": 95846,
+    "wikiTitle": "Gift of Aurene's Tail"
+  },
+  "dragon's tail": {
+    "name": "Dragon's Tail",
+    "id": 96827,
+    "wikiTitle": "Dragon's Tail"
+  },
+  "gift of aurene's argument": {
+    "name": "Gift of Aurene's Argument",
+    "id": 96493,
+    "wikiTitle": "Gift of Aurene's Argument"
+  },
+  "dragon's argument": {
+    "name": "Dragon's Argument",
+    "id": 96915,
+    "wikiTitle": "Dragon's Argument"
+  },
+  "gift of aurene's wisdom": {
+    "name": "Gift of Aurene's Wisdom",
+    "id": 97552,
+    "wikiTitle": "Gift of Aurene's Wisdom"
+  },
+  "dragon's wisdom": {
+    "name": "Dragon's Wisdom",
+    "id": 96193,
+    "wikiTitle": "Dragon's Wisdom"
+  },
+  "gift of aurene's fang": {
+    "name": "Gift of Aurene's Fang",
+    "id": 96790,
+    "wikiTitle": "Gift of Aurene's Fang"
+  },
+  "dragon's fang": {
+    "name": "Dragon's Fang",
+    "id": 95994,
+    "wikiTitle": "Dragon's Fang"
+  },
+  "gift of aurene's gaze": {
+    "name": "Gift of Aurene's Gaze",
+    "id": 97088,
+    "wikiTitle": "Gift of Aurene's Gaze"
+  },
+  "dragon's gaze": {
+    "name": "Dragon's Gaze",
+    "id": 96303,
+    "wikiTitle": "Dragon's Gaze"
+  },
+  "gift of aurene's scale": {
+    "name": "Gift of Aurene's Scale",
+    "id": 96073,
+    "wikiTitle": "Gift of Aurene's Scale"
+  },
+  "dragon's scale": {
+    "name": "Dragon's Scale",
+    "id": 97691,
+    "wikiTitle": "Dragon's Scale"
+  },
+  "gift of aurene's breath": {
+    "name": "Gift of Aurene's Breath",
+    "id": 95922,
+    "wikiTitle": "Gift of Aurene's Breath"
+  },
+  "dragon's breath": {
+    "name": "Dragon's Breath",
+    "id": 96925,
+    "wikiTitle": "Dragon's Breath"
+  },
+  "gift of aurene's horn": {
+    "name": "Gift of Aurene's Horn",
+    "id": 96354,
+    "wikiTitle": "Gift of Aurene's Horn"
+  },
+  "dragon's voice": {
+    "name": "Dragon's Voice",
+    "id": 97513,
+    "wikiTitle": "Dragon's Voice"
+  },
+  "gift of aurene's bite": {
+    "name": "Gift of Aurene's Bite",
+    "id": 97027,
+    "wikiTitle": "Gift of Aurene's Bite"
+  },
+  "dragon's bite": {
+    "name": "Dragon's Bite",
+    "id": 96357,
+    "wikiTitle": "Dragon's Bite"
+  },
+  "gift of aurene's weight": {
+    "name": "Gift of Aurene's Weight",
+    "id": 96161,
+    "wikiTitle": "Gift of Aurene's Weight"
+  },
+  "dragon's weight": {
+    "name": "Dragon's Weight",
+    "id": 95920,
+    "wikiTitle": "Dragon's Weight"
+  },
+  "gift of aurene's flight": {
+    "name": "Gift of Aurene's Flight",
+    "id": 95777,
+    "wikiTitle": "Gift of Aurene's Flight"
+  },
+  "dragon's flight": {
+    "name": "Dragon's Flight",
+    "id": 95834,
+    "wikiTitle": "Dragon's Flight"
+  },
+  "gift of aurene's persuasion": {
+    "name": "Gift of Aurene's Persuasion",
+    "id": 97412,
+    "wikiTitle": "Gift of Aurene's Persuasion"
+  },
+  "dragon's persuasion": {
+    "name": "Dragon's Persuasion",
+    "id": 97267,
+    "wikiTitle": "Dragon's Persuasion"
+  },
+  "gift of aurene's wing": {
+    "name": "Gift of Aurene's Wing",
+    "id": 96015,
+    "wikiTitle": "Gift of Aurene's Wing"
+  },
+  "dragon's wing": {
+    "name": "Dragon's Wing",
+    "id": 96330,
+    "wikiTitle": "Dragon's Wing"
+  },
+  "gift of aurene's insight": {
+    "name": "Gift of Aurene's Insight",
+    "id": 97281,
+    "wikiTitle": "Gift of Aurene's Insight"
+  },
+  "dragon's insight": {
+    "name": "Dragon's Insight",
+    "id": 95814,
+    "wikiTitle": "Dragon's Insight"
+  },
+  "gift of janthir wilds": {
+    "name": "Gift of Janthir Wilds",
+    "id": 102514,
+    "wikiTitle": "Gift of Janthir Wilds"
+  },
+  "gift of the homesteader": {
+    "name": "Gift of the Homesteader",
+    "id": 102376,
+    "wikiTitle": "Gift of the Homesteader"
+  },
+  "gift of klobjarne geirr": {
+    "name": "Gift of Klobjarne Geirr",
+    "id": 102901,
+    "wikiTitle": "Gift of Klobjarne Geirr"
+  },
+  "nyr hrammr": {
+    "name": "Nyr Hrammr",
+    "id": 103973,
+    "wikiTitle": "Nyr Hrammr"
+  },
+  "spark of sentience": {
+    "name": "Spark of Sentience",
+    "id": 81729,
+    "wikiTitle": "Spark of Sentience"
+  },
+  "gift of sentience": {
+    "name": "Gift of Sentience",
+    "id": 81796,
+    "wikiTitle": "Gift of Sentience"
+  },
+  "gift of draconic mastery": {
+    "name": "Gift of Draconic Mastery",
+    "id": 81861,
+    "wikiTitle": "Gift of Draconic Mastery"
+  },
+  "hateful sworl": {
+    "name": "Hateful Sworl",
+    "id": 86104,
+    "wikiTitle": "Hateful Sworl"
+  },
+  "gift of patience": {
+    "name": "Gift of Patience",
+    "id": 91193,
+    "wikiTitle": "Gift of Patience"
+  },
+  "gift of compassion": {
+    "name": "Gift of Compassion",
+    "id": 91225,
+    "wikiTitle": "Gift of Compassion"
+  },
+  "glimpse": {
+    "name": "Glimpse",
+    "id": 91035,
+    "wikiTitle": "Glimpse"
+  },
+  "gift of prescience": {
+    "name": "Gift of Prescience",
+    "id": 90985,
+    "wikiTitle": "Gift of Prescience"
+  },
+  "gift of arid mastery": {
+    "name": "Gift of Arid Mastery",
+    "id": 91041,
+    "wikiTitle": "Gift of Arid Mastery"
+  },
+  "gift of the champion": {
+    "name": "Gift of the Champion",
+    "id": 93036,
+    "wikiTitle": "Gift of the Champion"
+  },
+  "mist pendant": {
+    "name": "Mist Pendant",
+    "id": 79980,
+    "wikiTitle": "Mist Pendant"
+  },
+  "gift of skirmishing": {
+    "name": "Gift of Skirmishing",
+    "id": 77485,
+    "wikiTitle": "Gift of Skirmishing"
+  },
+  "gift of the world": {
+    "name": "Gift of the World",
+    "id": 93190,
+    "wikiTitle": "Gift of the World"
+  },
+  "mist band (infused)": {
+    "name": "Mist Band (Infused)",
+    "id": 80058,
+    "wikiTitle": "Mist Band (Infused)"
+  },
+  "gift of conquering": {
+    "name": "Gift of Conquering",
+    "id": 81371,
+    "wikiTitle": "Gift of Conquering"
+  },
+  "gift of rays": {
+    "name": "Gift of Rays",
+    "id": 107040,
+    "wikiTitle": "Gift of Rays"
+  },
+  "gift of the survivors": {
+    "name": "Gift of the Survivors",
+    "id": 106712,
+    "wikiTitle": "Gift of the Survivors"
+  },
+  "gift of the people": {
+    "name": "Gift of the People",
+    "id": 105804,
+    "wikiTitle": "Gift of the People"
+  },
+  "gift of the hylek": {
+    "name": "Gift of the Hylek",
+    "id": 106986,
+    "wikiTitle": "Gift of the Hylek"
+  },
+  "gift of galdra": {
+    "name": "Gift of Galdra",
+    "id": 109469,
+    "wikiTitle": "Gift of Galdra"
+  },
+  "gift of shadowstones": {
+    "name": "Gift of Shadowstones",
+    "id": 109161,
+    "wikiTitle": "Gift of Shadowstones"
+  },
+  "vial of liquid shadowstone": {
+    "name": "Vial of Liquid Shadowstone",
+    "id": 109391,
+    "wikiTitle": "Vial of Liquid Shadowstone"
+  },
+  "unbound": {
+    "name": "Unbound",
+    "id": 72309,
+    "wikiTitle": "Unbound"
+  },
+  "gift of infinity": {
+    "name": "Gift of Infinity",
+    "id": 74377,
+    "wikiTitle": "Gift of Infinity"
+  },
+  "gift of ascension": {
+    "name": "Gift of Ascension",
+    "id": 37070,
+    "wikiTitle": "Gift of Ascension"
+  },
+  "gift of the mistburned isles": {
+    "name": "Gift of the Mistburned Isles",
+    "id": 104962,
+    "wikiTitle": "Gift of the Mistburned Isles"
+  },
+  "gift of shadows": {
+    "name": "Gift of Shadows",
+    "id": 104846,
+    "wikiTitle": "Gift of Shadows"
+  },
+  "gift of the feast": {
+    "name": "Gift of the Feast",
+    "id": 104872,
+    "wikiTitle": "Gift of the Feast"
+  },
+  "orrax contained": {
+    "name": "Orrax Contained",
+    "id": 104690,
+    "wikiTitle": "Orrax Contained"
+  },
+  "gift of the competitor": {
+    "name": "Gift of the Competitor",
+    "id": 77509,
+    "wikiTitle": "Gift of the Competitor"
+  },
+  "wings of ascension": {
+    "name": "Wings of Ascension",
+    "id": 77536,
+    "wikiTitle": "Wings of Ascension"
+  },
+  "warcry": {
+    "name": "Warcry",
+    "id": 81467,
+    "wikiTitle": "Warcry"
+  },
+  "gift of warfare": {
+    "name": "Gift of Warfare",
+    "id": 81478,
+    "wikiTitle": "Gift of Warfare"
+  }
+}

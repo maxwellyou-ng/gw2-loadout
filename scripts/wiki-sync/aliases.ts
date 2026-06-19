@@ -42,8 +42,10 @@ export function normalizeName(raw: string): string {
  * Extend this as the catalog and wiki diverge.
  */
 export const PIECE_ALIASES: Record<string, string> = {
-  // Catalog models the dual-unlock container under its own name already.
-  // 'aetheric anchor' -> 'aetheric anchor' (identity)
+  // The wiki enumerates the spear "Ancora Bellum"; the catalog models the craft
+  // under its container name "Aetheric Anchor" (which unlocks Ancora Bellum +
+  // Ancora Pax via its `unlocks`). Map the wiki name onto the catalog entry.
+  'ancora bellum': 'aetheric anchor',
   // Wiki lists Obsidian as a set; catalog authors individual pieces. The set
   // name is mapped per-piece in the reconciler via SET_MEMBERS below.
 }
@@ -63,7 +65,10 @@ export const COMPONENT_ALIASES: Record<string, string> = {
  * being reported as EXTRA_ITEM, and so missing set coverage is visible.
  */
 export const ARMOR_SET_MEMBERS: Record<string, string[]> = {
-  'obsidian armor': ['obsidian helm', 'obsidian boots'],
+  'obsidian armor': ['obsidian helm', 'obsidian shoulders', 'obsidian chest', 'obsidian gloves', 'obsidian leggings', 'obsidian boots'],
+  "triumphant hero's armor": ["triumphant hero's helm", "triumphant hero's shoulders", "triumphant hero's chest", "triumphant hero's gloves", "triumphant hero's leggings", "triumphant hero's boots"],
+  'perfected envoy armor': ['perfected envoy helm', 'perfected envoy shoulders', 'perfected envoy chest', 'perfected envoy gloves', 'perfected envoy leggings', 'perfected envoy boots'],
+  'ardent glorious armor': ['ardent glorious helm', 'ardent glorious shoulders', 'ardent glorious chest', 'ardent glorious gloves', 'ardent glorious leggings', 'ardent glorious boots'],
 }
 
 /** Apply piece alias after normalization. */

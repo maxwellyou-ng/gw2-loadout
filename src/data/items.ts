@@ -159,6 +159,15 @@ export const ITEM = {
   giftOfExpertise: 100852,         // SotO; forged: 12 Rift Essence + Eldritch Scroll + 50 Obsidian Shard + Cube Dark Energy
   giftOfMagicalProsperity: 100512, // SotO Obsidian / Eikasia (head/shoulder/chest); forged: Craftsmanship + 9 Clovers + Condensed Magic + Research
   giftOfMightyProsperity: 100933,  // SotO Obsidian / Eikasia (boots/gloves/legs); forged: Craftsmanship + 9 Clovers + Condensed Might + Research
+
+  // --- Legendary armor game-mode gifts (wiki-verified ids; 15-clover gate in
+  // each Prosperity gift). Shared across all 6 pieces of a line. -------------
+  giftOfProsperity: 78866,             // Raid (Envoy): Craftsmanship + 15 Clover + Condensed Might/Magic
+  giftOfProwess: 78989,                // Raid: 25 Legendary Insight + Eldritch Scroll + 50 Obsidian + Cube
+  giftOfDedication: 78936,             // Raid: 5 Chak Egg + 5 Auric Ingot + 5 Reclaimed Metal Plate + Gift of the Pact
+  giftOfCompetitiveProsperity: 84174,  // PvP: Mist Core Fragment + 15 Clover + Condensed Might/Magic
+  giftOfCompetitiveProwess: 82350,     // PvP: Record of League Victories + Eldritch Scroll + 50 Obsidian + Cube
+  giftOfCompetitiveDedication: 84203,  // PvP: Record of League Participation + Star of Glory + Glob Spirit Energy + Jar of Distilled Glory
 } as const
 
 export interface GatedMaterialInfo {

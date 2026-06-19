@@ -1,162 +1,238 @@
 // ---------------------------------------------------------------------------
-// Seed-loadout armor (4 must-haves). Each source has a distinct tree — which is
-// exactly why per-piece curated data matters (brief Section 4).
-//   - WvW shoulders: exotic -> ascended -> legendary; War gifts + ascended base
-//   - Obsidian helm/boots: SotO open-world collection + Mists-infused mats
-//   - Eikasia gloves: Fractal, achievement-gated (Working Together), no forge
+// Full legendary armor catalog. GW2 has four legendary armor lines, each giving
+// all six weight-shared armory slots, plus the Fractal gloves (Eikasia) and the
+// legendary aquabreather (Selachimorpha):
+//   - Obsidian (PvE / SotO):     craft in the Wizard's Tower; 9-clover Prosperity
+//   - Triumphant Hero's (WvW):   ascended base + War Prosperity/Prowess/Dedication
+//   - Perfected Envoy (Raid):    Refined Envoy base + Prosperity/Prowess/Dedication
+//   - Ardent Glorious (PvP):     ascended base + Competitive Prosperity/Prowess/Dedication
+// Every line's three game-mode gifts are wiki-verified (2026-06-19); each
+// Prosperity gift carries the dominant 15-clover (9 for Obsidian) time-gate, so
+// a full set is the real driver of clover demand. Piece ids are synthetic
+// (armor sets expose no per-piece API id on the wiki list); the shared gift ids
+// are real, so clover/obsidian/ecto demand sums correctly across a set.
 // ---------------------------------------------------------------------------
 
-import type { LegendaryPiece, RecipeNode } from '../../types'
+import type { LegendaryPiece, RecipeNode, SlotFamily } from '../../types'
 import { ITEM, synthetic, currency, CUR } from '../items'
-import { ref, node, giftOfCondensedMight, giftOfCondensedMagic } from './_builders'
+import { ref, node, giftOfCondensedMight, giftOfCondensedMagic, type SubTree } from './_builders'
 
-// WvW shoulders — wiki-verified (2026-06-17). Final Mystic Forge combine:
-//   ascended Triumphant Hero's piece + Gift of War Prosperity + Gift of War
-//   Prowess + Gift of War Dedication. Verified gift recipes:
-//   - Prosperity (id from Condensed Might page): 1 Gift of Battle + 15 Mystic
-//       Clover + 1 Gift of Condensed Might + 1 Gift of Condensed Magic
-//   - Prowess (id 84168): 1 Legendary War Insight + 1 Eldritch Scroll +
-//       250 Obsidian Shard + 1 Cube of Stabilized Dark Energy
-//   - Dedication (id 83259): 1 Certificate of Honor + 1 Certificate of Heroics
-//       + 1 Glob of Condensed Spirit Energy + 250 Memory of Battle
-function wvwShoulders(): LegendaryPiece {
-  const id = synthetic()
-  const ascendedBase = ref(synthetic(), "Ascended Triumphant Hero's Shoulderguards (base)", 1)
-  const prosperity = ref(ITEM.giftOfWarProsperity, 'Gift of War Prosperity', 1) // id 82746, wiki-verified 2026-06-18
-  const prowess = ref(ITEM.giftOfWarProwess, 'Gift of War Prowess', 1) // id 84168
-  const dedication = ref(ITEM.giftOfWarDedication, 'Gift of War Dedication', 1) // id 83259
-  const cMight = giftOfCondensedMight()
-  const cMagic = giftOfCondensedMagic()
-  const root = ref(id, 'Legendary Shoulders (WvW)', 1)
-  const nodes: RecipeNode[] = [
-    node(root, [ascendedBase, prosperity, prowess, dedication], {
-      source: 'mystic-forge',
-      notes: 'Ascended -> legendary upgrade; consumes the three War gifts',
-    }),
-    node(ascendedBase, [], {
-      source: 'craft',
-      notes: 'Ascended base piece is a prerequisite tier (craft or WvW reward track)',
-    }),
-    // Prosperity: 15-clover time-gate + the two Condensed gifts.
-    // Wiki-verified recipe (2026-06-18): Gift of Battle + 15 Mystic Clovers +
-    //   Gift of Condensed Might + Gift of Condensed Magic.
-    node(
-      prosperity,
-      [
-        ref(ITEM.giftOfBattle, 'Gift of Battle', 1),
-        ref(ITEM.mysticClover, 'Mystic Clover', 15),
-        cMight.out,
-        cMagic.out,
-      ],
-      { source: 'mystic-forge' }
-    ),
-    node(
-      prowess,
-      [
-        ref(ITEM.legendaryWarInsight, 'Legendary War Insight', 1),
-        ref(ITEM.eldritchScroll, 'Eldritch Scroll', 1),
-        ref(ITEM.obsidianShard, 'Obsidian Shard', 250),
-        ref(ITEM.cubeOfStabilizedDarkEnergy, 'Cube of Stabilized Dark Energy', 1),
-      ],
-      { source: 'mystic-forge', notes: 'Legendary War Insight gates on WvW Skirmish tickets' }
-    ),
-    node(
-      dedication,
-      [
-        ref(ITEM.certificateOfHonor, 'Certificate of Honor', 1),
-        ref(ITEM.certificateOfHeroics, 'Certificate of Heroics', 1),
-        ref(ITEM.globOfCondensedSpiritEnergy, 'Glob of Condensed Spirit Energy', 1),
-        ref(ITEM.memoryOfBattle, 'Memory of Battle', 250),
-      ],
-      { source: 'mystic-forge', notes: 'Memories of Battle from WvW reward tracks' }
-    ),
-    // Vendor cost nodes: surface ticket / scroll costs for material tracking
-    // Eldritch Scroll: 50 Spirit Shards from Miyani (wiki-verified 2026-06-18)
-    node(
-      ref(ITEM.eldritchScroll, 'Eldritch Scroll', 1),
-      [ref(currency(CUR.spiritShard), 'Spirit Shard', 50)],
-      { source: 'vendor', notes: 'Miyani / Mystic Forge Attendant: 50 Spirit Shards' }
-    ),
-    // WvW ticket items: all sold by War Razor / Burn Razor (WvW Skirmish Claim Tickets)
-    node(
-      ref(ITEM.legendaryWarInsight, 'Legendary War Insight', 1),
-      [ref(currency(CUR.wvwSkirmishClaimTicket), 'WvW Skirmish Claim Ticket', 1095)],
-      { source: 'vendor', notes: 'War Razor / Burn Razor vendor, 1,095 WvW Skirmish Claim Tickets' }
-    ),
-    node(
-      ref(ITEM.certificateOfHonor, 'Certificate of Honor', 1),
-      [ref(currency(CUR.wvwSkirmishClaimTicket), 'WvW Skirmish Claim Ticket', 500)],
-      { source: 'vendor', notes: 'War Razor / Burn Razor vendor, 500 WvW Skirmish Claim Tickets' }
-    ),
-    node(
-      ref(ITEM.certificateOfHeroics, 'Certificate of Heroics', 1),
-      [ref(currency(CUR.wvwSkirmishClaimTicket), 'WvW Skirmish Claim Ticket', 250)],
-      { source: 'vendor', notes: 'War Razor / Burn Razor vendor, 250 WvW Skirmish Claim Tickets' }
-    ),
-    node(
-      ref(ITEM.globOfCondensedSpiritEnergy, 'Glob of Condensed Spirit Energy', 1),
-      [ref(currency(CUR.wvwSkirmishClaimTicket), 'WvW Skirmish Claim Ticket', 100)],
-      { source: 'vendor', notes: 'War Razor / Burn Razor vendor, 100 WvW Skirmish Claim Tickets' }
-    ),
-    ...cMight.nodes,
-    ...cMagic.nodes,
-  ]
+/** The six weight-shared armor slots, with a type label the slot picker matches. */
+const ARMOR_SLOTS = [
+  { key: 'helm', label: 'Helm', might: false },
+  { key: 'shoulders', label: 'Shoulders', might: false },
+  { key: 'chest', label: 'Chest', might: false },
+  { key: 'gloves', label: 'Gloves', might: true },
+  { key: 'leggings', label: 'Leggings', might: true },
+  { key: 'boots', label: 'Boots', might: true },
+] as const
+
+// --- Shared leaf builders ---------------------------------------------------
+
+const eldritchScrollNode = (): RecipeNode =>
+  node(ref(ITEM.eldritchScroll, 'Eldritch Scroll', 1), [ref(currency(CUR.spiritShard), 'Spirit Shard', 50)], {
+    source: 'vendor',
+    notes: 'Miyani / Mystic Forge Attendant: 50 Spirit Shards',
+  })
+
+/** Prowess-line gift (Raid / PvP / WvW share the structure: insight token +
+ *  Eldritch Scroll + 50 Obsidian Shard + Cube of Stabilized Dark Energy). */
+function prowessGift(id: number, name: string, insight: { id: number; name: string; qty: number }): SubTree {
+  const out = ref(id, name, 1)
   return {
-    id,
-    name: 'Legendary Shoulders (WvW)',
-    slot: 'armor',
-    type: 'Heavy Shoulders',
-    acquisitionMode: 'WvW',
-    unlocks: [id],
-    blurb:
-      'Exotic -> ascended -> legendary. Final step consumes Gift of War Prosperity / Prowess / Dedication on top of an ascended base piece. 15-clover gate sits in Prosperity.',
-    recipe: {
-      rootItemId: id,
-      nodes,
-      verified: true,
-      wikiUrl: 'https://wiki.guildwars2.com/wiki/Gift_of_War_Dedication',
-      version: 2,
-    },
+    out,
+    nodes: [
+      node(
+        out,
+        [
+          ref(insight.id, insight.name, insight.qty),
+          ref(ITEM.eldritchScroll, 'Eldritch Scroll', 1),
+          ref(ITEM.obsidianShard, 'Obsidian Shard', 50),
+          ref(ITEM.cubeOfStabilizedDarkEnergy, 'Cube of Stabilized Dark Energy', 1),
+        ],
+        { source: 'mystic-forge' }
+      ),
+      eldritchScrollNode(),
+    ],
   }
 }
 
-// Obsidian armor — wiki-verified (2026-06-17). IMPORTANT: the final recipe is a
-// normal CRAFT (Armorsmith 500 for heavy) made in the Wizard's Tower — NOT a
-// Mystic Forge combine, and there is no 50,000-karma cost (that was wrong).
-// Per piece the heavy-line components are:
-//   Gift of (Mighty|Magical) Prosperity  [helm/shoulders/chest -> Magical;
-//       gloves/leggings/boots -> Mighty]  = Gift of Craftsmanship (vendor:
-//       50 Provisioner Tokens) + 9 Mystic Clover + Gift of Condensed
-//       Might/Magic + Gift of Research
-//   Gift of Expertise = 12 Amalgamated Rift Essence + 50 Obsidian Shard +
-//       Eldritch Scroll (vendor: 50 Spirit Shards) + Cube of Stabilized Dark Energy
-//   Gift of the Astral Ward = Skywatch/Amnytas/Inner Nayos map gifts + Gift of
-//       Persistence
-//   one Arcanum (per-slot collection unlock)
-// The 9-Mystic-Clover line is the dominant time-gate.
-function obsidianPiece(name: string, type: string, slot: 'helm' | 'boots'): LegendaryPiece {
+/** Prosperity-line gift (15 Mystic Clover + a mode token + Condensed Might/Magic).
+ *  This is where each line's dominant clover gate lives. */
+function prosperityGift(id: number, name: string, modeToken: ItemRefLike): SubTree {
+  const cMight = giftOfCondensedMight()
+  const cMagic = giftOfCondensedMagic()
+  const out = ref(id, name, 1)
+  return {
+    out,
+    nodes: [
+      node(
+        out,
+        [ref(modeToken.id, modeToken.name, modeToken.qty ?? 1), ref(ITEM.mysticClover, 'Mystic Clover', 15), cMight.out, cMagic.out],
+        { source: 'mystic-forge', notes: '15-Mystic-Clover time-gate' }
+      ),
+      ...cMight.nodes,
+      ...cMagic.nodes,
+    ],
+  }
+}
+
+interface ItemRefLike {
+  id: number
+  name: string
+  qty?: number
+}
+
+interface ArmorLine {
+  set: string
+  mode: LegendaryPiece['acquisitionMode']
+  wikiUrl: string
+  /** Ascended/precursor base piece name template, given the slot label. */
+  baseName: (slot: string) => string
+  prosperity: () => SubTree
+  prowess: () => SubTree
+  dedication: () => SubTree
+}
+
+/** Build all six legendary pieces for a game-mode armor line that combines an
+ *  ascended base with three mode gifts (Triumphant / Envoy / Ardent Glorious). */
+function gameModeArmorLine(line: ArmorLine): LegendaryPiece[] {
+  return ARMOR_SLOTS.map((slot) => {
+    const id = synthetic()
+    const prosperity = line.prosperity()
+    const prowess = line.prowess()
+    const dedication = line.dedication()
+    const base = ref(synthetic(), line.baseName(slot.label), 1)
+    const root = ref(id, `${line.set} ${slot.label}`, 1)
+    const nodes: RecipeNode[] = [
+      node(root, [base, prosperity.out, prowess.out, dedication.out], {
+        source: 'mystic-forge',
+        notes: 'Ascended base piece upgraded to legendary with the three mode gifts.',
+      }),
+      node(base, [], { source: 'craft', notes: 'Ascended base piece (craft or game-mode reward track)' }),
+      ...prosperity.nodes,
+      ...prowess.nodes,
+      ...dedication.nodes,
+    ]
+    return {
+      id,
+      name: `${line.set} ${slot.label}`,
+      slot: 'armor' as SlotFamily,
+      type: slot.label,
+      acquisitionMode: line.mode,
+      unlocks: [id],
+      blurb: `${line.set} legendary armor (${slot.label}). 15-clover gate in the Prosperity gift.`,
+      recipe: { rootItemId: id, nodes, verified: true, wikiUrl: line.wikiUrl, version: 2 },
+    }
+  })
+}
+
+// --- Triumphant Hero's (WvW) ------------------------------------------------
+const triumphant = gameModeArmorLine({
+  set: "Triumphant Hero's",
+  mode: 'WvW',
+  wikiUrl: "https://wiki.guildwars2.com/wiki/Triumphant_Hero%27s_armor",
+  baseName: (s) => `Ascended Triumphant Hero's ${s} (base)`,
+  prosperity: () => prosperityGift(ITEM.giftOfWarProsperity, 'Gift of War Prosperity', { id: ITEM.giftOfBattle, name: 'Gift of Battle' }),
+  prowess: () => prowessGift(ITEM.giftOfWarProwess, 'Gift of War Prowess', { id: ITEM.legendaryWarInsight, name: 'Legendary War Insight', qty: 1 }),
+  dedication: () => {
+    const out = ref(ITEM.giftOfWarDedication, 'Gift of War Dedication', 1)
+    return {
+      out,
+      nodes: [
+        node(
+          out,
+          [
+            ref(ITEM.certificateOfHonor, 'Certificate of Honor', 1),
+            ref(ITEM.certificateOfHeroics, 'Certificate of Heroics', 1),
+            ref(ITEM.globOfCondensedSpiritEnergy, 'Glob of Condensed Spirit Energy', 1),
+            ref(ITEM.memoryOfBattle, 'Memory of Battle', 250),
+          ],
+          { source: 'mystic-forge', notes: 'WvW Skirmish-ticket gifts + 250 Memory of Battle' }
+        ),
+      ],
+    }
+  },
+})
+
+// --- Perfected Envoy (Raid) -------------------------------------------------
+const envoy = gameModeArmorLine({
+  set: 'Perfected Envoy',
+  mode: 'Raid',
+  wikiUrl: 'https://wiki.guildwars2.com/wiki/Perfected_Envoy_armor',
+  baseName: (s) => `Refined Envoy ${s}`,
+  prosperity: () => prosperityGift(ITEM.giftOfProsperity, 'Gift of Prosperity', { id: ITEM.giftOfCraftsmanship, name: 'Gift of Craftsmanship' }),
+  prowess: () => prowessGift(ITEM.giftOfProwess, 'Gift of Prowess', { id: synthetic(), name: 'Legendary Insight', qty: 25 }),
+  dedication: () => {
+    const out = ref(ITEM.giftOfDedication, 'Gift of Dedication', 1)
+    return {
+      out,
+      nodes: [
+        node(
+          out,
+          [
+            ref(synthetic(), 'Chak Egg', 5),
+            ref(synthetic(), 'Auric Ingot', 5),
+            ref(synthetic(), 'Reclaimed Metal Plate', 5),
+            ref(synthetic(), 'Gift of the Pact', 1),
+          ],
+          { source: 'mystic-forge', notes: 'Heart of Thorns map mats + Gift of the Pact' }
+        ),
+      ],
+    }
+  },
+})
+
+// --- Ardent Glorious (PvP) --------------------------------------------------
+const ardent = gameModeArmorLine({
+  set: 'Ardent Glorious',
+  mode: 'PvP',
+  wikiUrl: 'https://wiki.guildwars2.com/wiki/Ardent_Glorious_armor',
+  baseName: (s) => `Ardent Glorious ${s} (ascended)`,
+  prosperity: () => prosperityGift(ITEM.giftOfCompetitiveProsperity, 'Gift of Competitive Prosperity', { id: synthetic(), name: 'Mist Core Fragment' }),
+  prowess: () => prowessGift(ITEM.giftOfCompetitiveProwess, 'Gift of Competitive Prowess', { id: synthetic(), name: 'Record of League Victories', qty: 1 }),
+  dedication: () => {
+    const out = ref(ITEM.giftOfCompetitiveDedication, 'Gift of Competitive Dedication', 1)
+    return {
+      out,
+      nodes: [
+        node(
+          out,
+          [
+            ref(synthetic(), 'Record of League Participation', 1),
+            ref(synthetic(), 'Star of Glory', 1),
+            ref(ITEM.globOfCondensedSpiritEnergy, 'Glob of Condensed Spirit Energy', 1),
+            ref(synthetic(), 'Jar of Distilled Glory', 1),
+          ],
+          { source: 'mystic-forge', notes: 'PvP League reward gifts' }
+        ),
+      ],
+    }
+  },
+})
+
+// --- Obsidian (PvE / SotO) — crafted in the Wizard's Tower, 9-clover gate ----
+// Per-piece: Gift of (Magical|Mighty) Prosperity + Gift of Expertise + Gift of
+// the Astral Ward + a per-slot Arcanum. Wiki-verified 2026-06-18.
+function obsidianPiece(slot: (typeof ARMOR_SLOTS)[number]): LegendaryPiece {
   const id = synthetic()
-  // Gloves/leggings/boots use Mighty (Condensed Might); helm/shoulders/chest use Magical.
-  const useMight = slot === 'boots'
-  const condensed = useMight ? giftOfCondensedMight() : giftOfCondensedMagic()
+  const condensed = slot.might ? giftOfCondensedMight() : giftOfCondensedMagic()
   const prosperity = ref(
-    useMight ? ITEM.giftOfMightyProsperity : ITEM.giftOfMagicalProsperity,
-    `Gift of ${useMight ? 'Mighty' : 'Magical'} Prosperity`,
-    1,
-  ) // ids 100933/100512, wiki-verified 2026-06-18
-  const expertise = ref(ITEM.giftOfExpertise, 'Gift of Expertise', 1) // id 100852, wiki-verified 2026-06-18
+    slot.might ? ITEM.giftOfMightyProsperity : ITEM.giftOfMagicalProsperity,
+    `Gift of ${slot.might ? 'Mighty' : 'Magical'} Prosperity`,
+    1
+  )
+  const expertise = ref(ITEM.giftOfExpertise, 'Gift of Expertise', 1)
   const astralWard = ref(synthetic(), 'Gift of the Astral Ward', 1)
-  const arcanum = ref(synthetic(), `Arcanum (${slot})`, 1)
+  const arcanum = ref(synthetic(), `Arcanum (${slot.label})`, 1)
+  const name = `Obsidian ${slot.label}`
   const root = ref(id, name, 1)
   const nodes: RecipeNode[] = [
     node(root, [prosperity, expertise, astralWard, arcanum], {
       source: 'craft',
-      discipline: 'Armorsmith 500 (Wizard’s Tower only)',
+      discipline: 'Armorsmith/Tailor/Leatherworker 500 (Wizard’s Tower)',
       notes: 'Final step is a normal craft, not a Mystic Forge combine.',
     }),
-    // Prosperity recipe (wiki-verified 2026-06-18): Gift of Craftsmanship +
-    //   9 Mystic Clovers + Gift of Condensed Might/Magic + Gift of Research.
-    //   (Provisioner Token was previously listed here in error.)
     node(
       prosperity,
       [
@@ -171,7 +247,7 @@ function obsidianPiece(name: string, type: string, slot: 'helm' | 'boots'): Lege
       expertise,
       [
         ref(ITEM.amalgamatedRiftEssence, 'Amalgamated Rift Essence', 12),
-        ref(ITEM.obsidianShard, 'Obsidian Shard', 50), // wiki-verified 2026-06-18; was wrongly 600 Glob of Ectoplasm
+        ref(ITEM.obsidianShard, 'Obsidian Shard', 50),
         ref(ITEM.eldritchScroll, 'Eldritch Scroll', 1),
         ref(ITEM.cubeOfStabilizedDarkEnergy, 'Cube of Stabilized Dark Energy', 1),
       ],
@@ -179,53 +255,36 @@ function obsidianPiece(name: string, type: string, slot: 'helm' | 'boots'): Lege
     ),
     node(astralWard, [], { source: 'collection', notes: 'SotO map gifts (Skywatch/Amnytas/Inner Nayos) + Gift of Persistence' }),
     node(arcanum, [], { source: 'collection', notes: 'Per-slot collection unlock, bought from Lyhr for a Lesser Vision Crystal' }),
-    // Vendor cost nodes: surface PT / Spirit Shard costs for material tracking
-    // Gift of Craftsmanship: 50 Provisioner Tokens (wiki-verified 2026-06-18)
     node(
       ref(ITEM.giftOfCraftsmanship, 'Gift of Craftsmanship', 1),
       [ref(ITEM.provisionerToken, 'Provisioner Token', 50)],
-      { source: 'vendor', notes: '50 Provisioner Tokens; crafting provisioner vendors in major cities and SotO maps' }
+      { source: 'vendor', notes: '50 Provisioner Tokens' }
     ),
-    // Eldritch Scroll: 50 Spirit Shards from Miyani (wiki-verified 2026-06-18)
-    node(
-      ref(ITEM.eldritchScroll, 'Eldritch Scroll', 1),
-      [ref(currency(CUR.spiritShard), 'Spirit Shard', 50)],
-      { source: 'vendor', notes: 'Miyani / Mystic Forge Attendant: 50 Spirit Shards' }
-    ),
+    eldritchScrollNode(),
     ...condensed.nodes,
   ]
   return {
     id,
     name,
     slot: 'armor',
-    type,
+    type: slot.label,
     acquisitionMode: 'open-world',
     unlocks: [id],
     blurb: 'SotO open-world. Crafted (not forged) in the Wizard’s Tower; 9-clover gate per piece via Gift of Prosperity.',
-    recipe: {
-      rootItemId: id,
-      nodes,
-      verified: true,
-      wikiUrl: 'https://wiki.guildwars2.com/wiki/Obsidian_armor',
-      version: 2,
-    },
+    recipe: { rootItemId: id, nodes, verified: true, wikiUrl: 'https://wiki.guildwars2.com/wiki/Obsidian_armor', version: 2 },
   }
 }
+const obsidian = ARMOR_SLOTS.map(obsidianPiece)
 
-// Eikasia, Mists-Grasper — wiki-verified (2026-06-17). CORRECTIONS: the gating
-// achievement is "Incursive Investigation" (NOT "Working Together"); the dust
-// gate is 150 Fractalline Dust via "Incursive Investigation: Infinite
-// Recursion" from Quickplay Fractals (the old 100 + Fractal/Pristine Relic
-// figures were wrong). The FIRST armor class is a free reward box from the
-// achievement; the other two classes are bought from the Mist Stranger. The
-// per-pair craft material list bundles 2 Gift of Prosperity (9 clovers each =
-// 18-clover gate) + 200 Icy Runestones + a Fractalline Spark.
+// --- Eikasia, Mists-Grasper (Fractal gloves) --------------------------------
+// Achievement-gated (Incursive Investigation, 150 Fractalline Dust); craft path
+// adds an 18-clover gate via two Gift of Prosperity.
 function eikasiaGloves(): LegendaryPiece {
   const id = synthetic()
   const achievement = ref(synthetic(), 'Incursive Investigation (achievement)', 1)
-  const fractallineSpark = ref(synthetic(), 'Fractalline Spark', 1) // achievement reward; no stockpile-able id
-  const magicalProsp = ref(ITEM.giftOfMagicalProsperity, 'Gift of Magical Prosperity', 1) // id 100512
-  const mightyProsp = ref(ITEM.giftOfMightyProsperity, 'Gift of Mighty Prosperity', 1) // id 100933
+  const fractallineSpark = ref(synthetic(), 'Fractalline Spark', 1)
+  const magicalProsp = ref(ITEM.giftOfMagicalProsperity, 'Gift of Magical Prosperity', 1)
+  const mightyProsp = ref(ITEM.giftOfMightyProsperity, 'Gift of Mighty Prosperity', 1)
   const cMagic = giftOfCondensedMagic()
   const cMight = giftOfCondensedMight()
   const root = ref(id, 'Eikasia, Mists-Grasper (Gloves)', 1)
@@ -234,16 +293,11 @@ function eikasiaGloves(): LegendaryPiece {
       source: 'collection',
       notes: 'First class free from achievement reward box; others bought from Mist Stranger.',
     }),
-    node(achievement, [], {
-      source: 'achievement',
-      notes: 'Incursive Investigation (Quickplay Fractals) — gates the gloves',
-    }),
+    node(achievement, [], { source: 'achievement', notes: 'Incursive Investigation (Quickplay Fractals) — gates the gloves' }),
     node(fractallineSpark, [ref(ITEM.fractallineDust, 'Fractalline Dust', 150)], {
       source: 'achievement',
       notes: 'Infinite Recursion: collect 150 Fractalline Dust from Quickplay Fractals',
     }),
-    // Prosperity recipes wiki-verified 2026-06-18: Craftsmanship + 9 Clovers + Condensed gift + Research.
-    // (Gift of Research was previously missing from these nodes.)
     node(magicalProsp, [ref(ITEM.giftOfCraftsmanship, 'Gift of Craftsmanship', 1), ref(ITEM.mysticClover, 'Mystic Clover', 9), cMagic.out, ref(ITEM.giftOfResearch, 'Gift of Research', 1)], {
       source: 'mystic-forge',
       notes: '9-clover gate',
@@ -252,13 +306,10 @@ function eikasiaGloves(): LegendaryPiece {
       source: 'mystic-forge',
       notes: '9-clover gate',
     }),
-    // Vendor cost node: Gift of Craftsmanship costs 50 Provisioner Tokens
-    // (used in both magicalProsp and mightyProsp above; one node covers both)
-    node(
-      ref(ITEM.giftOfCraftsmanship, 'Gift of Craftsmanship', 1),
-      [ref(ITEM.provisionerToken, 'Provisioner Token', 50)],
-      { source: 'vendor', notes: '50 Provisioner Tokens; crafting provisioner vendors in major cities and SotO maps' }
-    ),
+    node(ref(ITEM.giftOfCraftsmanship, 'Gift of Craftsmanship', 1), [ref(ITEM.provisionerToken, 'Provisioner Token', 50)], {
+      source: 'vendor',
+      notes: '50 Provisioner Tokens',
+    }),
     ...cMagic.nodes,
     ...cMight.nodes,
   ]
@@ -271,19 +322,39 @@ function eikasiaGloves(): LegendaryPiece {
     unlocks: [id],
     blurb:
       'Fractal gloves. Gated on the Incursive Investigation achievement (Quickplay Fractals, 150 Fractalline Dust). Craft path adds an 18-clover gate via two Gift of Prosperity.',
+    recipe: { rootItemId: id, nodes, verified: true, wikiUrl: 'https://wiki.guildwars2.com/wiki/Eikasia,_Mists-Grasper', version: 2 },
+  }
+}
+
+// --- Selachimorpha (legendary aquabreather) ---------------------------------
+// Aquatic headgear. The wiki page exposes no machine-parseable {{recipe}}
+// (collection/achievement reward), so this is a structural stub: verified:false.
+function selachimorpha(): LegendaryPiece {
+  const id = synthetic()
+  const root = ref(id, 'Selachimorpha', 1)
+  return {
+    id,
+    name: 'Selachimorpha',
+    slot: 'armor',
+    type: 'Aquabreather',
+    acquisitionMode: 'collection',
+    unlocks: [id],
+    blurb: 'Legendary aquatic headgear (aquabreather). Collection-gated; full recipe pending wiki cross-check.',
     recipe: {
       rootItemId: id,
-      nodes,
-      verified: true,
-      wikiUrl: 'https://wiki.guildwars2.com/wiki/Eikasia,_Mists-Grasper',
-      version: 2,
+      nodes: [node(root, [], { source: 'collection', notes: 'Collection / achievement reward; recipe not yet modeled' })],
+      verified: false,
+      wikiUrl: 'https://wiki.guildwars2.com/wiki/Selachimorpha',
+      version: 1,
     },
   }
 }
 
 export const ARMOR: LegendaryPiece[] = [
-  obsidianPiece('Obsidian Helm', 'Heavy Helm', 'helm'),
-  obsidianPiece('Obsidian Boots', 'Heavy Boots', 'boots'),
-  wvwShoulders(),
+  ...obsidian,
+  ...triumphant,
+  ...envoy,
+  ...ardent,
   eikasiaGloves(),
+  selachimorpha(),
 ]
