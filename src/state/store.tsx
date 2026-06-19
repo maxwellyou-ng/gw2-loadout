@@ -23,7 +23,7 @@ import type {
 import { DEFAULT_WEIGHTS } from '../types'
 import { CATALOG, CATALOG_BY_ID } from '../data/recipes'
 import {
-  buildSeedLoadout,
+  buildEmptyLoadout,
   normalizeLoadout,
   type Loadout,
   type LoadoutSlot,
@@ -60,10 +60,13 @@ interface AppState {
   runSync: () => Promise<void>
   // Loadout mutators (pure/immutable; progress re-derives via the useMemo below).
   setLoadout: (loadout: Loadout) => void
+  setLoadoutName: (name: string) => void
   setSlotPiece: (key: SlotKey, pieceId: number | null) => void
   setSlotFlexible: (key: SlotKey, flexible: boolean) => void
   setSlotTracked: (key: SlotKey, tracked: boolean) => void
-  setSlotPriority: (key: SlotKey, priority: number | 'defer') => void
+  setSlotPriority: (key: SlotKey, priority: number) => void
+  /** Assign sequential priorities 1..n to the given keys, in order (drag/reorder). */
+  setSlotPriorities: (orderedKeys: SlotKey[]) => void
   setSlotCandidates: (key: SlotKey, candidateIds: number[]) => void
 }
 
@@ -74,7 +77,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     loadJSON<Settings>(STORAGE_KEYS.settings, { apiKey: '', weights: DEFAULT_WEIGHTS }),
   )
   const [loadout, setLoadout] = useState<Loadout>(() =>
-    normalizeLoadout(loadJSON<Loadout>(STORAGE_KEYS.loadout, buildSeedLoadout())),
+    normalizeLoadout(loadJSON<Loadout>(STORAGE_KEYS.loadout, buildEmptyLoadout())),
   )
   const [sync, setSync] = useState<SyncState | null>(() =>
     loadJSON<SyncState | null>(STORAGE_KEYS.sync, null),
@@ -121,11 +124,22 @@ export function AppProvider({ children }: { children: ReactNode }) {
     (key: SlotKey, tracked: boolean) => patchSlot(key, (s) => ({ ...s, tracked })),
     [patchSlot],
   )
+  const setLoadoutName = useCallback(
+    (name: string) => setLoadout((l) => ({ ...l, name })),
+    [],
+  )
   const setSlotPriority = useCallback(
-    (key: SlotKey, priority: number | 'defer') =>
+    (key: SlotKey, priority: number) =>
       patchSlot(key, (s) => ({ ...s, priority })),
     [patchSlot],
   )
+  const setSlotPriorities = useCallback((orderedKeys: SlotKey[]) => {
+    const rank = new Map(orderedKeys.map((k, i) => [k, i + 1]))
+    setLoadout((l) => ({
+      ...l,
+      slots: l.slots.map((s) => (rank.has(s.key) ? { ...s, priority: rank.get(s.key)! } : s)),
+    }))
+  }, [])
   const setSlotCandidates = useCallback(
     (key: SlotKey, candidateIds: number[]) =>
       patchSlot(key, (s) => ({ ...s, candidateIds })),
@@ -198,10 +212,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setWeights,
     runSync,
     setLoadout,
+    setLoadoutName,
     setSlotPiece,
     setSlotFlexible,
     setSlotTracked,
     setSlotPriority,
+    setSlotPriorities,
     setSlotCandidates,
   }
 

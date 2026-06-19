@@ -4,11 +4,24 @@ import {
   useEffect,
   useRef,
   useState,
+  type ComponentProps,
   type PointerEvent as ReactPointerEvent,
   type ReactNode,
 } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import type { TimeGateSeverity } from '../types'
 import { formatPercent, wikiUrl } from '../lib/format'
+
+/**
+ * A react-router `Link` that stashes the current location as `background`
+ * state, so the target route renders as a modal overlay on top of the current
+ * page (see App.tsx) instead of replacing it. Direct visits / refreshes have no
+ * background state and fall back to the full-page route.
+ */
+export function OverlayLink(props: ComponentProps<typeof Link>) {
+  const location = useLocation()
+  return <Link {...props} state={{ background: location }} />
+}
 
 /**
  * An "ⓘ" info dot with a custom tooltip that works on every device:
@@ -98,17 +111,9 @@ export function WikiName({
   )
 }
 
-export function Card({
-  children,
-  className = '',
-}: {
-  children: ReactNode
-  className?: string
-}) {
+export function Card({ children, className = '', ...rest }: ComponentProps<'div'>) {
   return (
-    <div
-      className={`rounded-xl border border-line bg-surface p-4 ${className}`}
-    >
+    <div {...rest} className={`rounded-xl border border-line bg-surface p-4 ${className}`}>
       {children}
     </div>
   )

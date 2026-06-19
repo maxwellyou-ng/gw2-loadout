@@ -29,7 +29,7 @@ interface SlotWireV2 {
   c: number | null // chosenPieceId
   t: 0 | 1 // tracked
   f: 0 | 1 // flexible
-  p: number | 'd' // priority ('d' = defer)
+  p: number | 'd' // priority ('d' = legacy defer sentinel, decode-only)
   n: number[] // candidateIds
 }
 
@@ -66,7 +66,7 @@ export function encode(loadout: Loadout): string {
       c: slot.chosenPieceId,
       t: slot.tracked ? 1 : 0,
       f: slot.flexible ? 1 : 0,
-      p: slot.priority === 'defer' ? 'd' : slot.priority,
+      p: slot.priority,
       n: slot.candidateIds,
     })),
   }
@@ -84,7 +84,9 @@ function rehydrateSlot(
     family: (meta?.family ?? 'misc') as SlotFamily,
     tracked: sw.t === 1,
     flexible,
-    priority: sw.p === 'd' ? 'defer' : sw.p,
+    // Legacy codes encoded a 'd' defer sentinel; map it to a high number so it
+    // sorts last. New codes always carry a numeric priority.
+    priority: sw.p === 'd' ? 99 : sw.p,
     chosenPieceId: sw.c,
     candidateIds: sw.n ?? [],
   }

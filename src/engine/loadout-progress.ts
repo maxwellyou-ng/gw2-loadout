@@ -41,9 +41,9 @@ export function progressForSlot(
   return slot.chosenPieceId != null ? progressByPiece[slot.chosenPieceId] : undefined
 }
 
-/** Sortable priority rank: 'defer' sinks to the bottom. */
+/** Sortable priority rank: lower numbers come first. */
 export function priorityRank(slot: LoadoutSlot): number {
-  return slot.priority === 'defer' ? Number.POSITIVE_INFINITY : slot.priority
+  return slot.priority
 }
 
 /**

@@ -59,7 +59,7 @@ function Group({
   )
 }
 
-export default function PieceDetail() {
+export default function PieceDetail({ inModal = false }: { inModal?: boolean }) {
   const { id } = useParams()
   const { progressByPiece, sync } = useApp()
   const piece = id ? CATALOG_BY_ID[Number(id)] : undefined
@@ -81,9 +81,11 @@ export default function PieceDetail() {
 
   return (
     <div className="space-y-6">
-      <Link to="/loadout" className="text-sm text-accent underline">
-        ← Loadout
-      </Link>
+      {!inModal && (
+        <Link to="/loadout" className="text-sm text-accent underline">
+          ← Loadout
+        </Link>
+      )}
 
       <Card>
         <div className="flex flex-wrap items-start justify-between gap-3">

@@ -10,7 +10,7 @@ import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useApp, CATALOG_BY_ID, type HistoryEntry } from '../state/store'
 import { plannedSlots } from '../engine'
-import { Card, ScorePill, EmptyState } from '../components/ui'
+import { Card, ScorePill, EmptyState, OverlayLink } from '../components/ui'
 import { formatDate, formatPercent } from '../lib/format'
 import { STORAGE_KEYS, loadJSON } from '../state/storage'
 
@@ -118,9 +118,9 @@ export default function History() {
               key={m.id}
               className="flex items-center justify-between gap-3 border-b border-line/60 py-2 last:border-0"
             >
-              <Link to={`/piece/${m.id}`} className="min-w-0 truncate text-sm text-ink hover:text-accent">
+              <OverlayLink to={`/piece/${m.id}`} className="min-w-0 truncate text-sm text-ink hover:text-accent">
                 {m.name}
-              </Link>
+              </OverlayLink>
               <div className="flex shrink-0 items-center gap-3 text-sm">
                 <span
                   className={`w-16 text-right font-mono text-xs ${

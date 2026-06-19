@@ -180,7 +180,7 @@ const rtLoadout: Loadout = normalizeLoadout({
   slots: [
     mkSlot({ key: 'helm', priority: 1, chosenPieceId: pieceByName('Obsidian Helm')?.id ?? null }),
     mkSlot({ key: 'chest', flexible: true, priority: 5, tracked: true, candidateIds: [incPiece.id, eikPiece.id] }),
-    mkSlot({ key: 'back', flexible: false, priority: 'defer', tracked: false }),
+    mkSlot({ key: 'back', flexible: false, priority: 11, tracked: false }),
   ],
 })
 const roundTripped = decode(encode(rtLoadout))

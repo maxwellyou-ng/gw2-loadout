@@ -15,8 +15,8 @@ export interface LoadoutSlot {
   tracked: boolean
   /** You're weighing candidates for this slot — surfaces the Compare link. */
   flexible: boolean
-  /** Lower = higher priority for the daily dashboard. 'defer' = lowest. */
-  priority: number | 'defer'
+  /** Lower = higher priority for the daily dashboard's tracked order. */
+  priority: number
   /** Chosen legendary piece id, or null if undecided. */
   chosenPieceId: number | null
   /** Flexible slots: candidate piece ids being weighed. */
@@ -57,6 +57,11 @@ export const SLOT_ORDER: { key: SlotKey; label: string; family: SlotFamily }[] =
 
 const pid = (name: string): number | null => pieceByName(name)?.id ?? null
 
+/** Default numeric priority for a slot with none set: its position in the grid,
+ *  so untouched slots get a stable, sensible starting order. */
+const defaultPriority = (key: SlotKey): number =>
+  Math.max(0, SLOT_ORDER.findIndex((s) => s.key === key))
+
 function slot(
   o: Partial<LoadoutSlot> & { key: SlotKey },
 ): LoadoutSlot {
@@ -67,7 +72,7 @@ function slot(
     family: o.family ?? meta.family,
     tracked: o.tracked ?? false,
     flexible: o.flexible ?? false,
-    priority: o.priority ?? 'defer',
+    priority: o.priority ?? defaultPriority(o.key),
     chosenPieceId: o.chosenPieceId ?? null,
     candidateIds: o.candidateIds ?? [],
   }
@@ -90,7 +95,12 @@ export function normalizeLoadout(loadout: Loadout): Loadout {
         family: existing.family ?? meta.family,
         tracked: existing.tracked ?? false,
         flexible: existing.flexible ?? false,
-        priority: existing.priority ?? 'defer',
+        // Migrate the legacy 'defer' sentinel (and any non-number) to a numeric
+        // priority — tracked/untracked now carries what 'defer' used to mean.
+        priority:
+          typeof existing.priority === 'number'
+            ? existing.priority
+            : defaultPriority(meta.key),
         chosenPieceId: existing.chosenPieceId ?? null,
         candidateIds: existing.candidateIds ?? [],
       }
@@ -119,7 +129,7 @@ export function buildSeedLoadout(): Loadout {
       slot({ key: 'weapon5', tracked: true, priority: 6, chosenPieceId: pid('Incinerator') }),
       slot({ key: 'weapon6', tracked: true, priority: 7, chosenPieceId: pid('Astralaria') }),
       slot({ key: 'weapon7', tracked: true, priority: 8, chosenPieceId: pid('Pharus') }),
-      slot({ key: 'weapon8', priority: 'defer' }), // open 8th weapon slot
+      slot({ key: 'weapon8', priority: 10 }), // open 8th weapon slot (untracked)
 
       slot({ key: 'amulet', flexible: true, tracked: true, priority: 9, candidateIds: [] }),
       slot({ key: 'ring1', flexible: true, tracked: true, priority: 9 }),
@@ -127,10 +137,16 @@ export function buildSeedLoadout(): Loadout {
       slot({ key: 'accessory1', flexible: true, tracked: true, priority: 9 }),
       slot({ key: 'accessory2', flexible: true, tracked: true, priority: 9 }),
 
-      slot({ key: 'back', flexible: true, tracked: false, priority: 'defer' }), // backpack: defer
-      slot({ key: 'relic', tracked: false, priority: 'defer' }),
-      slot({ key: 'runes', tracked: false, priority: 'defer' }),
-      slot({ key: 'aquabreather', tracked: false, priority: 'defer' }),
+      slot({ key: 'back', flexible: true, tracked: false, priority: 11 }), // backpack: untracked
+      slot({ key: 'relic', tracked: false, priority: 12 }),
+      slot({ key: 'runes', tracked: false, priority: 13 }),
+      slot({ key: 'aquabreather', tracked: false, priority: 14 }),
     ],
   }
+}
+
+/** A fresh, empty loadout for first-time users: every slot blank, nothing chosen
+ *  or tracked. Pick pieces on the Loadout tab to start your own plan. */
+export function buildEmptyLoadout(): Loadout {
+  return normalizeLoadout({ name: 'My loadout', slots: [] })
 }

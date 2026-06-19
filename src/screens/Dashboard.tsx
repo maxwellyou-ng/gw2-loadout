@@ -18,14 +18,16 @@ import { Link } from 'react-router-dom'
 import { useApp, CATALOG_BY_ID } from '../state/store'
 import {
   aggregateRequirements,
+  pieceForSlot,
   plannedSlots,
   priorityRank,
   progressForSlot,
 } from '../engine'
-import { Card, Ring, Badge, SeverityDot, EmptyState, ScorePill } from '../components/ui'
+import { Card, Ring, SeverityDot, EmptyState, ScorePill, OverlayLink } from '../components/ui'
 import { formatGold, formatDate, formatPercent, daysUntil } from '../lib/format'
 import { STORAGE_KEYS, loadJSON, saveJSON } from '../state/storage'
 import type { LoadoutSlot } from '../data/loadout'
+import type { SlotKey } from '../types'
 
 const todayISO = () => new Date().toISOString().slice(0, 10)
 
@@ -51,6 +53,15 @@ export default function Dashboard() {
   const { collectedToday, toggle } = useDailyLog()
 
   const slots = useMemo(() => plannedSlots(loadout), [loadout])
+
+  // Chosen-but-untracked pieces — the bottom "Untracked" zone of the ladder.
+  const untrackedChosen = useMemo(
+    () =>
+      loadout.slots
+        .filter((s) => !s.tracked && pieceForSlot(s) != null)
+        .sort((a, b) => priorityRank(a) - priorityRank(b)),
+    [loadout],
+  )
 
   const agg = useMemo(
     () => aggregateRequirements(slots, sync?.snapshot ?? {}, sync?.prices ?? {}, sync?.meta),
@@ -138,9 +149,9 @@ export default function Dashboard() {
                 const piece = CATALOG_BY_ID[slot.chosenPieceId!]
                 return (
                   <li key={slot.key} className="flex items-center justify-between gap-2 text-sm">
-                    <Link to={`/piece/${piece.id}`} title={piece.name} className="min-w-0 truncate text-ink hover:text-accent">
+                    <OverlayLink to={`/piece/${piece.id}`} title={piece.name} className="min-w-0 truncate text-ink hover:text-accent">
                       {piece.name}
-                    </Link>
+                    </OverlayLink>
                     <span className="shrink-0 text-muted">
                       {formatDate(prog!.earliestFinishDate)}
                       <span className="ml-1 text-gate">· {daysUntil(prog!.earliestFinishDate)}d</span>
@@ -226,7 +237,7 @@ export default function Dashboard() {
             {pushes.map(({ slot, prog }) => {
               const piece = CATALOG_BY_ID[slot.chosenPieceId!]
               return (
-                <Link key={slot.key} to={`/piece/${piece.id}`} className="block">
+                <OverlayLink key={slot.key} to={`/piece/${piece.id}`} className="block">
                   <Card className="transition-colors hover:border-accent/60">
                     <div className="flex items-start justify-between gap-2">
                       <div className="min-w-0">
@@ -247,50 +258,216 @@ export default function Dashboard() {
                       </p>
                     )}
                   </Card>
-                </Link>
+                </OverlayLink>
               )
             })}
           </div>
         </section>
       )}
 
-      {/* --- Priority ladder (defer sinks) --- */}
-      <section>
-        <h2 className="mb-3 text-lg font-semibold text-ink">Priority order</h2>
-        <div className="space-y-2">
-          {slots.map((slot) => (
-            <PriorityRow key={slot.key} slot={slot} />
-          ))}
-        </div>
-      </section>
+      {/* --- Priority ladder: tracked (sortable) over untracked --- */}
+      <PriorityLadder tracked={slots} untracked={untrackedChosen} />
     </div>
   )
 }
 
-function PriorityRow({ slot }: { slot: LoadoutSlot }) {
+/** Move the item at `from` to `to` in a copy of `keys`. */
+function moveKey(keys: SlotKey[], from: number, to: number): SlotKey[] {
+  const next = [...keys]
+  const [moved] = next.splice(from, 1)
+  next.splice(to, 0, moved)
+  return next
+}
+
+/**
+ * The priority ladder: a reorderable list of tracked pieces over a dimmed list of
+ * chosen-but-untracked pieces. Order is driven by each slot's numeric `priority`;
+ * reordering (drag, or the ↑/↓ buttons for keyboard/touch) rewrites priorities to
+ * 1..n. Toggling Track/Untrack moves a row between the two zones.
+ */
+function PriorityLadder({
+  tracked,
+  untracked,
+}: {
+  tracked: LoadoutSlot[]
+  untracked: LoadoutSlot[]
+}) {
+  const { setSlotPriorities, setSlotTracked } = useApp()
+  const [dragKey, setDragKey] = useState<SlotKey | null>(null)
+  const keys = tracked.map((s) => s.key)
+
+  const reorder = (from: number, to: number) => {
+    if (to < 0 || to >= keys.length || from === to) return
+    setSlotPriorities(moveKey(keys, from, to))
+  }
+  const dropOn = (targetKey: SlotKey) => {
+    if (dragKey == null || dragKey === targetKey) return
+    reorder(keys.indexOf(dragKey), keys.indexOf(targetKey))
+    setDragKey(null)
+  }
+  const track = (key: SlotKey) => {
+    setSlotTracked(key, true)
+    setSlotPriorities([...keys, key]) // append to the bottom of the order
+  }
+  const untrack = (key: SlotKey) => {
+    setSlotTracked(key, false)
+    setSlotPriorities(keys.filter((k) => k !== key)) // keep 1..n contiguous
+  }
+
+  if (tracked.length === 0 && untracked.length === 0) return null
+
+  return (
+    <section>
+      <h2 className="mb-1 text-lg font-semibold text-ink">Priority order</h2>
+      <p className="mb-3 text-sm text-muted">
+        Drag, or use the ↑/↓ buttons, to set which tracked pieces you want to finish first.
+      </p>
+
+      <div className="space-y-2">
+        {tracked.map((slot, i) => (
+          <LadderRow
+            key={slot.key}
+            slot={slot}
+            rank={i + 1}
+            tracked
+            isFirst={i === 0}
+            isLast={i === tracked.length - 1}
+            dragging={dragKey === slot.key}
+            onDragStart={() => setDragKey(slot.key)}
+            onDragEnd={() => setDragKey(null)}
+            onDropRow={() => dropOn(slot.key)}
+            onMoveUp={() => reorder(i, i - 1)}
+            onMoveDown={() => reorder(i, i + 1)}
+            onToggleTracked={() => untrack(slot.key)}
+          />
+        ))}
+      </div>
+
+      {untracked.length > 0 && (
+        <>
+          <h3 className="mb-2 mt-5 text-sm font-semibold uppercase tracking-wide text-muted">
+            Untracked
+          </h3>
+          <div className="space-y-2">
+            {untracked.map((slot) => (
+              <LadderRow
+                key={slot.key}
+                slot={slot}
+                tracked={false}
+                onToggleTracked={() => track(slot.key)}
+              />
+            ))}
+          </div>
+        </>
+      )}
+    </section>
+  )
+}
+
+function LadderRow({
+  slot,
+  rank,
+  tracked,
+  isFirst,
+  isLast,
+  dragging,
+  onDragStart,
+  onDragEnd,
+  onDropRow,
+  onMoveUp,
+  onMoveDown,
+  onToggleTracked,
+}: {
+  slot: LoadoutSlot
+  rank?: number
+  tracked: boolean
+  isFirst?: boolean
+  isLast?: boolean
+  dragging?: boolean
+  onDragStart?: () => void
+  onDragEnd?: () => void
+  onDropRow?: () => void
+  onMoveUp?: () => void
+  onMoveDown?: () => void
+  onToggleTracked: () => void
+}) {
   const { progressByPiece } = useApp()
   const piece = CATALOG_BY_ID[slot.chosenPieceId!]
   const prog = progressForSlot(slot, progressByPiece)
   if (!piece) return null
-  const deferred = priorityRank(slot) === Number.POSITIVE_INFINITY
+
+  const btn =
+    'shrink-0 rounded border border-line px-1.5 py-0.5 text-xs text-muted transition-colors hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-30'
+
   return (
-    <Link to={`/piece/${piece.id}`} className="block">
-      <Card className={`flex items-center justify-between gap-3 ${deferred ? 'opacity-60' : ''}`}>
-        <div className="flex min-w-0 items-center gap-3">
-          <span className="w-8 shrink-0 text-center text-sm font-mono text-muted">
-            {deferred ? '—' : slot.priority}
+    <Card
+      draggable={tracked}
+      onDragStart={tracked ? onDragStart : undefined}
+      onDragEnd={tracked ? onDragEnd : undefined}
+      onDragOver={tracked ? (e) => e.preventDefault() : undefined}
+      onDrop={tracked ? onDropRow : undefined}
+      className={`flex items-center justify-between gap-3 ${tracked ? 'cursor-grab' : 'opacity-60'} ${
+        dragging ? 'opacity-50 ring-1 ring-accent' : ''
+      }`}
+    >
+      <div className="flex min-w-0 items-center gap-2 sm:gap-3">
+        {tracked ? (
+          <span aria-hidden className="shrink-0 select-none text-muted">
+            ⠿
           </span>
-          <div className="min-w-0">
-            <p className="truncate font-medium text-ink">{piece.name}</p>
-            <p className="truncate text-xs text-muted">{slot.label}</p>
+        ) : (
+          <span aria-hidden className="w-3 shrink-0" />
+        )}
+        <span className="w-6 shrink-0 text-center text-sm font-mono text-muted">
+          {tracked ? rank : '—'}
+        </span>
+        <div className="min-w-0">
+          <OverlayLink
+            to={`/piece/${piece.id}`}
+            draggable={false}
+            className="block truncate font-medium text-ink hover:text-accent"
+          >
+            {piece.name}
+          </OverlayLink>
+          <p className="truncate text-xs text-muted">{slot.label}</p>
+        </div>
+      </div>
+
+      <div className="flex shrink-0 items-center gap-1.5">
+        {tracked && (
+          <div className="flex flex-col gap-0.5">
+            <button
+              type="button"
+              onClick={onMoveUp}
+              disabled={isFirst}
+              aria-label={`Move ${piece.name} up`}
+              className={btn}
+            >
+              ↑
+            </button>
+            <button
+              type="button"
+              onClick={onMoveDown}
+              disabled={isLast}
+              aria-label={`Move ${piece.name} down`}
+              className={btn}
+            >
+              ↓
+            </button>
           </div>
-        </div>
-        <div className="flex shrink-0 items-center gap-2">
-          {deferred && <Badge tone="warn">defer</Badge>}
-          <ScorePill value={prog?.completionScore ?? 0} done={prog?.owned} />
-        </div>
-      </Card>
-    </Link>
+        )}
+        <button
+          type="button"
+          onClick={onToggleTracked}
+          aria-label={tracked ? `Stop tracking ${piece.name}` : `Track ${piece.name}`}
+          title={tracked ? 'Counts in totals — click to untrack' : 'Not counted — click to track'}
+          className="shrink-0 rounded-lg border border-line px-2 py-1 text-xs font-medium text-ink transition-colors hover:border-accent"
+        >
+          {tracked ? 'Untrack' : 'Track'}
+        </button>
+        <ScorePill value={prog?.completionScore ?? 0} done={prog?.owned} />
+      </div>
+    </Card>
   )
 }
 

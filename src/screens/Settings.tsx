@@ -5,6 +5,7 @@ import { Card, Badge } from '../components/ui'
 import { formatRelative } from '../lib/format'
 import { DEFAULT_WEIGHTS } from '../types'
 import { encode, decode } from '../lib/buildcode'
+import { buildEmptyLoadout, buildSeedLoadout } from '../data/loadout'
 
 // Ordered as they appear on the GW2 account site (account.arena.net/applications),
 // each paired with ArenaNet's own description of the scope.
@@ -111,6 +112,17 @@ export default function Settings() {
       setImportMsg({ state: 'ok' })
     } catch (e) {
       setImportMsg({ state: 'error', message: e instanceof Error ? e.message : 'Invalid code.' })
+    }
+  }
+
+  const loadExample = () => {
+    if (confirm('Replace your current loadout with the example build?')) {
+      setLoadout(buildSeedLoadout())
+    }
+  }
+  const clearLoadout = () => {
+    if (confirm('Clear your loadout? This removes all chosen pieces and starts fresh.')) {
+      setLoadout(buildEmptyLoadout())
     }
   }
 
@@ -240,6 +252,29 @@ export default function Settings() {
         >
           Reset to defaults
         </button>
+      </Card>
+
+      <Card>
+        <h2 className="mb-1 text-lg font-semibold text-ink">Loadout</h2>
+        <p className="mb-4 text-sm text-muted">
+          Your loadout, <span className="font-medium text-ink">{loadout.name}</span>, is yours to
+          shape — pick pieces on the Loadout tab. Start over with a blank slate, or load the example
+          build to see how a full plan looks.
+        </p>
+        <div className="flex flex-wrap gap-2">
+          <button
+            onClick={loadExample}
+            className="rounded-lg border border-line px-3 py-2 text-sm font-medium text-ink hover:border-accent"
+          >
+            Load example build
+          </button>
+          <button
+            onClick={clearLoadout}
+            className="rounded-lg border border-line px-3 py-2 text-sm font-medium text-ink hover:border-bad hover:text-bad"
+          >
+            Clear loadout
+          </button>
+        </div>
       </Card>
 
       <Card>

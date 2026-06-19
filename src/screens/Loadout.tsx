@@ -1,11 +1,60 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import { useApp, CATALOG_BY_ID } from '../state/store'
-import { Card, ProgressBar, ScorePill, Badge, InfoTooltip } from '../components/ui'
+import { Card, ProgressBar, ScorePill, Badge, InfoTooltip, OverlayLink } from '../components/ui'
 import { formatDate, formatDateShort } from '../lib/format'
 import { piecesForSlot } from '../lib/slotPieces'
 import type { SlotFamily } from '../types'
 import type { LoadoutSlot } from '../data/loadout'
+
+/** Inline-editable loadout name: click the title (or its edit button) to rename.
+ *  Enter / blur commits, Escape cancels. Empty names fall back to "My loadout". */
+function LoadoutName({ name }: { name: string }) {
+  const { setLoadoutName } = useApp()
+  const [editing, setEditing] = useState(false)
+  const [draft, setDraft] = useState(name)
+
+  const commit = () => {
+    setLoadoutName(draft.trim() || 'My loadout')
+    setEditing(false)
+  }
+
+  if (editing) {
+    return (
+      <input
+        autoFocus
+        value={draft}
+        onChange={(e) => setDraft(e.target.value)}
+        onBlur={commit}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') commit()
+          if (e.key === 'Escape') {
+            setDraft(name)
+            setEditing(false)
+          }
+        }}
+        aria-label="Loadout name"
+        className="min-w-0 rounded-lg border border-line bg-surface-2 px-2 py-1 text-lg font-semibold text-ink outline-none focus:border-accent"
+      />
+    )
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={() => {
+        setDraft(name)
+        setEditing(true)
+      }}
+      title="Rename loadout"
+      className="group flex items-center gap-1.5 text-lg font-semibold text-ink hover:text-accent"
+    >
+      <span className="truncate">{name}</span>
+      <span aria-hidden className="text-xs text-muted group-hover:text-accent">
+        ✎
+      </span>
+    </button>
+  )
+}
 
 /** Sections of the loadout grid. Trinkets and Back share a section so the grid
  *  is a tidy multiple of 2/3 (5 trinkets + 1 back = 6 cards). */
@@ -62,9 +111,9 @@ function TrackedToggle({ slot }: { slot: LoadoutSlot }) {
 /** Static link to weigh candidates for this slot on the Compare screen. */
 function CompareLink({ slot }: { slot: LoadoutSlot }) {
   return (
-    <Link to={`/compare/${slot.key}`} className="text-xs font-medium text-accent hover:underline">
+    <OverlayLink to={`/compare/${slot.key}`} className="text-xs font-medium text-accent hover:underline">
       Compare →
-    </Link>
+    </OverlayLink>
   )
 }
 
@@ -117,9 +166,9 @@ function PieceBody({
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0">
           {eyebrow && <p className="truncate text-xs text-muted">{slot.label}</p>}
-          <Link to={`/piece/${piece.id}`} className="block truncate font-semibold text-ink hover:text-accent">
+          <OverlayLink to={`/piece/${piece.id}`} className="block truncate font-semibold text-ink hover:text-accent">
             {piece.name}
-          </Link>
+          </OverlayLink>
           <p className="truncate text-xs text-muted">{piece.type}</p>
         </div>
         <div className="flex shrink-0 items-center gap-1.5">
@@ -142,7 +191,6 @@ function PieceBody({
       </div>
 
       <div className="mt-3 flex flex-wrap items-center gap-2 text-xs text-muted">
-        {slot.priority === 'defer' && <Badge tone="warn">defer</Badge>}
         {progress && !progress.owned && progress.earliestFinishDate && (
           <EarliestFinish iso={progress.earliestFinishDate} />
         )}
@@ -258,7 +306,7 @@ export default function Loadout() {
     <div className="space-y-8">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div>
-          <h2 className="text-lg font-semibold text-ink">{loadout.name}</h2>
+          <LoadoutName name={loadout.name} />
           <p className="text-sm text-muted">
             {doneCount}/{tracked.length} tracked pieces unlocked
             {!sync && ' · sync your account to populate progress'}

@@ -17,7 +17,7 @@ import { useApp, CATALOG_BY_ID } from '../state/store'
 import { piecesForSlot } from '../lib/slotPieces'
 import { computeProgress } from '../engine'
 import { DEFAULT_WEIGHTS } from '../types'
-import { Card, Badge, EmptyState } from '../components/ui'
+import { Card, Badge, EmptyState, OverlayLink } from '../components/ui'
 import { formatGold } from '../lib/format'
 import type { SlotKey } from '../types'
 
@@ -33,7 +33,7 @@ interface Row {
   recommended: boolean
 }
 
-export default function Compare() {
+export default function Compare({ inModal = false }: { inModal?: boolean }) {
   const { slotKey } = useParams<{ slotKey: string }>()
   const { loadout, sync, progressByPiece, setSlotCandidates, setSlotPiece } = useApp()
 
@@ -100,9 +100,11 @@ export default function Compare() {
 
   return (
     <div className="space-y-6">
-      <Link to="/loadout" className="text-sm text-accent underline">
-        ← Loadout
-      </Link>
+      {!inModal && (
+        <Link to="/loadout" className="text-sm text-accent underline">
+          ← Loadout
+        </Link>
+      )}
 
       <div>
         <h2 className="text-lg font-semibold text-ink">Compare candidates · {slot.label}</h2>
@@ -139,9 +141,9 @@ export default function Compare() {
                 >
                   <td className="p-3">
                     <div className="flex items-center gap-2">
-                      <Link to={`/piece/${r.pieceId}`} className="font-medium text-ink hover:text-accent">
+                      <OverlayLink to={`/piece/${r.pieceId}`} className="font-medium text-ink hover:text-accent">
                         {r.name}
-                      </Link>
+                      </OverlayLink>
                       {r.recommended && <Badge tone="good">lowest effort</Badge>}
                       {r.owned && <Badge tone="accent">owned</Badge>}
                       {slot.chosenPieceId === r.pieceId && <Badge>chosen</Badge>}
