@@ -84,6 +84,25 @@ export function catalogIntermediates(): CatalogIntermediate[] {
   return [...byName.values()]
 }
 
+/**
+ * Every name that appears ANYWHERE in the catalog's trees — node outputs and
+ * inputs alike, canon-keyed. The recursive wiki expander stops here: past the
+ * catalog's own vocabulary lies Mystic-Forge material promotion (ingot→ore,
+ * dust chains) that the catalog deliberately treats as terminal, and following
+ * it compounds into meaningless quantities. Stopping at this set keeps the wiki
+ * expansion at the catalog's granularity, so a diff reflects real drift.
+ */
+export function catalogKnownNames(): Set<string> {
+  const names = new Set<string>()
+  for (const piece of CATALOG) {
+    for (const n of piece.recipe.nodes) {
+      names.add(canonComponent(n.output.name))
+      for (const inp of n.inputs) names.add(canonComponent(inp.name))
+    }
+  }
+  return names
+}
+
 export function catalogPieces(): CatalogPiece[] {
   const out: CatalogPiece[] = []
   for (const piece of CATALOG) {

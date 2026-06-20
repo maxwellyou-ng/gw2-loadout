@@ -18,6 +18,7 @@ discrepancies visible and enforced instead of relying on manual cross-checking.
 | `npm run wiki:check -- --update-baseline` | no | `baseline.json` | Accept the current state as the baseline. |
 | `npm run wiki:report -- --scaffold="<Item>"` | no | — | Print a draft recipe stub (verified:false) for a missing item. |
 | `npm run wiki:fix` | no | `generated/`, `baseline.json` | Auto-fixer. Regenerate `verified:false` drafts for all generatable missing items, validate (`tsc`/`check`/`wiki:check`), revert on failure, auto-prune resolved baseline acks. `-- --dry-run` previews. Alias: `wiki:report -- --apply`. |
+| `npm run wiki:expand -- "<Item>"` | cache (live on miss) | — | Phase 4 recursive expander. Walks the wiki recipe DAG, stopping at the catalog's vocabulary (cycle/depth-guarded). `--check` lists wiki components the catalog doesn't model; `--deep` expands past base materials (structure only — totals compound via promotion recipes); `--no-cache` re-downloads. |
 
 ## How it works
 

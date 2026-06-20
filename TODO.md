@@ -3,13 +3,29 @@
 Conventions for changing this codebase, plus the work that's still open. For *usage* and
 architecture, see [README.md](README.md).
 
+## Current state (2026-06-20)
+
+- **Catalog reach: done.** `CATALOG` holds **94 entries** (weapons 55, armor 26, trinkets 9,
+  backs 4), covering all ~74 wiki legendaries plus weapon variants. `npm run wiki:check` is
+  green (0 blocking, empty baseline).
+- **Verification: effectively complete.** **92 of 94 entries are `verified: true`** and the
+  wiki gate enforces each against its wiki snapshot (0 `UNVERIFIED`, 0 `SYNTHETIC_RESOLVABLE`).
+  The 2 remaining `verified: false` are the genuinely-unverifiable special cases the gate
+  reports as info, not gaps — **Selachimorpha** (collection aquabreather, no `{{recipe}}`) and
+  **Strife Unending** (vendor-sold, no craftable recipe). They are correctly left unverified;
+  promoting them would be dishonest. See "Known structural limits" below.
+- **Generated layer is empty.** All 94 pieces live in the curated files; `generated/
+  recipes.generated.json` is currently `[]`. The `wiki:fix` pipeline exists but no drafts are
+  committed through it right now — the catalog is fully curated and already verified.
+
 ## Project structure & conventions
 
 - **Where things live:**
   - `src/types/` — domain model and the source of truth for shapes (`LegendaryPiece`,
     `RecipeNode`, `DerivedProgress`, `LoadoutSlot`).
   - `src/data/recipes/` — curated trees: `weapons.ts`, `armor.ts`, `trinkets.ts`, `backs.ts`,
-    shared sub-trees in `_builders.ts`; `index.ts` assembles `CATALOG`.
+    shared sub-trees in `_builders.ts`; `index.ts` assembles `CATALOG` (curated + the
+    machine-owned `generated/` layer, curated wins collisions by name *and* id).
   - `src/data/items.ts` — the `ITEM` id registry + the id-namespace helpers.
   - `src/engine/` — `computeProgress` (per-piece truth) and `loadout-progress.ts`
     (aggregation + selectors).
@@ -36,131 +52,113 @@ architecture, see [README.md](README.md).
   "ALL CHECKS PASSED" are the real gates; `npm run build` should also pass (a `*.node`
   native-binding/arch error is an environment issue, not a code issue).
 
-## Remaining work
+## Remaining work — priority order
 
-All planned features are shipped (Phases 1–6). A full data re-audit ran 2026-06-19 (live wiki
-matched the catalog with zero drift). Most prior data-accuracy items are now closed:
+> The original #1 (promote drafts → `verified: true`) and #2 (component item-id resolution)
+> are **done** — see the changelog. What's left is optional depth work, both gated behind
+> live wiki fetches.
 
+### 1. Auto-fix Phase 4 — recursive recipe expansion  *(driver shipped 2026-06-20; see changelog)*
+
+The recursion driver now exists (`expand-recipe.ts` + `npm run wiki:expand`). Building it
+settled the open design question: **a full-depth leaf flatten is NOT a meaningful artifact**,
+because past the catalog's modeling granularity the wiki's Mystic-Forge *promotion* recipes
+(ingot→ore, dust→dust, Obsidian Shard→Obsidian Shard) are self-referential and compound into
+nonsense quantities — `npm run wiki:expand -- "Gift of Fortune" --deep` shows the cycle/
+max-depth guards firing on exactly these. The catalog's leaf granularity is therefore the
+correct stopping point, which is why the existing one-level-per-intermediate gate already gives
+full recursive coverage (`catalog-view.ts:59`). So **auto-promotion is moot** — 92/94 are
+already `verified: true` and gate-enforced. What `wiki:expand --check` adds is a recursive
+**gap finder**: it confirmed every wiki component across all four families resolves to a
+catalog-modeled name. Remaining (optional): parse `RecipeNode` metadata (`source`/`discipline`/
+`buyable`) into generated drafts when the `generated/` layer is next populated.
+
+### 2. (Low payoff, optional) Expand weapon themed-gift + precursor sub-trees
+
+Incinerator, Astralaria, Exordium, Pharus, Aurene's Fang/Scale, Aetheric Anchor — full-depth
+wiki transcription. Precursors are TP-buyable and themed-gift collections don't map to
+countable inventory, so the payoff is low. Do one weapon at a time, running `tsc` +
+`npm run check` after each.
+
+## Wiki reconciliation toolchain (`scripts/wiki-sync/`)
+
+Drift between catalog and wiki is measured and gated automatically — use it to drive the work
+above instead of hand-auditing. Read-only except `wiki:fetch`/`wiki:fix`:
+
+- `npm run wiki:report` — authoritative drift + low-confidence list.
+- `npm run wiki:check` — the build gate (also runs inside `npm run build`).
+- `npm run wiki:fix` (a.k.a. `wiki:report -- --apply`; `--dry-run` previews) — regenerates the
+  `generated/` draft layer in `scripts/wiki-sync/fix.ts`. Writes only MISSING entries that are
+  high-confidence + have a real API id + a non-empty top-level recipe + aren't armor *sets*.
+  Every draft ships `verified: false`. After writing it runs `tsc -b`, `npm run check`,
+  `npm run wiki:check` and **reverts all writes if any fail**; auto-prunes resolved
+  `baseline.json` entries. Output is a reviewable JSON diff.
+- `npm run wiki:expand -- "<Item>"` — Phase 4 recursive expander (read-only, NOT a gate).
+  Walks the wiki recipe DAG from the cache, stopping at the catalog's vocabulary by default
+  (cycle- and depth-guarded). `--check` lists wiki components the catalog doesn't model (gap /
+  alias finder); `--deep` ignores the catalog stop set for free structural exploration (totals
+  past base materials are not cost-accurate — see #1); `--no-cache` re-downloads.
+- `npm run wiki:test` — parser + expander regression tests (guards the `{{recipe list}}`
+  false-match fix, vendor-leaf classification, and the expander's stop/cycle/builder/depth
+  guards). Fully offline (inline fixtures).
+- `npm run wiki:audit` — canon-layer trust audit: fails if two genuinely different items
+  (different ids) collapse to one canonical name, or on no-op aliases.
+- `npm run wiki:links` — network link check: every wiki link the app renders resolves.
+- To **close an item**: fix its recipe in `src/data/recipes/*` (use
+  `npm run wiki:report -- --scaffold="<Item>"` for a starting stub), then delete its entries
+  from `baseline.json` (or rerun `npm run wiki:check -- --update-baseline`).
+
+Known structural limits (the honest manual lane — these never auto-write):
+
+- **Armor recipes are not machine-verifiable**: legendary armor wiki pages express crafting as
+  prose "Material list"/"Components" tables, not `{{recipe}}` templates, and pieces have no
+  individual pages (linked to the set page via `ARMOR_LINK_OVERRIDES`). Sets are verified by
+  enumeration + id; their shared gifts ARE verified as intermediates.
+- **Vendor leaves** (Bloodstone Shard, Eldritch Scroll, Gift of Craftsmanship/Insight, …) have
+  no `{{recipe}}` — classified `VENDOR_LEAF` (a correct terminal leaf), not "unverified".
+- **Genuinely special items** stay `LOW_CONFIDENCE`: Aetheric Anchor (dual-unlock),
+  Selachimorpha (collection aquabreather), Prismatic Champion's Regalia (achievement reward).
+
+## Done (changelog)
+
+- ✅ **Auto-fix Phase 4 — recursive recipe expander (2026-06-20):** `expand-recipe.ts` (pure,
+  injected fetcher) + `npm run wiki:expand`. Follows every component whose wiki page has a
+  `{{recipe}}`, building the nested DAG with stop conditions, cycle protection, builder mapping,
+  and a depth cap; offline regression test bundled into `wiki:test`. Empirically established
+  that the catalog's leaf granularity is the correct stop boundary (deeper = self-referential
+  Mystic-Forge promotion recipes), so the one-level-per-intermediate gate already gives full
+  recursive coverage and auto-promotion is moot. `--check` (recursive gap finder) confirmed
+  every wiki component across all four families resolves to a catalog-modeled name.
+- ✅ **Verification complete (2026-06-20):** **92/94 catalog entries are `verified: true`** and
+  pass `npm run wiki:check` against the wiki snapshot (0 `UNVERIFIED`, 0 `SYNTHETIC_RESOLVABLE`).
+  The 2 left `verified: false` are the correct special cases — Selachimorpha (collection
+  aquabreather) and Strife Unending (vendor leaf) — which have no parseable `{{recipe}}` and
+  are intentionally not promoted.
+- ✅ **Auto-fix Phase 3 — component item-id resolution:** synthetic-by-name leaves resolved to
+  real wiki ids; the only remaining `synthetic()` leaf is `Incursive Investigation
+  (achievement)`, which is genuinely id-less. Re-check with
+  `grep -rno "ref(synthetic(), '[^']*'" src/data/recipes/`.
+- ✅ **All planned features shipped (Phases 1–6):** Dashboard, Loadout, Materials, Compare,
+  Forecast, History, weighting sliders, build codes.
+- ✅ **Full catalog reach:** "add all legendaries" brought `CATALOG` to 94 entries; the wiki
+  gate reports 0 missing / empty baseline.
 - ✅ **`testimonyOfHeroics`** — resolved as a misconception: there is no such currency. The WvW
   heroics currency is Proof of Heroics (31); "Testimony of Desert/Jade/Castoran Heroics"
   (36/65/82) are the variants; "Testimony of Heroics" is an *item* (70985). No modeled recipe
-  uses it, so none is registered (see the note in `src/data/items.ts`).
-- ✅ **Synthetic-by-name leaves resolved to real ids** (wiki infobox + `/v2/items`
-  cross-confirmed): Auric Ingot, Chak Egg, Reclaimed Metal Plate, Star of Glory, Jar of
-  Distilled Glory, Record of League Participation, Gift of Exploration, the Aetheric Anchor
-  heart-gifts, Gift of the Astral Ward, Gift of the Mist Warrior, Gift of Insight, Fractalline
-  Spark — all in the `ITEM` registry now. Only `Incursive Investigation (achievement)` stays
-  synthetic (genuinely id-less). Re-check with `grep -rno "ref(synthetic(), '[^']*'" src/data/recipes/`.
+  uses it (note in `src/data/items.ts`).
+- ✅ **Synthetic-by-name leaves resolved to real ids** (wiki infobox + `/v2/items`): Auric Ingot,
+  Chak Egg, Reclaimed Metal Plate, Star of Glory, Jar of Distilled Glory, Record of League
+  Participation, Gift of Exploration, the Aetheric Anchor heart-gifts, Gift of the Astral Ward,
+  Gift of the Mist Warrior, Gift of Insight, Fractalline Spark. Only
+  `Incursive Investigation (achievement)` stays synthetic (genuinely id-less). Re-check with
+  `grep -rno "ref(synthetic(), '[^']*'" src/data/recipes/`.
 - ✅ **Draconic Tribute** real id confirmed: **96137** (in `_builders.ts`).
-- **(Optional, low payoff) Expand weapon themed-gift + precursor sub-trees** to full depth
-  (Incinerator, Astralaria, Exordium, Pharus, Aurene's Fang/Scale, Aetheric Anchor). Bulk
-  wiki transcription; precursors are TP-buyable and themed-gift collections don't map to
-  countable inventory, so the payoff is low. Do one weapon at a time, running `tsc` +
-  `npm run check` after each.
-- **Catalog reach:** only the seed-loadout pieces plus the full trinket/back catalog are
-  authored. Extending to the rest of the legendary catalog uses the same builder pattern —
-  no schema change.
-
-### Wiki reconciliation (`scripts/wiki-sync/`)
-
-The drift between the catalog and the wiki is now measured and gated automatically — use it
-to drive the work above instead of hand-auditing. The audit toolchain (all read-only except
-`wiki:fetch`/`wiki:fix`):
-
-- `npm run wiki:report` — authoritative drift + low-confidence list (currently 0 blocking, 0
-  warnings; 3 `LOW_CONFIDENCE` + 7 `VENDOR_LEAF` info items, all excluded from the gate).
-- `npm run wiki:check` — the build gate (also runs inside `npm run build`).
-- `npm run wiki:test` — parser regression test (inline fixtures); guards the `{{recipe list}}`
-  false-match fix and vendor-leaf classification.
-- `npm run wiki:audit` — canon-layer trust audit: fails if two genuinely different items
-  (different ids) collapse to one canonical name, or on no-op aliases. Validates the gate
-  isn't masking drift.
-- `npm run wiki:links` — network link check: every wiki link the app renders (via
-  `lib/format.ts` `wikiUrl`) resolves; reports broken pages + redirects.
-
-Known structural limits (the honest manual lane, all documented in code):
-- **Armor recipes are not machine-verifiable**: legendary armor wiki pages express crafting as
-  prose "Material list"/"Components" tables, not `{{recipe}}` templates, and pieces have no
-  individual pages (the app links them to the set page via `ARMOR_LINK_OVERRIDES`). Sets are
-  verified by enumeration + id; their shared gifts ARE verified as intermediates.
-- **Vendor leaves** (Bloodstone Shard, Eldritch Scroll, Gift of Craftsmanship/Insight, etc.)
-  have no `{{recipe}}` — their cost is a vendor purchase the wiki renders via a DB query. They
-  are classified `VENDOR_LEAF` (a correct terminal leaf), not "unverified".
-- **3 genuinely special items** stay `LOW_CONFIDENCE`: Aetheric Anchor (dual-unlock), Selachimorpha
-  (collection aquabreather), Prismatic Champion's Regalia (achievement reward).
-
-- (Historical) `npm run wiki:report` once showed ~53 missing weapons/armor sets and trinket/back
-  recipe simplifications, all recorded in `scripts/wiki-sync/baseline.json`.
-- To **close an item**: fix its recipe in `src/data/recipes/*` (use
-  `npm run wiki:report -- --scaffold="<Item>"` for a starting stub), then delete its entries
-  from `baseline.json` (or rerun `npm run wiki:check -- --update-baseline`). The gate then
-  enforces that the item stays correct.
-- **Resolve `SYNTHETIC_RESOLVABLE` warnings**: the wiki has real armory ids for every
-  trinket/back the catalog currently mints synthetically (e.g. Aurora 81908, Conflux 93105).
-  Swapping these in improves owned-on-sync matching and clears the warnings.
-- Re-run `npm run wiki:fetch` after each game update; review the `snapshot/` diff and commit.
-- ✅ **Deeper accuracy (SHIPPED):** the reconciler now snapshots every distinct catalog
+- ✅ **Auto-fix Phase 1 — machine-owned data layer:** `src/data/recipes/generated/` (json +
+  thin loader); `index.ts` merges `GENERATED` under curated, curated-wins by name *and* id.
+  Generated synthetic ids use a reserved sub-range (`GENERATED_SYNTHETIC_BASE`, 9.5M–10M).
+- ✅ **Auto-fix Phase 2 — `wiki:fix` command + validation-gated apply:** writes `verified:false`
+  drafts only, reverts on any gate failure, auto-prunes `baseline.json`, reviewable JSON diff.
+- ✅ **Deeper intermediate accuracy:** the reconciler snapshots every distinct catalog
   intermediate's wiki page (`catalogIntermediates()` + Phase C in `snapshot.ts`) and diffs each
-  by name — 28/33 verify; the other 5 are `VENDOR_LEAF`. This is where the historical
-  clover/T6/ecto miscounts lived (e.g. the Gift of Venom swap).
-
-### Auto-fix: apply wiki fixes automatically (phases 1–2 SHIPPED)
-
-Today the system is report-first (`wiki:report` + the `wiki:check` gate); fixes for the
-remaining gap (component ids + deep trees) are still applied by hand. The goal is for
-missing/incorrect items to be corrected automatically on discovery. Auto-writing turns every
-parse error into shipped-wrong-data, so most of this work is about making generation accurate
-and safe enough to trust — not the writing itself. Each phase is independently shippable.
-
-**1. Machine-owned data layer — ✅ DONE (2026-06-19).**
-- `src/data/recipes/generated/` holds `recipes.generated.json` (the fixer owns it) + a thin
-  `index.ts` loader. `src/data/recipes/index.ts` merges `GENERATED` into `CATALOG` with
-  curated-wins-on-collision (by name *and* id), so authored work is never clobbered. Auto-fix
-  is "regenerate the file" — clean diff, idempotent.
-- Generated synthetic ids are minted into a reserved sub-range (`GENERATED_SYNTHETIC_BASE`,
-  9.5M–10M, see `src/data/items.ts`) so they can't collide with curated `synthetic()` ids,
-  and shared gifts (e.g. "Gift of Fortune") hash to one id so the aggregate view de-dups them.
-
-**2. `wiki:fix` command + validation-gated apply — ✅ DONE (2026-06-19).**
-- `npm run wiki:fix` (a.k.a. `npm run wiki:report -- --apply`; `--dry-run` previews) in
-  `scripts/wiki-sync/fix.ts`. Regenerates `generated/` for every MISSING wiki entry that is
-  high-confidence + has a real API id + a non-empty top-level recipe + isn't an armor *set*.
-  First apply created 48 drafts (catalog 24 → 72); 6 entries route to the manual lane
-  (armor sets, low-confidence Ancora Bellum, no-id Selachimorpha) — i.e. phase 5's boundary.
-- Every draft ships **`verified: false`** (only an `UNVERIFIED` advisory warning, never a
-  blocking finding). Promote to `verified: true` only when confidence is `high`, *all*
-  component ids resolved (phase 3), and a structural self-check passes (phase 4).
-- After writing it runs `tsc -b`, `npm run check`, `npm run wiki:check` and **reverts all
-  writes if any fail** (verified with a forced-failure test — leaves no half-written catalog).
-- **Auto-prunes `baseline.json`**: drops the `acknowledgedMissing` entries the fix resolved.
-- Output is a reviewable JSON diff (no silent-commit); the JSON file *is* the review surface.
-
-**3. Component-level item-id resolution.** _(next — clears the `SYNTHETIC_RESOLVABLE` gap)_
-- `parse-recipe.ts` currently reads only the legendary's own infobox `id`. Add a name→id
-  resolver that fetches each component's wiki page infobox `id`, cached to a committed
-  `scripts/wiki-sync/item-ids.json`, and feed resolved ids into the `ITEM` registry.
-- Without this, generated recipes use `synthetic()` ids (correct structure, no inventory
-  matching). With it, the `SYNTHETIC_RESOLVABLE` warnings clear and leaves match on sync.
-
-**4. Recursive recipe expansion + node metadata.**
-- The snapshot captures only top-level components; the engine needs full leaf trees (e.g.
-  top-level "Gift of Fortune" → clovers/ecto/T6) for cost + time-gate math.
-- Add a recursion driver that follows each component whose wiki page has a `{{Recipe}}`,
-  builds the nested `RecipeNode` DAG, with: a stop condition (leaf = no recipe / known base
-  material), cycle protection, and **mapping shared gifts to the existing builders**
-  (`giftOfFortune()`, `mysticTribute()`, `giftOfCondensedMight()` in `_builders.ts`) so they
-  aren't re-expanded inconsistently.
-- Parse `RecipeNode` metadata: `source` (Mystic Forge / craft / vendor), `discipline`,
-  `buyable`; reuse the `TIME_GATED` registry for `timeGate` once ids resolve. This is the
-  largest extraction task and the one that enables auto-promotion to `verified: true`.
-
-**5. Keep an explicit manual lane (scope boundary).**
-- Never auto-write items with no clean `{{Recipe}}`: armor *sets*, achievement-reward
-  trinkets (Prismatic Champion's Regalia), the dual-unlock container (Aetheric Anchor ↔
-  Ancora Bellum/Pax), heart-vendor gifts. The fixer only applies `confidence: 'high'`,
-  fully-resolved items; everything else routes to curated overrides + `aliases.ts`. Auto-fix
-  is necessarily partial (~65 of 74 items).
-
-Suggested order: **1 + 2** ✅ done (the missing-item gap now ships as `verified:false` drafts);
-next **3** (real component ids → clears `SYNTHETIC_RESOLVABLE`, enables inventory matching),
-then **4** (leaf-accurate trees + auto-promotion to `verified:true`).
+  by name — this is where historical clover/T6/ecto miscounts lived (e.g. the Gift of Venom
+  swap).

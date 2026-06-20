@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-19T13:35:11.464Z",
+  "generatedAt": "2026-06-20T01:45:33.525Z",
   "entries": [
     {
       "name": "Bloodstone Shard",
@@ -14,7 +14,7 @@
     {
       "name": "Draconic Tribute",
       "apiId": 96137,
-      "syntheticId": true,
+      "syntheticId": false,
       "wikiUrl": "https://wiki.guildwars2.com/wiki/Draconic_Tribute",
       "confidence": "high",
       "wikitextHash": "72f5c47801b7a8b2",
@@ -50,7 +50,7 @@
     {
       "name": "Fractalline Spark",
       "apiId": 105196,
-      "syntheticId": true,
+      "syntheticId": false,
       "wikiUrl": "https://wiki.guildwars2.com/wiki/Fractalline_Spark",
       "confidence": "low",
       "wikitextHash": "01953b0d8ab9a49d",
@@ -408,7 +408,7 @@
     {
       "name": "Gift of Insight",
       "apiId": 105875,
-      "syntheticId": true,
+      "syntheticId": false,
       "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Insight",
       "confidence": "low",
       "wikitextHash": "309df6ade534ead5",
