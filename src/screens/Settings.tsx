@@ -3,9 +3,7 @@ import { useApp } from '../state/store'
 import { validateKey } from '../api/gw2'
 import { Card, Badge } from '../components/ui'
 import { formatRelative } from '../lib/format'
-import { DEFAULT_WEIGHTS } from '../types'
 import { encode, decode } from '../lib/buildcode'
-import { buildEmptyLoadout, buildSeedLoadout } from '../data/loadout'
 
 // Ordered as they appear on the GW2 account site (account.arena.net/applications),
 // each paired with ArenaNet's own description of the scope.
@@ -40,7 +38,6 @@ export default function Settings() {
   const {
     settings,
     setApiKey,
-    setWeights,
     forgetAccount,
     runSync,
     syncing,
@@ -97,8 +94,6 @@ export default function Settings() {
     }
   }
 
-  const w = settings.weights
-
   // --- Build-code import / export (Phase 5.1) — goals only, never the key ---
   const exportCode = encode(loadout)
   const [importInput, setImportInput] = useState('')
@@ -125,17 +120,6 @@ export default function Settings() {
       setImportMsg({ state: 'ok' })
     } catch (e) {
       setImportMsg({ state: 'error', message: e instanceof Error ? e.message : 'Invalid code.' })
-    }
-  }
-
-  const loadExample = () => {
-    if (confirm('Replace your current loadout with the example build?')) {
-      setLoadout(buildSeedLoadout())
-    }
-  }
-  const clearLoadout = () => {
-    if (confirm('Clear your loadout? This removes all chosen pieces and starts fresh.')) {
-      setLoadout(buildEmptyLoadout())
     }
   }
 
@@ -256,60 +240,6 @@ export default function Settings() {
       </Card>
 
       <Card>
-        <h2 className="mb-1 text-lg font-semibold text-ink">Completion-score weights</h2>
-        <p className="mb-4 text-sm text-muted">
-          Time is weighted highest by default so slow, daily-capped materials count for more than
-          cheap bulk. (time ≫ gold ≫ quantity)
-        </p>
-        {(['time', 'gold', 'qty'] as const).map((k) => (
-          <label key={k} className="mb-3 block">
-            <span className="flex justify-between text-sm text-ink">
-              <span className="capitalize">{k === 'qty' ? 'quantity' : k}</span>
-              <span className="font-mono text-muted">{w[k].toFixed(2)}</span>
-            </span>
-            <input
-              type="range"
-              min={0}
-              max={1}
-              step={0.05}
-              value={w[k]}
-              onChange={(e) => setWeights({ ...w, [k]: Number(e.target.value) })}
-              className="w-full accent-accent"
-            />
-          </label>
-        ))}
-        <button
-          onClick={() => setWeights(DEFAULT_WEIGHTS)}
-          className="text-sm text-accent underline"
-        >
-          Reset to defaults
-        </button>
-      </Card>
-
-      <Card>
-        <h2 className="mb-1 text-lg font-semibold text-ink">Loadout</h2>
-        <p className="mb-4 text-sm text-muted">
-          Your loadout, <span className="font-medium text-ink">{loadout.name}</span>, is yours to
-          shape — pick pieces on the Loadout tab. Start over with a blank slate, or load the example
-          build to see how a full plan looks.
-        </p>
-        <div className="flex flex-wrap gap-2">
-          <button
-            onClick={loadExample}
-            className="rounded-lg border border-line px-3 py-2 text-sm font-medium text-ink hover:border-accent"
-          >
-            Load example build
-          </button>
-          <button
-            onClick={clearLoadout}
-            className="rounded-lg border border-line px-3 py-2 text-sm font-medium text-ink hover:border-bad hover:text-bad"
-          >
-            Clear loadout
-          </button>
-        </div>
-      </Card>
-
-      <Card>
         <h2 className="mb-1 text-lg font-semibold text-ink">Share your loadout</h2>
         <p className="mb-4 text-sm text-muted">
           A build code captures only your slot goals (chosen pieces, tracked, flexible, priority, candidates)
@@ -318,16 +248,16 @@ export default function Settings() {
 
         <label className="mb-1 block text-sm font-medium text-ink">Export</label>
         <div className="flex flex-wrap gap-2">
-          <textarea
+          <input
+            type="text"
             readOnly
             value={exportCode}
-            rows={2}
             onFocus={(e) => e.currentTarget.select()}
-            className="min-w-0 flex-1 resize-none rounded-lg border border-line bg-surface-2 px-3 py-2 font-mono text-xs text-ink outline-none"
+            className="min-w-0 flex-1 rounded-lg border border-line bg-surface-2 px-3 py-2 font-mono text-xs text-ink outline-none"
           />
           <button
             onClick={copyCode}
-            className="self-start rounded-lg border border-line px-3 py-2 text-sm font-medium text-ink hover:border-accent"
+            className="rounded-lg border border-line px-3 py-2 text-sm font-medium text-ink hover:border-accent"
           >
             {copied ? 'Copied ✓' : 'Copy'}
           </button>
@@ -336,20 +266,20 @@ export default function Settings() {
         <label className="mb-1 mt-4 block text-sm font-medium text-ink">Import</label>
         <p className="mb-2 text-xs text-warn">Importing replaces your current loadout.</p>
         <div className="flex flex-wrap gap-2">
-          <textarea
+          <input
+            type="text"
             value={importInput}
             onChange={(e) => {
               setImportInput(e.target.value)
               setImportMsg({ state: 'idle' })
             }}
-            rows={2}
             placeholder="Paste a gw2-v1.… build code"
-            className="min-w-0 flex-1 resize-none rounded-lg border border-line bg-surface-2 px-3 py-2 font-mono text-xs text-ink outline-none focus:border-accent"
+            className="min-w-0 flex-1 rounded-lg border border-line bg-surface-2 px-3 py-2 font-mono text-xs text-ink outline-none focus:border-accent"
           />
           <button
             onClick={applyImport}
             disabled={!importInput.trim()}
-            className="self-start rounded-lg bg-accent px-3 py-2 text-sm font-semibold text-canvas disabled:opacity-40"
+            className="rounded-lg bg-accent px-3 py-2 text-sm font-semibold text-canvas disabled:opacity-40"
           >
             Import
           </button>

@@ -56,7 +56,6 @@ interface AppState {
   syncError: string | null
   progressByPiece: Record<number, DerivedProgress>
   setApiKey: (key: string) => void
-  setWeights: (w: Settings['weights']) => void
   /** Wipe the stored API key and all synced account data (key, snapshot, history). */
   forgetAccount: () => void
   runSync: () => Promise<void>
@@ -96,10 +95,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   const setApiKey = useCallback((apiKey: string) => {
     setSettings((s) => ({ ...s, apiKey }))
-  }, [])
-
-  const setWeights = useCallback((weights: Settings['weights']) => {
-    setSettings((s) => ({ ...s, weights }))
   }, [])
 
   const forgetAccount = useCallback(() => {
@@ -224,7 +219,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
     syncError,
     progressByPiece,
     setApiKey,
-    setWeights,
     forgetAccount,
     runSync,
     setLoadout,
