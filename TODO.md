@@ -48,9 +48,16 @@ architecture, see [README.md](README.md).
     `ref(ITEM.foo, 'Foo', qty)`.
   - `verified: true` means the modelled tree was wiki cross-checked. A summarized synthetic
     sub-tree is allowed as long as the top combine + leaf quantities are confirmed.
-- **Gates (keep green):** `npx tsc -b --noEmit` exits 0 and `npm run check` prints
-  "ALL CHECKS PASSED" are the real gates; `npm run build` should also pass (a `*.node`
-  native-binding/arch error is an environment issue, not a code issue).
+- **Gates (keep green):** `npx tsc -b --noEmit` exits 0, `npm run check` prints
+  "ALL CHECKS PASSED", `npm run wiki:check` passes (per-combine drift), and
+  `npm run wiki:totals` passes (full-tree totals vs wiki + golden snapshot; after an
+  intentional recipe/engine change re-bless with `npm run wiki:totals -- --update` and review
+  the JSON diff). `npm run build` should also pass (a `*.node` native-binding/arch error is an
+  environment issue, not a code issue). CI runs all of these on every push.
+- **Consumption discipline:** crafting consumes materials. Whole-loadout `remaining` comes
+  from the priority-order allocation walk (`allocateProgress`); multi-piece views read
+  `allocatedBySlot` from the store, Compare stays isolation-based on purpose. Don't credit one
+  owned stack (or banked gift) to two pieces.
 
 ## Remaining work — priority order
 
@@ -121,6 +128,14 @@ Known structural limits (the honest manual lane — these never auto-write):
 
 ## Done (changelog)
 
+- ✅ **Dependability pass (2026-07-03):** consumption-correct accounting (per-piece
+  `consumed`, `allocateProgress` priority-order allocation, allocation-derived aggregate
+  `remaining`, owned pieces excluded from totals; Klobjarne Geirr + Endless Summer condensed
+  gifts were terminal leaves — fixed); `npm run wiki:totals` gate (full-tree wiki cross-check +
+  engine reference multiply + committed golden-totals snapshot); catalog-wide invariant checks
+  + recommendation-rule fixtures in `npm run check`; error boundary, "prices unavailable"
+  honesty, storage-failure banner, sync-warning badge; searchable `PiecePicker` + first-run
+  onboarding; GitHub Actions CI running all offline gates.
 - ✅ **Auto-fix Phase 4 — recursive recipe expander (2026-06-20):** `expand-recipe.ts` (pure,
   injected fetcher) + `npm run wiki:expand`. Follows every component whose wiki page has a
   `{{recipe}}`, building the nested DAG with stop conditions, cycle protection, builder mapping,

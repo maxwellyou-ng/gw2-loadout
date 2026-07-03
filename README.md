@@ -25,8 +25,12 @@ Dashboard and Forecast are built around this.
 
 ## Features
 
-Every whole-loadout total routes through `engine/loadout-progress.ts`, so untracked slots
-are excluded everywhere and shared materials (clovers feed many pieces) are de-duplicated.
+Every whole-loadout total routes through `engine/loadout-progress.ts`, so untracked slots are
+excluded everywhere and the accounting is **consumption-correct**: crafting consumes materials,
+so `required` sums across pieces (77 + 18 clovers ⇒ 95) while your owned stock — including
+pre-built gifts in the bank — is allocated to pieces in priority order and never credited to
+two pieces at once. Multi-piece views (Dashboard, Loadout, History) show these allocated
+numbers; Compare deliberately measures candidates in isolation, since they're alternatives.
 
 - **Dashboard** (`/dashboard`, default) — the daily "what to do": a time-gate hygiene list
   of daily-capped mats to collect today (with a "collected today" toggle —
@@ -56,7 +60,7 @@ are excluded everywhere and shared materials (clovers feed many pieces) are de-d
   (`gw2lt:history`: `{ ts, overall, byPiece }`); charts overall completion across syncs
   (inline SVG) and shows a per-piece Δ-since-last-sync table.
 - **Piece detail** (`/piece/:id`) + **Settings** — the recipe tree for a single piece, and
-  the API key / completion weights / build-code import-export.
+  the API key and build-code import-export.
 
 ## Quick start
 
@@ -64,8 +68,9 @@ are excluded everywhere and shared materials (clovers feed many pieces) are de-d
 npm install
 npm run dev        # http://localhost:5173
 npm run build      # type-check + wiki:check + production build (base: /gw2-loadout/)
-npm run check      # engine sanity checks (no API key needed)
-npm run wiki:check # gate: catalog must match the committed wiki snapshot
+npm run check      # engine sanity checks incl. consumption + invariants (no API key needed)
+npm run wiki:check # gate: catalog must match the committed wiki snapshot (per combine)
+npm run wiki:totals # gate: full-tree totals match the wiki + the committed golden snapshot
 ```
 
 ## Architecture
@@ -114,7 +119,7 @@ sync.
 
 `completionScore = Σ(weight·dimProgress) / Σweight` over the dimensions that have a
 measurable basis (time = gated mats present; gold = TP prices loaded; quantity = always).
-Defaults weight **time 0.6 ≫ gold 0.3 ≫ quantity 0.1**, adjustable in Settings. A dimension
+Defaults weight **time 0.6 ≫ gold 0.3 ≫ quantity 0.1**. A dimension
 with no basis (e.g. prices not synced yet) is **excluded**, not counted as 100% — so an
 unsynced account never looks falsely complete.
 
@@ -176,19 +181,20 @@ against the GW2 Wiki**. What that means in practice:
 ### Verification status
 
 `npm run wiki:check` is **green**: 74 wiki legendaries vs 94 catalog entries, 0 blocking
-findings, empty baseline (full coverage — no acknowledged gap). But coverage is not the same
-as verification:
+findings, empty baseline (full coverage — no acknowledged gap). Verification is effectively
+complete:
 
-- **The catalog reaches every legendary, but the recipes are not all hand-verified yet.**
-  After the "all legendaries" expansion, **0 of 94 entries are `verified: true`** — they ship
-  `verified: false` (drafts scaffolded from the wiki snapshot) pending a per-piece promotion.
-- `verified: true` means a piece's modelled tree was wiki cross-checked end to end. The gate
-  enforces that any entry *marked* verified exactly matches its wiki snapshot — so promotion
-  can't drift — but it does not require entries to be verified. **Promoting the 94 drafts is
-  the headline remaining work** (see [TODO.md](TODO.md)).
-- The seed-loadout pieces (Aetheric Anchor tree, Eikasia gloves, etc.) and the trinket/back
-  recipes were the originally hand-verified set; their leaf quantities and vendor costs are the
-  ones to trust most until the wider catalog is promoted.
+- **92 of 94 entries are `verified: true`** and the gate enforces each against its committed
+  wiki snapshot (any drift fails the build). The 2 left `verified: false` are genuinely
+  unverifiable special cases — **Selachimorpha** (collection aquabreather, no `{{recipe}}`) and
+  **Strife Unending** (vendor-sold, no craftable recipe) — and are intentionally not promoted.
+- Beyond per-node checks, `npm run wiki:totals` verifies the **full-tree multiplication**: for
+  every piece with a parseable wiki recipe (65 of 94; the skips are printed, not hidden), the
+  catalog tree and the wiki snapshot DAG must flatten to identical leaf totals, and the
+  engine's flatten must match an independent reference multiply for all 94.
+- A committed **golden-totals snapshot** (`scripts/wiki-sync/golden-totals.json`) pins every
+  piece's displayed leaf totals and buyable/time-gate flags — any change to a number the app
+  shows becomes a reviewable diff (`npm run wiki:totals -- --update` to re-bless intentionally).
 
 ### The drift gate (`scripts/wiki-sync/`)
 
@@ -203,6 +209,10 @@ prevents the catalog from silently deviating from it (full detail in
   from the snapshot (every draft `verified: false`; curated files always win a collision).
 - `npm run wiki:check` is the offline gate wired into `npm run build`. It fails on any
   unacknowledged drift and on any `verified: true` recipe that doesn't match its snapshot.
+- `npm run wiki:totals` is the offline **totals** gate: full-tree leaf quantities must match
+  the wiki snapshot DAG, the engine's flatten must match a reference multiply, and displayed
+  totals must match the committed golden snapshot (see
+  [Verification status](#verification-status)).
 
 Run `wiki:fetch` after game updates, review the `snapshot/` diff, and commit.
 

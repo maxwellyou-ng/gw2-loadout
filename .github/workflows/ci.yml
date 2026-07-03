@@ -1,0 +1,33 @@
+# All gates are offline (the wiki snapshot, golden totals, and test fixtures
+# are committed), so CI needs no network beyond npm ci.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  gates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Type-check
+        run: npx tsc -b --noEmit
+      - name: Lint
+        run: npm run lint
+      - name: Engine checks (consumption, invariants, recommendations)
+        run: npm run check
+      - name: Wiki drift gate (per combine)
+        run: npm run wiki:check
+      - name: Totals gate (full-tree + golden snapshot)
+        run: npm run wiki:totals
+      - name: Wiki parser/expander tests
+        run: npm run wiki:test
+      - name: Production build
+        run: npm run build

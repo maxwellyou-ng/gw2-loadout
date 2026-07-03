@@ -71,8 +71,8 @@ export default function Layout() {
       </main>
 
       <footer className="border-t border-line py-3 text-center text-xs text-muted">
-        Read-only · API key stays in your browser · recipe data is wiki-seeded and flagged for
-        verification
+        Read-only · API key stays in your browser · recipes wiki-verified (92/94) and
+        drift-gated against the GW2 Wiki
       </footer>
     </div>
   )
