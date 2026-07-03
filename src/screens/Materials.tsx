@@ -131,7 +131,7 @@ function Chip({ active, onClick, children }: { active: boolean; onClick: () => v
 }
 
 export default function Materials() {
-  const { loadout, sync } = useApp()
+  const { loadout, sync, pricesLoaded } = useApp()
   const [view, setView] = useState<View>('base')
   const [grouping, setGrouping] = useState<Grouping>('phase')
   const [sort, setSort] = useState<Sort>('default')
@@ -233,7 +233,13 @@ export default function Materials() {
         actions={
           <div className="text-right">
             <p className="text-xs text-muted">Total buy-out</p>
-            <p className="text-xl font-semibold text-ink">≈{formatGold(agg.buyOutGold)}</p>
+            {pricesLoaded ? (
+              <p className="text-xl font-semibold text-ink">≈{formatGold(agg.buyOutGold)}</p>
+            ) : (
+              <p className="text-sm font-medium text-muted" title="Trading Post prices didn't load in the last sync — buy-out costs can't be computed. Sync again to fetch them.">
+                prices unavailable
+              </p>
+            )}
           </div>
         }
       />

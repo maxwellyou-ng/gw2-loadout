@@ -21,11 +21,23 @@ export function loadJSON<T>(key: string, fallback: T): T {
   }
 }
 
+type StorageErrorListener = (key: string, error: unknown) => void
+const errorListeners = new Set<StorageErrorListener>()
+
+/** Notify when a save fails (quota exceeded / storage disabled), so the UI can
+ *  warn that changes aren't persisting instead of failing silently. */
+export function onStorageError(listener: StorageErrorListener): () => void {
+  errorListeners.add(listener)
+  return () => errorListeners.delete(listener)
+}
+
 export function saveJSON(key: string, value: unknown): void {
   try {
     localStorage.setItem(key, JSON.stringify(value))
-  } catch {
-    /* quota / disabled storage — non-fatal */
+  } catch (e) {
+    // Quota / disabled storage — non-fatal, but the user must know their
+    // edits won't survive a reload.
+    for (const l of errorListeners) l(key, e)
   }
 }
 

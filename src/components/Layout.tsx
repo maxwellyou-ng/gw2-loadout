@@ -12,7 +12,8 @@ const tabs = [
 ]
 
 export default function Layout() {
-  const { sync, syncing, runSync, settings } = useApp()
+  const { sync, syncing, runSync, settings, storageFailing } = useApp()
+  const warnings = sync?.warnings ?? []
 
   return (
     <div className="mx-auto flex min-h-full max-w-6xl flex-col px-4">
@@ -23,6 +24,14 @@ export default function Layout() {
           </h1>
           <p className="text-xs text-muted">
             Last synced: {formatRelative(sync?.meta.lastSynced ?? null)}
+            {warnings.length > 0 && (
+              <span
+                className="ml-1.5 cursor-help text-warn"
+                title={`Last sync was partial — some numbers may be stale or missing:\n• ${warnings.join('\n• ')}`}
+              >
+                ⚠ {warnings.length} sync warning{warnings.length === 1 ? '' : 's'}
+              </span>
+            )}
           </p>
         </div>
         <div className="flex min-w-0 items-center gap-2">
@@ -52,6 +61,12 @@ export default function Layout() {
       </header>
 
       <main className="flex-1 py-6">
+        {storageFailing && (
+          <div className="mb-4 rounded-lg border border-bad/40 bg-bad/10 p-3 text-sm text-bad">
+            Your changes aren't being saved — this browser's storage is full or blocked. Free up
+            space (or allow site data) and reload, or your edits will be lost when you leave.
+          </div>
+        )}
         <Outlet />
       </main>
 

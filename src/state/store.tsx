@@ -31,7 +31,7 @@ import {
 import type { SlotKey } from '../types'
 import { allocateProgress, computeProgress, plannedSlots } from '../engine'
 import { syncAccount } from '../api/gw2'
-import { STORAGE_KEYS, loadJSON, saveJSON, removeKey } from './storage'
+import { STORAGE_KEYS, loadJSON, saveJSON, removeKey, onStorageError } from './storage'
 
 interface SyncState {
   snapshot: InventorySnapshot
@@ -63,6 +63,10 @@ interface AppState {
    * Compare stays isolation-based (candidates are alternatives).
    */
   allocatedBySlot: Partial<Record<SlotKey, DerivedProgress>>
+  /** TP prices present in the last sync — buy-out figures are only real then. */
+  pricesLoaded: boolean
+  /** A localStorage write failed (quota/blocked): edits aren't persisting. */
+  storageFailing: boolean
   setApiKey: (key: string) => void
   /** Wipe the stored API key and all synced account data (key, snapshot, history). */
   forgetAccount: () => void
@@ -94,6 +98,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [syncing, setSyncing] = useState(false)
   const [syncMessage, setSyncMessage] = useState('')
   const [syncError, setSyncError] = useState<string | null>(null)
+  const [storageFailing, setStorageFailing] = useState(false)
+
+  useEffect(() => onStorageError(() => setStorageFailing(true)), [])
 
   useEffect(() => saveJSON(STORAGE_KEYS.settings, settings), [settings])
   useEffect(() => saveJSON(STORAGE_KEYS.loadout, loadout), [loadout])
@@ -240,6 +247,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
     syncError,
     progressByPiece,
     allocatedBySlot,
+    pricesLoaded: !!sync && Object.keys(sync.prices).length > 0,
+    storageFailing,
     setApiKey,
     forgetAccount,
     runSync,

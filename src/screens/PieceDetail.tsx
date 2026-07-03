@@ -64,7 +64,7 @@ function Group({
 
 export default function PieceDetail({ inModal = false }: { inModal?: boolean }) {
   const { id } = useParams()
-  const { progressByPiece, allocatedBySlot, loadout, sync } = useApp()
+  const { progressByPiece, allocatedBySlot, loadout, sync, pricesLoaded } = useApp()
   const [view, setView] = useState<View>('tree')
   const piece = id ? CATALOG_BY_ID[Number(id)] : undefined
 
@@ -224,8 +224,14 @@ export default function PieceDetail({ inModal = false }: { inModal?: boolean }) 
             >
               {progress.finishableByGold ? (
                 <p className="text-sm text-good">
-                  <span className="font-semibold">Finish now for ≈{formatGold(progress.buyOutGold)}</span>{' '}
-                  — everything left is purchasable. Spending gold is now the fastest path.
+                  {pricesLoaded ? (
+                    <>
+                      <span className="font-semibold">Finish now for ≈{formatGold(progress.buyOutGold)}</span>{' '}
+                      — everything left is purchasable. Spending gold is now the fastest path.
+                    </>
+                  ) : (
+                    <>Everything left is purchasable on the TP — prices unavailable, sync to cost it.</>
+                  )}
                 </p>
               ) : (
                 <p className="text-sm text-muted">

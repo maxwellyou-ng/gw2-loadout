@@ -60,7 +60,7 @@ function useDailyLog() {
 }
 
 export default function Dashboard() {
-  const { loadout, sync, progressByPiece, allocatedBySlot } = useApp()
+  const { loadout, sync, progressByPiece, allocatedBySlot, pricesLoaded } = useApp()
   const { collectedToday, toggle } = useDailyLog()
 
   const slots = useMemo(() => plannedSlots(loadout), [loadout])
@@ -272,8 +272,9 @@ export default function Dashboard() {
                     </div>
                     {prog!.finishableByGold ? (
                       <p className="mt-2 text-sm text-good">
-                        Finish now for ≈{formatGold(prog!.buyOutGold)} — everything left is
-                        purchasable.
+                        {pricesLoaded
+                          ? `Finish now for ≈${formatGold(prog!.buyOutGold)} — everything left is purchasable.`
+                          : 'Everything left is purchasable on the TP (prices unavailable — sync to cost it).'}
                       </p>
                     ) : (
                       <p className="mt-2 text-sm text-muted">

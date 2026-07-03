@@ -1,5 +1,6 @@
 import { HashRouter, Navigate, Route, Routes, useLocation, type Location } from 'react-router-dom'
 import { AppProvider } from './state/store'
+import ErrorBoundary from './components/ErrorBoundary'
 import Layout from './components/Layout'
 import Modal from './components/Modal'
 import Loadout from './screens/Loadout'
@@ -67,10 +68,12 @@ function AppRoutes() {
 // rewrites needed).
 export default function App() {
   return (
-    <AppProvider>
-      <HashRouter>
-        <AppRoutes />
-      </HashRouter>
-    </AppProvider>
+    <ErrorBoundary>
+      <AppProvider>
+        <HashRouter>
+          <AppRoutes />
+        </HashRouter>
+      </AppProvider>
+    </ErrorBoundary>
   )
 }
