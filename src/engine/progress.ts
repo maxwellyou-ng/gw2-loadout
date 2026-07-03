@@ -340,8 +340,14 @@ export function buildRecipeTree(
       (source === 'achievement' || source === 'collection' || source === 'reward-track' || source === 'vendor')
     ) {
       provenance = 'summarized'
+    } else if (isSynthetic(item.itemId)) {
+      // A terminal LEAF with a synthetic id is a modelled stand-in for a real item
+      // we couldn't resolve to an API id (e.g. armor-set ascended bases, which
+      // expose no per-piece id) — a known representation, not an unverified recipe.
+      // 'unverified' is reserved for craftable intermediates not matched to the wiki.
+      provenance = 'summarized'
     } else {
-      provenance = isSynthetic(item.itemId) ? 'unverified' : parentVerified ? 'verified' : 'unverified'
+      provenance = parentVerified ? 'verified' : 'unverified'
     }
 
     return {
