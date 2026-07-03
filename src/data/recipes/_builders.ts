@@ -343,9 +343,13 @@ const ACQ_LEAF: Record<GiftAcq, { source: RecipeSource; notes: string }> = {
 }
 
 /** Sub-components the catalog deep-expands via a dedicated builder, not the
- * table (the table stops at them as terminal leaves). */
+ * table (the table stops at them as terminal leaves). Without a delegate a
+ * shared gift the curated layer models would terminate here as a bare leaf —
+ * under-counting its whole material sub-tree (caught by `npm run wiki:totals`). */
 const giftDelegates: Record<string, () => SubTree> = {
   'bloodstone shard': () => bloodstoneShard(ref(currency(CUR.spiritShard), 'Spirit Shard', 200)),
+  'gift of condensed might': giftOfCondensedMight,
+  'gift of condensed magic': giftOfCondensedMagic,
 }
 
 /** True when expanding this gift adds structure — a craftable recipe, a
