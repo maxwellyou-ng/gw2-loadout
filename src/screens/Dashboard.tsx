@@ -59,10 +59,14 @@ function useDailyLog() {
 }
 
 export default function Dashboard() {
-  const { loadout, sync, progressByPiece } = useApp()
+  const { loadout, sync, progressByPiece, allocatedBySlot } = useApp()
   const { collectedToday, toggle } = useDailyLog()
 
   const slots = useMemo(() => plannedSlots(loadout), [loadout])
+
+  // Consumption-correct per-slot progress for tracked slots (owned stock is
+  // allocated in priority order, never credited to two pieces at once).
+  const progFor = (s: LoadoutSlot) => allocatedBySlot[s.key] ?? progressForSlot(s, progressByPiece)
 
   // Chosen-but-untracked pieces — the bottom "Untracked" zone of the ladder.
   const untrackedChosen = useMemo(
@@ -79,14 +83,14 @@ export default function Dashboard() {
   )
 
   // --- Summary numbers (tracked + chosen pieces only) ----------------------
-  const scored = slots.map((s) => progressForSlot(s, progressByPiece)).filter((p) => p != null)
+  const scored = slots.map((s) => progFor(s)).filter((p) => p != null)
   const avgScore =
     scored.length > 0 ? scored.reduce((sum, p) => sum + p!.completionScore, 0) / scored.length : 0
   const doneCount = scored.filter((p) => p!.owned).length
 
   // Nearest finishes: not-owned pieces with a projected finish date, soonest first.
   const nearest = slots
-    .map((s) => ({ slot: s, prog: progressForSlot(s, progressByPiece) }))
+    .map((s) => ({ slot: s, prog: progFor(s) }))
     .filter((x) => x.prog && !x.prog.owned && x.prog.earliestFinishDate)
     .sort(
       (a, b) =>
@@ -99,7 +103,7 @@ export default function Dashboard() {
 
   // --- Finish-line pushes: nearly done, short finish window ----------------
   const pushes = slots
-    .map((s) => ({ slot: s, prog: progressForSlot(s, progressByPiece) }))
+    .map((s) => ({ slot: s, prog: progFor(s) }))
     .filter((x) => {
       const p = x.prog
       if (!p || p.owned) return false
@@ -416,9 +420,11 @@ function LadderRow({
   onMoveDown?: () => void
   onToggleTracked: () => void
 }) {
-  const { progressByPiece } = useApp()
+  const { progressByPiece, allocatedBySlot } = useApp()
   const piece = CATALOG_BY_ID[slot.chosenPieceId!]
-  const prog = progressForSlot(slot, progressByPiece)
+  // Tracked rows show allocation-aware progress; untracked rows (not in the
+  // plan, consuming nothing) show isolation progress.
+  const prog = (tracked ? allocatedBySlot[slot.key] : undefined) ?? progressForSlot(slot, progressByPiece)
   if (!piece) return null
 
   const btn =

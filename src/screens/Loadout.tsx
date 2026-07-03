@@ -138,9 +138,14 @@ function PieceBody({
   eyebrow?: boolean
   onRemove?: () => void
 }) {
-  const { progressByPiece } = useApp()
+  const { progressByPiece, allocatedBySlot } = useApp()
   const piece = slot.chosenPieceId != null ? CATALOG_BY_ID[slot.chosenPieceId] : undefined
-  const progress = piece ? progressByPiece[piece.id] : undefined
+  // Tracked slots read the consumption-correct allocation (owned stock credits
+  // one piece at a time, in priority order); untracked slots aren't part of the
+  // plan, so they show isolation progress.
+  const progress = piece
+    ? (slot.tracked ? allocatedBySlot[slot.key] : undefined) ?? progressByPiece[piece.id]
+    : undefined
 
   // Stale localStorage can hold a piece id no longer in the catalog — degrade
   // to a removable "unknown" card instead of crashing.

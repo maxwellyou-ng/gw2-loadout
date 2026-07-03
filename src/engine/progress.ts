@@ -75,12 +75,20 @@ function flatten(
   piece: LegendaryPiece,
   snapshot: InventorySnapshot,
   stopAtIntermediates = false,
+  /** When provided, intermediate credits taken from the snapshot are recorded
+   *  here (itemId -> qty). Crafting consumes: a credit is a claim on stock. */
+  intermediateCredits?: Map<number, number>,
 ): Map<number, LeafAcc> {
   const nodeByOutput = new Map<number, RecipeNode>()
   for (const n of piece.recipe.nodes) nodeByOutput.set(n.output.itemId, n)
 
   const leaves = new Map<number, LeafAcc>()
-  const owned = (id: number) => (isSynthetic(id) ? 0 : snapshot[id] ?? 0)
+  // Intermediate credits already taken during this walk. An owned gift is
+  // consumed by the subtree it credits — a second occurrence of the same
+  // intermediate in the tree must not be zeroed by the same stack.
+  const taken = new Map<number, number>()
+  const owned = (id: number) =>
+    isSynthetic(id) ? 0 : Math.max(0, (snapshot[id] ?? 0) - (taken.get(id) ?? 0))
 
   const recordLeaf = (itemId: number, name: string, qty: number, node?: RecipeNode) => {
     const cur = leaves.get(itemId)
@@ -103,8 +111,11 @@ function flatten(
       recordLeaf(itemId, name, qty, node)
       return
     }
-    // Intermediate: credit owned, expand the remainder.
-    const need = Math.max(0, qty - owned(itemId))
+    // Intermediate: credit owned stock (consuming it for this subtree), then
+    // expand only the uncovered remainder.
+    const credit = Math.min(qty, owned(itemId))
+    if (credit > 0) taken.set(itemId, (taken.get(itemId) ?? 0) + credit)
+    const need = qty - credit
     if (need <= 0) return
     if (seen.has(itemId)) return // guard against cyclic data
     seen.add(itemId)
@@ -117,6 +128,7 @@ function flatten(
   }
 
   expand(piece.id, piece.name, 1, true)
+  if (intermediateCredits) for (const [id, qty] of taken) intermediateCredits.set(id, qty)
   return leaves
 }
 
@@ -177,7 +189,8 @@ export function computeProgress(
 ): DerivedProgress {
   const owned = isOwned(piece, meta)
 
-  const leafMap = flatten(piece, snapshot)
+  const intermediateCredits = new Map<number, number>()
+  const leafMap = flatten(piece, snapshot, false, intermediateCredits)
   const materials: RemainingMaterial[] = []
 
   let qtyNeeded = 0
@@ -252,6 +265,17 @@ export function computeProgress(
   const earliestFinishDate =
     owned || maxDays <= 0 ? null : addDaysISO(new Date(), maxDays)
 
+  // What crafting this piece would consume from the snapshot: credited leaf
+  // stock plus credited intermediates. An already-unlocked piece consumes
+  // nothing — it will never be crafted.
+  const consumed: Record<number, number> = {}
+  if (!owned) {
+    for (const m of materials) if (m.owned > 0) consumed[m.itemId] = m.owned
+    for (const [id, qty] of intermediateCredits) {
+      consumed[id] = (consumed[id] ?? 0) + qty
+    }
+  }
+
   return {
     pieceId: piece.id,
     owned,
@@ -268,6 +292,7 @@ export function computeProgress(
     buyOutGold,
     timeGateDebt,
     earliestFinishDate,
+    consumed,
   }
 }
 

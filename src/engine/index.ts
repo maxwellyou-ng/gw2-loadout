@@ -7,6 +7,7 @@ export {
   progressForSlot,
   priorityRank,
   plannedSlots,
+  allocateProgress,
   aggregateRequirements,
   aggregateIntermediates,
 } from './loadout-progress'

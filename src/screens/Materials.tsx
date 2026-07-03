@@ -145,7 +145,7 @@ export default function Materials() {
     const snapshot = sync?.snapshot ?? {}
     const prices = sync?.prices ?? {}
     return view === 'gifts'
-      ? aggregateIntermediates(slots, snapshot, prices)
+      ? aggregateIntermediates(slots, snapshot, prices, sync?.meta)
       : aggregateRequirements(slots, snapshot, prices, sync?.meta)
   }, [slots, sync, view])
 
@@ -228,8 +228,8 @@ export default function Materials() {
     <div className="space-y-6">
       <PageHeader
         title="Whole-loadout materials"
-        subtitle={`${trackedWithPiece} tracked pieces · shared materials de-duplicated${!sync ? ' · sync to credit your inventory' : ''}`}
-        help="Every tracked piece rolled into one list: required is summed across pieces and owned is subtracted once, so a shared material like Mystic Clovers is never double-counted."
+        subtitle={`${trackedWithPiece} tracked pieces · crafting consumes: each piece needs its own materials${!sync ? ' · sync to credit your inventory' : ''}`}
+        help="Every tracked piece rolled into one list. Crafting consumes materials, so required is the sum over pieces (two pieces needing 77 and 18 clovers require 95) and your stock — including pre-built gifts — is credited to one piece at a time in priority order, never to several at once. Pieces you already own contribute nothing."
         actions={
           <div className="text-right">
             <p className="text-xs text-muted">Total buy-out</p>

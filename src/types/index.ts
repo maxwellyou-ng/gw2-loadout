@@ -231,6 +231,14 @@ export interface DerivedProgress {
   timeGateDebt: TimeGateDebt[]
   /** ISO date string for the soonest possible finish, or null if not gated. */
   earliestFinishDate: string | null
+  /**
+   * Inventory this piece's craft would consume, keyed by itemId: owned leaf
+   * materials credited (min(have, required)) plus owned intermediates credited
+   * during flattening. Crafting consumes materials, so the allocation walk
+   * (engine/loadout-progress `allocateProgress`) deducts this from the snapshot
+   * before computing the next piece — one stack never satisfies two pieces.
+   */
+  consumed: Record<number, number>
 }
 
 // --- Settings / weights ----------------------------------------------------

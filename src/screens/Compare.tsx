@@ -109,7 +109,7 @@ export default function Compare({ inModal = false }: { inModal?: boolean }) {
       <PageHeader
         title={`Compare candidates · ${slot.label}`}
         subtitle={`Lowest remaining effort wins.${!sync ? ' Sync to factor in your inventory.' : ''}`}
-        help="Sorted by remaining time-gate days, then buy-out gold, then how many required materials you already own."
+        help="Sorted by remaining time-gate days, then buy-out gold, then how many required materials you already own. Candidates are alternatives — only one will be crafted — so each is measured against your full inventory, unlike the priority-allocated numbers on the Dashboard."
       />
 
       {rows.length === 0 ? (

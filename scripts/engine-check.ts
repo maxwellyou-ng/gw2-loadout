@@ -6,6 +6,7 @@ import { CATALOG, pieceByName } from '../src/data/recipes'
 import {
   computeProgress,
   mergeInventory,
+  allocateProgress,
   aggregateRequirements,
   aggregateIntermediates,
   intermediateRequirements,
@@ -219,6 +220,74 @@ const v1helm = v1decoded.slots.find((s) => s.key === 'helm')
 check("v1 'flexible' status -> flexible true", v1chest?.flexible === true)
 check("v1 'must-have' status -> flexible false", v1helm?.flexible === false)
 check('v1 tracked preserved', v1chest?.tracked === true)
+
+// --- 9b. Consumption-correct allocation (crafting consumes materials) -------
+// Owned stock covers each requirement once: the allocation walk depletes the
+// snapshot in priority order, so one stack (or one banked gift) never
+// satisfies two pieces at the same time.
+console.log('\nConsumption-correct allocation:')
+
+// 77 owned clovers, Incinerator (77, priority 1) + Eikasia (18, priority 2):
+// the clovers go to Incinerator; Eikasia still needs all 18 — not both covered.
+const consSlots: LoadoutSlot[] = [
+  mkSlot({ key: 'weapon5', chosenPieceId: incPiece.id, priority: 1 }),
+  mkSlot({ key: 'gloves', chosenPieceId: eikPiece.id, priority: 2 }),
+]
+const cloverSnap = mergeInventory({ materials: [{ id: ITEM.mysticClover, count: 77 }] })
+const alloc = allocateProgress(consSlots, cloverSnap, {})
+const incAlloc = alloc['weapon5']!
+const eikAlloc = alloc['gloves']!
+const incAllocClover = incAlloc.remainingMaterials.find((m) => m.itemId === ITEM.mysticClover)
+const eikAllocClover = eikAlloc.remainingMaterials.find((m) => m.itemId === ITEM.mysticClover)
+check('priority piece consumes the stack (clover remaining 0)', incAllocClover == null, incAllocClover?.remaining)
+check('lower-priority piece gets nothing (still needs 18)', eikAllocClover?.remaining === 18, eikAllocClover?.remaining)
+check('consumed map records the claim', incAlloc.consumed[ITEM.mysticClover] === 77, incAlloc.consumed[ITEM.mysticClover])
+
+// Reversing priorities reverses the allocation.
+const consRev: LoadoutSlot[] = [
+  mkSlot({ key: 'weapon5', chosenPieceId: incPiece.id, priority: 2 }),
+  mkSlot({ key: 'gloves', chosenPieceId: eikPiece.id, priority: 1 }),
+]
+const allocRev = allocateProgress(consRev, cloverSnap, {})
+const incRevClover = allocRev['weapon5']!.remainingMaterials.find((m) => m.itemId === ITEM.mysticClover)
+check('reversed priority: Eikasia credited 18, Incinerator needs 18 more (77-59)', incRevClover?.remaining === 18, incRevClover?.remaining)
+
+// Aggregate remaining reconciles with the allocation walk (leaf-only snapshot).
+const consAgg = aggregateRequirements(consSlots, cloverSnap, {})
+const consAggClover = consAgg.materials.find((m) => m.itemId === ITEM.mysticClover)
+check('aggregate: required 95, remaining 18 after one 77-stack', consAggClover?.required === 95 && consAggClover?.remaining === 18, consAggClover && { req: consAggClover.required, rem: consAggClover.remaining })
+{
+  const remainingById = new Map<number, number>()
+  for (const key of ['weapon5', 'gloves'] as const) {
+    for (const m of alloc[key]!.remainingMaterials) {
+      remainingById.set(m.itemId, (remainingById.get(m.itemId) ?? 0) + m.remaining)
+    }
+  }
+  const mismatch = consAgg.materials.filter((m) => m.remaining !== (remainingById.get(m.itemId) ?? 0))
+  check('aggregate remaining == Σ allocated remaining, per item', mismatch.length === 0, mismatch.slice(0, 3).map((m) => m.name))
+}
+
+// One banked Gift of Fortune + two pieces needing one each: exactly one
+// piece's worth of the gift's base mats (77 clovers, 250 ecto) drops out.
+const twoInc: LoadoutSlot[] = [
+  mkSlot({ key: 'weapon5', chosenPieceId: incPiece.id, priority: 1 }),
+  mkSlot({ key: 'weapon6', chosenPieceId: incPiece.id, priority: 2 }),
+]
+const giftSnap = { [ITEM.giftOfFortune]: 1 }
+const giftAgg = aggregateRequirements(twoInc, giftSnap, {})
+const giftAggClover = giftAgg.materials.find((m) => m.itemId === ITEM.mysticClover)
+const giftAggEcto = giftAgg.materials.find((m) => m.itemId === ITEM.ectoplasm)
+check('one banked gift credits one piece: clovers 154 → 77 remaining', giftAggClover?.required === 154 && giftAggClover?.remaining === 77, giftAggClover && { req: giftAggClover.required, rem: giftAggClover.remaining })
+check('…and ecto 500 → 250 remaining', giftAggEcto?.required === 500 && giftAggEcto?.remaining === 250, giftAggEcto && { req: giftAggEcto.required, rem: giftAggEcto.remaining })
+
+// An already-unlocked piece is never crafted: it consumes nothing and
+// contributes nothing to the shopping list.
+const ownedIncMeta: SyncMeta = { ...emptyMeta, ownedArmoryNames: ['incinerator'] }
+const ownedAgg = aggregateRequirements(consSlots, {}, {}, ownedIncMeta)
+const ownedAggClover = ownedAgg.materials.find((m) => m.itemId === ITEM.mysticClover)
+check('unlocked piece excluded from aggregate (only Eikasia’s 18 clovers)', ownedAggClover?.required === 18, ownedAggClover?.required)
+const ownedAlloc = allocateProgress(consSlots, cloverSnap, {}, DEFAULT_WEIGHTS, ownedIncMeta)
+check('unlocked piece consumes nothing (Eikasia gets the stack)', ownedAlloc['gloves']!.remainingMaterials.find((m) => m.itemId === ITEM.mysticClover) == null)
 
 // --- 10. Forecaster data contract + re-pace math (Phase 6.7) ----------------
 // The forecaster reads aggregateRequirements().timeGateDebt and recomputes

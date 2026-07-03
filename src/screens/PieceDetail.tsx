@@ -64,9 +64,17 @@ function Group({
 
 export default function PieceDetail({ inModal = false }: { inModal?: boolean }) {
   const { id } = useParams()
-  const { progressByPiece, sync } = useApp()
+  const { progressByPiece, allocatedBySlot, loadout, sync } = useApp()
   const [view, setView] = useState<View>('tree')
   const piece = id ? CATALOG_BY_ID[Number(id)] : undefined
+
+  // If this piece sits in a tracked slot, the plan-level (allocation-aware)
+  // numbers can differ from the isolation view below: crafting consumes, so
+  // stock claimed by higher-priority pieces isn't available to this one.
+  const trackedSlot = piece
+    ? loadout.slots.find((s) => s.tracked && s.chosenPieceId === piece.id)
+    : undefined
+  const allocated = trackedSlot ? allocatedBySlot[trackedSlot.key] : undefined
 
   const tree = useMemo(
     () =>
@@ -158,6 +166,21 @@ export default function PieceDetail({ inModal = false }: { inModal?: boolean }) 
         <EmptyState title="No account data yet">
           Sync your account on the Settings tab to see real remaining-material counts.
         </EmptyState>
+      )}
+
+      {allocated && !allocated.owned && Math.abs(allocated.completionScore - progress.completionScore) > 0.005 && (
+        <Card className="border-line bg-surface/50">
+          <p className="text-sm text-muted">
+            This page shows the piece <span className="font-medium text-ink">in isolation</span>, with
+            your full inventory credited to it. In your plan, higher-priority pieces consume shared
+            stock first — after them this piece is at{' '}
+            <span className="font-medium text-ink">{formatPercent(allocated.completionScore)}</span>
+            {allocated.earliestFinishDate && (
+              <> with an earliest finish of <span className="font-medium text-ink">{formatDate(allocated.earliestFinishDate)}</span></>
+            )}
+            .
+          </p>
+        </Card>
       )}
 
       {progress.owned ? (

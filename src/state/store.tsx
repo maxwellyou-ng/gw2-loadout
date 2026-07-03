@@ -29,7 +29,7 @@ import {
   type LoadoutSlot,
 } from '../data/loadout'
 import type { SlotKey } from '../types'
-import { computeProgress, plannedSlots } from '../engine'
+import { allocateProgress, computeProgress, plannedSlots } from '../engine'
 import { syncAccount } from '../api/gw2'
 import { STORAGE_KEYS, loadJSON, saveJSON, removeKey } from './storage'
 
@@ -54,7 +54,15 @@ interface AppState {
   syncing: boolean
   syncMessage: string
   syncError: string | null
+  /** Per-piece progress in isolation (each piece sees the full inventory). */
   progressByPiece: Record<number, DerivedProgress>
+  /**
+   * Consumption-correct per-slot progress: tracked slots computed in priority
+   * order against a depleting inventory, so one stack never satisfies two
+   * pieces at once. Multi-piece views (Dashboard, Loadout, History) read this;
+   * Compare stays isolation-based (candidates are alternatives).
+   */
+  allocatedBySlot: Partial<Record<SlotKey, DerivedProgress>>
   setApiKey: (key: string) => void
   /** Wipe the stored API key and all synced account data (key, snapshot, history). */
   forgetAccount: () => void
@@ -186,6 +194,18 @@ export function AppProvider({ children }: { children: ReactNode }) {
     return out
   }, [sync, settings.weights])
 
+  const allocatedBySlot = useMemo(
+    () =>
+      allocateProgress(
+        loadout.slots,
+        sync?.snapshot ?? {},
+        sync?.prices ?? {},
+        settings.weights,
+        sync?.meta,
+      ),
+    [loadout, sync, settings.weights],
+  )
+
   // Snapshot history: log one record per *new* sync timestamp. Guarded by a ref
   // so re-renders (weight tweaks, loadout edits) don't re-log the same sync.
   const lastLoggedTs = useRef<string | null>(
@@ -198,7 +218,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
     const byPiece: Record<number, number> = {}
     let sum = 0
     for (const slot of planned) {
-      const p = progressByPiece[slot.chosenPieceId!]
+      // Allocation-aware score: shared stock credits one piece, not several.
+      const p = allocatedBySlot[slot.key] ?? progressByPiece[slot.chosenPieceId!]
       if (!p) continue
       byPiece[p.pieceId] = p.completionScore
       sum += p.completionScore
@@ -208,7 +229,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     const next = [...hist.filter((h) => h.ts !== ts), { ts, overall, byPiece }].slice(-100)
     saveJSON(STORAGE_KEYS.history, next)
     lastLoggedTs.current = ts
-  }, [sync, progressByPiece, loadout])
+  }, [sync, progressByPiece, allocatedBySlot, loadout])
 
   const value: AppState = {
     settings,
@@ -218,6 +239,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     syncMessage,
     syncError,
     progressByPiece,
+    allocatedBySlot,
     setApiKey,
     forgetAccount,
     runSync,
