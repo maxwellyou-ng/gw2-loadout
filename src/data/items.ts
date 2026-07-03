@@ -211,16 +211,25 @@ export interface GatedMaterialInfo {
 
 /**
  * Daily-cap registry for known time-gated materials. dailyRate is a planning
- * assumption (realistic sustained pace, not theoretical max). Used by the
- * engine to weight completion score and to project earliest-finish dates.
+ * ASSUMPTION (realistic sustained pace, not theoretical max) — each entry
+ * cites its basis, and the Forecast screen exposes per-material pace sliders
+ * to override any of them. Used by the engine to weight completion score and
+ * to project earliest-finish dates.
  */
 export const TIME_GATED: Record<number, GatedMaterialInfo> = {
+  // ~6/day sustained: 2/day Ley-Energy Matter Converter exchange + fractal
+  // dailies + WvW/PvP reward-track trickle, averaged. Forge gambling can burst
+  // higher but is luck, not pace. wiki.guildwars2.com/wiki/Mystic_Clover.
   [ITEM.mysticClover]: { dailyRate: 6, severity: 'high', label: 'Mystic Clover' },
+  // Hard cap: charging 25 quartz at a place of power is once/day/account.
+  // wiki.guildwars2.com/wiki/Charged_Quartz_Crystal.
   [ITEM.chargedQuartzCrystal]: {
     dailyRate: 1,
     severity: 'medium',
     label: 'Charged Quartz Crystal',
   },
+  // The four ascended-refinement materials below are each a once/day/account
+  // craft. wiki.guildwars2.com/wiki/Lump_of_Mithrillium (and siblings).
   [ITEM.lumpOfMithrillium]: {
     dailyRate: 1,
     severity: 'medium',

@@ -16,6 +16,7 @@
     "wiki:gifts": "tsx scripts/wiki-sync/gen-gifts.ts",
     "wiki:vendor-costs": "tsx scripts/wiki-sync/gen-vendor-costs.ts",
     "wiki:check": "tsx scripts/wiki-sync/check.ts",
+    "wiki:totals": "tsx scripts/wiki-sync/check-totals.ts",
     "wiki:test": "tsx scripts/wiki-sync/parse-recipe.test.ts && tsx scripts/wiki-sync/expand-recipe.test.ts",
     "wiki:audit": "tsx scripts/wiki-sync/audit-aliases.ts",
     "wiki:links": "tsx scripts/wiki-sync/check-links.ts",

@@ -12,3 +12,5 @@ export {
   aggregateIntermediates,
 } from './loadout-progress'
 export type { AggregatedMaterial, AggregateResult } from './loadout-progress'
+export { compareCandidates, daysUntilISO, isFinishLinePush } from './recommend'
+export type { CandidateSignals } from './recommend'

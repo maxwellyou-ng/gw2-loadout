@@ -10,9 +10,11 @@ import {
   aggregateRequirements,
   aggregateIntermediates,
   intermediateRequirements,
+  compareCandidates,
+  isFinishLinePush,
 } from '../src/engine'
 import { DEFAULT_WEIGHTS } from '../src/types'
-import { ITEM, currency, CUR } from '../src/data/items'
+import { ITEM, currency, CUR, isSynthetic } from '../src/data/items'
 import type { SyncMeta } from '../src/types'
 import {
   SLOT_ORDER,
@@ -310,6 +312,122 @@ const overall = (hpA + hpB) / 2
 const byPiece = { [incPiece.id]: hpA, [eikPiece.id]: hpB }
 const recomputed = Object.values(byPiece).reduce((s, v) => s + v, 0) / Object.values(byPiece).length
 check('overall equals mean of per-piece scores', Math.abs(recomputed - overall) < 1e-9, { overall, recomputed })
+
+// --- 12. Catalog-wide aggregation invariants (property checks) ---------------
+// Random tracked combos over the WHOLE catalog with random leaf-only
+// inventories: the totals identities must hold for every combination, not just
+// the hand-picked fixtures above. Seeded PRNG — failures are reproducible.
+console.log('\nCatalog-wide aggregation invariants:')
+{
+  let seed = 0xc0ffee
+  const rand = () => {
+    // LCG (Numerical Recipes) — deterministic across runs.
+    seed = (seed * 1664525 + 1013904223) >>> 0
+    return seed / 0x100000000
+  }
+  const pick = <T,>(arr: readonly T[]): T => arr[Math.floor(rand() * arr.length)]
+
+  const slotKeys = SLOT_ORDER.map((s) => s.key)
+  let bad = 0
+  const TRIALS = 30
+  for (let t = 0; t < TRIALS; t++) {
+    const n = 2 + Math.floor(rand() * 5)
+    const keys = [...slotKeys]
+    const slots: LoadoutSlot[] = []
+    const pieces: (typeof CATALOG)[number][] = []
+    for (let i = 0; i < n && keys.length > 0; i++) {
+      const key = keys.splice(Math.floor(rand() * keys.length), 1)[0]
+      const piece = pick(CATALOG)
+      pieces.push(piece)
+      slots.push(mkSlot({ key, chosenPieceId: piece.id, priority: i + 1 }))
+    }
+
+    // Gross per-piece leaf requirements (empty snapshot).
+    const grossById = new Map<number, number>()
+    const leafInfo = new Map<number, { buyable: boolean; dailyRate?: number; gated: boolean }>()
+    for (const piece of pieces) {
+      for (const m of computeProgress(piece, {}, {}, DEFAULT_WEIGHTS, emptyMeta).remainingMaterials) {
+        grossById.set(m.itemId, (grossById.get(m.itemId) ?? 0) + m.required)
+        leafInfo.set(m.itemId, { buyable: m.buyable, dailyRate: m.timeGate.dailyRate, gated: m.timeGate.isGated })
+      }
+    }
+
+    // Random leaf-only inventory + random prices over those leaves. Two
+    // exclusions keep the plain identity applicable: synthetic ids never match
+    // inventory (id-namespace contract), and an id that is a *producible
+    // intermediate* in any selected tree gets intermediate-credited (pruning
+    // its subtree), which is deeper than this identity models.
+    const producible = new Set<number>()
+    for (const piece of pieces) {
+      for (const nd of piece.recipe.nodes) if (nd.inputs.length > 0) producible.add(nd.output.itemId)
+    }
+    const snapshot: Record<number, number> = {}
+    const prices: Record<number, number> = {}
+    for (const [id, req] of grossById) {
+      if (!isSynthetic(id) && !producible.has(id) && rand() < 0.5) snapshot[id] = Math.floor(rand() * req * 1.5)
+      if (rand() < 0.5) prices[id] = 1 + Math.floor(rand() * 10_000)
+    }
+
+    const agg = aggregateRequirements(slots, snapshot, prices, emptyMeta)
+    const aggById = new Map(agg.materials.map((m) => [m.itemId, m]))
+
+    for (const [id, req] of grossById) {
+      const row = aggById.get(id)
+      if (!row || row.required !== req) { bad++; console.log(`  [FAIL] trial ${t}: required(${id}) ${row?.required} != Σ gross ${req}`); break }
+      const owned = snapshot[id] ?? 0
+      const expectRemaining = Math.max(0, req - owned)
+      if (row.remaining !== expectRemaining) { bad++; console.log(`  [FAIL] trial ${t}: remaining(${id}) ${row.remaining} != max(0, ${req} - ${owned})`); break }
+      if (row.owned !== req - expectRemaining) { bad++; console.log(`  [FAIL] trial ${t}: owned(${id}) ${row.owned} != required - remaining`); break }
+    }
+
+    // buyOutGold identity + time-gate day identity.
+    const expectGold = agg.materials.reduce(
+      (s, m) => s + (m.buyable && m.unitPrice != null ? m.remaining * m.unitPrice : 0), 0)
+    if (agg.buyOutGold !== expectGold) { bad++; console.log(`  [FAIL] trial ${t}: buyOutGold ${agg.buyOutGold} != Σ remaining×price ${expectGold}`) }
+    for (const d of agg.timeGateDebt) {
+      if (d.days !== Math.ceil(d.remaining / d.dailyRate)) { bad++; console.log(`  [FAIL] trial ${t}: debt days ${d.days} != ceil(${d.remaining}/${d.dailyRate})`); break }
+    }
+
+    // Untracked slots never contribute.
+    const withUntracked = [...slots, mkSlot({ key: keys[0] ?? 'relic', chosenPieceId: pick(CATALOG).id, tracked: false })]
+    const agg2 = aggregateRequirements(withUntracked, snapshot, prices, emptyMeta)
+    const sum = (a: typeof agg) => a.materials.reduce((s, m) => s + m.required, 0)
+    if (sum(agg2) !== sum(agg)) { bad++; console.log(`  [FAIL] trial ${t}: untracked slot changed totals`) }
+
+    // Allocation reconciliation: Σ per-slot allocated remaining == aggregate remaining.
+    const alloc = allocateProgress(slots, snapshot, prices, DEFAULT_WEIGHTS, emptyMeta)
+    const remById = new Map<number, number>()
+    for (const s of slots) {
+      for (const m of alloc[s.key]?.remainingMaterials ?? []) {
+        remById.set(m.itemId, (remById.get(m.itemId) ?? 0) + m.remaining)
+      }
+    }
+    for (const m of agg.materials) {
+      if (m.remaining !== (remById.get(m.itemId) ?? 0)) { bad++; console.log(`  [FAIL] trial ${t}: aggregate remaining(${m.itemId}) ${m.remaining} != Σ allocated ${remById.get(m.itemId) ?? 0}`); break }
+    }
+  }
+  check(`all invariants hold across ${TRIALS} random combos`, bad === 0, bad)
+}
+
+// --- 13. Recommendation rules (Compare ranking + finish-line pushes) ---------
+console.log('\nRecommendation rules:')
+{
+  const sig = (timeGateDays: number, gold: number, overlap: number) => ({ timeGateDays, gold, overlap })
+  const ranked = [sig(10, 0, 9), sig(3, 500, 1), sig(3, 100, 0), sig(3, 100, 5)].sort(compareCandidates)
+  check('fewest gate-days wins', ranked[0].timeGateDays === 3 && ranked[3].timeGateDays === 10)
+  check('gold breaks gate ties', ranked[0].gold === 100 && ranked[2].gold === 500)
+  check('overlap breaks gold ties (more first)', ranked[0].overlap === 5 && ranked[1].overlap === 0)
+
+  const now = new Date('2026-07-03T12:00:00Z')
+  const inDays = (d: number) => new Date(now.getTime() + d * 86_400_000).toISOString().slice(0, 10)
+  const prog = (over: Partial<import('../src/types').DerivedProgress>) =>
+    ({ owned: false, completionScore: 0, finishableByGold: false, earliestFinishDate: null, ...over }) as import('../src/types').DerivedProgress
+  check('owned piece is never a push', !isFinishLinePush(prog({ owned: true, finishableByGold: true }), now))
+  check('all-buyable remainder is a push', isFinishLinePush(prog({ finishableByGold: true }), now))
+  check('≥80% and ≤14d out is a push', isFinishLinePush(prog({ completionScore: 0.85, earliestFinishDate: inDays(10) }), now))
+  check('<80% is not a push', !isFinishLinePush(prog({ completionScore: 0.7, earliestFinishDate: inDays(10) }), now))
+  check('>14d out is not a push', !isFinishLinePush(prog({ completionScore: 0.95, earliestFinishDate: inDays(20) }), now))
+}
 
 console.log(`\n${failures === 0 ? 'ALL CHECKS PASSED ✅' : `${failures} CHECK(S) FAILED ❌`}`)
 process.exit(failures === 0 ? 0 : 1)

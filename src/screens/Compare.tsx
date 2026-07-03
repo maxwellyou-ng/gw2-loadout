@@ -15,7 +15,7 @@ import { useMemo } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useApp, CATALOG_BY_ID } from '../state/store'
 import { piecesForSlot } from '../lib/slotPieces'
-import { computeProgress } from '../engine'
+import { compareCandidates, computeProgress } from '../engine'
 import { DEFAULT_WEIGHTS } from '../types'
 import { Card, Badge, EmptyState, OverlayLink, ItemIcon, PageHeader } from '../components/ui'
 import { formatGold } from '../lib/format'
@@ -72,10 +72,7 @@ export default function Compare({ inModal = false }: { inModal?: boolean }) {
           recommended: false,
         }
       })
-    base.sort(
-      (a, b) =>
-        a.timeGateDays - b.timeGateDays || a.gold - b.gold || b.overlap - a.overlap,
-    )
+    base.sort(compareCandidates)
     if (base.length > 0) base[0].recommended = true
     return base
   }, [slot, progressByPiece, overlapFor])

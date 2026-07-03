@@ -18,6 +18,7 @@ import { Link } from 'react-router-dom'
 import { useApp, CATALOG_BY_ID } from '../state/store'
 import {
   aggregateRequirements,
+  isFinishLinePush,
   pieceForSlot,
   plannedSlots,
   priorityRank,
@@ -104,13 +105,7 @@ export default function Dashboard() {
   // --- Finish-line pushes: nearly done, short finish window ----------------
   const pushes = slots
     .map((s) => ({ slot: s, prog: progFor(s) }))
-    .filter((x) => {
-      const p = x.prog
-      if (!p || p.owned) return false
-      if (p.finishableByGold) return true // everything left is purchasable
-      const d = daysUntil(p.earliestFinishDate)
-      return p.completionScore >= 0.8 && d != null && d <= 14
-    })
+    .filter((x) => isFinishLinePush(x.prog))
     .sort((a, b) => b.prog!.completionScore - a.prog!.completionScore)
 
   if (slots.length === 0) {
