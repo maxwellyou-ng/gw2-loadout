@@ -17,8 +17,9 @@ import {
   trackedSlots,
   type AggregatedMaterial,
 } from '../engine'
-import { Card, Badge, SeverityDot, EmptyState, WikiName, ItemIcon, PageHeader } from '../components/ui'
+import { Card, Badge, SeverityDot, EmptyState, WikiName, ItemIcon, InfoTooltip, PageHeader } from '../components/ui'
 import { formatGold } from '../lib/format'
+import { ITEM_NOTES } from '../data/items'
 import type { GameMode, MaterialCategory } from '../types'
 
 type View = 'base' | 'gifts'
@@ -63,6 +64,7 @@ function MaterialRow({ m }: { m: AggregatedMaterial }) {
       <div className="flex min-w-0 flex-1 items-center gap-2">
         {m.timeGate.isGated && m.timeGate.severity && <SeverityDot severity={m.timeGate.severity} />}
         <WikiName name={m.name} itemId={m.itemId} className="truncate text-sm text-ink" />
+        {ITEM_NOTES[m.itemId] && <InfoTooltip label={ITEM_NOTES[m.itemId]} />}
         {m.gameMode && <Badge tone="accent">{m.gameMode}</Badge>}
       </div>
       <span className="w-20 shrink-0 text-right text-sm tabular-nums text-muted">

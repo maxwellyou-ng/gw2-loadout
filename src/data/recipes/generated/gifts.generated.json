@@ -530,6 +530,12 @@
       }
     ]
   },
+  "gift of baelfire": {
+    "name": "Gift of Baelfire",
+    "id": 19668,
+    "acq": "vendor",
+    "inputs": []
+  },
   "gift of balthazar": {
     "name": "Gift of Balthazar",
     "id": 81144,
@@ -3173,6 +3179,12 @@
     "acq": "reward",
     "inputs": []
   },
+  "gift of the forgeman": {
+    "name": "Gift of the Forgeman",
+    "id": 19666,
+    "acq": "vendor",
+    "inputs": []
+  },
   "gift of the four legions": {
     "name": "Gift of the Four Legions",
     "id": 87115,
@@ -3578,6 +3590,12 @@
   "gift of the survivors": {
     "name": "Gift of the Survivors",
     "id": 106712,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of the tides": {
+    "name": "Gift of the Tides",
+    "id": 106275,
     "acq": "vendor",
     "inputs": []
   },

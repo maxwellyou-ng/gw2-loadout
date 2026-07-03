@@ -62,6 +62,7 @@ export const COMPONENT_ALIASES: Record<string, string> = {
   'mystic coins': 'mystic coin',
   'globs of ectoplasm': 'glob of ectoplasm',
   'spirit shards': 'spirit shard',
+  'piles of bloodstone dust': 'pile of bloodstone dust',
   // Wiki disambiguates the raid currency as "(consumable)"; the catalog doesn't.
   'legendary insight (consumable)': 'legendary insight',
 }

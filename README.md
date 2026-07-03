@@ -174,6 +174,16 @@ against the GW2 Wiki**. What that means in practice:
   Craftsmanship (50 Provisioner Tokens), Eldritch Scroll (50 Spirit Shards), Legendary War
   Insight (1,095 WvW Skirmish Claim Tickets), Certificate of Honor (500) / Heroics (250), Glob
   of Condensed Spirit Energy (100). The engine expands these to currency costs.
+- **Nothing required is hidden behind an opaque leaf.** Materials whose ingredients are
+  needed on *every* acquisition path are always expanded — Gift of Research (250 Exotic
+  Essence of Luck + reagents), Cube of Stabilized Dark Energy (1 Ball of Dark Energy + 75
+  Stabilizing Matrix per cube), Vision Crystals (the Dragonite/Empyreal/Bloodstone "eater
+  food"), Poems (daily-gated Deldrimor/Spiritwood refinements), the gen2 curio/shard walls.
+  Kept leaves are documented decisions (`src/data/recipes/leaf-policy.json`); the
+  `wiki:totals` gate fails if anything expandable regresses to a leaf. Buyable-vs-account-bound
+  classification comes from the `/v2/items` flags (`account-bound.generated.json`), and
+  save-your-materials notes (luck, eater food, ascended salvage) render in the recipe tree
+  and Materials list.
 - **Still synthetic by design:** per-map heart-vendor gifts, achievements, and precursors
   *consumed in the forge* rather than stockpiled (Gift of Exploration, weapon precursors,
   Draconic Tribute). Matching these against inventory has no practical effect.

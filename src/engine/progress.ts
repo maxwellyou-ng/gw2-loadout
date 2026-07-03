@@ -27,10 +27,12 @@ import type {
 } from '../types'
 import {
   gameModeFor,
+  isAccountBound,
   isCurrency,
   isSynthetic,
   isTimeGated,
   materialCategory,
+  ITEM_NOTES,
   TIME_GATED,
 } from '../data/items'
 
@@ -38,6 +40,9 @@ const SEVERITY_WEIGHT: Record<TimeGateSeverity, number> = { low: 1, medium: 2, h
 
 /** Account-bound leaves that can't be bought on the TP to skip the grind. */
 function leafBuyable(itemId: number, fallbackNode?: RecipeNode): boolean {
+  // The /v2/items AccountBound flag is authoritative — it overrides whatever a
+  // recipe node claims (see account-bound.generated.json).
+  if (isAccountBound(itemId)) return false
   if (fallbackNode) return fallbackNode.buyable
   if (isCurrency(itemId)) return false // wallet currencies are account-bound
   if (isTimeGated(itemId)) return false // clovers, charged quartz, daily mats
@@ -333,7 +338,7 @@ export function buildRecipeTree(
     const node = nodeByOutput.get(item.itemId)
     const hasChildren = !!node && node.inputs.length > 0 && !seen.has(item.itemId)
     const source: RecipeSource = node?.source ?? 'mystic-forge'
-    const buyable = node ? node.buyable : leafBuyable(item.itemId)
+    const buyable = leafBuyable(item.itemId, node)
     const timeGate = node?.timeGate ?? leafGate(item.itemId)
     const have = isSynthetic(item.itemId) ? 0 : snapshot[item.itemId] ?? 0
     const remaining = Math.max(0, item.qty - have)
@@ -381,7 +386,7 @@ export function buildRecipeTree(
       buyable,
       timeGate,
       discipline: node?.discipline,
-      notes: node?.notes,
+      notes: node?.notes ?? ITEM_NOTES[item.itemId],
       category: materialCategory(item.itemId, source, item.name),
       gameMode: gameModeFor(item.itemId, source, item.name),
       provenance,

@@ -27,6 +27,8 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { CATALOG } from '../../src/data/recipes'
+import { hasGiftRecipe } from '../../src/data/recipes/_builders'
+import leafPolicy from '../../src/data/recipes/leaf-policy.json'
 import { computeProgress } from '../../src/engine'
 import { DEFAULT_WEIGHTS } from '../../src/types'
 import type { LegendaryPiece, RecipeNode } from '../../src/types'
@@ -291,6 +293,51 @@ function main(): void {
     for (const [reason, names] of skipByReason) {
       console.log(`  • ${reason}:`)
       console.log(`      ${names.join(', ')}`)
+    }
+  }
+
+  // ---- Check 3: leaf policy — nothing expandable may stay a leaf -------------
+  // A material whose ingredients are required on every acquisition path (gift
+  // recipes, itemized vendor costs, crafted intermediates) must never sit as an
+  // opaque leaf — that's how 250 Exotic Essence of Luck and the Cube of
+  // Stabilized Dark Energy's matrices stayed invisible to users. Kept leaves
+  // are documented decisions in leaf-policy.json (maintained by
+  // `npm run wiki:leaf-audit`, whose --check mode catches unclassified names).
+  {
+    const policy = leafPolicy as Record<string, { name: string; action: string; reason: string }>
+    const offenders = new Map<string, string[]>()
+    for (const piece of CATALOG) {
+      const producing = new Map(piece.recipe.nodes.map((n) => [n.output.itemId, n]))
+      const seen = new Set<number>()
+      for (const n of piece.recipe.nodes) {
+        for (const i of n.inputs) {
+          if (seen.has(i.itemId)) continue
+          seen.add(i.itemId)
+          const node = producing.get(i.itemId)
+          if (node && node.inputs.length > 0) continue
+          if (!hasGiftRecipe(i.name)) continue
+          const list = offenders.get(i.name) ?? []
+          list.push(piece.name)
+          offenders.set(i.name, list)
+        }
+      }
+    }
+    if (offenders.size > 0) {
+      failures++
+      console.error(`\n❌ ${offenders.size} expandable material(s) modeled as opaque leaves (hidden requirements):`)
+      for (const [name, pieces] of offenders) {
+        console.error(`   • ${name} — leaf in ${pieces.length} piece(s): ${pieces.slice(0, 4).join(', ')}${pieces.length > 4 ? ', …' : ''}`)
+      }
+    }
+    // Every policy entry marked 'expand' must actually be covered by the tables.
+    const uncovered = Object.values(policy).filter((e) => e.action === 'expand' && !hasGiftRecipe(e.name))
+    if (uncovered.length > 0) {
+      failures++
+      console.error(`\n❌ ${uncovered.length} leaf-policy 'expand' name(s) not covered by the gift/crafted tables:`)
+      for (const e of uncovered) console.error(`   • ${e.name}`)
+    }
+    if (offenders.size === 0 && uncovered.length === 0) {
+      console.log(`Leaf policy: no expandable material is modeled as a leaf (${Object.keys(policy).length} kept leaves documented).`)
     }
   }
 

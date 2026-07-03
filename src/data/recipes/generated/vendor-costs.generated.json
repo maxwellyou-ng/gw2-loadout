@@ -20,6 +20,13 @@
       "id": 84438
     }
   ],
+  "gift of baelfire": [
+    {
+      "name": "Tale of Dungeon Delving",
+      "qty": 500,
+      "id": null
+    }
+  ],
   "gift of bava nisos": [
     {
       "name": "Curious Mursaat Remnants",
@@ -429,6 +436,13 @@
       "currency": 1
     }
   ],
+  "gift of the forgeman": [
+    {
+      "name": "Tale of Dungeon Delving",
+      "qty": 500,
+      "id": null
+    }
+  ],
   "gift of the highlands": [
     {
       "name": "Karma",
@@ -593,6 +607,18 @@
       "name": "Aether-Rich Sap",
       "qty": 500,
       "currency": 83
+    }
+  ],
+  "gift of the tides": [
+    {
+      "name": "Karma",
+      "qty": 300000,
+      "currency": 2
+    },
+    {
+      "name": "Coin",
+      "qty": 500000,
+      "currency": 1
     }
   ],
   "gift of the ursus": [

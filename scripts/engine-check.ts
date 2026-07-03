@@ -313,6 +313,43 @@ const byPiece = { [incPiece.id]: hpA, [eikPiece.id]: hpB }
 const recomputed = Object.values(byPiece).reduce((s, v) => s + v, 0) / Object.values(byPiece).length
 check('overall equals mean of per-piece scores', Math.abs(recomputed - overall) < 1e-9, { overall, recomputed })
 
+// --- 11b. Hidden-requirement expansion (leaf-policy work, 2026-07-03) --------
+// Materials required on every acquisition path must surface as leaves, with
+// honest buyable classification, instead of hiding inside opaque intermediates.
+console.log('\nHidden-requirement expansion:')
+{
+  const flat = (name: string) =>
+    computeProgress(pieceByName(name)!, {}, {}, DEFAULT_WEIGHTS, emptyMeta).remainingMaterials
+  const find = (ms: ReturnType<typeof flat>, n: string) => ms.find((m) => m.name === n)
+
+  // Gift of Research (via Gift of Magical Prosperity): 250 Exotic Essence of
+  // Luck + 250 Thermo + 500 Hydro reagents — the user-reported case.
+  const obsHelm = flat('Obsidian Helm')
+  const luck = find(obsHelm, 'Exotic Essence of Luck')
+  check('Obsidian Helm needs 250 Exotic Essence of Luck', luck?.required === 250, luck?.required)
+  check('…and the luck is account-bound (not "buyable")', luck?.buyable === false)
+  check('…plus 500 Hydrocatalytic Reagent', find(obsHelm, 'Hydrocatalytic Reagent')?.required === 500)
+
+  // Cube of Stabilized Dark Energy — 1 Ball of Dark Energy + 75 Stabilizing
+  // Matrix per cube; was an opaque leaf in ~64 pieces.
+  const aurora = flat('Aurora')
+  check('Aurora surfaces Ball of Dark Energy (account-bound)', find(aurora, 'Ball of Dark Energy')?.buyable === false)
+  check('Aurora surfaces 75 Stabilizing Matrix (buyable)', find(aurora, 'Stabilizing Matrix')?.required === 75 && find(aurora, 'Stabilizing Matrix')?.buyable === true)
+
+  // Vision Crystal → Bricks/Ingots/Stars → the eater-food mats + Augur's Stone
+  // spirit shards; Conflux also converts certificates to wallet currencies.
+  const conflux = flat('Conflux')
+  check('Conflux surfaces Dragonite Ore via Vision Crystals', (find(conflux, 'Dragonite Ore')?.required ?? 0) >= 1000, find(conflux, 'Dragonite Ore')?.required)
+  const thHelm = flat("Triumphant Hero's Helm")
+  check('Triumphant Hero: Certificate of Honor → 500 Badge of Honor', find(thHelm, 'Badge of Honor')?.required === 500, find(thHelm, 'Badge of Honor')?.required)
+  check('Triumphant Hero: Globs of Spirit Energy → Spirit Shards', (find(thHelm, 'Spirit Shard')?.required ?? 0) >= 100, find(thHelm, 'Spirit Shard')?.required)
+
+  // Poems: Deldrimor parts sit behind the DAILY-gated Mithrillium refinement.
+  const rending = flat("Aurene's Rending")
+  const mith = find(rending, 'Lump of Mithrillium')
+  check("Aurene's Rending surfaces Lump of Mithrillium (time-gated)", !!mith && mith.timeGate.isGated, mith?.required)
+}
+
 // --- 12. Catalog-wide aggregation invariants (property checks) ---------------
 // Random tracked combos over the WHOLE catalog with random leaf-only
 // inventories: the totals identities must hold for every combination, not just

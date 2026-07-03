@@ -87,6 +87,18 @@ wiki transcription. Precursors are TP-buyable and themed-gift collections don't 
 countable inventory, so the payoff is low. Do one weapon at a time, running `tsc` +
 `npm run check` after each.
 
+- **Leaf-expansion policy:** a material whose ingredients are required on every acquisition
+  path (craft-only items, pure currency conversions, gifts with recipes/itemized vendor costs)
+  must NEVER be modeled as an opaque leaf — that's how 250 Exotic Essence of Luck (Gift of
+  Research) and the Cube of Stabilized Dark Energy's matrices stayed invisible. The central
+  pass (`expandKnownLeaves` in `src/data/recipes/index.ts` + `buildGiftSubTree`) expands
+  everything the generated tables know (`gifts` / `vendor-costs` / `crafted` .generated.json);
+  kept leaves are documented decisions in `src/data/recipes/leaf-policy.json` (promotion
+  recipes, TP-buyables, direct-drop items, precursor journeys). `npm run wiki:totals` fails if
+  anything expandable is a leaf; after `wiki:fetch` or catalog changes run
+  `npm run wiki:leaf-audit -- --check` (and `wiki:crafted` / `wiki:account-bound` to refresh
+  the generated tables — the account-bound manifest drives honest buyable classification).
+
 ## Wiki reconciliation toolchain (`scripts/wiki-sync/`)
 
 Drift between catalog and wiki is measured and gated automatically — use it to drive the work

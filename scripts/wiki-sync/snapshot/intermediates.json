@@ -1,6 +1,56 @@
 {
-  "generatedAt": "2026-06-21T05:48:15.205Z",
+  "generatedAt": "2026-07-03T19:40:53.746Z",
   "entries": [
+    {
+      "name": "Augur's Stone",
+      "apiId": 46752,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Augur's_Stone",
+      "confidence": "low",
+      "wikitextHash": "c9fb98309c0bead0",
+      "components": [],
+      "parseNote": "vendor-sold item — no craftable {{recipe}}; cost not machine-readable from {{Sold by}} (leaf material)"
+    },
+    {
+      "name": "Auric Ingot",
+      "apiId": 73537,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Auric_Ingot",
+      "confidence": "high",
+      "wikitextHash": "6e11ded922bb972d",
+      "components": [
+        {
+          "qty": 30,
+          "name": "Pile of Auric Dust"
+        },
+        {
+          "qty": 30,
+          "name": "Auric Sliver"
+        }
+      ]
+    },
+    {
+      "name": "Bloodstone Brick",
+      "apiId": 46730,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Bloodstone_Brick",
+      "confidence": "high",
+      "wikitextHash": "5df72f9b002a98a7",
+      "components": [
+        {
+          "qty": 100,
+          "name": "Pile of Bloodstone Dust"
+        },
+        {
+          "qty": 2,
+          "name": "Obsidian Shard"
+        },
+        {
+          "qty": 10,
+          "name": "Thermocatalytic Reagent"
+        }
+      ]
+    },
     {
       "name": "Bloodstone Shard",
       "apiId": 20797,
@@ -10,6 +60,364 @@
       "wikitextHash": "6e9ae305effd0755",
       "components": [],
       "parseNote": "vendor-sold item — no craftable {{recipe}}; cost not machine-readable from {{Sold by}} (leaf material)"
+    },
+    {
+      "name": "Certificate of Heroics",
+      "apiId": 84099,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Certificate_of_Heroics",
+      "confidence": "high",
+      "wikitextHash": "f360270048b2bf3f",
+      "components": [
+        {
+          "qty": 250,
+          "name": "Testimony of Jade Heroics"
+        }
+      ]
+    },
+    {
+      "name": "Certificate of Honor",
+      "apiId": 83620,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Certificate_of_Honor",
+      "confidence": "high",
+      "wikitextHash": "42ca8df1a38c5295",
+      "components": [
+        {
+          "qty": 500,
+          "name": "Badge of Honor"
+        }
+      ]
+    },
+    {
+      "name": "Certificate of Support",
+      "apiId": 77486,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Certificate_of_Support",
+      "confidence": "high",
+      "wikitextHash": "6eb3568766310bd5",
+      "components": [
+        {
+          "qty": 5,
+          "name": "PvP League Ticket"
+        }
+      ]
+    },
+    {
+      "name": "Crystalline Ingot",
+      "apiId": 46683,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Crystalline_Ingot",
+      "confidence": "high",
+      "wikitextHash": "d6c00ae73580b5e4",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Crystalline Ore"
+        },
+        {
+          "qty": 1,
+          "name": "Fulgurite"
+        },
+        {
+          "qty": 1,
+          "name": "Glob of Ectoplasm"
+        },
+        {
+          "qty": 1,
+          "name": "Amalgamated Gemstone"
+        }
+      ]
+    },
+    {
+      "name": "Cube of Stabilized Dark Energy",
+      "apiId": 73137,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Cube_of_Stabilized_Dark_Energy",
+      "confidence": "high",
+      "wikitextHash": "00f994cf724f067c",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Ball of Dark Energy"
+        },
+        {
+          "qty": 75,
+          "name": "Stabilizing Matrix"
+        }
+      ]
+    },
+    {
+      "name": "Deldrimor Steel Axe Blade",
+      "apiId": 45845,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Deldrimor_Steel_Axe_Blade",
+      "confidence": "high",
+      "wikitextHash": "d944d91a500d305d",
+      "components": [
+        {
+          "qty": 5,
+          "name": "Pile of Crystalline Dust"
+        },
+        {
+          "qty": 3,
+          "name": "Deldrimor Steel Ingot"
+        },
+        {
+          "qty": 50,
+          "name": "Thermocatalytic Reagent"
+        }
+      ]
+    },
+    {
+      "name": "Deldrimor Steel Dagger Blade",
+      "apiId": 45846,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Deldrimor_Steel_Dagger_Blade",
+      "confidence": "high",
+      "wikitextHash": "f20b690ebe04597a",
+      "components": [
+        {
+          "qty": 5,
+          "name": "Pile of Crystalline Dust"
+        },
+        {
+          "qty": 3,
+          "name": "Deldrimor Steel Ingot"
+        },
+        {
+          "qty": 50,
+          "name": "Thermocatalytic Reagent"
+        }
+      ]
+    },
+    {
+      "name": "Deldrimor Steel Greatsword Blade",
+      "apiId": 45847,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Deldrimor_Steel_Greatsword_Blade",
+      "confidence": "high",
+      "wikitextHash": "6893102e0967bb78",
+      "components": [
+        {
+          "qty": 5,
+          "name": "Pile of Crystalline Dust"
+        },
+        {
+          "qty": 3,
+          "name": "Deldrimor Steel Ingot"
+        },
+        {
+          "qty": 50,
+          "name": "Thermocatalytic Reagent"
+        }
+      ]
+    },
+    {
+      "name": "Deldrimor Steel Hammer Head",
+      "apiId": 45851,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Deldrimor_Steel_Hammer_Head",
+      "confidence": "high",
+      "wikitextHash": "66e82eb0c868cc35",
+      "components": [
+        {
+          "qty": 5,
+          "name": "Pile of Crystalline Dust"
+        },
+        {
+          "qty": 3,
+          "name": "Deldrimor Steel Ingot"
+        },
+        {
+          "qty": 50,
+          "name": "Thermocatalytic Reagent"
+        }
+      ]
+    },
+    {
+      "name": "Deldrimor Steel Horn",
+      "apiId": 45839,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Deldrimor_Steel_Horn",
+      "confidence": "high",
+      "wikitextHash": "0a323fad2935ef91",
+      "components": [
+        {
+          "qty": 5,
+          "name": "Pile of Crystalline Dust"
+        },
+        {
+          "qty": 2,
+          "name": "Spiritwood Plank"
+        },
+        {
+          "qty": 1,
+          "name": "Deldrimor Steel Ingot"
+        },
+        {
+          "qty": 50,
+          "name": "Thermocatalytic Reagent"
+        }
+      ]
+    },
+    {
+      "name": "Deldrimor Steel Ingot",
+      "apiId": 46738,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Deldrimor_Steel_Ingot",
+      "confidence": "high",
+      "wikitextHash": "3b061123163c5001",
+      "components": [
+        {
+          "qty": 20,
+          "name": "Iron Ingot"
+        },
+        {
+          "qty": 10,
+          "name": "Steel Ingot"
+        },
+        {
+          "qty": 20,
+          "name": "Darksteel Ingot"
+        },
+        {
+          "qty": 1,
+          "name": "Lump of Mithrillium"
+        }
+      ]
+    },
+    {
+      "name": "Deldrimor Steel Mace Head",
+      "apiId": 45852,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Deldrimor_Steel_Mace_Head",
+      "confidence": "high",
+      "wikitextHash": "a19d358d9b903e48",
+      "components": [
+        {
+          "qty": 5,
+          "name": "Pile of Crystalline Dust"
+        },
+        {
+          "qty": 3,
+          "name": "Deldrimor Steel Ingot"
+        },
+        {
+          "qty": 50,
+          "name": "Thermocatalytic Reagent"
+        }
+      ]
+    },
+    {
+      "name": "Deldrimor Steel Pistol Barrel",
+      "apiId": 45833,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Deldrimor_Steel_Pistol_Barrel",
+      "confidence": "high",
+      "wikitextHash": "c1d5dd6a1e3ef6ad",
+      "components": [
+        {
+          "qty": 5,
+          "name": "Pile of Crystalline Dust"
+        },
+        {
+          "qty": 3,
+          "name": "Deldrimor Steel Ingot"
+        },
+        {
+          "qty": 50,
+          "name": "Thermocatalytic Reagent"
+        }
+      ]
+    },
+    {
+      "name": "Deldrimor Steel Rifle Barrel",
+      "apiId": 45834,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Deldrimor_Steel_Rifle_Barrel",
+      "confidence": "high",
+      "wikitextHash": "0bcddc04d11c50e5",
+      "components": [
+        {
+          "qty": 5,
+          "name": "Pile of Crystalline Dust"
+        },
+        {
+          "qty": 3,
+          "name": "Deldrimor Steel Ingot"
+        },
+        {
+          "qty": 50,
+          "name": "Thermocatalytic Reagent"
+        }
+      ]
+    },
+    {
+      "name": "Deldrimor Steel Shield Boss",
+      "apiId": 45858,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Deldrimor_Steel_Shield_Boss",
+      "confidence": "high",
+      "wikitextHash": "a99e2b789031b0d7",
+      "components": [
+        {
+          "qty": 5,
+          "name": "Pile of Crystalline Dust"
+        },
+        {
+          "qty": 2,
+          "name": "Deldrimor Steel Ingot"
+        },
+        {
+          "qty": 50,
+          "name": "Thermocatalytic Reagent"
+        }
+      ]
+    },
+    {
+      "name": "Deldrimor Steel Sword Blade",
+      "apiId": 45848,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Deldrimor_Steel_Sword_Blade",
+      "confidence": "high",
+      "wikitextHash": "bcc7dd288b83bf61",
+      "components": [
+        {
+          "qty": 5,
+          "name": "Pile of Crystalline Dust"
+        },
+        {
+          "qty": 3,
+          "name": "Deldrimor Steel Ingot"
+        },
+        {
+          "qty": 50,
+          "name": "Thermocatalytic Reagent"
+        }
+      ]
+    },
+    {
+      "name": "Deldrimor Steel Torch Head",
+      "apiId": 45838,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Deldrimor_Steel_Torch_Head",
+      "confidence": "high",
+      "wikitextHash": "e9ebf37cfe617044",
+      "components": [
+        {
+          "qty": 5,
+          "name": "Pile of Crystalline Dust"
+        },
+        {
+          "qty": 2,
+          "name": "Deldrimor Steel Ingot"
+        },
+        {
+          "qty": 50,
+          "name": "Thermocatalytic Reagent"
+        }
+      ]
     },
     {
       "name": "Draconic Tribute",
@@ -38,6 +446,76 @@
       ]
     },
     {
+      "name": "Dragonite Ingot",
+      "apiId": 46732,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Dragonite_Ingot",
+      "confidence": "high",
+      "wikitextHash": "cdcab5c88a017313",
+      "components": [
+        {
+          "qty": 100,
+          "name": "Dragonite Ore"
+        },
+        {
+          "qty": 2,
+          "name": "Obsidian Shard"
+        },
+        {
+          "qty": 10,
+          "name": "Thermocatalytic Reagent"
+        }
+      ]
+    },
+    {
+      "name": "Eel Statue",
+      "apiId": 19642,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Eel_Statue",
+      "confidence": "high",
+      "wikitextHash": "88285a6841bad25d",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of the Forgeman"
+        },
+        {
+          "qty": 250,
+          "name": "Orichalcum Ingot"
+        },
+        {
+          "qty": 250,
+          "name": "Cured Hardened Leather Square"
+        },
+        {
+          "qty": 250,
+          "name": "Armored Scale"
+        }
+      ]
+    },
+    {
+      "name": "Empyreal Star",
+      "apiId": 46734,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Empyreal_Star",
+      "confidence": "high",
+      "wikitextHash": "c68ab896133e4f44",
+      "components": [
+        {
+          "qty": 100,
+          "name": "Empyreal Fragment"
+        },
+        {
+          "qty": 2,
+          "name": "Obsidian Shard"
+        },
+        {
+          "qty": 10,
+          "name": "Thermocatalytic Reagent"
+        }
+      ]
+    },
+    {
       "name": "Fractalline Spark",
       "apiId": 105196,
       "syntheticId": false,
@@ -46,6 +524,32 @@
       "wikitextHash": "01953b0d8ab9a49d",
       "components": [],
       "parseNote": "vendor-sold item — no craftable {{recipe}}; cost not machine-readable from {{Sold by}} (leaf material)"
+    },
+    {
+      "name": "Fulgurite",
+      "apiId": 76933,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Fulgurite",
+      "confidence": "high",
+      "wikitextHash": "a0606273168ceb3a",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Obsidian Shard"
+        },
+        {
+          "qty": 1,
+          "name": "Bottle of Airship Oil"
+        },
+        {
+          "qty": 1,
+          "name": "Pile of Auric Dust"
+        },
+        {
+          "qty": 1,
+          "name": "Ley Line Spark"
+        }
+      ]
     },
     {
       "name": "Gift of Arah",
@@ -2636,6 +3140,32 @@
       ]
     },
     {
+      "name": "Gift of the Astral Ward",
+      "apiId": 100466,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_the_Astral_Ward",
+      "confidence": "high",
+      "wikitextHash": "6fdd24fb38a90822",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Skywatch Archipelago"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Amnytas"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Inner Nayos"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Persistence"
+        }
+      ]
+    },
+    {
       "name": "Gift of the Beach",
       "apiId": 107201,
       "syntheticId": false,
@@ -3638,6 +4168,142 @@
       ]
     },
     {
+      "name": "Glob of Condensed Spirit Energy",
+      "apiId": 83082,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Glob_of_Condensed_Spirit_Energy",
+      "confidence": "high",
+      "wikitextHash": "6e33c33a429ce925",
+      "components": [
+        {
+          "qty": 100,
+          "name": "Spirit Shard"
+        }
+      ]
+    },
+    {
+      "name": "Jar of Distilled Glory",
+      "apiId": 82926,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Jar_of_Distilled_Glory",
+      "confidence": "high",
+      "wikitextHash": "20acd5244b0e0c54",
+      "components": [
+        {
+          "qty": 500,
+          "name": "Shard of Glory"
+        },
+        {
+          "qty": 500,
+          "name": "Shard of Glory"
+        }
+      ]
+    },
+    {
+      "name": "Mystic Essence of Animosity",
+      "apiId": 81494,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Mystic_Essence_of_Animosity",
+      "confidence": "high",
+      "wikitextHash": "42e6b2640ea128e6",
+      "components": [
+        {
+          "qty": 20,
+          "name": "Ancient Bone"
+        },
+        {
+          "qty": 50,
+          "name": "Large Bone"
+        },
+        {
+          "qty": 250,
+          "name": "Empyreal Fragment"
+        },
+        {
+          "qty": 1,
+          "name": "Essence of Animosity"
+        }
+      ]
+    },
+    {
+      "name": "Mystic Essence of Annihilation",
+      "apiId": 81407,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Mystic_Essence_of_Annihilation",
+      "confidence": "high",
+      "wikitextHash": "4d7e7f79839d8b3c",
+      "components": [
+        {
+          "qty": 20,
+          "name": "Vicious Claw"
+        },
+        {
+          "qty": 50,
+          "name": "Large Claw"
+        },
+        {
+          "qty": 10,
+          "name": "Dark Matter"
+        },
+        {
+          "qty": 1,
+          "name": "Essence of Annihilation"
+        }
+      ]
+    },
+    {
+      "name": "Mystic Essence of Carnage",
+      "apiId": 81449,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Mystic_Essence_of_Carnage",
+      "confidence": "high",
+      "wikitextHash": "426dbffb3071c541",
+      "components": [
+        {
+          "qty": 20,
+          "name": "Armored Scale"
+        },
+        {
+          "qty": 50,
+          "name": "Large Scale"
+        },
+        {
+          "qty": 250,
+          "name": "Dragonite Ore"
+        },
+        {
+          "qty": 1,
+          "name": "Essence of Carnage"
+        }
+      ]
+    },
+    {
+      "name": "Mystic Essence of Strategy",
+      "apiId": 81319,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Mystic_Essence_of_Strategy",
+      "confidence": "high",
+      "wikitextHash": "af787bdce73f4bfa",
+      "components": [
+        {
+          "qty": 20,
+          "name": "Vial of Powerful Blood"
+        },
+        {
+          "qty": 50,
+          "name": "Vial of Potent Blood"
+        },
+        {
+          "qty": 250,
+          "name": "Piles of Bloodstone Dust"
+        },
+        {
+          "qty": 1,
+          "name": "Essence of Strategy"
+        }
+      ]
+    },
+    {
       "name": "Mystic Tribute",
       "apiId": 71820,
       "syntheticId": false,
@@ -3660,6 +4326,1150 @@
         {
           "qty": 250,
           "name": "Mystic Coin"
+        }
+      ]
+    },
+    {
+      "name": "Neutralized Titan Alloy",
+      "apiId": 102467,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Neutralized_Titan_Alloy",
+      "confidence": "high",
+      "wikitextHash": "3c205df181c25bb1",
+      "components": [
+        {
+          "qty": 5,
+          "name": "Rotted Titan Amber"
+        },
+        {
+          "qty": 5,
+          "name": "Charged Titan Ore"
+        },
+        {
+          "qty": 3,
+          "name": "Glob of Ectoplasm"
+        },
+        {
+          "qty": 5,
+          "name": "Orichalcum Ingot"
+        }
+      ]
+    },
+    {
+      "name": "Poem on Axes",
+      "apiId": 97160,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Poem_on_Axes",
+      "confidence": "high",
+      "wikitextHash": "a686705ae16212eb",
+      "components": [
+        {
+          "qty": 10,
+          "name": "Tale of Adventure"
+        },
+        {
+          "qty": 10,
+          "name": "Lamplighter's Badge"
+        },
+        {
+          "qty": 1,
+          "name": "Deldrimor Steel Axe Blade"
+        },
+        {
+          "qty": 1,
+          "name": "Sheet of Premium Paper"
+        }
+      ]
+    },
+    {
+      "name": "Poem on Daggers",
+      "apiId": 96187,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Poem_on_Daggers",
+      "confidence": "high",
+      "wikitextHash": "692845b8e1cc10cb",
+      "components": [
+        {
+          "qty": 10,
+          "name": "Tale of Adventure"
+        },
+        {
+          "qty": 10,
+          "name": "Lamplighter's Badge"
+        },
+        {
+          "qty": 1,
+          "name": "Deldrimor Steel Dagger Blade"
+        },
+        {
+          "qty": 1,
+          "name": "Sheet of Premium Paper"
+        }
+      ]
+    },
+    {
+      "name": "Poem on Foci",
+      "apiId": 96951,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Poem_on_Foci",
+      "confidence": "high",
+      "wikitextHash": "3554fd6e1291d3c2",
+      "components": [
+        {
+          "qty": 10,
+          "name": "Tale of Adventure"
+        },
+        {
+          "qty": 10,
+          "name": "Lamplighter's Badge"
+        },
+        {
+          "qty": 1,
+          "name": "Spiritwood Focus Core"
+        },
+        {
+          "qty": 1,
+          "name": "Sheet of Premium Paper"
+        }
+      ]
+    },
+    {
+      "name": "Poem on Greatswords",
+      "apiId": 96036,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Poem_on_Greatswords",
+      "confidence": "high",
+      "wikitextHash": "c9b5affe01c78d28",
+      "components": [
+        {
+          "qty": 10,
+          "name": "Tale of Adventure"
+        },
+        {
+          "qty": 10,
+          "name": "Lamplighter's Badge"
+        },
+        {
+          "qty": 1,
+          "name": "Deldrimor Steel Greatsword Blade"
+        },
+        {
+          "qty": 1,
+          "name": "Sheet of Premium Paper"
+        }
+      ]
+    },
+    {
+      "name": "Poem on Hammers",
+      "apiId": 97082,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Poem_on_Hammers",
+      "confidence": "high",
+      "wikitextHash": "c2dd40e6f6143167",
+      "components": [
+        {
+          "qty": 10,
+          "name": "Tale of Adventure"
+        },
+        {
+          "qty": 10,
+          "name": "Lamplighter's Badge"
+        },
+        {
+          "qty": 1,
+          "name": "Deldrimor Steel Hammer Head"
+        },
+        {
+          "qty": 1,
+          "name": "Sheet of Premium Paper"
+        }
+      ]
+    },
+    {
+      "name": "Poem on Longbows",
+      "apiId": 97800,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Poem_on_Longbows",
+      "confidence": "high",
+      "wikitextHash": "6244a102056c57fc",
+      "components": [
+        {
+          "qty": 10,
+          "name": "Tale of Adventure"
+        },
+        {
+          "qty": 10,
+          "name": "Lamplighter's Badge"
+        },
+        {
+          "qty": 1,
+          "name": "Spiritwood Longbow Stave"
+        },
+        {
+          "qty": 1,
+          "name": "Sheet of Premium Paper"
+        }
+      ]
+    },
+    {
+      "name": "Poem on Maces",
+      "apiId": 96035,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Poem_on_Maces",
+      "confidence": "high",
+      "wikitextHash": "7742594e2aa99e6c",
+      "components": [
+        {
+          "qty": 10,
+          "name": "Tale of Adventure"
+        },
+        {
+          "qty": 10,
+          "name": "Lamplighter's Badge"
+        },
+        {
+          "qty": 1,
+          "name": "Deldrimor Steel Mace Head"
+        },
+        {
+          "qty": 1,
+          "name": "Sheet of Premium Paper"
+        }
+      ]
+    },
+    {
+      "name": "Poem on Pistols",
+      "apiId": 95809,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Poem_on_Pistols",
+      "confidence": "high",
+      "wikitextHash": "4fd78da332c91618",
+      "components": [
+        {
+          "qty": 10,
+          "name": "Tale of Adventure"
+        },
+        {
+          "qty": 10,
+          "name": "Lamplighter's Badge"
+        },
+        {
+          "qty": 1,
+          "name": "Deldrimor Steel Pistol Barrel"
+        },
+        {
+          "qty": 1,
+          "name": "Sheet of Premium Paper"
+        }
+      ]
+    },
+    {
+      "name": "Poem on Rifles",
+      "apiId": 97201,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Poem_on_Rifles",
+      "confidence": "high",
+      "wikitextHash": "aeb0d1660c26241e",
+      "components": [
+        {
+          "qty": 10,
+          "name": "Tale of Adventure"
+        },
+        {
+          "qty": 10,
+          "name": "Lamplighter's Badge"
+        },
+        {
+          "qty": 1,
+          "name": "Deldrimor Steel Rifle Barrel"
+        },
+        {
+          "qty": 1,
+          "name": "Sheet of Premium Paper"
+        }
+      ]
+    },
+    {
+      "name": "Poem on Scepters",
+      "apiId": 96173,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Poem_on_Scepters",
+      "confidence": "high",
+      "wikitextHash": "9e56d5513f99fc48",
+      "components": [
+        {
+          "qty": 10,
+          "name": "Tale of Adventure"
+        },
+        {
+          "qty": 10,
+          "name": "Lamplighter's Badge"
+        },
+        {
+          "qty": 1,
+          "name": "Spiritwood Scepter Core"
+        },
+        {
+          "qty": 1,
+          "name": "Sheet of Premium Paper"
+        }
+      ]
+    },
+    {
+      "name": "Poem on Shields",
+      "apiId": 95740,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Poem_on_Shields",
+      "confidence": "high",
+      "wikitextHash": "abfc578c55a0a73a",
+      "components": [
+        {
+          "qty": 10,
+          "name": "Tale of Adventure"
+        },
+        {
+          "qty": 10,
+          "name": "Lamplighter's Badge"
+        },
+        {
+          "qty": 1,
+          "name": "Deldrimor Steel Shield Boss"
+        },
+        {
+          "qty": 1,
+          "name": "Sheet of Premium Paper"
+        }
+      ]
+    },
+    {
+      "name": "Poem on Short Bows",
+      "apiId": 96849,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Poem_on_Short_Bows",
+      "confidence": "high",
+      "wikitextHash": "2eff4238a2e716cd",
+      "components": [
+        {
+          "qty": 10,
+          "name": "Tale of Adventure"
+        },
+        {
+          "qty": 10,
+          "name": "Lamplighter's Badge"
+        },
+        {
+          "qty": 1,
+          "name": "Spiritwood Short-Bow Stave"
+        },
+        {
+          "qty": 1,
+          "name": "Sheet of Premium Paper"
+        }
+      ]
+    },
+    {
+      "name": "Poem on Staves",
+      "apiId": 95962,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Poem_on_Staves",
+      "confidence": "high",
+      "wikitextHash": "2565e8870b94760d",
+      "components": [
+        {
+          "qty": 10,
+          "name": "Tale of Adventure"
+        },
+        {
+          "qty": 10,
+          "name": "Lamplighter's Badge"
+        },
+        {
+          "qty": 1,
+          "name": "Spiritwood Staff Head"
+        },
+        {
+          "qty": 1,
+          "name": "Sheet of Premium Paper"
+        }
+      ]
+    },
+    {
+      "name": "Poem on Swords",
+      "apiId": 97335,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Poem_on_Swords",
+      "confidence": "high",
+      "wikitextHash": "cec3735f879d621b",
+      "components": [
+        {
+          "qty": 10,
+          "name": "Tale of Adventure"
+        },
+        {
+          "qty": 10,
+          "name": "Lamplighter's Badge"
+        },
+        {
+          "qty": 1,
+          "name": "Deldrimor Steel Sword Blade"
+        },
+        {
+          "qty": 1,
+          "name": "Sheet of Premium Paper"
+        }
+      ]
+    },
+    {
+      "name": "Poem on Torches",
+      "apiId": 97257,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Poem_on_Torches",
+      "confidence": "high",
+      "wikitextHash": "8d08c4aa27d9f64a",
+      "components": [
+        {
+          "qty": 10,
+          "name": "Tale of Adventure"
+        },
+        {
+          "qty": 10,
+          "name": "Lamplighter's Badge"
+        },
+        {
+          "qty": 1,
+          "name": "Deldrimor Steel Torch Head"
+        },
+        {
+          "qty": 1,
+          "name": "Sheet of Premium Paper"
+        }
+      ]
+    },
+    {
+      "name": "Poem on Warhorns",
+      "apiId": 96341,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Poem_on_Warhorns",
+      "confidence": "high",
+      "wikitextHash": "2033ce539829620d",
+      "components": [
+        {
+          "qty": 10,
+          "name": "Tale of Adventure"
+        },
+        {
+          "qty": 10,
+          "name": "Lamplighter's Badge"
+        },
+        {
+          "qty": 1,
+          "name": "Deldrimor Steel Horn"
+        },
+        {
+          "qty": 1,
+          "name": "Sheet of Premium Paper"
+        }
+      ]
+    },
+    {
+      "name": "Purified Rift Essence",
+      "apiId": 100569,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Purified_Rift_Essence",
+      "confidence": "high",
+      "wikitextHash": "06c4921b0b347bc5",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Amalgamated Rift Essence"
+        },
+        {
+          "qty": 1,
+          "name": "Mystic Clover"
+        }
+      ]
+    },
+    {
+      "name": "Record of League Participation",
+      "apiId": 82471,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Record_of_League_Participation",
+      "confidence": "high",
+      "wikitextHash": "8049e626e044faf5",
+      "components": [
+        {
+          "qty": 20,
+          "name": "PvP League Ticket"
+        }
+      ]
+    },
+    {
+      "name": "Relic of the Sunless",
+      "apiId": null,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Relic_of_the_Sunless",
+      "confidence": "high",
+      "wikitextHash": "29fe8be5d7814e0f",
+      "components": [
+        {
+          "qty": 48,
+          "name": "Pile of Lucent Crystal"
+        },
+        {
+          "qty": 30,
+          "name": "Sun Bead"
+        },
+        {
+          "qty": 3,
+          "name": "Charm of Skill"
+        },
+        {
+          "qty": 15,
+          "name": "Glob of Ectoplasm"
+        }
+      ]
+    },
+    {
+      "name": "Shard of Arah",
+      "apiId": 82069,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Shard_of_Arah",
+      "confidence": "high",
+      "wikitextHash": "fbc02b404e205520",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Tribute to Arah"
+        },
+        {
+          "qty": 1,
+          "name": "Mystic Curio"
+        },
+        {
+          "qty": 40,
+          "name": "Mithril Ingot"
+        },
+        {
+          "qty": 30,
+          "name": "Elder Wood Plank"
+        }
+      ]
+    },
+    {
+      "name": "Shard of Call of the Void",
+      "apiId": 87711,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Shard_of_Call_of_the_Void",
+      "confidence": "high",
+      "wikitextHash": "deed651ddc25a10f",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Tribute to the Call of the Void"
+        },
+        {
+          "qty": 1,
+          "name": "Mystic Curio"
+        },
+        {
+          "qty": 20,
+          "name": "Mithril Ingot"
+        },
+        {
+          "qty": 10,
+          "name": "Elder Wood Plank"
+        }
+      ]
+    },
+    {
+      "name": "Shard of Endeavor",
+      "apiId": 79445,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Shard_of_Endeavor",
+      "confidence": "high",
+      "wikitextHash": "0897367cb2354a24",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Tribute to Endeavor"
+        },
+        {
+          "qty": 1,
+          "name": "Mystic Curio"
+        },
+        {
+          "qty": 30,
+          "name": "Mithril Ingot"
+        },
+        {
+          "qty": 20,
+          "name": "Elder Wood Plank"
+        }
+      ]
+    },
+    {
+      "name": "Shard of Exitare",
+      "apiId": 90390,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Shard_of_Exitare",
+      "confidence": "high",
+      "wikitextHash": "9dd6db15be3374ae",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Tribute to the Exitare"
+        },
+        {
+          "qty": 1,
+          "name": "Mystic Curio"
+        },
+        {
+          "qty": 40,
+          "name": "Mithril Ingot"
+        },
+        {
+          "qty": 30,
+          "name": "Elder Wood Plank"
+        }
+      ]
+    },
+    {
+      "name": "Shard of Friendship",
+      "apiId": 79784,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Shard_of_Friendship",
+      "confidence": "high",
+      "wikitextHash": "dd7024739b2b0f71",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Tribute to Friendship"
+        },
+        {
+          "qty": 1,
+          "name": "Mystic Curio"
+        },
+        {
+          "qty": 20,
+          "name": "Mithril Ingot"
+        },
+        {
+          "qty": 10,
+          "name": "Elder Wood Plank"
+        }
+      ]
+    },
+    {
+      "name": "Shard of Liturgy",
+      "apiId": 81051,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Shard_of_Liturgy",
+      "confidence": "high",
+      "wikitextHash": "0108a1b6bc09d726",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Tribute to Liturgy"
+        },
+        {
+          "qty": 1,
+          "name": "Mystic Curio"
+        },
+        {
+          "qty": 20,
+          "name": "Mithril Ingot"
+        },
+        {
+          "qty": 10,
+          "name": "Elder Wood Plank"
+        }
+      ]
+    },
+    {
+      "name": "Shard of Resolution",
+      "apiId": 87031,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Shard_of_Resolution",
+      "confidence": "high",
+      "wikitextHash": "a6d470fe5c87450b",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Tribute to Resolution"
+        },
+        {
+          "qty": 1,
+          "name": "Mystic Curio"
+        },
+        {
+          "qty": 30,
+          "name": "Mithril Ingot"
+        },
+        {
+          "qty": 20,
+          "name": "Elder Wood Plank"
+        }
+      ]
+    },
+    {
+      "name": "Shard of Spero",
+      "apiId": 89947,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Shard_of_Spero",
+      "confidence": "high",
+      "wikitextHash": "b1a4fa2353fb7259",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Tribute to Spero"
+        },
+        {
+          "qty": 1,
+          "name": "Mystic Curio"
+        },
+        {
+          "qty": 40,
+          "name": "Mithril Ingot"
+        },
+        {
+          "qty": 30,
+          "name": "Elder Wood Plank"
+        }
+      ]
+    },
+    {
+      "name": "Shard of the Crown",
+      "apiId": 81961,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Shard_of_the_Crown",
+      "confidence": "high",
+      "wikitextHash": "13eaddacb6ad9218",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Tribute to the Queen"
+        },
+        {
+          "qty": 1,
+          "name": "Mystic Curio"
+        },
+        {
+          "qty": 30,
+          "name": "Mithril Ingot"
+        },
+        {
+          "qty": 20,
+          "name": "Elder Wood Plank"
+        }
+      ]
+    },
+    {
+      "name": "Shard of the Dark Arts",
+      "apiId": 86120,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Shard_of_the_Dark_Arts",
+      "confidence": "high",
+      "wikitextHash": "be156e9bb98b6b49",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Tribute to the Dark Arts"
+        },
+        {
+          "qty": 1,
+          "name": "Mystic Curio"
+        },
+        {
+          "qty": 20,
+          "name": "Mithril Ingot"
+        },
+        {
+          "qty": 10,
+          "name": "Elder Wood Plank"
+        }
+      ]
+    },
+    {
+      "name": "Shard of Tlehco",
+      "apiId": 88738,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Shard_of_Tlehco",
+      "confidence": "high",
+      "wikitextHash": "f786a29a52bf79d7",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Tribute to Tlehco"
+        },
+        {
+          "qty": 1,
+          "name": "Mystic Curio"
+        },
+        {
+          "qty": 30,
+          "name": "Mithril Ingot"
+        },
+        {
+          "qty": 20,
+          "name": "Elder Wood Plank"
+        }
+      ]
+    },
+    {
+      "name": "Shark Statue",
+      "apiId": 19641,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Shark_Statue",
+      "confidence": "high",
+      "wikitextHash": "c840a2e2a45ab5ae",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Zhaitan"
+        },
+        {
+          "qty": 250,
+          "name": "Orichalcum Ingot"
+        },
+        {
+          "qty": 250,
+          "name": "Armored Scale"
+        },
+        {
+          "qty": 250,
+          "name": "Vial of Powerful Blood"
+        }
+      ]
+    },
+    {
+      "name": "Spiritwood Focus Core",
+      "apiId": 45884,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Spiritwood_Focus_Core",
+      "confidence": "high",
+      "wikitextHash": "14e980e6a3f24117",
+      "components": [
+        {
+          "qty": 5,
+          "name": "Pile of Crystalline Dust"
+        },
+        {
+          "qty": 2,
+          "name": "Spiritwood Plank"
+        },
+        {
+          "qty": 50,
+          "name": "Thermocatalytic Reagent"
+        }
+      ]
+    },
+    {
+      "name": "Spiritwood Longbow Stave",
+      "apiId": 45841,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Spiritwood_Longbow_Stave",
+      "confidence": "high",
+      "wikitextHash": "448486916a17fd70",
+      "components": [
+        {
+          "qty": 5,
+          "name": "Pile of Crystalline Dust"
+        },
+        {
+          "qty": 4,
+          "name": "Spiritwood Plank"
+        },
+        {
+          "qty": 50,
+          "name": "Thermocatalytic Reagent"
+        }
+      ]
+    },
+    {
+      "name": "Spiritwood Plank",
+      "apiId": 46736,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Spiritwood_Plank",
+      "confidence": "high",
+      "wikitextHash": "a3f0ddfe0f7039da",
+      "components": [
+        {
+          "qty": 20,
+          "name": "Soft Wood Plank"
+        },
+        {
+          "qty": 10,
+          "name": "Seasoned Wood Plank"
+        },
+        {
+          "qty": 20,
+          "name": "Hard Wood Plank"
+        },
+        {
+          "qty": 1,
+          "name": "Glob of Elder Spirit Residue"
+        }
+      ]
+    },
+    {
+      "name": "Spiritwood Scepter Core",
+      "apiId": 45885,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Spiritwood_Scepter_Core",
+      "confidence": "high",
+      "wikitextHash": "ca24f5d8cc3a650f",
+      "components": [
+        {
+          "qty": 5,
+          "name": "Pile of Crystalline Dust"
+        },
+        {
+          "qty": 2,
+          "name": "Spiritwood Plank"
+        },
+        {
+          "qty": 50,
+          "name": "Thermocatalytic Reagent"
+        }
+      ]
+    },
+    {
+      "name": "Spiritwood Short-Bow Stave",
+      "apiId": 45842,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Spiritwood_Short-Bow_Stave",
+      "confidence": "high",
+      "wikitextHash": "1a2188b4305a4fff",
+      "components": [
+        {
+          "qty": 5,
+          "name": "Pile of Crystalline Dust"
+        },
+        {
+          "qty": 4,
+          "name": "Spiritwood Plank"
+        },
+        {
+          "qty": 50,
+          "name": "Thermocatalytic Reagent"
+        }
+      ]
+    },
+    {
+      "name": "Spiritwood Staff Head",
+      "apiId": 45887,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Spiritwood_Staff_Head",
+      "confidence": "high",
+      "wikitextHash": "d797df24c509a5f8",
+      "components": [
+        {
+          "qty": 5,
+          "name": "Pile of Crystalline Dust"
+        },
+        {
+          "qty": 2,
+          "name": "Spiritwood Plank"
+        },
+        {
+          "qty": 50,
+          "name": "Thermocatalytic Reagent"
+        }
+      ]
+    },
+    {
+      "name": "Star of Glory",
+      "apiId": 83872,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Star_of_Glory",
+      "confidence": "high",
+      "wikitextHash": "fca1855bfe17a92c",
+      "components": [
+        {
+          "qty": 400,
+          "name": "Ascended Shard of Glory"
+        }
+      ]
+    },
+    {
+      "name": "Unicorn Statue",
+      "apiId": 19628,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Unicorn_Statue",
+      "confidence": "high",
+      "wikitextHash": "995bd87159749f21",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Thorns"
+        },
+        {
+          "qty": 250,
+          "name": "Orichalcum Ingot"
+        },
+        {
+          "qty": 100,
+          "name": "Chrysocola Orb"
+        },
+        {
+          "qty": 100,
+          "name": "Opal Orb"
+        }
+      ]
+    },
+    {
+      "name": "Vial of Liquid Flame",
+      "apiId": 19634,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Vial_of_Liquid_Flame",
+      "confidence": "high",
+      "wikitextHash": "88fef4e829396c93",
+      "components": [
+        {
+          "qty": 250,
+          "name": "Ghost Pepper"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Baelfire"
+        },
+        {
+          "qty": 100,
+          "name": "Molten Lodestone"
+        },
+        {
+          "qty": 100,
+          "name": "Destroyer Lodestone"
+        }
+      ]
+    },
+    {
+      "name": "Vial of Quicksilver",
+      "apiId": 19633,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Vial_of_Quicksilver",
+      "confidence": "high",
+      "wikitextHash": "0834d99eb5234a21",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of the Forgeman"
+        },
+        {
+          "qty": 250,
+          "name": "Steel Ingot"
+        },
+        {
+          "qty": 150,
+          "name": "Molten Lodestone"
+        },
+        {
+          "qty": 250,
+          "name": "Silver Doubloon"
+        }
+      ]
+    },
+    {
+      "name": "Vial of Titan Melted Liquid Obsidian",
+      "apiId": 104229,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Vial_of_Titan_Melted_Liquid_Obsidian",
+      "confidence": "high",
+      "wikitextHash": "fbc13e0a7594b9fd",
+      "components": [
+        {
+          "qty": 5,
+          "name": "Mursaat Obsidian Chunk"
+        },
+        {
+          "qty": 5,
+          "name": "Titan Heatstone"
+        },
+        {
+          "qty": 3,
+          "name": "Glob of Ectoplasm"
+        },
+        {
+          "qty": 3,
+          "name": "Ancient Wood Plank"
+        }
+      ]
+    },
+    {
+      "name": "Vision Crystal",
+      "apiId": 46746,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Vision_Crystal",
+      "confidence": "high",
+      "wikitextHash": "e0379b4277291e4d",
+      "components": [
+        {
+          "qty": 5,
+          "name": "Bloodstone Brick"
+        },
+        {
+          "qty": 5,
+          "name": "Dragonite Ingot"
+        },
+        {
+          "qty": 5,
+          "name": "Empyreal Star"
+        },
+        {
+          "qty": 1,
+          "name": "Augur's Stone"
+        }
+      ]
+    },
+    {
+      "name": "War Commendation",
+      "apiId": 93101,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/War_Commendation",
+      "confidence": "high",
+      "wikitextHash": "ef490ea63f8a3401",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Warfare"
+        },
+        {
+          "qty": 1,
+          "name": "Emblem of the Conqueror"
+        },
+        {
+          "qty": 1,
+          "name": "Mist Pearl"
+        },
+        {
+          "qty": 1,
+          "name": "Mist-Enhanced Mithril"
+        }
+      ]
+    },
+    {
+      "name": "Wolf Statue",
+      "apiId": 19640,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Wolf_Statue",
+      "confidence": "high",
+      "wikitextHash": "735fb5e1db4aab60",
+      "components": [
+        {
+          "qty": 250,
+          "name": "Orichalcum Ingot"
+        },
+        {
+          "qty": 250,
+          "name": "Cured Hardened Leather Square"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Thorns"
+        },
+        {
+          "qty": 250,
+          "name": "Vicious Fang"
         }
       ]
     }

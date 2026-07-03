@@ -1,0 +1,817 @@
+{
+ "amalgamated draconic lodestone": {
+  "name": "Amalgamated Draconic Lodestone",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "amalgamated rift essence": {
+  "name": "Amalgamated Rift Essence",
+  "action": "leaf",
+  "reason": "direct acquisition exists (drops/salvage/vendor) — the recipe is an alternative path, not required"
+ },
+ "ancient bone": {
+  "name": "Ancient Bone",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "ancient wood plank": {
+  "name": "Ancient Wood Plank",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "armored scale": {
+  "name": "Armored Scale",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "ars goetia": {
+  "name": "Ars Goetia",
+  "action": "leaf",
+  "reason": "precursor — crafted via its own multi-tier collection journey; catalog models precursors at piece granularity (future depth work)"
+ },
+ "beryl orb": {
+  "name": "Beryl Orb",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "bolt of gossamer": {
+  "name": "Bolt of Gossamer",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "bone": {
+  "name": "Bone",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "bowl of black pepper cactus salad": {
+  "name": "Bowl of Black Pepper Cactus Salad",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "bowl of passion fruit tapioca pudding": {
+  "name": "Bowl of Passion Fruit Tapioca Pudding",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "bowl of poultry satay": {
+  "name": "Bowl of Poultry Satay",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "bowl of prickly pear sorbet": {
+  "name": "Bowl of Prickly Pear Sorbet",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "call of the void": {
+  "name": "Call of the Void",
+  "action": "leaf",
+  "reason": "precursor — crafted via its own multi-tier collection journey; catalog models precursors at piece granularity (future depth work)"
+ },
+ "carcharias": {
+  "name": "Carcharias",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "chaos gun": {
+  "name": "Chaos Gun",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "charged lodestone": {
+  "name": "Charged Lodestone",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "charm of skill": {
+  "name": "Charm of Skill",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "chrysocola orb": {
+  "name": "Chrysocola Orb",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "claw": {
+  "name": "Claw",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "claw of resolution": {
+  "name": "Claw of Resolution",
+  "action": "leaf",
+  "reason": "precursor — crafted via its own multi-tier collection journey; catalog models precursors at piece granularity (future depth work)"
+ },
+ "coral orb": {
+  "name": "Coral Orb",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "corrupted lodestone": {
+  "name": "Corrupted Lodestone",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "cured hardened leather square": {
+  "name": "Cured Hardened Leather Square",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "darksteel ingot": {
+  "name": "Darksteel Ingot",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "dawn": {
+  "name": "Dawn",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "destroyer lodestone": {
+  "name": "Destroyer Lodestone",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "dragon's argument": {
+  "name": "Dragon's Argument",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "dragon's bite": {
+  "name": "Dragon's Bite",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "dragon's breath": {
+  "name": "Dragon's Breath",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "dragon's claw": {
+  "name": "Dragon's Claw (weapon)",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "dragon's fang": {
+  "name": "Dragon's Fang",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "dragon's flight": {
+  "name": "Dragon's Flight",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "dragon's gaze": {
+  "name": "Dragon's Gaze",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "dragon's insight": {
+  "name": "Dragon's Insight",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "dragon's persuasion": {
+  "name": "Dragon's Persuasion",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "dragon's rending": {
+  "name": "Dragon's Rending",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "dragon's scale": {
+  "name": "Dragon's Scale",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "dragon's tail": {
+  "name": "Dragon's Tail",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "dragon's voice": {
+  "name": "Dragon's Voice",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "dragon's weight": {
+  "name": "Dragon's Weight",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "dragon's wing": {
+  "name": "Dragon's Wing",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "dragon's wisdom": {
+  "name": "Dragon's Wisdom",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "dusk": {
+  "name": "Dusk",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "elaborate totem": {
+  "name": "Elaborate Totem",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "elder wood plank": {
+  "name": "Elder Wood Plank",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "endeavor": {
+  "name": "Endeavor",
+  "action": "leaf",
+  "reason": "precursor — crafted via its own multi-tier collection journey; catalog models precursors at piece granularity (future depth work)"
+ },
+ "engraved totem": {
+  "name": "Engraved Totem",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "essence of animosity": {
+  "name": "Essence of Animosity",
+  "action": "leaf",
+  "reason": "direct acquisition exists (drops/salvage/vendor) — the recipe is an alternative path, not required"
+ },
+ "essence of annihilation": {
+  "name": "Essence of Annihilation",
+  "action": "leaf",
+  "reason": "direct acquisition exists (drops/salvage/vendor) — the recipe is an alternative path, not required"
+ },
+ "essence of carnage": {
+  "name": "Essence of Carnage",
+  "action": "leaf",
+  "reason": "direct acquisition exists (drops/salvage/vendor) — the recipe is an alternative path, not required"
+ },
+ "essence of strategy": {
+  "name": "Essence of Strategy",
+  "action": "leaf",
+  "reason": "direct acquisition exists (drops/salvage/vendor) — the recipe is an alternative path, not required"
+ },
+ "exitare": {
+  "name": "Exitare",
+  "action": "leaf",
+  "reason": "precursor — crafted via its own multi-tier collection journey; catalog models precursors at piece granularity (future depth work)"
+ },
+ "exotic essence of luck": {
+  "name": "Exotic Essence of Luck",
+  "action": "leaf",
+  "reason": "direct acquisition exists (drops/salvage/vendor) — the recipe is an alternative path, not required"
+ },
+ "fang": {
+  "name": "Fang",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "friendship": {
+  "name": "Friendship",
+  "action": "leaf",
+  "reason": "precursor — crafted via its own multi-tier collection journey; catalog models precursors at piece granularity (future depth work)"
+ },
+ "full venom sac": {
+  "name": "Full Venom Sac",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "gift of research": {
+  "name": "Gift of Research",
+  "action": "expand",
+  "reason": "covered by gift/crafted tables"
+ },
+ "gift of the mists": {
+  "name": "Gift of the Mists",
+  "action": "expand",
+  "reason": "covered by gift/crafted tables"
+ },
+ "gift of war prosperity": {
+  "name": "Gift of War Prosperity",
+  "action": "expand",
+  "reason": "covered by gift/crafted tables"
+ },
+ "glacial lodestone": {
+  "name": "Glacial Lodestone",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "hard wood plank": {
+  "name": "Hard Wood Plank",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "hardened leather section": {
+  "name": "Hardened Leather Section",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "heavy bone": {
+  "name": "Heavy Bone",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "howl": {
+  "name": "Howl",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "intricate totem": {
+  "name": "Intricate Totem",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "iron ingot": {
+  "name": "Iron Ingot",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "large bone": {
+  "name": "Large Bone",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "large claw": {
+  "name": "Large Claw",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "large fang": {
+  "name": "Large Fang",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "large scale": {
+  "name": "Large Scale",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "leaf of kudzu": {
+  "name": "Leaf of Kudzu",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "liturgy": {
+  "name": "Liturgy",
+  "action": "leaf",
+  "reason": "precursor — crafted via its own multi-tier collection journey; catalog models precursors at piece granularity (future depth work)"
+ },
+ "man o' war": {
+  "name": "Man o' War",
+  "action": "leaf",
+  "reason": "precursor — crafted via its own multi-tier collection journey; catalog models precursors at piece granularity (future depth work)"
+ },
+ "meaty asparagus skewer": {
+  "name": "Meaty Asparagus Skewer",
+  "action": "leaf",
+  "reason": "direct acquisition exists (drops/salvage/vendor) — the recipe is an alternative path, not required"
+ },
+ "might of arah": {
+  "name": "Might of Arah",
+  "action": "leaf",
+  "reason": "precursor — crafted via its own multi-tier collection journey; catalog models precursors at piece granularity (future depth work)"
+ },
+ "mist pearl": {
+  "name": "Mist Pearl",
+  "action": "leaf",
+  "reason": "direct acquisition exists (drops/salvage/vendor) — the recipe is an alternative path, not required"
+ },
+ "mist-enhanced mithril": {
+  "name": "Mist-Enhanced Mithril",
+  "action": "leaf",
+  "reason": "direct acquisition exists (drops/salvage/vendor) — the recipe is an alternative path, not required"
+ },
+ "mithril ingot": {
+  "name": "Mithril Ingot",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "molten lodestone": {
+  "name": "Molten Lodestone",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "mystic curio": {
+  "name": "Mystic Curio",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "nyr hrammr": {
+  "name": "Nyr Hrammr",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "obsidian shard": {
+  "name": "Obsidian Shard",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "onyx lodestone": {
+  "name": "Onyx Lodestone",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "opal orb": {
+  "name": "Opal Orb",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "orichalcum ingot": {
+  "name": "Orichalcum Ingot",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "orrax contained": {
+  "name": "Orrax Contained",
+  "action": "leaf",
+  "reason": "precursor — crafted via its own multi-tier collection journey; catalog models precursors at piece granularity (future depth work)"
+ },
+ "pile of bloodstone dust": {
+  "name": "Pile of Bloodstone Dust",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "pile of crystalline dust": {
+  "name": "Pile of Crystalline Dust",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "pile of incandescent dust": {
+  "name": "Pile of Incandescent Dust",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "pile of lucent crystal": {
+  "name": "Pile of Lucent Crystal",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "pile of luminous dust": {
+  "name": "Pile of Luminous Dust",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "pile of radiant dust": {
+  "name": "Pile of Radiant Dust",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "plate of orrian steak frittes": {
+  "name": "Plate of Orrian Steak Frittes",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "plate of spicy herbed chicken": {
+  "name": "Plate of Spicy Herbed Chicken",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "plate of truffle steak": {
+  "name": "Plate of Truffle Steak",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "platinum ingot": {
+  "name": "Platinum Ingot",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "potent venom sac": {
+  "name": "Potent Venom Sac",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "powerful venom sac": {
+  "name": "Powerful Venom Sac",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "prototype": {
+  "name": "Prototype",
+  "action": "leaf",
+  "reason": "precursor — crafted via its own multi-tier collection journey; catalog models precursors at piece granularity (future depth work)"
+ },
+ "rage": {
+  "name": "Rage (weapon)",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "red-lentil saobosa": {
+  "name": "Red-Lentil Saobosa",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "rodgort's flame": {
+  "name": "Rodgort's Flame",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "salt-forged mist diamond": {
+  "name": "Salt-Forged Mist Diamond",
+  "action": "leaf",
+  "reason": "direct acquisition exists (drops/salvage/vendor) — the recipe is an alternative path, not required"
+ },
+ "save the queen": {
+  "name": "Save the Queen",
+  "action": "leaf",
+  "reason": "precursor — crafted via its own multi-tier collection journey; catalog models precursors at piece granularity (future depth work)"
+ },
+ "scale": {
+  "name": "Scale",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "seasoned wood plank": {
+  "name": "Seasoned Wood Plank",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "shard o' war": {
+  "name": "Shard o' War",
+  "action": "leaf",
+  "reason": "precursor — crafted via its own multi-tier collection journey; catalog models precursors at piece granularity (future depth work)"
+ },
+ "sharp claw": {
+  "name": "Sharp Claw",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "sharp fang": {
+  "name": "Sharp Fang",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "sheet of premium paper": {
+  "name": "Sheet of Premium Paper",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "smooth scale": {
+  "name": "Smooth Scale",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "soft wood plank": {
+  "name": "Soft Wood Plank",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "spark": {
+  "name": "Spark (weapon)",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "spero": {
+  "name": "Spero",
+  "action": "leaf",
+  "reason": "precursor — crafted via its own multi-tier collection journey; catalog models precursors at piece granularity (future depth work)"
+ },
+ "spicy marinated mushroom": {
+  "name": "Spicy Marinated Mushroom",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "steel ingot": {
+  "name": "Steel Ingot",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "storm": {
+  "name": "Storm",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "sunrise": {
+  "name": "Sunrise",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "superior sigil of accuracy": {
+  "name": "Superior Sigil of Accuracy",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "superior sigil of agony": {
+  "name": "Superior Sigil of Agony",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "superior sigil of air": {
+  "name": "Superior Sigil of Air",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "superior sigil of battle": {
+  "name": "Superior Sigil of Battle",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "superior sigil of benevolence": {
+  "name": "Superior Sigil of Benevolence",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "superior sigil of blood": {
+  "name": "Superior Sigil of Blood",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "superior sigil of celerity": {
+  "name": "Superior Sigil of Celerity",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "superior sigil of energy": {
+  "name": "Superior Sigil of Energy",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "superior sigil of fire": {
+  "name": "Superior Sigil of Fire",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "superior sigil of force": {
+  "name": "Superior Sigil of Force",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "superior sigil of ice": {
+  "name": "Superior Sigil of Ice",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "superior sigil of nullification": {
+  "name": "Superior Sigil of Nullification",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "superior sigil of purity": {
+  "name": "Superior Sigil of Purity",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "superior sigil of rage": {
+  "name": "Superior Sigil of Rage",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "superior sigil of stamina": {
+  "name": "Superior Sigil of Stamina",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "superior sigil of strength": {
+  "name": "Superior Sigil of Strength",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "superior sigil of venom": {
+  "name": "Superior Sigil of Venom",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "sweet-treated pine plank": {
+  "name": "Sweet-Treated Pine Plank",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "the bard": {
+  "name": "The Bard",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "the chosen": {
+  "name": "The Chosen",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "the colossus": {
+  "name": "The Colossus",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "the energizer": {
+  "name": "The Energizer",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "the hunter": {
+  "name": "The Hunter",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "the legend": {
+  "name": "The Legend",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "the lover": {
+  "name": "The Lover",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "the mechanism": {
+  "name": "The Mechanism",
+  "action": "leaf",
+  "reason": "precursor — crafted via its own multi-tier collection journey; catalog models precursors at piece granularity (future depth work)"
+ },
+ "the raven staff": {
+  "name": "The Raven Staff",
+  "action": "leaf",
+  "reason": "precursor — crafted via its own multi-tier collection journey; catalog models precursors at piece granularity (future depth work)"
+ },
+ "tigris": {
+  "name": "Tigris",
+  "action": "leaf",
+  "reason": "precursor — crafted via its own multi-tier collection journey; catalog models precursors at piece granularity (future depth work)"
+ },
+ "tlehco": {
+  "name": "Tlehco",
+  "action": "leaf",
+  "reason": "precursor — crafted via its own multi-tier collection journey; catalog models precursors at piece granularity (future depth work)"
+ },
+ "tooth of frostfang": {
+  "name": "Tooth of Frostfang",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "totem": {
+  "name": "Totem",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "twilight": {
+  "name": "Twilight",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "unbound": {
+  "name": "Unbound",
+  "action": "leaf",
+  "reason": "precursor — crafted via its own multi-tier collection journey; catalog models precursors at piece granularity (future depth work)"
+ },
+ "venom": {
+  "name": "Venom (weapon)",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ },
+ "venom sac": {
+  "name": "Venom Sac",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "vial of blood": {
+  "name": "Vial of Blood",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "vial of potent blood": {
+  "name": "Vial of Potent Blood",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "vial of powerful blood": {
+  "name": "Vial of Powerful Blood",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "vial of thick blood": {
+  "name": "Vial of Thick Blood",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "vicious claw": {
+  "name": "Vicious Claw",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "vicious fang": {
+  "name": "Vicious Fang",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "warcry": {
+  "name": "Warcry",
+  "action": "leaf",
+  "reason": "precursor — crafted via its own multi-tier collection journey; catalog models precursors at piece granularity (future depth work)"
+ },
+ "wings of ascension": {
+  "name": "Wings of Ascension",
+  "action": "leaf",
+  "reason": "precursor — crafted via its own multi-tier collection journey; catalog models precursors at piece granularity (future depth work)"
+ },
+ "zap": {
+  "name": "Zap",
+  "action": "leaf",
+  "reason": "tp-buyable — purchasing is a legitimate direct path"
+ }
+}

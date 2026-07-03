@@ -1,7 +1,8 @@
 import { useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useApp, CATALOG_BY_ID } from '../state/store'
-import { Card, ProgressBar, ScorePill, SeverityDot, Badge, EmptyState, WikiName, ItemIcon, StatStrip } from '../components/ui'
+import { Card, ProgressBar, ScorePill, SeverityDot, Badge, EmptyState, WikiName, ItemIcon, InfoTooltip, StatStrip } from '../components/ui'
+import { ITEM_NOTES } from '../data/items'
 import RecipeTree from '../components/RecipeTree'
 import { buildRecipeTree } from '../engine'
 import { VERIFIED_INTERMEDIATES } from '../data/verified-intermediates'
@@ -20,6 +21,7 @@ function MaterialRow({ m }: { m: RemainingMaterial }) {
       <div className="flex min-w-0 flex-1 items-center gap-2">
         {m.timeGate.isGated && m.timeGate.severity && <SeverityDot severity={m.timeGate.severity} />}
         <WikiName name={m.name} itemId={m.itemId} className="truncate text-sm text-ink" />
+        {ITEM_NOTES[m.itemId] && <InfoTooltip label={ITEM_NOTES[m.itemId]} />}
       </div>
       <span className="w-20 shrink-0 text-right text-sm tabular-nums text-muted">
         {m.owned}/{m.required}

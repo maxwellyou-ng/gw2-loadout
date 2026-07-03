@@ -22,6 +22,7 @@ import type {
 } from '../../types'
 import { CUR, ITEM, TIME_GATED, currency, synthetic } from '../items'
 import giftTable from './generated/gifts.generated.json'
+import craftedTable from './generated/crafted.generated.json'
 import vendorCostTable from './generated/vendor-costs.generated.json'
 
 export const ref = (itemId: number, name: string, qty: number): ItemRef => ({
@@ -333,6 +334,18 @@ interface RawCost {
 const GIFTS = giftTable as Record<string, RawGiftEntry>
 const VENDOR_COSTS = vendorCostTable as Record<string, RawCost[]>
 
+/** Crafted-intermediate recipes (`npm run wiki:crafted`) — NON-gift items whose
+ * ingredients are required on every acquisition path (craft-only items and pure
+ * currency conversions: Cube of Stabilized Dark Energy, Vision Crystal + its
+ * refinements, Mystic Essences, Poems, Certificates, …). Inputs carry either a
+ * real item `id` or a wallet `currency` id. */
+interface RawCraftedEntry {
+  name: string
+  id: number | null
+  inputs: { name: string; qty: number; id?: number | null; currency?: number }[]
+}
+const CRAFTED = craftedTable as Record<string, RawCraftedEntry>
+
 const giftCanon = (s: string) => s.trim().toLowerCase().replace(/['`´]/g, "'")
 
 /** How a non-crafted gift is acquired → the leaf's source + an explanatory note. */
@@ -352,14 +365,16 @@ const giftDelegates: Record<string, () => SubTree> = {
   'gift of condensed magic': giftOfCondensedMagic,
 }
 
-/** True when expanding this gift adds structure — a craftable recipe, a
- * documented vendor cost, or a delegated builder. Pure vendor/reward leaf gifts
- * return false so `assembleLegendary` keeps its curated top-level leaf handling;
- * they still get acquisition-labelled when reached during recursion. */
+/** True when expanding this name adds structure — a gift recipe, a documented
+ * vendor cost, a crafted-intermediate recipe, or a delegated builder. Pure
+ * vendor/reward leaf gifts return false so `assembleLegendary` keeps its curated
+ * top-level leaf handling; they still get acquisition-labelled when reached
+ * during recursion. */
 export const hasGiftRecipe = (name: string): boolean => {
   const c = giftCanon(name)
   if (c in giftDelegates) return true
   if ((VENDOR_COSTS[c]?.length ?? 0) > 0) return true
+  if ((CRAFTED[c]?.inputs.length ?? 0) > 0) return true
   const e = GIFTS[c]
   return !!e && e.inputs.length > 0
 }
@@ -397,8 +412,9 @@ export function buildGiftSubTree(rootName: string): SubTree {
 
     const entry = GIFTS[canon]
     const vendorCost = VENDOR_COSTS[canon]
-    const out = ref(idFor(name, entry?.id ?? id), name, 1)
-    if ((!entry && !vendorCost) || seen.has(canon)) {
+    const crafted = entry?.inputs.length ? undefined : CRAFTED[canon]
+    const out = ref(idFor(name, entry?.id ?? crafted?.id ?? id), name, 1)
+    if ((!entry && !vendorCost && !crafted) || seen.has(canon)) {
       // Terminal: a non-gift material leaf, an un-modelled gift, or a cycle stop.
       // Give gift leaves a friendly collection source; materials stay plain leaves.
       if (/^gift of /.test(canon) && !built.has(canon)) {
@@ -413,9 +429,31 @@ export function buildGiftSubTree(rootName: string): SubTree {
       const nextSeen = new Set(seen)
       nextSeen.add(canon)
       const inputs = (entry?.inputs ?? []).map((inp) => ({ ...visit(inp.name, inp.id, nextSeen), qty: inp.qty }))
+      // Crafted-intermediate recipe (Cube of Stabilized Dark Energy, Vision
+      // Crystal, Certificates, …): item ingredients recurse like gift inputs;
+      // wallet-currency ingredients become tracked currency leaves directly.
+      for (const c of crafted?.inputs ?? []) {
+        if (c.currency != null) {
+          const cref = ref(currency(c.currency), c.name, c.qty)
+          inputs.push(cref)
+          const ck = 'cost:' + giftCanon(c.name)
+          if (!built.has(ck)) {
+            built.add(ck)
+            nodes.push(node(cref, [], { source: 'vendor', notes: 'Currency conversion cost' }))
+          }
+        } else {
+          inputs.push({ ...visit(c.name, c.id ?? null, nextSeen), qty: c.qty })
+        }
+      }
       // The currencies / items this gift is bought with — tracked so they aren't
-      // spent before the gift is acquired.
+      // spent before the gift is acquired. An item tender the tables can expand
+      // (e.g. Gift of the Elders is bought WITH a Gift of Research) recurses like
+      // any other input, so its own materials are surfaced too.
       for (const c of vendorCost ?? []) {
+        if (c.currency == null && hasGiftRecipe(c.name)) {
+          inputs.push({ ...visit(c.name, c.id ?? null, nextSeen), qty: c.qty })
+          continue
+        }
         const cref =
           c.currency != null ? ref(currency(c.currency), c.name, c.qty) : ref(c.id ?? synthetic(), c.name, c.qty)
         inputs.push(cref)
@@ -426,10 +464,12 @@ export function buildGiftSubTree(rootName: string): SubTree {
         }
       }
       // A craftable gift forges its inputs; a vendor gift expands to its purchase
-      // cost; a reward gift with neither is a tracked leaf labelled how it's earned.
-      const acq: GiftAcq = entry?.acq ?? (vendorCost ? 'vendor' : 'reward')
+      // cost; a crafted intermediate crafts its ingredients; a reward gift with
+      // neither is a tracked leaf labelled how it's earned.
+      const acq: GiftAcq = entry?.acq ?? (vendorCost ? 'vendor' : crafted ? 'recipe' : 'reward')
       const leaf = ACQ_LEAF[acq]
-      const source = inputs.length > 0 ? (acq === 'vendor' ? 'vendor' : 'mystic-forge') : leaf.source
+      const source: RecipeSource =
+        inputs.length > 0 ? (acq === 'vendor' ? 'vendor' : crafted ? 'craft' : 'mystic-forge') : leaf.source
       nodes.push(node(out, inputs, { source, notes: leaf.notes || undefined }))
     }
     return out
