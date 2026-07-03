@@ -13,6 +13,8 @@
     "wiki:report": "tsx scripts/wiki-sync/report.ts",
     "wiki:fix": "tsx scripts/wiki-sync/fix.ts",
     "wiki:expand": "tsx scripts/wiki-sync/expand.ts",
+    "wiki:gifts": "tsx scripts/wiki-sync/gen-gifts.ts",
+    "wiki:vendor-costs": "tsx scripts/wiki-sync/gen-vendor-costs.ts",
     "wiki:check": "tsx scripts/wiki-sync/check.ts",
     "wiki:test": "tsx scripts/wiki-sync/parse-recipe.test.ts && tsx scripts/wiki-sync/expand-recipe.test.ts",
     "wiki:audit": "tsx scripts/wiki-sync/audit-aliases.ts",

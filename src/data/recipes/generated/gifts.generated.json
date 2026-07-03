@@ -1,0 +1,4004 @@
+{
+  "gift of amnytas": {
+    "name": "Gift of Amnytas",
+    "id": 100798,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of arah": {
+    "name": "Gift of Arah",
+    "id": 81684,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of the Mists",
+        "qty": 1,
+        "id": 76427
+      },
+      {
+        "name": "Mystic Runestone",
+        "qty": 100,
+        "id": 79418
+      },
+      {
+        "name": "Shard of Arah",
+        "qty": 100,
+        "id": 82069
+      },
+      {
+        "name": "Gift of Metal",
+        "qty": 1,
+        "id": 19621
+      }
+    ]
+  },
+  "gift of arid mastery": {
+    "name": "Gift of Arid Mastery",
+    "id": 91041,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Funerary Incense",
+        "qty": 100,
+        "id": 86093
+      },
+      {
+        "name": "Bloodstone Shard",
+        "qty": 1,
+        "id": 20797
+      },
+      {
+        "name": "Gift of Crystalline Magic",
+        "qty": 1,
+        "id": 91124
+      },
+      {
+        "name": "Gift of Ephemeral Magic",
+        "qty": 1,
+        "id": 91112
+      }
+    ]
+  },
+  "gift of ascalon": {
+    "name": "Gift of Ascalon",
+    "id": 19664,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of ascension": {
+    "name": "Gift of Ascension",
+    "id": 37070,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of astralaria": {
+    "name": "Gift of Astralaria",
+    "id": 71972,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of the Mists",
+        "qty": 1,
+        "id": 76427
+      },
+      {
+        "name": "Icy Runestone",
+        "qty": 100,
+        "id": 19676
+      },
+      {
+        "name": "Gift of the Cosmos",
+        "qty": 1,
+        "id": 72083
+      },
+      {
+        "name": "Gift of Metal",
+        "qty": 1,
+        "id": 19621
+      }
+    ]
+  },
+  "gift of aurene's argument": {
+    "name": "Gift of Aurene's Argument",
+    "id": 96493,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Poem on Pistols",
+        "qty": 1,
+        "id": 95809
+      },
+      {
+        "name": "Mystic Runestone",
+        "qty": 100,
+        "id": 79418
+      },
+      {
+        "name": "Gift of Research",
+        "qty": 1,
+        "id": 97655
+      },
+      {
+        "name": "Gift of the Mists",
+        "qty": 1,
+        "id": 76427
+      }
+    ]
+  },
+  "gift of aurene's bite": {
+    "name": "Gift of Aurene's Bite",
+    "id": 97027,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Poem on Greatswords",
+        "qty": 1,
+        "id": 96036
+      },
+      {
+        "name": "Mystic Runestone",
+        "qty": 100,
+        "id": 79418
+      },
+      {
+        "name": "Gift of Research",
+        "qty": 1,
+        "id": 97655
+      },
+      {
+        "name": "Gift of the Mists",
+        "qty": 1,
+        "id": 76427
+      }
+    ]
+  },
+  "gift of aurene's breath": {
+    "name": "Gift of Aurene's Breath",
+    "id": 95922,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Poem on Torches",
+        "qty": 1,
+        "id": 97257
+      },
+      {
+        "name": "Mystic Runestone",
+        "qty": 100,
+        "id": 79418
+      },
+      {
+        "name": "Gift of Research",
+        "qty": 1,
+        "id": 97655
+      },
+      {
+        "name": "Gift of the Mists",
+        "qty": 1,
+        "id": 76427
+      }
+    ]
+  },
+  "gift of aurene's claw": {
+    "name": "Gift of Aurene's Claw",
+    "id": 97066,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Poem on Daggers",
+        "qty": 1,
+        "id": 96187
+      },
+      {
+        "name": "Mystic Runestone",
+        "qty": 100,
+        "id": 79418
+      },
+      {
+        "name": "Gift of Research",
+        "qty": 1,
+        "id": 97655
+      },
+      {
+        "name": "Gift of the Mists",
+        "qty": 1,
+        "id": 76427
+      }
+    ]
+  },
+  "gift of aurene's fang": {
+    "name": "Gift of Aurene's Fang",
+    "id": 96790,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Poem on Swords",
+        "qty": 1,
+        "id": 97335
+      },
+      {
+        "name": "Mystic Runestone",
+        "qty": 100,
+        "id": 79418
+      },
+      {
+        "name": "Gift of Research",
+        "qty": 1,
+        "id": 97655
+      },
+      {
+        "name": "Gift of the Mists",
+        "qty": 1,
+        "id": 76427
+      }
+    ]
+  },
+  "gift of aurene's flight": {
+    "name": "Gift of Aurene's Flight",
+    "id": 95777,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Poem on Longbows",
+        "qty": 1,
+        "id": 97800
+      },
+      {
+        "name": "Mystic Runestone",
+        "qty": 100,
+        "id": 79418
+      },
+      {
+        "name": "Gift of Research",
+        "qty": 1,
+        "id": 97655
+      },
+      {
+        "name": "Gift of the Mists",
+        "qty": 1,
+        "id": 76427
+      }
+    ]
+  },
+  "gift of aurene's gaze": {
+    "name": "Gift of Aurene's Gaze",
+    "id": 97088,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Poem on Foci",
+        "qty": 1,
+        "id": 96951
+      },
+      {
+        "name": "Mystic Runestone",
+        "qty": 100,
+        "id": 79418
+      },
+      {
+        "name": "Gift of Research",
+        "qty": 1,
+        "id": 97655
+      },
+      {
+        "name": "Gift of the Mists",
+        "qty": 1,
+        "id": 76427
+      }
+    ]
+  },
+  "gift of aurene's horn": {
+    "name": "Gift of Aurene's Horn",
+    "id": 96354,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Poem on Warhorns",
+        "qty": 1,
+        "id": 96341
+      },
+      {
+        "name": "Mystic Runestone",
+        "qty": 100,
+        "id": 79418
+      },
+      {
+        "name": "Gift of Research",
+        "qty": 1,
+        "id": 97655
+      },
+      {
+        "name": "Gift of the Mists",
+        "qty": 1,
+        "id": 76427
+      }
+    ]
+  },
+  "gift of aurene's insight": {
+    "name": "Gift of Aurene's Insight",
+    "id": 97281,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Poem on Staves",
+        "qty": 1,
+        "id": 95962
+      },
+      {
+        "name": "Mystic Runestone",
+        "qty": 100,
+        "id": 79418
+      },
+      {
+        "name": "Gift of Research",
+        "qty": 1,
+        "id": 97655
+      },
+      {
+        "name": "Gift of the Mists",
+        "qty": 1,
+        "id": 76427
+      }
+    ]
+  },
+  "gift of aurene's persuasion": {
+    "name": "Gift of Aurene's Persuasion",
+    "id": 97412,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Poem on Rifles",
+        "qty": 1,
+        "id": 97201
+      },
+      {
+        "name": "Mystic Runestone",
+        "qty": 100,
+        "id": 79418
+      },
+      {
+        "name": "Gift of Research",
+        "qty": 1,
+        "id": 97655
+      },
+      {
+        "name": "Gift of the Mists",
+        "qty": 1,
+        "id": 76427
+      }
+    ]
+  },
+  "gift of aurene's rending": {
+    "name": "Gift of Aurene's Rending",
+    "id": 97804,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Poem on Axes",
+        "qty": 1,
+        "id": 97160
+      },
+      {
+        "name": "Mystic Runestone",
+        "qty": 100,
+        "id": 79418
+      },
+      {
+        "name": "Gift of Research",
+        "qty": 1,
+        "id": 97655
+      },
+      {
+        "name": "Gift of the Mists",
+        "qty": 1,
+        "id": 76427
+      }
+    ]
+  },
+  "gift of aurene's scale": {
+    "name": "Gift of Aurene's Scale",
+    "id": 96073,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Poem on Shields",
+        "qty": 1,
+        "id": 95740
+      },
+      {
+        "name": "Mystic Runestone",
+        "qty": 100,
+        "id": 79418
+      },
+      {
+        "name": "Gift of Research",
+        "qty": 1,
+        "id": 97655
+      },
+      {
+        "name": "Gift of the Mists",
+        "qty": 1,
+        "id": 76427
+      }
+    ]
+  },
+  "gift of aurene's tail": {
+    "name": "Gift of Aurene's Tail",
+    "id": 95846,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Poem on Maces",
+        "qty": 1,
+        "id": 96035
+      },
+      {
+        "name": "Mystic Runestone",
+        "qty": 100,
+        "id": 79418
+      },
+      {
+        "name": "Gift of Research",
+        "qty": 1,
+        "id": 97655
+      },
+      {
+        "name": "Gift of the Mists",
+        "qty": 1,
+        "id": 76427
+      }
+    ]
+  },
+  "gift of aurene's weight": {
+    "name": "Gift of Aurene's Weight",
+    "id": 96161,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Poem on Hammers",
+        "qty": 1,
+        "id": 97082
+      },
+      {
+        "name": "Mystic Runestone",
+        "qty": 100,
+        "id": 79418
+      },
+      {
+        "name": "Gift of Research",
+        "qty": 1,
+        "id": 97655
+      },
+      {
+        "name": "Gift of the Mists",
+        "qty": 1,
+        "id": 76427
+      }
+    ]
+  },
+  "gift of aurene's wing": {
+    "name": "Gift of Aurene's Wing",
+    "id": 96015,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Poem on Short Bows",
+        "qty": 1,
+        "id": 96849
+      },
+      {
+        "name": "Mystic Runestone",
+        "qty": 100,
+        "id": 79418
+      },
+      {
+        "name": "Gift of Research",
+        "qty": 1,
+        "id": 97655
+      },
+      {
+        "name": "Gift of the Mists",
+        "qty": 1,
+        "id": 76427
+      }
+    ]
+  },
+  "gift of aurene's wisdom": {
+    "name": "Gift of Aurene's Wisdom",
+    "id": 97552,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Poem on Scepters",
+        "qty": 1,
+        "id": 96173
+      },
+      {
+        "name": "Mystic Runestone",
+        "qty": 100,
+        "id": 79418
+      },
+      {
+        "name": "Gift of Research",
+        "qty": 1,
+        "id": 97655
+      },
+      {
+        "name": "Gift of the Mists",
+        "qty": 1,
+        "id": 76427
+      }
+    ]
+  },
+  "gift of balthazar": {
+    "name": "Gift of Balthazar",
+    "id": 81144,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Wood",
+        "qty": 1,
+        "id": 19622
+      },
+      {
+        "name": "Gift of the Mists",
+        "qty": 1,
+        "id": 76427
+      },
+      {
+        "name": "Shard of Liturgy",
+        "qty": 100,
+        "id": 81051
+      },
+      {
+        "name": "Mystic Runestone",
+        "qty": 100,
+        "id": 79418
+      }
+    ]
+  },
+  "gift of battle": {
+    "name": "Gift of Battle",
+    "id": 19678,
+    "acq": "reward",
+    "inputs": []
+  },
+  "gift of bava nisos": {
+    "name": "Gift of Bava Nisos",
+    "id": 104896,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of blood": {
+    "name": "Gift of Blood",
+    "id": 71655,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Vial of Powerful Blood",
+        "qty": 100,
+        "id": 24295
+      },
+      {
+        "name": "Vial of Potent Blood",
+        "qty": 250,
+        "id": 24294
+      },
+      {
+        "name": "Vial of Thick Blood",
+        "qty": 50,
+        "id": 24293
+      },
+      {
+        "name": "Vial of Blood",
+        "qty": 50,
+        "id": 24292
+      }
+    ]
+  },
+  "gift of bloodstone magic": {
+    "name": "Gift of Bloodstone Magic",
+    "id": 81815,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of bolt": {
+    "name": "Gift of Bolt",
+    "id": 19655,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Metal",
+        "qty": 1,
+        "id": 19621
+      },
+      {
+        "name": "Gift of Lightning",
+        "qty": 1,
+        "id": 19639
+      },
+      {
+        "name": "Icy Runestone",
+        "qty": 100,
+        "id": 19676
+      },
+      {
+        "name": "Superior Sigil of Air",
+        "qty": 1,
+        "id": 24554
+      }
+    ]
+  },
+  "gift of bones": {
+    "name": "Gift of Bones",
+    "id": 71123,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Ancient Bone",
+        "qty": 100,
+        "id": 24358
+      },
+      {
+        "name": "Large Bone",
+        "qty": 250,
+        "id": 24341
+      },
+      {
+        "name": "Heavy Bone",
+        "qty": 50,
+        "id": 24345
+      },
+      {
+        "name": "Bone",
+        "qty": 50,
+        "id": 24344
+      }
+    ]
+  },
+  "gift of cantha": {
+    "name": "Gift of Cantha",
+    "id": 97096,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Seitung Province",
+        "qty": 1,
+        "id": 96993
+      },
+      {
+        "name": "Gift of New Kaineng City",
+        "qty": 1,
+        "id": 95621
+      },
+      {
+        "name": "Gift of the Echovald Forest",
+        "qty": 1,
+        "id": 97232
+      },
+      {
+        "name": "Gift of Dragon's End",
+        "qty": 1,
+        "id": 96083
+      }
+    ]
+  },
+  "gift of chuka and champawat": {
+    "name": "Gift of Chuka and Champawat",
+    "id": 78627,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of the Mists",
+        "qty": 1,
+        "id": 76427
+      },
+      {
+        "name": "Icy Runestone",
+        "qty": 100,
+        "id": 19676
+      },
+      {
+        "name": "Gift of Family",
+        "qty": 1,
+        "id": 78344
+      },
+      {
+        "name": "Gift of Wood",
+        "qty": 1,
+        "id": 19622
+      }
+    ]
+  },
+  "gift of claws": {
+    "name": "Gift of Claws",
+    "id": 70801,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Vicious Claw",
+        "qty": 100,
+        "id": 24351
+      },
+      {
+        "name": "Large Claw",
+        "qty": 250,
+        "id": 24350
+      },
+      {
+        "name": "Sharp Claw",
+        "qty": 50,
+        "id": 24349
+      },
+      {
+        "name": "Claw",
+        "qty": 50,
+        "id": 24348
+      }
+    ]
+  },
+  "gift of color": {
+    "name": "Gift of Color",
+    "id": 19638,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Zhaitan",
+        "qty": 1,
+        "id": 19669
+      },
+      {
+        "name": "Unidentified Dye",
+        "qty": 100,
+        "id": 20323
+      },
+      {
+        "name": "Pile of Crystalline Dust",
+        "qty": 250,
+        "id": 24277
+      },
+      {
+        "name": "Opal Orb",
+        "qty": 100,
+        "id": 24522
+      }
+    ]
+  },
+  "gift of compassion": {
+    "name": "Gift of Compassion",
+    "id": 91225,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Desert Mastery",
+        "qty": 1,
+        "id": 86036
+      },
+      {
+        "name": "Ball of Dark Energy",
+        "qty": 6,
+        "id": 71994
+      },
+      {
+        "name": "Legendary Insight (consumable)",
+        "qty": 150,
+        "id": 77302
+      },
+      {
+        "name": "Gift of Complex Emotions",
+        "qty": 1,
+        "id": 88909
+      }
+    ]
+  },
+  "gift of competitive dedication": {
+    "name": "Gift of Competitive Dedication",
+    "id": 84203,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Record of League Participation",
+        "qty": 1,
+        "id": 82471
+      },
+      {
+        "name": "Star of Glory",
+        "qty": 1,
+        "id": 83872
+      },
+      {
+        "name": "Glob of Condensed Spirit Energy",
+        "qty": 1,
+        "id": 83082
+      },
+      {
+        "name": "Jar of Distilled Glory",
+        "qty": 1,
+        "id": 82926
+      }
+    ]
+  },
+  "gift of competitive prosperity": {
+    "name": "Gift of Competitive Prosperity",
+    "id": 84174,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Mist Core Fragment",
+        "qty": 1,
+        "id": 77531
+      },
+      {
+        "name": "Mystic Clover",
+        "qty": 15,
+        "id": 19675
+      },
+      {
+        "name": "Gift of Condensed Might",
+        "qty": 1,
+        "id": 70867
+      },
+      {
+        "name": "Gift of Condensed Magic",
+        "qty": 1,
+        "id": 76530
+      }
+    ]
+  },
+  "gift of competitive prowess": {
+    "name": "Gift of Competitive Prowess",
+    "id": 82350,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Record of League Victories",
+        "qty": 1,
+        "id": 82700
+      },
+      {
+        "name": "Eldritch Scroll",
+        "qty": 1,
+        "id": 20852
+      },
+      {
+        "name": "Obsidian Shard",
+        "qty": 50,
+        "id": 19925
+      },
+      {
+        "name": "Cube of Stabilized Dark Energy",
+        "qty": 1,
+        "id": 73137
+      }
+    ]
+  },
+  "gift of complex emotions": {
+    "name": "Gift of Complex Emotions",
+    "id": 88909,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of conquering": {
+    "name": "Gift of Conquering",
+    "id": 81371,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Legendary Spike",
+        "qty": 1,
+        "id": 81296
+      },
+      {
+        "name": "Gift of Battle",
+        "qty": 4,
+        "id": 19678
+      },
+      {
+        "name": "Memory of Battle",
+        "qty": 250,
+        "id": 71581
+      },
+      {
+        "name": "Vision Crystal",
+        "qty": 2,
+        "id": 46746
+      }
+    ]
+  },
+  "gift of craftsmanship": {
+    "name": "Gift of Craftsmanship",
+    "id": 77451,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of crystalline magic": {
+    "name": "Gift of Crystalline Magic",
+    "id": 91124,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Kralkatite Ore",
+        "qty": 100,
+        "id": 86069
+      },
+      {
+        "name": "Difluorite Crystal",
+        "qty": 100,
+        "id": 86977
+      },
+      {
+        "name": "Inscribed Shard",
+        "qty": 100,
+        "id": 87645
+      },
+      {
+        "name": "Bottle of Elonian Wine",
+        "qty": 1,
+        "id": 19663
+      }
+    ]
+  },
+  "gift of darkness": {
+    "name": "Gift of Darkness",
+    "id": 19631,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Ascalon",
+        "qty": 1,
+        "id": 19664
+      },
+      {
+        "name": "Orichalcum Ingot",
+        "qty": 250,
+        "id": 19685
+      },
+      {
+        "name": "Cured Hardened Leather Square",
+        "qty": 250,
+        "id": 19737
+      },
+      {
+        "name": "Onyx Lodestone",
+        "qty": 100,
+        "id": 24310
+      }
+    ]
+  },
+  "gift of dedication": {
+    "name": "Gift of Dedication",
+    "id": 78936,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Chak Egg",
+        "qty": 5,
+        "id": 72205
+      },
+      {
+        "name": "Auric Ingot",
+        "qty": 5,
+        "id": 73537
+      },
+      {
+        "name": "Reclaimed Metal Plate",
+        "qty": 5,
+        "id": 74356
+      },
+      {
+        "name": "Gift of the Pact",
+        "qty": 1,
+        "id": 78793
+      }
+    ]
+  },
+  "gift of desert mastery": {
+    "name": "Gift of Desert Mastery",
+    "id": 86036,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of the Desert",
+        "qty": 1,
+        "id": 85631
+      },
+      {
+        "name": "Gift of the Rider",
+        "qty": 1,
+        "id": 86330
+      },
+      {
+        "name": "Bloodstone Shard",
+        "qty": 1,
+        "id": 20797
+      },
+      {
+        "name": "Funerary Incense",
+        "qty": 250,
+        "id": 86093
+      }
+    ]
+  },
+  "gift of divinity": {
+    "name": "Gift of Divinity",
+    "id": 80650,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Wood",
+        "qty": 1,
+        "id": 19622
+      },
+      {
+        "name": "Gift of the Mists",
+        "qty": 1,
+        "id": 76427
+      },
+      {
+        "name": "Shard o' War",
+        "qty": 100,
+        "id": 80380
+      },
+      {
+        "name": "Mystic Runestone",
+        "qty": 100,
+        "id": 79418
+      }
+    ]
+  },
+  "gift of draconic mastery": {
+    "name": "Gift of Draconic Mastery",
+    "id": 81861,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Crystalline Ingot",
+        "qty": 1,
+        "id": 46683
+      },
+      {
+        "name": "Bloodstone Shard",
+        "qty": 1,
+        "id": 20797
+      },
+      {
+        "name": "Gift of Bloodstone Magic",
+        "qty": 1,
+        "id": 81815
+      },
+      {
+        "name": "Gift of Dragon Magic",
+        "qty": 1,
+        "id": 82036
+      }
+    ]
+  },
+  "gift of dragon magic": {
+    "name": "Gift of Dragon Magic",
+    "id": 82036,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of dragon's end": {
+    "name": "Gift of Dragon's End",
+    "id": 96083,
+    "acq": "reward",
+    "inputs": []
+  },
+  "gift of dust": {
+    "name": "Gift of Dust",
+    "id": 73196,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Pile of Crystalline Dust",
+        "qty": 100,
+        "id": 24277
+      },
+      {
+        "name": "Pile of Incandescent Dust",
+        "qty": 250,
+        "id": 24276
+      },
+      {
+        "name": "Pile of Luminous Dust",
+        "qty": 50,
+        "id": 24275
+      },
+      {
+        "name": "Pile of Radiant Dust",
+        "qty": 50,
+        "id": 24274
+      }
+    ]
+  },
+  "gift of embracing refuge": {
+    "name": "Gift of Embracing Refuge",
+    "id": 103242,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Refined Homestead Metal",
+        "qty": 250,
+        "id": 102205
+      },
+      {
+        "name": "Refined Homestead Fiber",
+        "qty": 250,
+        "id": 102306
+      },
+      {
+        "name": "Refined Homestead Wood",
+        "qty": 250,
+        "id": 103049
+      },
+      {
+        "name": "Shard of the Homestead",
+        "qty": 250,
+        "id": 103587
+      }
+    ]
+  },
+  "gift of energy": {
+    "name": "Gift of Energy",
+    "id": 19623,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Pile of Radiant Dust",
+        "qty": 250,
+        "id": 24274
+      },
+      {
+        "name": "Pile of Luminous Dust",
+        "qty": 250,
+        "id": 24275
+      },
+      {
+        "name": "Pile of Incandescent Dust",
+        "qty": 250,
+        "id": 24276
+      },
+      {
+        "name": "Pile of Crystalline Dust",
+        "qty": 250,
+        "id": 24277
+      }
+    ]
+  },
+  "gift of entertainment": {
+    "name": "Gift of Entertainment",
+    "id": 19635,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of the Nobleman",
+        "qty": 1,
+        "id": 19665
+      },
+      {
+        "name": "Orichalcum Ingot",
+        "qty": 250,
+        "id": 19685
+      },
+      {
+        "name": "Bolt of Gossamer",
+        "qty": 250,
+        "id": 19746
+      },
+      {
+        "name": "Box o' Fun",
+        "qty": 5,
+        "id": 20000
+      }
+    ]
+  },
+  "gift of ephemeral magic": {
+    "name": "Gift of Ephemeral Magic",
+    "id": 91112,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Lump of Mistonium",
+        "qty": 100,
+        "id": 88955
+      },
+      {
+        "name": "Branded Mass",
+        "qty": 100,
+        "id": 89537
+      },
+      {
+        "name": "Mistborn Mote",
+        "qty": 100,
+        "id": 90783
+      },
+      {
+        "name": "Bottle of Elonian Wine",
+        "qty": 1,
+        "id": 19663
+      }
+    ]
+  },
+  "gift of eternity's garden exploration": {
+    "name": "Gift of Eternity's Garden Exploration",
+    "id": 109114,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of eureka": {
+    "name": "Gift of Eureka",
+    "id": 79419,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Metal",
+        "qty": 1,
+        "id": 19621
+      },
+      {
+        "name": "Gift of the Mists",
+        "qty": 1,
+        "id": 76427
+      },
+      {
+        "name": "Shard of Endeavor",
+        "qty": 100,
+        "id": 79445
+      },
+      {
+        "name": "Mystic Runestone",
+        "qty": 100,
+        "id": 79418
+      }
+    ]
+  },
+  "gift of exordium": {
+    "name": "Gift of Exordium",
+    "id": 90893,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of the Mists",
+        "qty": 1,
+        "id": 76427
+      },
+      {
+        "name": "Mystic Runestone",
+        "qty": 100,
+        "id": 79418
+      },
+      {
+        "name": "Shard of Exitare",
+        "qty": 100,
+        "id": 90390
+      },
+      {
+        "name": "Gift of Metal",
+        "qty": 1,
+        "id": 19621
+      }
+    ]
+  },
+  "gift of expertise": {
+    "name": "Gift of Expertise",
+    "id": 100852,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Amalgamated Rift Essence",
+        "qty": 12,
+        "id": 100930
+      },
+      {
+        "name": "Eldritch Scroll",
+        "qty": 1,
+        "id": 20852
+      },
+      {
+        "name": "Obsidian Shards",
+        "qty": 50,
+        "id": 19925
+      },
+      {
+        "name": "Cube of Stabilized Dark Energy",
+        "qty": 1,
+        "id": 73137
+      }
+    ]
+  },
+  "gift of exploration": {
+    "name": "Gift of Exploration",
+    "id": 19677,
+    "acq": "reward",
+    "inputs": []
+  },
+  "gift of family": {
+    "name": "Gift of Family",
+    "id": 78344,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of fangs": {
+    "name": "Gift of Fangs",
+    "id": 75744,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Vicious Fang",
+        "qty": 100,
+        "id": 24357
+      },
+      {
+        "name": "Large Fang",
+        "qty": 250,
+        "id": 24356
+      },
+      {
+        "name": "Sharp Fang",
+        "qty": 50,
+        "id": 24355
+      },
+      {
+        "name": "Fang",
+        "qty": 50,
+        "id": 24354
+      }
+    ]
+  },
+  "gift of frenzy": {
+    "name": "Gift of Frenzy",
+    "id": 19659,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Wood",
+        "qty": 1,
+        "id": 19622
+      },
+      {
+        "name": "Gift of Water",
+        "qty": 1,
+        "id": 19643
+      },
+      {
+        "name": "Icy Runestone",
+        "qty": 100,
+        "id": 19676
+      },
+      {
+        "name": "Superior Sigil of Rage",
+        "qty": 1,
+        "id": 24561
+      }
+    ]
+  },
+  "gift of frostfang": {
+    "name": "Gift of Frostfang",
+    "id": 19625,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Metal",
+        "qty": 1,
+        "id": 19621
+      },
+      {
+        "name": "Gift of Ice",
+        "qty": 1,
+        "id": 19624
+      },
+      {
+        "name": "Icy Runestone",
+        "qty": 100,
+        "id": 19676
+      },
+      {
+        "name": "Superior Sigil of Ice",
+        "qty": 1,
+        "id": 24555
+      }
+    ]
+  },
+  "gift of galdra": {
+    "name": "Gift of Galdra",
+    "id": 109469,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of gatherer of the hunt": {
+    "name": "Gift of Gatherer of the Hunt",
+    "id": 102515,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Sweet-Treated Pine Plank",
+        "qty": 100,
+        "id": 103103
+      },
+      {
+        "name": "Neutralized Titan Alloy",
+        "qty": 100,
+        "id": 102467
+      },
+      {
+        "name": "Shard of Lowland Shore",
+        "qty": 100,
+        "id": 102569
+      },
+      {
+        "name": "Shard of Janthir Syntri",
+        "qty": 100,
+        "id": 103316
+      }
+    ]
+  },
+  "gift of gliding": {
+    "name": "Gift of Gliding",
+    "id": 71311,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of glory": {
+    "name": "Gift of Glory",
+    "id": 70528,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Shard of Glory",
+        "qty": 250,
+        "id": 70820
+      }
+    ]
+  },
+  "gift of history": {
+    "name": "Gift of History",
+    "id": 19629,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Onyx Lodestone",
+        "qty": 100,
+        "id": 24310
+      },
+      {
+        "name": "Cured Hardened Leather Square",
+        "qty": 250,
+        "id": 19737
+      },
+      {
+        "name": "Gift of Ascalon",
+        "qty": 1,
+        "id": 19664
+      },
+      {
+        "name": "Pile of Crystalline Dust",
+        "qty": 250,
+        "id": 24277
+      }
+    ]
+  },
+  "gift of hope": {
+    "name": "Gift of HOPE",
+    "id": 77086,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of the Mists",
+        "qty": 1,
+        "id": 76427
+      },
+      {
+        "name": "Icy Runestone",
+        "qty": 100,
+        "id": 19676
+      },
+      {
+        "name": "Gift of the Catalyst",
+        "qty": 1,
+        "id": 76442
+      },
+      {
+        "name": "Gift of Wood",
+        "qty": 1,
+        "id": 19622
+      }
+    ]
+  },
+  "gift of howler": {
+    "name": "Gift of Howler",
+    "id": 19662,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Wood",
+        "qty": 1,
+        "id": 19622
+      },
+      {
+        "name": "Wolf Statue",
+        "qty": 1,
+        "id": 19640
+      },
+      {
+        "name": "Icy Runestone",
+        "qty": 100,
+        "id": 19676
+      },
+      {
+        "name": "Superior Sigil of Accuracy",
+        "qty": 1,
+        "id": 24618
+      }
+    ]
+  },
+  "gift of ice": {
+    "name": "Gift of Ice",
+    "id": 19624,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of the Sanctuary",
+        "qty": 1,
+        "id": 19670
+      },
+      {
+        "name": "Orichalcum Ingot",
+        "qty": 250,
+        "id": 19685
+      },
+      {
+        "name": "Glacial Lodestone",
+        "qty": 100,
+        "id": 24320
+      },
+      {
+        "name": "Corrupted Lodestone",
+        "qty": 100,
+        "id": 24340
+      }
+    ]
+  },
+  "gift of incinerator": {
+    "name": "Gift of Incinerator",
+    "id": 19645,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Metal",
+        "qty": 1,
+        "id": 19621
+      },
+      {
+        "name": "Vial of Liquid Flame",
+        "qty": 1,
+        "id": 19634
+      },
+      {
+        "name": "Icy Runestone",
+        "qty": 100,
+        "id": 19676
+      },
+      {
+        "name": "Superior Sigil of Fire",
+        "qty": 1,
+        "id": 24548
+      }
+    ]
+  },
+  "gift of infinity": {
+    "name": "Gift of Infinity",
+    "id": 74377,
+    "acq": "reward",
+    "inputs": []
+  },
+  "gift of infused gems": {
+    "name": "Gift of Infused Gems",
+    "id": 106975,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Obsidian Shards",
+        "qty": 250,
+        "id": 19925
+      },
+      {
+        "name": "Beryl Orb",
+        "qty": 250,
+        "id": 24520
+      },
+      {
+        "name": "Bloodstone Shard",
+        "qty": 1,
+        "id": 20797
+      },
+      {
+        "name": "Mystic Runestone",
+        "qty": 100,
+        "id": 79418
+      }
+    ]
+  },
+  "gift of inner nayos": {
+    "name": "Gift of Inner Nayos",
+    "id": 101595,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of insight": {
+    "name": "Gift of Insight",
+    "id": 105875,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of insights": {
+    "name": "Gift of Insights",
+    "id": 72964,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of the Itzel",
+        "qty": 1,
+        "id": 73469
+      },
+      {
+        "name": "Gift of the Nuhoch",
+        "qty": 1,
+        "id": 76767
+      },
+      {
+        "name": "Gift of the Exalted",
+        "qty": 1,
+        "id": 76636
+      },
+      {
+        "name": "Gift of Gliding",
+        "qty": 1,
+        "id": 71311
+      }
+    ]
+  },
+  "gift of ipos": {
+    "name": "Gift of Ipos",
+    "id": 85744,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of the Mists",
+        "qty": 1,
+        "id": 76427
+      },
+      {
+        "name": "Mystic Runestone",
+        "qty": 100,
+        "id": 79418
+      },
+      {
+        "name": "Shard of the Dark Arts",
+        "qty": 100,
+        "id": 86120
+      },
+      {
+        "name": "Gift of Energy",
+        "qty": 1,
+        "id": 19623
+      }
+    ]
+  },
+  "gift of jade mastery": {
+    "name": "Gift of Jade Mastery",
+    "id": 96033,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of the Dragon Empire",
+        "qty": 1,
+        "id": 97433
+      },
+      {
+        "name": "Bloodstone Shard",
+        "qty": 1,
+        "id": 20797
+      },
+      {
+        "name": "Gift of Cantha",
+        "qty": 1,
+        "id": 97096
+      },
+      {
+        "name": "Antique Summoning Stone",
+        "qty": 100,
+        "id": 96978
+      }
+    ]
+  },
+  "gift of janthir syntri": {
+    "name": "Gift of Janthir Syntri",
+    "id": 102958,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of janthir wanderlust": {
+    "name": "Gift of Janthir Wanderlust",
+    "id": 104699,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Lowland Shore",
+        "qty": 1,
+        "id": 102929
+      },
+      {
+        "name": "Gift of Janthir Syntri",
+        "qty": 1,
+        "id": 102958
+      },
+      {
+        "name": "Gift of Mistburned Barrens",
+        "qty": 1,
+        "id": 104313
+      },
+      {
+        "name": "Gift of Bava Nisos",
+        "qty": 1,
+        "id": 104896
+      }
+    ]
+  },
+  "gift of janthir wilds": {
+    "name": "Gift of Janthir Wilds",
+    "id": 102514,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Gatherer of the Hunt",
+        "qty": 1,
+        "id": 102515
+      },
+      {
+        "name": "Gift of Uncovered Grounds",
+        "qty": 1,
+        "id": 102411
+      },
+      {
+        "name": "Gift of Expertise",
+        "qty": 1,
+        "id": 100852
+      },
+      {
+        "name": "Bloodstone Shard",
+        "qty": 1,
+        "id": 20797
+      }
+    ]
+  },
+  "gift of kamohoali'i kotaki": {
+    "name": "Gift of Kamohoali'i Kotaki",
+    "id": 19657,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Metal",
+        "qty": 1,
+        "id": 19621
+      },
+      {
+        "name": "Shark Statue",
+        "qty": 1,
+        "id": 19641
+      },
+      {
+        "name": "Icy Runestone",
+        "qty": 100,
+        "id": 19676
+      },
+      {
+        "name": "Superior Sigil of Agony",
+        "qty": 1,
+        "id": 24612
+      }
+    ]
+  },
+  "gift of klobjarne geirr": {
+    "name": "Gift of Klobjarne Geirr",
+    "id": 102901,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Recollector of Memories",
+        "qty": 1,
+        "id": 102342
+      },
+      {
+        "name": "Mystic Runestone",
+        "qty": 100,
+        "id": 79418
+      },
+      {
+        "name": "Gift of the Mists",
+        "qty": 1,
+        "id": 76427
+      },
+      {
+        "name": "Gift of Research",
+        "qty": 1,
+        "id": 97655
+      }
+    ]
+  },
+  "gift of knowledge": {
+    "name": "Gift of Knowledge",
+    "id": 19671,
+    "acq": "reward",
+    "inputs": []
+  },
+  "gift of kraitkin": {
+    "name": "Gift of Kraitkin",
+    "id": 19658,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Energy",
+        "qty": 1,
+        "id": 19623
+      },
+      {
+        "name": "Eel Statue",
+        "qty": 1,
+        "id": 19642
+      },
+      {
+        "name": "Icy Runestone",
+        "qty": 100,
+        "id": 19676
+      },
+      {
+        "name": "Superior Sigil of Venom",
+        "qty": 1,
+        "id": 24632
+      }
+    ]
+  },
+  "gift of kudzu": {
+    "name": "Gift of Kudzu",
+    "id": 19644,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Wood",
+        "qty": 1,
+        "id": 19622
+      },
+      {
+        "name": "Gift of Nature",
+        "qty": 1,
+        "id": 19627
+      },
+      {
+        "name": "Icy Runestone",
+        "qty": 100,
+        "id": 19676
+      },
+      {
+        "name": "Superior Sigil of Celerity",
+        "qty": 1,
+        "id": 24865
+      }
+    ]
+  },
+  "gift of light": {
+    "name": "Gift of Light",
+    "id": 19632,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Ascalon",
+        "qty": 1,
+        "id": 19664
+      },
+      {
+        "name": "Orichalcum Ingot",
+        "qty": 250,
+        "id": 19685
+      },
+      {
+        "name": "Cured Hardened Leather Square",
+        "qty": 250,
+        "id": 19737
+      },
+      {
+        "name": "Charged Lodestone",
+        "qty": 100,
+        "id": 24305
+      }
+    ]
+  },
+  "gift of lightning": {
+    "name": "Gift of Lightning",
+    "id": 19639,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Ascalon",
+        "qty": 1,
+        "id": 19664
+      },
+      {
+        "name": "Orichalcum Ingot",
+        "qty": 250,
+        "id": 19685
+      },
+      {
+        "name": "Bolt of Gossamer",
+        "qty": 250,
+        "id": 19746
+      },
+      {
+        "name": "Charged Lodestone",
+        "qty": 100,
+        "id": 24305
+      }
+    ]
+  },
+  "gift of lowland shore": {
+    "name": "Gift of Lowland Shore",
+    "id": 102929,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of magic": {
+    "name": "Gift of Magic",
+    "id": 19673,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Vial of Powerful Blood",
+        "qty": 250,
+        "id": 24295
+      },
+      {
+        "name": "Powerful Venom Sac",
+        "qty": 250,
+        "id": 24283
+      },
+      {
+        "name": "Elaborate Totem",
+        "qty": 250,
+        "id": 24300
+      },
+      {
+        "name": "Pile of Crystalline Dust",
+        "qty": 250,
+        "id": 24277
+      }
+    ]
+  },
+  "gift of magical prosperity": {
+    "name": "Gift of Magical Prosperity",
+    "id": 100512,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Craftsmanship",
+        "qty": 1,
+        "id": 77451
+      },
+      {
+        "name": "Mystic Clovers",
+        "qty": 9,
+        "id": 19675
+      },
+      {
+        "name": "Gift of Condensed Magic",
+        "qty": 1,
+        "id": 76530
+      },
+      {
+        "name": "Gift of Research",
+        "qty": 1,
+        "id": 97655
+      }
+    ]
+  },
+  "gift of maguuma": {
+    "name": "Gift of Maguuma",
+    "id": 74927,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of the Fleet",
+        "qty": 1,
+        "id": 70797
+      },
+      {
+        "name": "Gift of Tarir",
+        "qty": 1,
+        "id": 71943
+      },
+      {
+        "name": "Gift of the Chak",
+        "qty": 1,
+        "id": 74528
+      },
+      {
+        "name": "Gift of the Jungle",
+        "qty": 1,
+        "id": 70698
+      }
+    ]
+  },
+  "gift of maguuma mastery": {
+    "name": "Gift of Maguuma Mastery",
+    "id": 73239,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Maguuma",
+        "qty": 1,
+        "id": 74927
+      },
+      {
+        "name": "Gift of Insights",
+        "qty": 1,
+        "id": 72964
+      },
+      {
+        "name": "Bloodstone Shard",
+        "qty": 1,
+        "id": 20797
+      },
+      {
+        "name": "Crystalline Ingot",
+        "qty": 250,
+        "id": 46683
+      }
+    ]
+  },
+  "gift of metal": {
+    "name": "Gift of Metal",
+    "id": 19621,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Orichalcum Ingot",
+        "qty": 250,
+        "id": 19685
+      },
+      {
+        "name": "Mithril Ingot",
+        "qty": 250,
+        "id": 19684
+      },
+      {
+        "name": "Darksteel Ingot",
+        "qty": 250,
+        "id": 19681
+      },
+      {
+        "name": "Platinum Ingot",
+        "qty": 250,
+        "id": 19686
+      }
+    ]
+  },
+  "gift of meteorlogicus": {
+    "name": "Gift of Meteorlogicus",
+    "id": 19652,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Energy",
+        "qty": 1,
+        "id": 19623
+      },
+      {
+        "name": "Gift of Weather",
+        "qty": 1,
+        "id": 19637
+      },
+      {
+        "name": "Icy Runestone",
+        "qty": 100,
+        "id": 19676
+      },
+      {
+        "name": "Superior Sigil of Air",
+        "qty": 1,
+        "id": 24554
+      }
+    ]
+  },
+  "gift of might": {
+    "name": "Gift of Might",
+    "id": 19672,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Vicious Fang",
+        "qty": 250,
+        "id": 24357
+      },
+      {
+        "name": "Armored Scale",
+        "qty": 250,
+        "id": 24289
+      },
+      {
+        "name": "Vicious Claw",
+        "qty": 250,
+        "id": 24351
+      },
+      {
+        "name": "Ancient Bone",
+        "qty": 250,
+        "id": 24358
+      }
+    ]
+  },
+  "gift of mighty prosperity": {
+    "name": "Gift of Mighty Prosperity",
+    "id": 100933,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Craftsmanship",
+        "qty": 1,
+        "id": 77451
+      },
+      {
+        "name": "Mystic Clovers",
+        "qty": 9,
+        "id": 19675
+      },
+      {
+        "name": "Gift of Condensed Might",
+        "qty": 1,
+        "id": 70867
+      },
+      {
+        "name": "Gift of Research",
+        "qty": 1,
+        "id": 97655
+      }
+    ]
+  },
+  "gift of mistburned barrens": {
+    "name": "Gift of Mistburned Barrens",
+    "id": 104313,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of music": {
+    "name": "Gift of Music",
+    "id": 19630,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of the Nobleman",
+        "qty": 1,
+        "id": 19665
+      },
+      {
+        "name": "Orichalcum Ingot",
+        "qty": 250,
+        "id": 19685
+      },
+      {
+        "name": "Bolt of Gossamer",
+        "qty": 250,
+        "id": 19746
+      },
+      {
+        "name": "Opal Orb",
+        "qty": 100,
+        "id": 24522
+      }
+    ]
+  },
+  "gift of nature": {
+    "name": "Gift of Nature",
+    "id": 19627,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Omnomberry",
+        "qty": 250,
+        "id": 12128
+      },
+      {
+        "name": "Gift of Thorns",
+        "qty": 1,
+        "id": 19667
+      },
+      {
+        "name": "Ancient Wood Plank",
+        "qty": 250,
+        "id": 19712
+      },
+      {
+        "name": "Cured Hardened Leather Square",
+        "qty": 250,
+        "id": 19737
+      }
+    ]
+  },
+  "gift of nevermore": {
+    "name": "Gift of Nevermore",
+    "id": 74300,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of the Mists",
+        "qty": 1,
+        "id": 76427
+      },
+      {
+        "name": "Icy Runestone",
+        "qty": 100,
+        "id": 19676
+      },
+      {
+        "name": "Gift of the Raven Spirit",
+        "qty": 1,
+        "id": 71173
+      },
+      {
+        "name": "Gift of Energy",
+        "qty": 1,
+        "id": 19623
+      }
+    ]
+  },
+  "gift of new kaineng city": {
+    "name": "Gift of New Kaineng City",
+    "id": 95621,
+    "acq": "reward",
+    "inputs": []
+  },
+  "gift of patience": {
+    "name": "Gift of Patience",
+    "id": 91193,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of persistence": {
+    "name": "Gift of Persistence",
+    "id": 99962,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of pharus": {
+    "name": "Gift of Pharus",
+    "id": 89445,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of the Mists",
+        "qty": 1,
+        "id": 76427
+      },
+      {
+        "name": "Mystic Runestone",
+        "qty": 100,
+        "id": 79418
+      },
+      {
+        "name": "Shard of Spero",
+        "qty": 100,
+        "id": 89947
+      },
+      {
+        "name": "Gift of Wood",
+        "qty": 1,
+        "id": 19622
+      }
+    ]
+  },
+  "gift of prescience": {
+    "name": "Gift of Prescience",
+    "id": 90985,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Energy",
+        "qty": 1,
+        "id": 19623
+      },
+      {
+        "name": "Gift of the Mists",
+        "qty": 1,
+        "id": 76427
+      },
+      {
+        "name": "Icy Runestone",
+        "qty": 100,
+        "id": 19676
+      },
+      {
+        "name": "Shattered Gift of Prescience",
+        "qty": 1,
+        "id": 91010
+      }
+    ]
+  },
+  "gift of prosperity": {
+    "name": "Gift of Prosperity",
+    "id": 78866,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Craftsmanship",
+        "qty": 1,
+        "id": 77451
+      },
+      {
+        "name": "Mystic Clover",
+        "qty": 15,
+        "id": 19675
+      },
+      {
+        "name": "Gift of Condensed Magic",
+        "qty": 1,
+        "id": 76530
+      },
+      {
+        "name": "Gift of Condensed Might",
+        "qty": 1,
+        "id": 70867
+      }
+    ]
+  },
+  "gift of prowess": {
+    "name": "Gift of Prowess",
+    "id": 78989,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Legendary Insight (consumable)",
+        "qty": 25,
+        "id": 77302
+      },
+      {
+        "name": "Eldritch Scroll",
+        "qty": 1,
+        "id": 20852
+      },
+      {
+        "name": "Obsidian Shard",
+        "qty": 50,
+        "id": 19925
+      },
+      {
+        "name": "Cube of Stabilized Dark Energy",
+        "qty": 1,
+        "id": 73137
+      }
+    ]
+  },
+  "gift of quip": {
+    "name": "Gift of Quip",
+    "id": 19651,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Wood",
+        "qty": 1,
+        "id": 19622
+      },
+      {
+        "name": "Gift of Entertainment",
+        "qty": 1,
+        "id": 19635
+      },
+      {
+        "name": "Icy Runestone",
+        "qty": 100,
+        "id": 19676
+      },
+      {
+        "name": "Superior Sigil of Stamina",
+        "qty": 1,
+        "id": 24592
+      }
+    ]
+  },
+  "gift of rays": {
+    "name": "Gift of Rays",
+    "id": 107040,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of the Sun",
+        "qty": 1,
+        "id": 107136
+      },
+      {
+        "name": "Gift of the Beach",
+        "qty": 1,
+        "id": 107201
+      },
+      {
+        "name": "Gift of Infused Gems",
+        "qty": 1,
+        "id": 106975
+      },
+      {
+        "name": "Purified Rift Essence",
+        "qty": 10,
+        "id": 100569
+      }
+    ]
+  },
+  "gift of recollector of memories": {
+    "name": "Gift of Recollector of Memories",
+    "id": 102342,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Tale of Adventure",
+        "qty": 25,
+        "id": 96151
+      },
+      {
+        "name": "Gift of Bones",
+        "qty": 1,
+        "id": 71123
+      },
+      {
+        "name": "Memory of the Bearkin's Hunts",
+        "qty": 1,
+        "id": 103766
+      },
+      {
+        "name": "Memory of the Bearkin's Victories",
+        "qty": 1,
+        "id": 103833
+      }
+    ]
+  },
+  "gift of regrowth": {
+    "name": "Gift of Regrowth",
+    "id": 109361,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of research": {
+    "name": "Gift of Research",
+    "id": 97655,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Thermocatalytic Reagent",
+        "qty": 250,
+        "id": 46747
+      },
+      {
+        "name": "Hydrocatalytic Reagent",
+        "qty": 250,
+        "id": 95813
+      },
+      {
+        "name": "Hydrocatalytic Reagent",
+        "qty": 250,
+        "id": 95813
+      },
+      {
+        "name": "Exotic Essence of Luck",
+        "qty": 250,
+        "id": 45178
+      }
+    ]
+  },
+  "gift of restoration": {
+    "name": "Gift of Restoration",
+    "id": 109489,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of rodgort": {
+    "name": "Gift of Rodgort",
+    "id": 19656,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Wood",
+        "qty": 1,
+        "id": 19622
+      },
+      {
+        "name": "Vial of Liquid Flame",
+        "qty": 1,
+        "id": 19634
+      },
+      {
+        "name": "Icy Runestone",
+        "qty": 100,
+        "id": 19676
+      },
+      {
+        "name": "Superior Sigil of Fire",
+        "qty": 1,
+        "id": 24548
+      }
+    ]
+  },
+  "gift of scales": {
+    "name": "Gift of Scales",
+    "id": 75299,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Armored Scale",
+        "qty": 100,
+        "id": 24289
+      },
+      {
+        "name": "Large Scale",
+        "qty": 250,
+        "id": 24288
+      },
+      {
+        "name": "Smooth Scale",
+        "qty": 50,
+        "id": 24287
+      },
+      {
+        "name": "Scale",
+        "qty": 50,
+        "id": 24286
+      }
+    ]
+  },
+  "gift of seitung province": {
+    "name": "Gift of Seitung Province",
+    "id": 96993,
+    "acq": "reward",
+    "inputs": []
+  },
+  "gift of sentience": {
+    "name": "Gift of Sentience",
+    "id": 81796,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Energy",
+        "qty": 1,
+        "id": 19623
+      },
+      {
+        "name": "Gift of the Mists",
+        "qty": 1,
+        "id": 76427
+      },
+      {
+        "name": "Icy Runestone",
+        "qty": 100,
+        "id": 19676
+      },
+      {
+        "name": "Gift of Valor",
+        "qty": 1,
+        "id": 82008
+      }
+    ]
+  },
+  "gift of shadows": {
+    "name": "Gift of Shadows",
+    "id": 104846,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Darkness",
+        "qty": 1,
+        "id": 19631
+      },
+      {
+        "name": "Gift of Scales",
+        "qty": 1,
+        "id": 75299
+      },
+      {
+        "name": "Gift of Titan Understanding",
+        "qty": 1,
+        "id": 104791
+      },
+      {
+        "name": "Bloodstone Shard",
+        "qty": 1,
+        "id": 20797
+      }
+    ]
+  },
+  "gift of shadowstones": {
+    "name": "Gift of Shadowstones",
+    "id": 109161,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of shipwreck strand exploration": {
+    "name": "Gift of Shipwreck Strand Exploration",
+    "id": 106467,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of shooshadoo": {
+    "name": "Gift of Shooshadoo",
+    "id": 79839,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Metal",
+        "qty": 1,
+        "id": 19621
+      },
+      {
+        "name": "Gift of the Mists",
+        "qty": 1,
+        "id": 76427
+      },
+      {
+        "name": "Shard of Friendship",
+        "qty": 100,
+        "id": 79784
+      },
+      {
+        "name": "Mystic Runestone",
+        "qty": 100,
+        "id": 79418
+      }
+    ]
+  },
+  "gift of skirmishing": {
+    "name": "Gift of Skirmishing",
+    "id": 77485,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Vision Crystal",
+        "qty": 2,
+        "id": 46746
+      },
+      {
+        "name": "Shard of Glory",
+        "qty": 250,
+        "id": 70820
+      },
+      {
+        "name": "Certificate of Support",
+        "qty": 5,
+        "id": 77486
+      },
+      {
+        "name": "Perfect Mist Core",
+        "qty": 1,
+        "id": 77520
+      }
+    ]
+  },
+  "gift of skywatch archipelago": {
+    "name": "Gift of Skywatch Archipelago",
+    "id": 100544,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of starlit weald exploration": {
+    "name": "Gift of Starlit Weald Exploration",
+    "id": 106672,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of stealth": {
+    "name": "Gift of Stealth",
+    "id": 19636,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Orrian Truffle",
+        "qty": 250,
+        "id": 12545
+      },
+      {
+        "name": "Gift of Knowledge",
+        "qty": 1,
+        "id": 19671
+      },
+      {
+        "name": "Orichalcum Ingot",
+        "qty": 250,
+        "id": 19685
+      },
+      {
+        "name": "Onyx Lodestone",
+        "qty": 100,
+        "id": 24310
+      }
+    ]
+  },
+  "gift of sunrise": {
+    "name": "Gift of Sunrise",
+    "id": 19647,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Metal",
+        "qty": 1,
+        "id": 19621
+      },
+      {
+        "name": "Gift of Light",
+        "qty": 1,
+        "id": 19632
+      },
+      {
+        "name": "Icy Runestone",
+        "qty": 100,
+        "id": 19676
+      },
+      {
+        "name": "Superior Sigil of Strength",
+        "qty": 1,
+        "id": 24562
+      }
+    ]
+  },
+  "gift of tarir": {
+    "name": "Gift of Tarir",
+    "id": 71943,
+    "acq": "reward",
+    "inputs": []
+  },
+  "gift of the appetizer": {
+    "name": "Gift of the Appetizer",
+    "id": 104965,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Bowl of Poultry Satay",
+        "qty": 200,
+        "id": 49296
+      },
+      {
+        "name": "Red-Lentil Saobosa",
+        "qty": 100,
+        "id": 46273
+      },
+      {
+        "name": "Spicy Marinated Mushroom",
+        "qty": 50,
+        "id": 17824
+      },
+      {
+        "name": "Fruit of the Shadow",
+        "qty": 5,
+        "id": 104844
+      }
+    ]
+  },
+  "gift of the astral ward": {
+    "name": "Gift of the Astral Ward",
+    "id": 100466,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Skywatch Archipelago",
+        "qty": 1,
+        "id": 100544
+      },
+      {
+        "name": "Gift of Amnytas",
+        "qty": 1,
+        "id": 100798
+      },
+      {
+        "name": "Gift of Inner Nayos",
+        "qty": 1,
+        "id": 101595
+      },
+      {
+        "name": "Gift of Persistence",
+        "qty": 1,
+        "id": 99962
+      }
+    ]
+  },
+  "gift of the beach": {
+    "name": "Gift of the Beach",
+    "id": 107201,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Pile of Coarse Sand",
+        "qty": 250,
+        "id": 71641
+      },
+      {
+        "name": "Ley-Infused Sand",
+        "qty": 100,
+        "id": 83284
+      },
+      {
+        "name": "Coral Orb",
+        "qty": 250,
+        "id": 24510
+      },
+      {
+        "name": "Relic of the Sunless",
+        "qty": 1,
+        "id": 100400
+      }
+    ]
+  },
+  "gift of the bifrost": {
+    "name": "Gift of The Bifrost",
+    "id": 19654,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Energy",
+        "qty": 1,
+        "id": 19623
+      },
+      {
+        "name": "Gift of Color",
+        "qty": 1,
+        "id": 19638
+      },
+      {
+        "name": "Icy Runestone",
+        "qty": 100,
+        "id": 19676
+      },
+      {
+        "name": "Superior Sigil of Nullification",
+        "qty": 1,
+        "id": 24572
+      }
+    ]
+  },
+  "gift of the blade": {
+    "name": "Gift of the Blade",
+    "id": 82003,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Metal",
+        "qty": 1,
+        "id": 19621
+      },
+      {
+        "name": "Gift of the Mists",
+        "qty": 1,
+        "id": 76427
+      },
+      {
+        "name": "Shard of the Crown",
+        "qty": 100,
+        "id": 81961
+      },
+      {
+        "name": "Mystic Runestone",
+        "qty": 100,
+        "id": 79418
+      }
+    ]
+  },
+  "gift of the catalyst": {
+    "name": "Gift of the Catalyst",
+    "id": 76442,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of the chak": {
+    "name": "Gift of the Chak",
+    "id": 74528,
+    "acq": "reward",
+    "inputs": []
+  },
+  "gift of the champion": {
+    "name": "Gift of the Champion",
+    "id": 93036,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Salt-Forged Mist Diamond",
+        "qty": 1,
+        "id": 93016
+      },
+      {
+        "name": "Gift of the Mists",
+        "qty": 1,
+        "id": 76427
+      },
+      {
+        "name": "Gift of Competitive Dedication",
+        "qty": 1,
+        "id": 84203
+      },
+      {
+        "name": "Tome of the Mists",
+        "qty": 1,
+        "id": 93284
+      }
+    ]
+  },
+  "gift of the competitor": {
+    "name": "Gift of the Competitor",
+    "id": 77509,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "The Thrill of Battle",
+        "qty": 1,
+        "id": 77493
+      },
+      {
+        "name": "Tapestry of Sacrifice",
+        "qty": 1,
+        "id": 77497
+      },
+      {
+        "name": "Monument of Legends",
+        "qty": 1,
+        "id": 77538
+      },
+      {
+        "name": "Hymn of Glory",
+        "qty": 1,
+        "id": 77548
+      }
+    ]
+  },
+  "gift of the cosmos": {
+    "name": "Gift of the Cosmos",
+    "id": 72083,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of the desert": {
+    "name": "Gift of the Desert",
+    "id": 85631,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of the Oasis",
+        "qty": 1,
+        "id": 85961
+      },
+      {
+        "name": "Gift of the Highlands",
+        "qty": 1,
+        "id": 86018
+      },
+      {
+        "name": "Gift of the Riverlands",
+        "qty": 1,
+        "id": 86241
+      },
+      {
+        "name": "Gift of the Desolation",
+        "qty": 1,
+        "id": 86010
+      }
+    ]
+  },
+  "gift of the desolation": {
+    "name": "Gift of the Desolation",
+    "id": 86010,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of the dessert": {
+    "name": "Gift of the Dessert",
+    "id": 104717,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Bowl of Prickly Pear Sorbet",
+        "qty": 200,
+        "id": 24792
+      },
+      {
+        "name": "Bowl of Passion Fruit Tapioca Pudding",
+        "qty": 50,
+        "id": 32522
+      },
+      {
+        "name": "Amalgamated Rift Essence",
+        "qty": 2,
+        "id": 100930
+      },
+      {
+        "name": "Fruit of the Shadow",
+        "qty": 5,
+        "id": 104844
+      }
+    ]
+  },
+  "gift of the dragon empire": {
+    "name": "Gift of the Dragon Empire",
+    "id": 97433,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Jade Runestone",
+        "qty": 100,
+        "id": 96722
+      },
+      {
+        "name": "Chunk of Pure Jade",
+        "qty": 200,
+        "id": 97102
+      },
+      {
+        "name": "Chunk of Ancient Ambergris",
+        "qty": 100,
+        "id": 96347
+      },
+      {
+        "name": "Blessing of the Jade Empress",
+        "qty": 5,
+        "id": 97829
+      }
+    ]
+  },
+  "gift of the dreamer": {
+    "name": "Gift of The Dreamer",
+    "id": 19660,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Wood",
+        "qty": 1,
+        "id": 19622
+      },
+      {
+        "name": "Unicorn Statue",
+        "qty": 1,
+        "id": 19628
+      },
+      {
+        "name": "Icy Runestone",
+        "qty": 100,
+        "id": 19676
+      },
+      {
+        "name": "Superior Sigil of Purity",
+        "qty": 1,
+        "id": 24571
+      }
+    ]
+  },
+  "gift of the echovald forest": {
+    "name": "Gift of the Echovald Forest",
+    "id": 97232,
+    "acq": "reward",
+    "inputs": []
+  },
+  "gift of the elders": {
+    "name": "Gift of the Elders",
+    "id": 106632,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of the entrée": {
+    "name": "Gift of the Entrée",
+    "id": 104932,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Plate of Orrian Steak Frittes",
+        "qty": 200,
+        "id": 9773
+      },
+      {
+        "name": "Plate of Truffle Steak",
+        "qty": 100,
+        "id": 9769
+      },
+      {
+        "name": "Plate of Spicy Herbed Chicken",
+        "qty": 50,
+        "id": 17823
+      },
+      {
+        "name": "Fruit of the Shadow",
+        "qty": 5,
+        "id": 104844
+      }
+    ]
+  },
+  "gift of the exalted": {
+    "name": "Gift of the Exalted",
+    "id": 76636,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of the feast": {
+    "name": "Gift of the Feast",
+    "id": 104872,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of the Appetizer",
+        "qty": 1,
+        "id": 104965
+      },
+      {
+        "name": "Gift of the Entrée",
+        "qty": 1,
+        "id": 104932
+      },
+      {
+        "name": "Gift of the Side Course",
+        "qty": 1,
+        "id": 104839
+      },
+      {
+        "name": "Gift of the Dessert",
+        "qty": 1,
+        "id": 104717
+      }
+    ]
+  },
+  "gift of the flameseeker prophecies": {
+    "name": "Gift of The Flameseeker Prophecies",
+    "id": 19653,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Metal",
+        "qty": 1,
+        "id": 19621
+      },
+      {
+        "name": "Gift of History",
+        "qty": 1,
+        "id": 19629
+      },
+      {
+        "name": "Icy Runestone",
+        "qty": 100,
+        "id": 19676
+      },
+      {
+        "name": "Superior Sigil of Battle",
+        "qty": 1,
+        "id": 24601
+      }
+    ]
+  },
+  "gift of the fleet": {
+    "name": "Gift of the Fleet",
+    "id": 70797,
+    "acq": "reward",
+    "inputs": []
+  },
+  "gift of the four legions": {
+    "name": "Gift of the Four Legions",
+    "id": 87115,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Metal",
+        "qty": 1,
+        "id": 19621
+      },
+      {
+        "name": "Gift of the Mists",
+        "qty": 1,
+        "id": 76427
+      },
+      {
+        "name": "Shard of Resolution",
+        "qty": 100,
+        "id": 87031
+      },
+      {
+        "name": "Mystic Runestone",
+        "qty": 100,
+        "id": 79418
+      }
+    ]
+  },
+  "gift of the highlands": {
+    "name": "Gift of the Highlands",
+    "id": 86018,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of the homesteader": {
+    "name": "Gift of the Homesteader",
+    "id": 102376,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Embracing Refuge",
+        "qty": 1,
+        "id": 103242
+      },
+      {
+        "name": "Gift of Condensed Might",
+        "qty": 1,
+        "id": 70867
+      },
+      {
+        "name": "Gift of Condensed Magic",
+        "qty": 1,
+        "id": 76530
+      },
+      {
+        "name": "Mystic Clovers",
+        "qty": 38,
+        "id": 19675
+      }
+    ]
+  },
+  "gift of the hylek": {
+    "name": "Gift of the Hylek",
+    "id": 106986,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of the itzel": {
+    "name": "Gift of the Itzel",
+    "id": 73469,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of the juggernaut": {
+    "name": "Gift of The Juggernaut",
+    "id": 19649,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Metal",
+        "qty": 1,
+        "id": 19621
+      },
+      {
+        "name": "Vial of Quicksilver",
+        "qty": 1,
+        "id": 19633
+      },
+      {
+        "name": "Icy Runestone",
+        "qty": 100,
+        "id": 19676
+      },
+      {
+        "name": "Superior Sigil of Benevolence",
+        "qty": 1,
+        "id": 24584
+      }
+    ]
+  },
+  "gift of the jungle": {
+    "name": "Gift of the Jungle",
+    "id": 70698,
+    "acq": "reward",
+    "inputs": []
+  },
+  "gift of the minstrel": {
+    "name": "Gift of The Minstrel",
+    "id": 19646,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Energy",
+        "qty": 1,
+        "id": 19623
+      },
+      {
+        "name": "Gift of Music",
+        "qty": 1,
+        "id": 19630
+      },
+      {
+        "name": "Icy Runestone",
+        "qty": 100,
+        "id": 19676
+      },
+      {
+        "name": "Superior Sigil of Energy",
+        "qty": 1,
+        "id": 24607
+      }
+    ]
+  },
+  "gift of the mist warrior": {
+    "name": "Gift of the Mist Warrior",
+    "id": 109686,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of the mistburned isles": {
+    "name": "Gift of the Mistburned Isles",
+    "id": 104962,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of the Mursaat Ruins",
+        "qty": 1,
+        "id": 104763
+      },
+      {
+        "name": "Gift of Janthir Wanderlust",
+        "qty": 1,
+        "id": 104699
+      },
+      {
+        "name": "Mursaat Runestone",
+        "qty": 250,
+        "id": 103351
+      },
+      {
+        "name": "Mystic Runestone",
+        "qty": 250,
+        "id": 79418
+      }
+    ]
+  },
+  "gift of the mists": {
+    "name": "Gift of the Mists",
+    "id": 76427,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Battle",
+        "qty": 1,
+        "id": 19678
+      },
+      {
+        "name": "Gift of Glory",
+        "qty": 1,
+        "id": 70528
+      },
+      {
+        "name": "Gift of War",
+        "qty": 1,
+        "id": 71008
+      },
+      {
+        "name": "Cube of Stabilized Dark Energy",
+        "qty": 1,
+        "id": 73137
+      }
+    ]
+  },
+  "gift of the moot": {
+    "name": "Gift of The Moot",
+    "id": 19650,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Metal",
+        "qty": 1,
+        "id": 19621
+      },
+      {
+        "name": "Gift of Entertainment",
+        "qty": 1,
+        "id": 19635
+      },
+      {
+        "name": "Icy Runestone",
+        "qty": 100,
+        "id": 19676
+      },
+      {
+        "name": "Superior Sigil of Energy",
+        "qty": 1,
+        "id": 24607
+      }
+    ]
+  },
+  "gift of the mursaat ruins": {
+    "name": "Gift of the Mursaat Ruins",
+    "id": 104763,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Vial of Titan Melted Liquid Obsidian",
+        "qty": 100,
+        "id": 104229
+      },
+      {
+        "name": "Mists Gate Residue",
+        "qty": 50,
+        "id": 105004
+      },
+      {
+        "name": "Shard of Mistburned Barrens",
+        "qty": 100,
+        "id": 104282
+      },
+      {
+        "name": "Shard of Bava Nisos",
+        "qty": 100,
+        "id": 104855
+      }
+    ]
+  },
+  "gift of the nobleman": {
+    "name": "Gift of the Nobleman",
+    "id": 19665,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of the nuhoch": {
+    "name": "Gift of the Nuhoch",
+    "id": 76767,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of the oasis": {
+    "name": "Gift of the Oasis",
+    "id": 85961,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of the pact": {
+    "name": "Gift of the Pact",
+    "id": 78793,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of the people": {
+    "name": "Gift of the People",
+    "id": 105804,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of the predator": {
+    "name": "Gift of The Predator",
+    "id": 19661,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Wood",
+        "qty": 1,
+        "id": 19622
+      },
+      {
+        "name": "Gift of Stealth",
+        "qty": 1,
+        "id": 19636
+      },
+      {
+        "name": "Icy Runestone",
+        "qty": 100,
+        "id": 19676
+      },
+      {
+        "name": "Superior Sigil of Force",
+        "qty": 1,
+        "id": 24615
+      }
+    ]
+  },
+  "gift of the raven spirit": {
+    "name": "Gift of the Raven Spirit",
+    "id": 71173,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of the rider": {
+    "name": "Gift of the Rider",
+    "id": 86330,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Spirit of the Raptor",
+        "qty": 1,
+        "id": 85707
+      },
+      {
+        "name": "Spirit of the Springer",
+        "qty": 1,
+        "id": 85681
+      },
+      {
+        "name": "Spirit of the Skimmer",
+        "qty": 1,
+        "id": 86115
+      },
+      {
+        "name": "Spirit of the Jackal",
+        "qty": 1,
+        "id": 86177
+      }
+    ]
+  },
+  "gift of the riverlands": {
+    "name": "Gift of the Riverlands",
+    "id": 86241,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of the sanctuary": {
+    "name": "Gift of the Sanctuary",
+    "id": 19670,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of the side course": {
+    "name": "Gift of the Side Course",
+    "id": 104839,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Meaty Asparagus Skewer",
+        "qty": 200,
+        "id": 64568
+      },
+      {
+        "name": "Bowl of Black Pepper Cactus Salad",
+        "qty": 100,
+        "id": 24807
+      },
+      {
+        "name": "Mystic Clovers",
+        "qty": 30,
+        "id": 19675
+      },
+      {
+        "name": "Fruit of the Shadow",
+        "qty": 5,
+        "id": 104844
+      }
+    ]
+  },
+  "gift of the sun": {
+    "name": "Gift of the Sun",
+    "id": 107136,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Light",
+        "qty": 2,
+        "id": 19632
+      },
+      {
+        "name": "Gift of Condensed Might",
+        "qty": 2,
+        "id": 70867
+      },
+      {
+        "name": "Gift of Condensed Magic",
+        "qty": 2,
+        "id": 76530
+      },
+      {
+        "name": "Sun Beads",
+        "qty": 250,
+        "id": 19717
+      }
+    ]
+  },
+  "gift of the survivors": {
+    "name": "Gift of the Survivors",
+    "id": 106712,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of the ursus": {
+    "name": "Gift of the Ursus",
+    "id": 103236,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of the world": {
+    "name": "Gift of the World",
+    "id": 93190,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "War Commendation",
+        "qty": 1,
+        "id": 93101
+      },
+      {
+        "name": "Gift of the Mists",
+        "qty": 1,
+        "id": 76427
+      },
+      {
+        "name": "Gift of War Dedication",
+        "qty": 1,
+        "id": 83259
+      },
+      {
+        "name": "Icy Runestones",
+        "qty": 100,
+        "id": 19676
+      }
+    ]
+  },
+  "gift of thorns": {
+    "name": "Gift of Thorns",
+    "id": 19667,
+    "acq": "reward",
+    "inputs": []
+  },
+  "gift of titan understanding": {
+    "name": "Gift of Titan Understanding",
+    "id": 104791,
+    "acq": "vendor",
+    "inputs": []
+  },
+  "gift of totems": {
+    "name": "Gift of Totems",
+    "id": 73236,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Elaborate Totem",
+        "qty": 100,
+        "id": 24300
+      },
+      {
+        "name": "Intricate Totem",
+        "qty": 250,
+        "id": 24299
+      },
+      {
+        "name": "Engraved Totem",
+        "qty": 50,
+        "id": 24363
+      },
+      {
+        "name": "Totem",
+        "qty": 50,
+        "id": 24298
+      }
+    ]
+  },
+  "gift of twilight": {
+    "name": "Gift of Twilight",
+    "id": 19648,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Metal",
+        "qty": 1,
+        "id": 19621
+      },
+      {
+        "name": "Gift of Darkness",
+        "qty": 1,
+        "id": 19631
+      },
+      {
+        "name": "Icy Runestone",
+        "qty": 100,
+        "id": 19676
+      },
+      {
+        "name": "Superior Sigil of Blood",
+        "qty": 1,
+        "id": 24570
+      }
+    ]
+  },
+  "gift of uncovered grounds": {
+    "name": "Gift of Uncovered Grounds",
+    "id": 102411,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Mursaat Runestone",
+        "qty": 100,
+        "id": 103351
+      },
+      {
+        "name": "Gift of Lowland Shore",
+        "qty": 1,
+        "id": 102929
+      },
+      {
+        "name": "Gift of Janthir Syntri",
+        "qty": 1,
+        "id": 102958
+      },
+      {
+        "name": "Gift of the Ursus",
+        "qty": 1,
+        "id": 103236
+      }
+    ]
+  },
+  "gift of valor": {
+    "name": "Gift of Valor",
+    "id": 82008,
+    "acq": "reward",
+    "inputs": []
+  },
+  "gift of venom": {
+    "name": "Gift of Venom",
+    "id": 71787,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Powerful Venom Sac",
+        "qty": 100,
+        "id": 24283
+      },
+      {
+        "name": "Potent Venom Sac",
+        "qty": 250,
+        "id": 24282
+      },
+      {
+        "name": "Full Venom Sac",
+        "qty": 50,
+        "id": 24281
+      },
+      {
+        "name": "Venom Sac",
+        "qty": 50,
+        "id": 24280
+      }
+    ]
+  },
+  "gift of verdarach": {
+    "name": "Gift of Verdarach",
+    "id": 88060,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Wood",
+        "qty": 1,
+        "id": 19622
+      },
+      {
+        "name": "Gift of the Mists",
+        "qty": 1,
+        "id": 76427
+      },
+      {
+        "name": "Shard of Call of the Void",
+        "qty": 100,
+        "id": 87711
+      },
+      {
+        "name": "Mystic Runestone",
+        "qty": 100,
+        "id": 79418
+      }
+    ]
+  },
+  "gift of war": {
+    "name": "Gift of War",
+    "id": 71008,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Memory of Battle",
+        "qty": 250,
+        "id": 71581
+      }
+    ]
+  },
+  "gift of war dedication": {
+    "name": "Gift of War Dedication",
+    "id": 83259,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Certificate of Honor",
+        "qty": 1,
+        "id": 83620
+      },
+      {
+        "name": "Certificate of Heroics",
+        "qty": 1,
+        "id": 84099
+      },
+      {
+        "name": "Glob of Condensed Spirit Energy",
+        "qty": 1,
+        "id": 83082
+      },
+      {
+        "name": "Memory of Battle",
+        "qty": 250,
+        "id": 71581
+      }
+    ]
+  },
+  "gift of war prosperity": {
+    "name": "Gift of War Prosperity",
+    "id": 82746,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Battle",
+        "qty": 1,
+        "id": 19678
+      },
+      {
+        "name": "Mystic Clover",
+        "qty": 15,
+        "id": 19675
+      },
+      {
+        "name": "Gift of Condensed Might",
+        "qty": 1,
+        "id": 70867
+      },
+      {
+        "name": "Gift of Condensed Magic",
+        "qty": 1,
+        "id": 76530
+      }
+    ]
+  },
+  "gift of war prowess": {
+    "name": "Gift of War Prowess",
+    "id": 84168,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Legendary War Insight",
+        "qty": 1,
+        "id": 83584
+      },
+      {
+        "name": "Eldritch Scroll",
+        "qty": 1,
+        "id": 20852
+      },
+      {
+        "name": "Obsidian Shard",
+        "qty": 50,
+        "id": 19925
+      },
+      {
+        "name": "Cube of Stabilized Dark Energy",
+        "qty": 1,
+        "id": 73137
+      }
+    ]
+  },
+  "gift of warfare": {
+    "name": "Gift of Warfare",
+    "id": 81478,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Mystic Essence of Strategy",
+        "qty": 1,
+        "id": 81319
+      },
+      {
+        "name": "Mystic Essence of Animosity",
+        "qty": 1,
+        "id": 81494
+      },
+      {
+        "name": "Mystic Essence of Carnage",
+        "qty": 1,
+        "id": 81449
+      },
+      {
+        "name": "Mystic Essence of Annihilation",
+        "qty": 1,
+        "id": 81407
+      }
+    ]
+  },
+  "gift of water": {
+    "name": "Gift of Water",
+    "id": 19643,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of the Sanctuary",
+        "qty": 1,
+        "id": 19670
+      },
+      {
+        "name": "Orichalcum Ingot",
+        "qty": 250,
+        "id": 19685
+      },
+      {
+        "name": "Molten Lodestone",
+        "qty": 100,
+        "id": 24315
+      },
+      {
+        "name": "Glacial Lodestone",
+        "qty": 100,
+        "id": 24320
+      }
+    ]
+  },
+  "gift of weather": {
+    "name": "Gift of Weather",
+    "id": 19637,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of Knowledge",
+        "qty": 1,
+        "id": 19671
+      },
+      {
+        "name": "Orichalcum Ingot",
+        "qty": 250,
+        "id": 19685
+      },
+      {
+        "name": "Hardened Leather Section",
+        "qty": 250,
+        "id": 19732
+      },
+      {
+        "name": "Charged Lodestone",
+        "qty": 100,
+        "id": 24305
+      }
+    ]
+  },
+  "gift of wood": {
+    "name": "Gift of Wood",
+    "id": 19622,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Seasoned Wood Plank",
+        "qty": 250,
+        "id": 19714
+      },
+      {
+        "name": "Hard Wood Plank",
+        "qty": 250,
+        "id": 19711
+      },
+      {
+        "name": "Elder Wood Plank",
+        "qty": 250,
+        "id": 19709
+      },
+      {
+        "name": "Ancient Wood Plank",
+        "qty": 250,
+        "id": 19712
+      }
+    ]
+  },
+  "gift of xiuquatl": {
+    "name": "Gift of Xiuquatl",
+    "id": 88500,
+    "acq": "recipe",
+    "inputs": [
+      {
+        "name": "Gift of the Mists",
+        "qty": 1,
+        "id": 76427
+      },
+      {
+        "name": "Mystic Runestone",
+        "qty": 100,
+        "id": 79418
+      },
+      {
+        "name": "Shard of Tlehco",
+        "qty": 100,
+        "id": 88738
+      },
+      {
+        "name": "Gift of Energy",
+        "qty": 1,
+        "id": 19623
+      }
+    ]
+  },
+  "gift of zhaitan": {
+    "name": "Gift of Zhaitan",
+    "id": 19669,
+    "acq": "vendor",
+    "inputs": []
+  }
+}

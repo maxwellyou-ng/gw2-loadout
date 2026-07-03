@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-20T01:45:33.525Z",
+  "generatedAt": "2026-06-21T05:48:15.205Z",
   "entries": [
     {
       "name": "Bloodstone Shard",
@@ -38,16 +38,6 @@
       ]
     },
     {
-      "name": "Eldritch Scroll",
-      "apiId": 20852,
-      "syntheticId": false,
-      "wikiUrl": "https://wiki.guildwars2.com/wiki/Eldritch_Scroll",
-      "confidence": "low",
-      "wikitextHash": "326e129e7e89ca8f",
-      "components": [],
-      "parseNote": "vendor-sold item — no craftable {{recipe}}; cost not machine-readable from {{Sold by}} (leaf material)"
-    },
-    {
       "name": "Fractalline Spark",
       "apiId": 105196,
       "syntheticId": false,
@@ -56,6 +46,526 @@
       "wikitextHash": "01953b0d8ab9a49d",
       "components": [],
       "parseNote": "vendor-sold item — no craftable {{recipe}}; cost not machine-readable from {{Sold by}} (leaf material)"
+    },
+    {
+      "name": "Gift of Arah",
+      "apiId": 81684,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Arah",
+      "confidence": "high",
+      "wikitextHash": "fc15735058fb6868",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of the Mists"
+        },
+        {
+          "qty": 100,
+          "name": "Mystic Runestone"
+        },
+        {
+          "qty": 100,
+          "name": "Shard of Arah"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Metal"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Arid Mastery",
+      "apiId": 91041,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Arid_Mastery",
+      "confidence": "high",
+      "wikitextHash": "54741d10a46abe12",
+      "components": [
+        {
+          "qty": 100,
+          "name": "Funerary Incense"
+        },
+        {
+          "qty": 1,
+          "name": "Bloodstone Shard"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Crystalline Magic"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Ephemeral Magic"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Astralaria",
+      "apiId": 71972,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Astralaria",
+      "confidence": "high",
+      "wikitextHash": "a490fa089f4d3965",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of the Mists"
+        },
+        {
+          "qty": 100,
+          "name": "Icy Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Cosmos"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Metal"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Aurene's Argument",
+      "apiId": 96493,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Aurene's_Argument",
+      "confidence": "high",
+      "wikitextHash": "0a020ef03ef86e63",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Poem on Pistols"
+        },
+        {
+          "qty": 100,
+          "name": "Mystic Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Research"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Mists"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Aurene's Bite",
+      "apiId": 97027,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Aurene's_Bite",
+      "confidence": "high",
+      "wikitextHash": "47a1f918673928cd",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Poem on Greatswords"
+        },
+        {
+          "qty": 100,
+          "name": "Mystic Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Research"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Mists"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Aurene's Breath",
+      "apiId": 95922,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Aurene's_Breath",
+      "confidence": "high",
+      "wikitextHash": "d7c5de8ccc1c70b6",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Poem on Torches"
+        },
+        {
+          "qty": 100,
+          "name": "Mystic Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Research"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Mists"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Aurene's Claw",
+      "apiId": 97066,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Aurene's_Claw",
+      "confidence": "high",
+      "wikitextHash": "f242a4b38e2c71eb",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Poem on Daggers"
+        },
+        {
+          "qty": 100,
+          "name": "Mystic Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Research"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Mists"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Aurene's Fang",
+      "apiId": 96790,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Aurene's_Fang",
+      "confidence": "high",
+      "wikitextHash": "cfc8d0080c0bdb5f",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Poem on Swords"
+        },
+        {
+          "qty": 100,
+          "name": "Mystic Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Research"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Mists"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Aurene's Flight",
+      "apiId": 95777,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Aurene's_Flight",
+      "confidence": "high",
+      "wikitextHash": "ffc3cd8af086f409",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Poem on Longbows"
+        },
+        {
+          "qty": 100,
+          "name": "Mystic Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Research"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Mists"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Aurene's Gaze",
+      "apiId": 97088,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Aurene's_Gaze",
+      "confidence": "high",
+      "wikitextHash": "270d81115d89ff4e",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Poem on Foci"
+        },
+        {
+          "qty": 100,
+          "name": "Mystic Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Research"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Mists"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Aurene's Horn",
+      "apiId": 96354,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Aurene's_Horn",
+      "confidence": "high",
+      "wikitextHash": "031afca5d03196bb",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Poem on Warhorns"
+        },
+        {
+          "qty": 100,
+          "name": "Mystic Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Research"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Mists"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Aurene's Insight",
+      "apiId": 97281,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Aurene's_Insight",
+      "confidence": "high",
+      "wikitextHash": "99bea44ec38bcd25",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Poem on Staves"
+        },
+        {
+          "qty": 100,
+          "name": "Mystic Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Research"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Mists"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Aurene's Persuasion",
+      "apiId": 97412,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Aurene's_Persuasion",
+      "confidence": "high",
+      "wikitextHash": "b58a185e9a19186f",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Poem on Rifles"
+        },
+        {
+          "qty": 100,
+          "name": "Mystic Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Research"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Mists"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Aurene's Rending",
+      "apiId": 97804,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Aurene's_Rending",
+      "confidence": "high",
+      "wikitextHash": "605eac89d42f1a93",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Poem on Axes"
+        },
+        {
+          "qty": 100,
+          "name": "Mystic Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Research"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Mists"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Aurene's Scale",
+      "apiId": 96073,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Aurene's_Scale",
+      "confidence": "high",
+      "wikitextHash": "ee6a280f8dbf835d",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Poem on Shields"
+        },
+        {
+          "qty": 100,
+          "name": "Mystic Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Research"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Mists"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Aurene's Tail",
+      "apiId": 95846,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Aurene's_Tail",
+      "confidence": "high",
+      "wikitextHash": "60dbb5bcaf14c140",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Poem on Maces"
+        },
+        {
+          "qty": 100,
+          "name": "Mystic Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Research"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Mists"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Aurene's Weight",
+      "apiId": 96161,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Aurene's_Weight",
+      "confidence": "high",
+      "wikitextHash": "9203b01cbd08af0e",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Poem on Hammers"
+        },
+        {
+          "qty": 100,
+          "name": "Mystic Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Research"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Mists"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Aurene's Wing",
+      "apiId": 96015,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Aurene's_Wing",
+      "confidence": "high",
+      "wikitextHash": "e0db38df12b9e49c",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Poem on Short Bows"
+        },
+        {
+          "qty": 100,
+          "name": "Mystic Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Research"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Mists"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Aurene's Wisdom",
+      "apiId": 97552,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Aurene's_Wisdom",
+      "confidence": "high",
+      "wikitextHash": "854e69e1d9beff64",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Poem on Scepters"
+        },
+        {
+          "qty": 100,
+          "name": "Mystic Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Research"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Mists"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Balthazar",
+      "apiId": 81144,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Balthazar",
+      "confidence": "high",
+      "wikitextHash": "ffb2a87d48f24fcd",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Wood"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Mists"
+        },
+        {
+          "qty": 100,
+          "name": "Shard of Liturgy"
+        },
+        {
+          "qty": 100,
+          "name": "Mystic Runestone"
+        }
+      ]
     },
     {
       "name": "Gift of Blood",
@@ -80,6 +590,32 @@
         {
           "qty": 50,
           "name": "Vial of Blood"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Bolt",
+      "apiId": 19655,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Bolt",
+      "confidence": "high",
+      "wikitextHash": "733a0d42f24a50cb",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Metal"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Lightning"
+        },
+        {
+          "qty": 100,
+          "name": "Icy Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Superior Sigil of Air"
         }
       ]
     },
@@ -110,6 +646,58 @@
       ]
     },
     {
+      "name": "Gift of Cantha",
+      "apiId": 97096,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Cantha",
+      "confidence": "high",
+      "wikitextHash": "97660f059c99be13",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Seitung Province"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of New Kaineng City"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Echovald Forest"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Dragon's End"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Chuka and Champawat",
+      "apiId": 78627,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Chuka_and_Champawat",
+      "confidence": "high",
+      "wikitextHash": "4eaf5003b7f73f40",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of the Mists"
+        },
+        {
+          "qty": 100,
+          "name": "Icy Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Family"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Wood"
+        }
+      ]
+    },
+    {
       "name": "Gift of Claws",
       "apiId": 70801,
       "syntheticId": true,
@@ -132,6 +720,58 @@
         {
           "qty": 50,
           "name": "Claw"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Color",
+      "apiId": 19638,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Color",
+      "confidence": "high",
+      "wikitextHash": "2b3b742347dbd06f",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Zhaitan"
+        },
+        {
+          "qty": 100,
+          "name": "Unidentified Dye"
+        },
+        {
+          "qty": 250,
+          "name": "Pile of Crystalline Dust"
+        },
+        {
+          "qty": 100,
+          "name": "Opal Orb"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Compassion",
+      "apiId": 91225,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Compassion",
+      "confidence": "high",
+      "wikitextHash": "6b569966dc87718e",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Desert Mastery"
+        },
+        {
+          "qty": 6,
+          "name": "Ball of Dark Energy"
+        },
+        {
+          "qty": 150,
+          "name": "Legendary Insight (consumable)"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Complex Emotions"
         }
       ]
     },
@@ -266,14 +906,82 @@
       ]
     },
     {
-      "name": "Gift of Craftsmanship",
-      "apiId": 77451,
+      "name": "Gift of Conquering",
+      "apiId": 81371,
       "syntheticId": false,
-      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Craftsmanship",
-      "confidence": "low",
-      "wikitextHash": "5220b948497d0f6f",
-      "components": [],
-      "parseNote": "vendor-sold item — no craftable {{recipe}}; cost not machine-readable from {{Sold by}} (leaf material)"
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Conquering",
+      "confidence": "high",
+      "wikitextHash": "bf5a5ece6ac2f7d7",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Legendary Spike"
+        },
+        {
+          "qty": 4,
+          "name": "Gift of Battle"
+        },
+        {
+          "qty": 250,
+          "name": "Memory of Battle"
+        },
+        {
+          "qty": 2,
+          "name": "Vision Crystal"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Crystalline Magic",
+      "apiId": 91124,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Crystalline_Magic",
+      "confidence": "high",
+      "wikitextHash": "abe7514cc07af549",
+      "components": [
+        {
+          "qty": 100,
+          "name": "Kralkatite Ore"
+        },
+        {
+          "qty": 100,
+          "name": "Difluorite Crystal"
+        },
+        {
+          "qty": 100,
+          "name": "Inscribed Shard"
+        },
+        {
+          "qty": 1,
+          "name": "Bottle of Elonian Wine"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Darkness",
+      "apiId": 19631,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Darkness",
+      "confidence": "high",
+      "wikitextHash": "51fdad8e4d927f3e",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Ascalon"
+        },
+        {
+          "qty": 250,
+          "name": "Orichalcum Ingot"
+        },
+        {
+          "qty": 250,
+          "name": "Cured Hardened Leather Square"
+        },
+        {
+          "qty": 100,
+          "name": "Onyx Lodestone"
+        }
+      ]
     },
     {
       "name": "Gift of Dedication",
@@ -302,6 +1010,84 @@
       ]
     },
     {
+      "name": "Gift of Desert Mastery",
+      "apiId": 86036,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Desert_Mastery",
+      "confidence": "high",
+      "wikitextHash": "8c3ab65baa51b5fd",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of the Desert"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Rider"
+        },
+        {
+          "qty": 1,
+          "name": "Bloodstone Shard"
+        },
+        {
+          "qty": 250,
+          "name": "Funerary Incense"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Divinity",
+      "apiId": 80650,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Divinity",
+      "confidence": "high",
+      "wikitextHash": "116c56599abe7c63",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Wood"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Mists"
+        },
+        {
+          "qty": 100,
+          "name": "Shard o' War"
+        },
+        {
+          "qty": 100,
+          "name": "Mystic Runestone"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Draconic Mastery",
+      "apiId": 81861,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Draconic_Mastery",
+      "confidence": "high",
+      "wikitextHash": "a80cd7bf03eabdaf",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Crystalline Ingot"
+        },
+        {
+          "qty": 1,
+          "name": "Bloodstone Shard"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Bloodstone Magic"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Dragon Magic"
+        }
+      ]
+    },
+    {
       "name": "Gift of Dust",
       "apiId": 73196,
       "syntheticId": true,
@@ -324,6 +1110,162 @@
         {
           "qty": 50,
           "name": "Pile of Radiant Dust"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Embracing Refuge",
+      "apiId": 103242,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Embracing_Refuge",
+      "confidence": "high",
+      "wikitextHash": "21c4ddd65a26622d",
+      "components": [
+        {
+          "qty": 250,
+          "name": "Refined Homestead Metal"
+        },
+        {
+          "qty": 250,
+          "name": "Refined Homestead Fiber"
+        },
+        {
+          "qty": 250,
+          "name": "Refined Homestead Wood"
+        },
+        {
+          "qty": 250,
+          "name": "Shard of the Homestead"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Energy",
+      "apiId": 19623,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Energy",
+      "confidence": "high",
+      "wikitextHash": "970c1afa56f86b3d",
+      "components": [
+        {
+          "qty": 250,
+          "name": "Pile of Radiant Dust"
+        },
+        {
+          "qty": 250,
+          "name": "Pile of Luminous Dust"
+        },
+        {
+          "qty": 250,
+          "name": "Pile of Incandescent Dust"
+        },
+        {
+          "qty": 250,
+          "name": "Pile of Crystalline Dust"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Entertainment",
+      "apiId": 19635,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Entertainment",
+      "confidence": "high",
+      "wikitextHash": "8739ec1fad13a4e9",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of the Nobleman"
+        },
+        {
+          "qty": 250,
+          "name": "Orichalcum Ingot"
+        },
+        {
+          "qty": 250,
+          "name": "Bolt of Gossamer"
+        },
+        {
+          "qty": 5,
+          "name": "Box o' Fun"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Ephemeral Magic",
+      "apiId": 91112,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Ephemeral_Magic",
+      "confidence": "high",
+      "wikitextHash": "0e710447d2cce6d2",
+      "components": [
+        {
+          "qty": 100,
+          "name": "Lump of Mistonium"
+        },
+        {
+          "qty": 100,
+          "name": "Branded Mass"
+        },
+        {
+          "qty": 100,
+          "name": "Mistborn Mote"
+        },
+        {
+          "qty": 1,
+          "name": "Bottle of Elonian Wine"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Eureka",
+      "apiId": 79419,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Eureka",
+      "confidence": "high",
+      "wikitextHash": "2c97b316e3d84182",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Metal"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Mists"
+        },
+        {
+          "qty": 100,
+          "name": "Shard of Endeavor"
+        },
+        {
+          "qty": 100,
+          "name": "Mystic Runestone"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Exordium",
+      "apiId": 90893,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Exordium",
+      "confidence": "high",
+      "wikitextHash": "04e087838416f7d3",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of the Mists"
+        },
+        {
+          "qty": 100,
+          "name": "Mystic Runestone"
+        },
+        {
+          "qty": 100,
+          "name": "Shard of Exitare"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Metal"
         }
       ]
     },
@@ -406,14 +1348,538 @@
       ]
     },
     {
-      "name": "Gift of Insight",
-      "apiId": 105875,
+      "name": "Gift of Frenzy",
+      "apiId": 19659,
       "syntheticId": false,
-      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Insight",
-      "confidence": "low",
-      "wikitextHash": "309df6ade534ead5",
-      "components": [],
-      "parseNote": "vendor-sold item — no craftable {{recipe}}; cost not machine-readable from {{Sold by}} (leaf material)"
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Frenzy",
+      "confidence": "high",
+      "wikitextHash": "6baca40cdc5b207c",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Wood"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Water"
+        },
+        {
+          "qty": 100,
+          "name": "Icy Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Superior Sigil of Rage"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Frostfang",
+      "apiId": 19625,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Frostfang",
+      "confidence": "high",
+      "wikitextHash": "6cfe95368d9bf7bb",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Metal"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Ice"
+        },
+        {
+          "qty": 100,
+          "name": "Icy Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Superior Sigil of Ice"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Gatherer of the Hunt",
+      "apiId": 102515,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Gatherer_of_the_Hunt",
+      "confidence": "high",
+      "wikitextHash": "eba55b09c0903998",
+      "components": [
+        {
+          "qty": 100,
+          "name": "Sweet-Treated Pine Plank"
+        },
+        {
+          "qty": 100,
+          "name": "Neutralized Titan Alloy"
+        },
+        {
+          "qty": 100,
+          "name": "Shard of Lowland Shore"
+        },
+        {
+          "qty": 100,
+          "name": "Shard of Janthir Syntri"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Glory",
+      "apiId": 70528,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Glory",
+      "confidence": "high",
+      "wikitextHash": "b1a2d37bda8191ee",
+      "components": [
+        {
+          "qty": 250,
+          "name": "Shard of Glory"
+        }
+      ]
+    },
+    {
+      "name": "Gift of History",
+      "apiId": 19629,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_History",
+      "confidence": "high",
+      "wikitextHash": "ac73bf37fa65345e",
+      "components": [
+        {
+          "qty": 100,
+          "name": "Onyx Lodestone"
+        },
+        {
+          "qty": 250,
+          "name": "Cured Hardened Leather Square"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Ascalon"
+        },
+        {
+          "qty": 250,
+          "name": "Pile of Crystalline Dust"
+        }
+      ]
+    },
+    {
+      "name": "Gift of HOPE",
+      "apiId": 77086,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_HOPE",
+      "confidence": "high",
+      "wikitextHash": "193e59bf7a21763b",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of the Mists"
+        },
+        {
+          "qty": 100,
+          "name": "Icy Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Catalyst"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Wood"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Howler",
+      "apiId": 19662,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Howler",
+      "confidence": "high",
+      "wikitextHash": "1270162261fc7549",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Wood"
+        },
+        {
+          "qty": 1,
+          "name": "Wolf Statue"
+        },
+        {
+          "qty": 100,
+          "name": "Icy Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Superior Sigil of Accuracy"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Ice",
+      "apiId": 19624,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Ice",
+      "confidence": "high",
+      "wikitextHash": "5e176a499e152c81",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of the Sanctuary"
+        },
+        {
+          "qty": 250,
+          "name": "Orichalcum Ingot"
+        },
+        {
+          "qty": 100,
+          "name": "Glacial Lodestone"
+        },
+        {
+          "qty": 100,
+          "name": "Corrupted Lodestone"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Incinerator",
+      "apiId": 19645,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Incinerator",
+      "confidence": "high",
+      "wikitextHash": "83b5e0ff3d452eb3",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Metal"
+        },
+        {
+          "qty": 1,
+          "name": "Vial of Liquid Flame"
+        },
+        {
+          "qty": 100,
+          "name": "Icy Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Superior Sigil of Fire"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Infused Gems",
+      "apiId": 106975,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Infused_Gems",
+      "confidence": "high",
+      "wikitextHash": "11716ed2bfbe3b75",
+      "components": [
+        {
+          "qty": 250,
+          "name": "Obsidian Shards"
+        },
+        {
+          "qty": 250,
+          "name": "Beryl Orb"
+        },
+        {
+          "qty": 1,
+          "name": "Bloodstone Shard"
+        },
+        {
+          "qty": 100,
+          "name": "Mystic Runestone"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Insights",
+      "apiId": 72964,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Insights",
+      "confidence": "high",
+      "wikitextHash": "0f542a47565ff9e1",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of the Itzel"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Nuhoch"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Exalted"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Gliding"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Ipos",
+      "apiId": 85744,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Ipos",
+      "confidence": "high",
+      "wikitextHash": "74dc9965a7a78b9c",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of the Mists"
+        },
+        {
+          "qty": 100,
+          "name": "Mystic Runestone"
+        },
+        {
+          "qty": 100,
+          "name": "Shard of the Dark Arts"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Energy"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Jade Mastery",
+      "apiId": 96033,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Jade_Mastery",
+      "confidence": "high",
+      "wikitextHash": "a9b0f9cc1371af3f",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of the Dragon Empire"
+        },
+        {
+          "qty": 1,
+          "name": "Bloodstone Shard"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Cantha"
+        },
+        {
+          "qty": 100,
+          "name": "Antique Summoning Stone"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Janthir Wanderlust",
+      "apiId": 104699,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Janthir_Wanderlust",
+      "confidence": "high",
+      "wikitextHash": "9dfb924d876a15fd",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Lowland Shore"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Janthir Syntri"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Mistburned Barrens"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Bava Nisos"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Janthir Wilds",
+      "apiId": 102514,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Janthir_Wilds",
+      "confidence": "high",
+      "wikitextHash": "18fe212e5741eea2",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Gatherer of the Hunt"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Uncovered Grounds"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Expertise"
+        },
+        {
+          "qty": 1,
+          "name": "Bloodstone Shard"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Kamohoali'i Kotaki",
+      "apiId": 19657,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Kamohoali'i_Kotaki",
+      "confidence": "high",
+      "wikitextHash": "c7379ddaa75573bb",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Metal"
+        },
+        {
+          "qty": 1,
+          "name": "Shark Statue"
+        },
+        {
+          "qty": 100,
+          "name": "Icy Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Superior Sigil of Agony"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Klobjarne Geirr",
+      "apiId": 102901,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Klobjarne_Geirr",
+      "confidence": "high",
+      "wikitextHash": "0fc4bee07692f077",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Recollector of Memories"
+        },
+        {
+          "qty": 100,
+          "name": "Mystic Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Mists"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Research"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Kraitkin",
+      "apiId": 19658,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Kraitkin",
+      "confidence": "high",
+      "wikitextHash": "2ff00ae9cfc96955",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Energy"
+        },
+        {
+          "qty": 1,
+          "name": "Eel Statue"
+        },
+        {
+          "qty": 100,
+          "name": "Icy Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Superior Sigil of Venom"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Kudzu",
+      "apiId": 19644,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Kudzu",
+      "confidence": "high",
+      "wikitextHash": "e95f211e95cf8679",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Wood"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Nature"
+        },
+        {
+          "qty": 100,
+          "name": "Icy Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Superior Sigil of Celerity"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Light",
+      "apiId": 19632,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Light",
+      "confidence": "high",
+      "wikitextHash": "3197ed38fc368042",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Ascalon"
+        },
+        {
+          "qty": 250,
+          "name": "Orichalcum Ingot"
+        },
+        {
+          "qty": 250,
+          "name": "Cured Hardened Leather Square"
+        },
+        {
+          "qty": 100,
+          "name": "Charged Lodestone"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Lightning",
+      "apiId": 19639,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Lightning",
+      "confidence": "high",
+      "wikitextHash": "5ec82de6a9072602",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Ascalon"
+        },
+        {
+          "qty": 250,
+          "name": "Orichalcum Ingot"
+        },
+        {
+          "qty": 250,
+          "name": "Bolt of Gossamer"
+        },
+        {
+          "qty": 100,
+          "name": "Charged Lodestone"
+        }
+      ]
     },
     {
       "name": "Gift of Magic",
@@ -468,6 +1934,58 @@
       ]
     },
     {
+      "name": "Gift of Maguuma",
+      "apiId": 74927,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Maguuma",
+      "confidence": "high",
+      "wikitextHash": "71ac796a8e2404db",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of the Fleet"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Tarir"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Chak"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Jungle"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Maguuma Mastery",
+      "apiId": 73239,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Maguuma_Mastery",
+      "confidence": "high",
+      "wikitextHash": "f809f0dc8bb7902c",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Maguuma"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Insights"
+        },
+        {
+          "qty": 1,
+          "name": "Bloodstone Shard"
+        },
+        {
+          "qty": 250,
+          "name": "Crystalline Ingot"
+        }
+      ]
+    },
+    {
       "name": "Gift of Mastery",
       "apiId": 19674,
       "syntheticId": false,
@@ -490,6 +2008,58 @@
         {
           "qty": 1,
           "name": "Gift of Battle"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Metal",
+      "apiId": 19621,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Metal",
+      "confidence": "high",
+      "wikitextHash": "52b1f90d4c7501cc",
+      "components": [
+        {
+          "qty": 250,
+          "name": "Orichalcum Ingot"
+        },
+        {
+          "qty": 250,
+          "name": "Mithril Ingot"
+        },
+        {
+          "qty": 250,
+          "name": "Darksteel Ingot"
+        },
+        {
+          "qty": 250,
+          "name": "Platinum Ingot"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Meteorlogicus",
+      "apiId": 19652,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Meteorlogicus",
+      "confidence": "high",
+      "wikitextHash": "f4f6cdfa6b108c86",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Energy"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Weather"
+        },
+        {
+          "qty": 100,
+          "name": "Icy Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Superior Sigil of Air"
         }
       ]
     },
@@ -546,6 +2116,136 @@
       ]
     },
     {
+      "name": "Gift of Music",
+      "apiId": 19630,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Music",
+      "confidence": "high",
+      "wikitextHash": "ffcd3f9f5e58a149",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of the Nobleman"
+        },
+        {
+          "qty": 250,
+          "name": "Orichalcum Ingot"
+        },
+        {
+          "qty": 250,
+          "name": "Bolt of Gossamer"
+        },
+        {
+          "qty": 100,
+          "name": "Opal Orb"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Nature",
+      "apiId": 19627,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Nature",
+      "confidence": "high",
+      "wikitextHash": "9b06e2121f455889",
+      "components": [
+        {
+          "qty": 250,
+          "name": "Omnomberry"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Thorns"
+        },
+        {
+          "qty": 250,
+          "name": "Ancient Wood Plank"
+        },
+        {
+          "qty": 250,
+          "name": "Cured Hardened Leather Square"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Nevermore",
+      "apiId": 74300,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Nevermore",
+      "confidence": "high",
+      "wikitextHash": "afed5c551f4e6d23",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of the Mists"
+        },
+        {
+          "qty": 100,
+          "name": "Icy Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Raven Spirit"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Energy"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Pharus",
+      "apiId": 89445,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Pharus",
+      "confidence": "high",
+      "wikitextHash": "b9ac5050335b3847",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of the Mists"
+        },
+        {
+          "qty": 100,
+          "name": "Mystic Runestone"
+        },
+        {
+          "qty": 100,
+          "name": "Shard of Spero"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Wood"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Prescience",
+      "apiId": 90985,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Prescience",
+      "confidence": "high",
+      "wikitextHash": "ed0e91e30770143f",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Energy"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Mists"
+        },
+        {
+          "qty": 100,
+          "name": "Icy Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Shattered Gift of Prescience"
+        }
+      ]
+    },
+    {
       "name": "Gift of Prosperity",
       "apiId": 78866,
       "syntheticId": false,
@@ -598,6 +2298,136 @@
       ]
     },
     {
+      "name": "Gift of Quip",
+      "apiId": 19651,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Quip",
+      "confidence": "high",
+      "wikitextHash": "5bcc90fd086ce36f",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Wood"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Entertainment"
+        },
+        {
+          "qty": 100,
+          "name": "Icy Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Superior Sigil of Stamina"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Rays",
+      "apiId": 107040,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Rays",
+      "confidence": "high",
+      "wikitextHash": "4f2a3a6d9e2f5351",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of the Sun"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Beach"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Infused Gems"
+        },
+        {
+          "qty": 10,
+          "name": "Purified Rift Essence"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Recollector of Memories",
+      "apiId": 102342,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Recollector_of_Memories",
+      "confidence": "high",
+      "wikitextHash": "73f803d7a59ab041",
+      "components": [
+        {
+          "qty": 25,
+          "name": "Tale of Adventure"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Bones"
+        },
+        {
+          "qty": 1,
+          "name": "Memory of the Bearkin's Hunts"
+        },
+        {
+          "qty": 1,
+          "name": "Memory of the Bearkin's Victories"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Research",
+      "apiId": 97655,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Research",
+      "confidence": "high",
+      "wikitextHash": "8528767cad427d97",
+      "components": [
+        {
+          "qty": 250,
+          "name": "Thermocatalytic Reagent"
+        },
+        {
+          "qty": 250,
+          "name": "Hydrocatalytic Reagent"
+        },
+        {
+          "qty": 250,
+          "name": "Hydrocatalytic Reagent"
+        },
+        {
+          "qty": 250,
+          "name": "Exotic Essence of Luck"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Rodgort",
+      "apiId": 19656,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Rodgort",
+      "confidence": "high",
+      "wikitextHash": "cf9afa28c27b3987",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Wood"
+        },
+        {
+          "qty": 1,
+          "name": "Vial of Liquid Flame"
+        },
+        {
+          "qty": 100,
+          "name": "Icy Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Superior Sigil of Fire"
+        }
+      ]
+    },
+    {
       "name": "Gift of Scales",
       "apiId": 75299,
       "syntheticId": true,
@@ -620,6 +2450,838 @@
         {
           "qty": 50,
           "name": "Scale"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Sentience",
+      "apiId": 81796,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Sentience",
+      "confidence": "high",
+      "wikitextHash": "c1c73a9be402205f",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Energy"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Mists"
+        },
+        {
+          "qty": 100,
+          "name": "Icy Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Valor"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Shadows",
+      "apiId": 104846,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Shadows",
+      "confidence": "high",
+      "wikitextHash": "05ffd3bff5691cc4",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Darkness"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Scales"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Titan Understanding"
+        },
+        {
+          "qty": 1,
+          "name": "Bloodstone Shard"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Shooshadoo",
+      "apiId": 79839,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Shooshadoo",
+      "confidence": "high",
+      "wikitextHash": "dffaca87883ea4e5",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Metal"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Mists"
+        },
+        {
+          "qty": 100,
+          "name": "Shard of Friendship"
+        },
+        {
+          "qty": 100,
+          "name": "Mystic Runestone"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Skirmishing",
+      "apiId": 77485,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Skirmishing",
+      "confidence": "high",
+      "wikitextHash": "ee2d197dbd5e6ef0",
+      "components": [
+        {
+          "qty": 2,
+          "name": "Vision Crystal"
+        },
+        {
+          "qty": 250,
+          "name": "Shard of Glory"
+        },
+        {
+          "qty": 5,
+          "name": "Certificate of Support"
+        },
+        {
+          "qty": 1,
+          "name": "Perfect Mist Core"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Stealth",
+      "apiId": 19636,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Stealth",
+      "confidence": "high",
+      "wikitextHash": "fb2403f0ccf213c0",
+      "components": [
+        {
+          "qty": 250,
+          "name": "Orrian Truffle"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Knowledge"
+        },
+        {
+          "qty": 250,
+          "name": "Orichalcum Ingot"
+        },
+        {
+          "qty": 100,
+          "name": "Onyx Lodestone"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Sunrise",
+      "apiId": 19647,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Sunrise",
+      "confidence": "high",
+      "wikitextHash": "ae8c57553182f5f0",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Metal"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Light"
+        },
+        {
+          "qty": 100,
+          "name": "Icy Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Superior Sigil of Strength"
+        }
+      ]
+    },
+    {
+      "name": "Gift of the Appetizer",
+      "apiId": 104965,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_the_Appetizer",
+      "confidence": "high",
+      "wikitextHash": "9dac41ad814e3f6d",
+      "components": [
+        {
+          "qty": 200,
+          "name": "Bowl of Poultry Satay"
+        },
+        {
+          "qty": 100,
+          "name": "Red-Lentil Saobosa"
+        },
+        {
+          "qty": 50,
+          "name": "Spicy Marinated Mushroom"
+        },
+        {
+          "qty": 5,
+          "name": "Fruit of the Shadow"
+        }
+      ]
+    },
+    {
+      "name": "Gift of the Beach",
+      "apiId": 107201,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_the_Beach",
+      "confidence": "high",
+      "wikitextHash": "0da7676da33e33dd",
+      "components": [
+        {
+          "qty": 250,
+          "name": "Pile of Coarse Sand"
+        },
+        {
+          "qty": 100,
+          "name": "Ley-Infused Sand"
+        },
+        {
+          "qty": 250,
+          "name": "Coral Orb"
+        },
+        {
+          "qty": 1,
+          "name": "Relic of the Sunless"
+        }
+      ]
+    },
+    {
+      "name": "Gift of The Bifrost",
+      "apiId": 19654,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_The_Bifrost",
+      "confidence": "high",
+      "wikitextHash": "998d158268daa40f",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Energy"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Color"
+        },
+        {
+          "qty": 100,
+          "name": "Icy Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Superior Sigil of Nullification"
+        }
+      ]
+    },
+    {
+      "name": "Gift of the Blade",
+      "apiId": 82003,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_the_Blade",
+      "confidence": "high",
+      "wikitextHash": "d085e22bd22ea0e9",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Metal"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Mists"
+        },
+        {
+          "qty": 100,
+          "name": "Shard of the Crown"
+        },
+        {
+          "qty": 100,
+          "name": "Mystic Runestone"
+        }
+      ]
+    },
+    {
+      "name": "Gift of the Champion",
+      "apiId": 93036,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_the_Champion",
+      "confidence": "high",
+      "wikitextHash": "05baa31b278fbe1e",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Salt-Forged Mist Diamond"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Mists"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Competitive Dedication"
+        },
+        {
+          "qty": 1,
+          "name": "Tome of the Mists"
+        }
+      ]
+    },
+    {
+      "name": "Gift of the Competitor",
+      "apiId": 77509,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_the_Competitor",
+      "confidence": "high",
+      "wikitextHash": "2bd57875258e9a13",
+      "components": [
+        {
+          "qty": 1,
+          "name": "The Thrill of Battle"
+        },
+        {
+          "qty": 1,
+          "name": "Tapestry of Sacrifice"
+        },
+        {
+          "qty": 1,
+          "name": "Monument of Legends"
+        },
+        {
+          "qty": 1,
+          "name": "Hymn of Glory"
+        }
+      ]
+    },
+    {
+      "name": "Gift of the Desert",
+      "apiId": 85631,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_the_Desert",
+      "confidence": "high",
+      "wikitextHash": "82f96a0b999464fa",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of the Oasis"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Highlands"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Riverlands"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Desolation"
+        }
+      ]
+    },
+    {
+      "name": "Gift of the Dessert",
+      "apiId": 104717,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_the_Dessert",
+      "confidence": "high",
+      "wikitextHash": "165488aa1b8f9372",
+      "components": [
+        {
+          "qty": 200,
+          "name": "Bowl of Prickly Pear Sorbet"
+        },
+        {
+          "qty": 50,
+          "name": "Bowl of Passion Fruit Tapioca Pudding"
+        },
+        {
+          "qty": 2,
+          "name": "Amalgamated Rift Essence"
+        },
+        {
+          "qty": 5,
+          "name": "Fruit of the Shadow"
+        }
+      ]
+    },
+    {
+      "name": "Gift of the Dragon Empire",
+      "apiId": 97433,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_the_Dragon_Empire",
+      "confidence": "high",
+      "wikitextHash": "dd8bd9207c287d6e",
+      "components": [
+        {
+          "qty": 100,
+          "name": "Jade Runestone"
+        },
+        {
+          "qty": 200,
+          "name": "Chunk of Pure Jade"
+        },
+        {
+          "qty": 100,
+          "name": "Chunk of Ancient Ambergris"
+        },
+        {
+          "qty": 5,
+          "name": "Blessing of the Jade Empress"
+        }
+      ]
+    },
+    {
+      "name": "Gift of The Dreamer",
+      "apiId": 19660,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_The_Dreamer",
+      "confidence": "high",
+      "wikitextHash": "378394e8b70e57f4",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Wood"
+        },
+        {
+          "qty": 1,
+          "name": "Unicorn Statue"
+        },
+        {
+          "qty": 100,
+          "name": "Icy Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Superior Sigil of Purity"
+        }
+      ]
+    },
+    {
+      "name": "Gift of the Entrée",
+      "apiId": 104932,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_the_Entr%C3%A9e",
+      "confidence": "high",
+      "wikitextHash": "086ca7e40a38a60d",
+      "components": [
+        {
+          "qty": 200,
+          "name": "Plate of Orrian Steak Frittes"
+        },
+        {
+          "qty": 100,
+          "name": "Plate of Truffle Steak"
+        },
+        {
+          "qty": 50,
+          "name": "Plate of Spicy Herbed Chicken"
+        },
+        {
+          "qty": 5,
+          "name": "Fruit of the Shadow"
+        }
+      ]
+    },
+    {
+      "name": "Gift of the Feast",
+      "apiId": 104872,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_the_Feast",
+      "confidence": "high",
+      "wikitextHash": "f908d43e3f47bdaf",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of the Appetizer"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Entrée"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Side Course"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Dessert"
+        }
+      ]
+    },
+    {
+      "name": "Gift of The Flameseeker Prophecies",
+      "apiId": 19653,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_The_Flameseeker_Prophecies",
+      "confidence": "high",
+      "wikitextHash": "e7d72071aac4656e",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Metal"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of History"
+        },
+        {
+          "qty": 100,
+          "name": "Icy Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Superior Sigil of Battle"
+        }
+      ]
+    },
+    {
+      "name": "Gift of the Four Legions",
+      "apiId": 87115,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_the_Four_Legions",
+      "confidence": "high",
+      "wikitextHash": "234d46df278f0bc9",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Metal"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Mists"
+        },
+        {
+          "qty": 100,
+          "name": "Shard of Resolution"
+        },
+        {
+          "qty": 100,
+          "name": "Mystic Runestone"
+        }
+      ]
+    },
+    {
+      "name": "Gift of the Homesteader",
+      "apiId": 102376,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_the_Homesteader",
+      "confidence": "high",
+      "wikitextHash": "10684b833cfd5551",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Embracing Refuge"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Condensed Might"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Condensed Magic"
+        },
+        {
+          "qty": 38,
+          "name": "Mystic Clovers"
+        }
+      ]
+    },
+    {
+      "name": "Gift of The Juggernaut",
+      "apiId": 19649,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_The_Juggernaut",
+      "confidence": "high",
+      "wikitextHash": "e52f66d38881ea42",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Metal"
+        },
+        {
+          "qty": 1,
+          "name": "Vial of Quicksilver"
+        },
+        {
+          "qty": 100,
+          "name": "Icy Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Superior Sigil of Benevolence"
+        }
+      ]
+    },
+    {
+      "name": "Gift of The Minstrel",
+      "apiId": 19646,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_The_Minstrel",
+      "confidence": "high",
+      "wikitextHash": "bd656b11e8c2f050",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Energy"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Music"
+        },
+        {
+          "qty": 100,
+          "name": "Icy Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Superior Sigil of Energy"
+        }
+      ]
+    },
+    {
+      "name": "Gift of the Mistburned Isles",
+      "apiId": 104962,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_the_Mistburned_Isles",
+      "confidence": "high",
+      "wikitextHash": "3a97b8dc49d1cf2a",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of the Mursaat Ruins"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Janthir Wanderlust"
+        },
+        {
+          "qty": 250,
+          "name": "Mursaat Runestone"
+        },
+        {
+          "qty": 250,
+          "name": "Mystic Runestone"
+        }
+      ]
+    },
+    {
+      "name": "Gift of the Mists",
+      "apiId": 76427,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_the_Mists",
+      "confidence": "high",
+      "wikitextHash": "ccf4dc2a98364cf0",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Battle"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Glory"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of War"
+        },
+        {
+          "qty": 1,
+          "name": "Cube of Stabilized Dark Energy"
+        }
+      ]
+    },
+    {
+      "name": "Gift of The Moot",
+      "apiId": 19650,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_The_Moot",
+      "confidence": "high",
+      "wikitextHash": "3a5e422270cef320",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Metal"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Entertainment"
+        },
+        {
+          "qty": 100,
+          "name": "Icy Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Superior Sigil of Energy"
+        }
+      ]
+    },
+    {
+      "name": "Gift of the Mursaat Ruins",
+      "apiId": 104763,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_the_Mursaat_Ruins",
+      "confidence": "high",
+      "wikitextHash": "60d207ebc6caf5bf",
+      "components": [
+        {
+          "qty": 100,
+          "name": "Vial of Titan Melted Liquid Obsidian"
+        },
+        {
+          "qty": 50,
+          "name": "Mists Gate Residue"
+        },
+        {
+          "qty": 100,
+          "name": "Shard of Mistburned Barrens"
+        },
+        {
+          "qty": 100,
+          "name": "Shard of Bava Nisos"
+        }
+      ]
+    },
+    {
+      "name": "Gift of The Predator",
+      "apiId": 19661,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_The_Predator",
+      "confidence": "high",
+      "wikitextHash": "9be765c5091db3de",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Wood"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Stealth"
+        },
+        {
+          "qty": 100,
+          "name": "Icy Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Superior Sigil of Force"
+        }
+      ]
+    },
+    {
+      "name": "Gift of the Rider",
+      "apiId": 86330,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_the_Rider",
+      "confidence": "high",
+      "wikitextHash": "a138562cd0796965",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Spirit of the Raptor"
+        },
+        {
+          "qty": 1,
+          "name": "Spirit of the Springer"
+        },
+        {
+          "qty": 1,
+          "name": "Spirit of the Skimmer"
+        },
+        {
+          "qty": 1,
+          "name": "Spirit of the Jackal"
+        }
+      ]
+    },
+    {
+      "name": "Gift of the Side Course",
+      "apiId": 104839,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_the_Side_Course",
+      "confidence": "high",
+      "wikitextHash": "6c2fe70e1702df9f",
+      "components": [
+        {
+          "qty": 200,
+          "name": "Meaty Asparagus Skewer"
+        },
+        {
+          "qty": 100,
+          "name": "Bowl of Black Pepper Cactus Salad"
+        },
+        {
+          "qty": 30,
+          "name": "Mystic Clovers"
+        },
+        {
+          "qty": 5,
+          "name": "Fruit of the Shadow"
+        }
+      ]
+    },
+    {
+      "name": "Gift of the Sun",
+      "apiId": 107136,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_the_Sun",
+      "confidence": "high",
+      "wikitextHash": "aa47acccf5f29004",
+      "components": [
+        {
+          "qty": 2,
+          "name": "Gift of Light"
+        },
+        {
+          "qty": 2,
+          "name": "Gift of Condensed Might"
+        },
+        {
+          "qty": 2,
+          "name": "Gift of Condensed Magic"
+        },
+        {
+          "qty": 250,
+          "name": "Sun Beads"
+        }
+      ]
+    },
+    {
+      "name": "Gift of the World",
+      "apiId": 93190,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_the_World",
+      "confidence": "high",
+      "wikitextHash": "302427a3bb4225da",
+      "components": [
+        {
+          "qty": 1,
+          "name": "War Commendation"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Mists"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of War Dedication"
+        },
+        {
+          "qty": 100,
+          "name": "Icy Runestones"
         }
       ]
     },
@@ -650,6 +3312,58 @@
       ]
     },
     {
+      "name": "Gift of Twilight",
+      "apiId": 19648,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Twilight",
+      "confidence": "high",
+      "wikitextHash": "ad5d0207edd89321",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Metal"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Darkness"
+        },
+        {
+          "qty": 100,
+          "name": "Icy Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Superior Sigil of Blood"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Uncovered Grounds",
+      "apiId": 102411,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Uncovered_Grounds",
+      "confidence": "high",
+      "wikitextHash": "c0f816c22d0c8e3d",
+      "components": [
+        {
+          "qty": 100,
+          "name": "Mursaat Runestone"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Lowland Shore"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Janthir Syntri"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Ursus"
+        }
+      ]
+    },
+    {
       "name": "Gift of Venom",
       "apiId": 71787,
       "syntheticId": true,
@@ -672,6 +3386,46 @@
         {
           "qty": 50,
           "name": "Venom Sac"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Verdarach",
+      "apiId": 88060,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Verdarach",
+      "confidence": "high",
+      "wikitextHash": "4fcbbac33887ee67",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Wood"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of the Mists"
+        },
+        {
+          "qty": 100,
+          "name": "Shard of Call of the Void"
+        },
+        {
+          "qty": 100,
+          "name": "Mystic Runestone"
+        }
+      ]
+    },
+    {
+      "name": "Gift of War",
+      "apiId": 71008,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_War",
+      "confidence": "high",
+      "wikitextHash": "7833e74627cf9204",
+      "components": [
+        {
+          "qty": 250,
+          "name": "Memory of Battle"
         }
       ]
     },
@@ -750,6 +3504,136 @@
         {
           "qty": 1,
           "name": "Cube of Stabilized Dark Energy"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Warfare",
+      "apiId": 81478,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Warfare",
+      "confidence": "high",
+      "wikitextHash": "3a14d88f97c8b5d8",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Mystic Essence of Strategy"
+        },
+        {
+          "qty": 1,
+          "name": "Mystic Essence of Animosity"
+        },
+        {
+          "qty": 1,
+          "name": "Mystic Essence of Carnage"
+        },
+        {
+          "qty": 1,
+          "name": "Mystic Essence of Annihilation"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Water",
+      "apiId": 19643,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Water",
+      "confidence": "high",
+      "wikitextHash": "f81bc94254c185f6",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of the Sanctuary"
+        },
+        {
+          "qty": 250,
+          "name": "Orichalcum Ingot"
+        },
+        {
+          "qty": 100,
+          "name": "Molten Lodestone"
+        },
+        {
+          "qty": 100,
+          "name": "Glacial Lodestone"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Weather",
+      "apiId": 19637,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Weather",
+      "confidence": "high",
+      "wikitextHash": "182004468413c691",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of Knowledge"
+        },
+        {
+          "qty": 250,
+          "name": "Orichalcum Ingot"
+        },
+        {
+          "qty": 250,
+          "name": "Hardened Leather Section"
+        },
+        {
+          "qty": 100,
+          "name": "Charged Lodestone"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Wood",
+      "apiId": 19622,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Wood",
+      "confidence": "high",
+      "wikitextHash": "e21fce44a2dcd928",
+      "components": [
+        {
+          "qty": 250,
+          "name": "Seasoned Wood Plank"
+        },
+        {
+          "qty": 250,
+          "name": "Hard Wood Plank"
+        },
+        {
+          "qty": 250,
+          "name": "Elder Wood Plank"
+        },
+        {
+          "qty": 250,
+          "name": "Ancient Wood Plank"
+        }
+      ]
+    },
+    {
+      "name": "Gift of Xiuquatl",
+      "apiId": 88500,
+      "syntheticId": false,
+      "wikiUrl": "https://wiki.guildwars2.com/wiki/Gift_of_Xiuquatl",
+      "confidence": "high",
+      "wikitextHash": "90d13deb74c31b60",
+      "components": [
+        {
+          "qty": 1,
+          "name": "Gift of the Mists"
+        },
+        {
+          "qty": 100,
+          "name": "Mystic Runestone"
+        },
+        {
+          "qty": 100,
+          "name": "Shard of Tlehco"
+        },
+        {
+          "qty": 1,
+          "name": "Gift of Energy"
         }
       ]
     },

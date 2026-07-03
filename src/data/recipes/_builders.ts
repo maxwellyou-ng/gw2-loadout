@@ -21,6 +21,8 @@ import type {
   TimeGate,
 } from '../../types'
 import { CUR, ITEM, TIME_GATED, currency, synthetic } from '../items'
+import giftTable from './generated/gifts.generated.json'
+import vendorCostTable from './generated/vendor-costs.generated.json'
 
 export const ref = (itemId: number, name: string, qty: number): ItemRef => ({
   itemId,
@@ -296,6 +298,143 @@ export function giftOfMastery(): SubTree {
   }
 }
 
+// --- Wiki-generated gift recipes ------------------------------------------
+//
+// Themed weapon gifts (Gift of Sunrise, Gift of Astralaria, …) and their shared
+// sub-gifts (Gift of the Mists, Gift of Metal, …) each have their own Mystic
+// Forge recipe, but were previously modelled as opaque leaves. `npm run
+// wiki:gifts` walks each one's wiki recipe DAG into the table below; this
+// builder reconstructs the nested sub-tree at load. Gift nodes carry the wiki's
+// real ids (so a pre-crafted gift in inventory matches); non-gift materials are
+// terminal leaves at the catalog's granularity. Everything here is verified:false
+// (not in VERIFIED_INTERMEDIATES → flagged yellow) until the gift wiki pages are
+// snapshotted.
+//
+// Each entry records `acq` (how it's acquired). Vendor gifts ({{Sold by}}) carry
+// their purchase cost in a separate overlay (vendor-costs.generated.json, from
+// `npm run wiki:vendor-costs`) — the currencies/items you exchange for the gift,
+// so they expand as tracked leaves and aren't spent before the gift is bought.
+// Only raw materials and whole-reward gifts (map/story/achievement/reward-track)
+// stay as terminal leaves.
+
+type GiftAcq = 'recipe' | 'vendor' | 'reward'
+interface RawGiftEntry {
+  name: string
+  id: number | null
+  acq?: GiftAcq
+  inputs: { name: string; qty: number; id: number | null }[]
+}
+interface RawCost {
+  name: string
+  qty: number
+  currency?: number
+  id?: number | null
+}
+const GIFTS = giftTable as Record<string, RawGiftEntry>
+const VENDOR_COSTS = vendorCostTable as Record<string, RawCost[]>
+
+const giftCanon = (s: string) => s.trim().toLowerCase().replace(/['`´]/g, "'")
+
+/** How a non-crafted gift is acquired → the leaf's source + an explanatory note. */
+const ACQ_LEAF: Record<GiftAcq, { source: RecipeSource; notes: string }> = {
+  recipe: { source: 'mystic-forge', notes: '' },
+  vendor: { source: 'vendor', notes: 'Vendor purchase — exchanged for map currency / items' },
+  reward: { source: 'collection', notes: 'Achievement / collection reward — no materials spent' },
+}
+
+/** Sub-components the catalog deep-expands via a dedicated builder, not the
+ * table (the table stops at them as terminal leaves). */
+const giftDelegates: Record<string, () => SubTree> = {
+  'bloodstone shard': () => bloodstoneShard(ref(currency(CUR.spiritShard), 'Spirit Shard', 200)),
+}
+
+/** True when expanding this gift adds structure — a craftable recipe, a
+ * documented vendor cost, or a delegated builder. Pure vendor/reward leaf gifts
+ * return false so `assembleLegendary` keeps its curated top-level leaf handling;
+ * they still get acquisition-labelled when reached during recursion. */
+export const hasGiftRecipe = (name: string): boolean => {
+  const c = giftCanon(name)
+  if (c in giftDelegates) return true
+  if ((VENDOR_COSTS[c]?.length ?? 0) > 0) return true
+  const e = GIFTS[c]
+  return !!e && e.inputs.length > 0
+}
+
+/**
+ * Reconstruct a gift's nested sub-tree from the wiki-generated table. Gift nodes
+ * recurse; non-gift materials and un-modelled gifts terminate as leaves. A
+ * per-build `built` set dedupes shared sub-gifts and a `seen` path guards cycles;
+ * ids fall back to synthetic when the wiki infobox gave none.
+ */
+export function buildGiftSubTree(rootName: string): SubTree {
+  const nodes: RecipeNode[] = []
+  const idByCanon = new Map<string, number>()
+  const built = new Set<string>()
+
+  const idFor = (name: string, id: number | null): number => {
+    if (id != null && id > 0) return id
+    const c = giftCanon(name)
+    if (!idByCanon.has(c)) idByCanon.set(c, synthetic())
+    return idByCanon.get(c)!
+  }
+
+  const visit = (name: string, id: number | null, seen: ReadonlySet<string>): ItemRef => {
+    const canon = giftCanon(name)
+
+    const delegate = giftDelegates[canon]
+    if (delegate && !seen.has(canon)) {
+      const sub = delegate()
+      if (!built.has(canon)) {
+        built.add(canon)
+        nodes.push(...sub.nodes)
+      }
+      return sub.out
+    }
+
+    const entry = GIFTS[canon]
+    const vendorCost = VENDOR_COSTS[canon]
+    const out = ref(idFor(name, entry?.id ?? id), name, 1)
+    if ((!entry && !vendorCost) || seen.has(canon)) {
+      // Terminal: a non-gift material leaf, an un-modelled gift, or a cycle stop.
+      // Give gift leaves a friendly collection source; materials stay plain leaves.
+      if (/^gift of /.test(canon) && !built.has(canon)) {
+        built.add(canon)
+        nodes.push(node(out, [], { source: 'collection', notes: 'Acquired in-game' }))
+      }
+      return out
+    }
+
+    if (!built.has(canon)) {
+      built.add(canon)
+      const nextSeen = new Set(seen)
+      nextSeen.add(canon)
+      const inputs = (entry?.inputs ?? []).map((inp) => ({ ...visit(inp.name, inp.id, nextSeen), qty: inp.qty }))
+      // The currencies / items this gift is bought with — tracked so they aren't
+      // spent before the gift is acquired.
+      for (const c of vendorCost ?? []) {
+        const cref =
+          c.currency != null ? ref(currency(c.currency), c.name, c.qty) : ref(c.id ?? synthetic(), c.name, c.qty)
+        inputs.push(cref)
+        const ck = 'cost:' + giftCanon(c.name)
+        if (!built.has(ck)) {
+          built.add(ck)
+          nodes.push(node(cref, [], { source: 'vendor', notes: 'Vendor purchase cost' }))
+        }
+      }
+      // A craftable gift forges its inputs; a vendor gift expands to its purchase
+      // cost; a reward gift with neither is a tracked leaf labelled how it's earned.
+      const acq: GiftAcq = entry?.acq ?? (vendorCost ? 'vendor' : 'reward')
+      const leaf = ACQ_LEAF[acq]
+      const source = inputs.length > 0 ? (acq === 'vendor' ? 'vendor' : 'mystic-forge') : leaf.source
+      nodes.push(node(out, inputs, { source, notes: leaf.notes || undefined }))
+    }
+    return out
+  }
+
+  const out = visit(rootName, GIFTS[giftCanon(rootName)]?.id ?? null, new Set())
+  return { out, nodes }
+}
+
 // ---------------------------------------------------------------------------
 // Generic legendary assembler.
 //
@@ -324,6 +463,13 @@ export interface TopComponent {
   buyable?: boolean
   source?: RecipeSource
   notes?: string
+  /**
+   * Optional sub-recipe. When present the component expands into this costed
+   * tree instead of being a summarized leaf — used for themed weapon gifts
+   * (e.g. Gift of Exordium) whose recipe is specific to one weapon, so it can't
+   * live in the name-keyed SHARED_GIFTS map.
+   */
+  expand?: () => SubTree
 }
 
 export function assembleLegendary(opts: {
@@ -344,6 +490,19 @@ export function assembleLegendary(opts: {
     const shared = SHARED_GIFTS[c.name.trim().toLowerCase()]
     if (shared) {
       const sub = shared()
+      rootInputs.push(times(sub, c.qty))
+      childNodes.push(...sub.nodes)
+      continue
+    }
+    if (c.expand) {
+      const sub = c.expand()
+      rootInputs.push(times(sub, c.qty))
+      childNodes.push(...sub.nodes)
+      continue
+    }
+    // Themed weapon gifts + their sub-gifts: expand from the wiki-generated table.
+    if (hasGiftRecipe(c.name)) {
+      const sub = buildGiftSubTree(c.name)
       rootInputs.push(times(sub, c.qty))
       childNodes.push(...sub.nodes)
       continue

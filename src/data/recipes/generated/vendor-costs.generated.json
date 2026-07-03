@@ -1,0 +1,649 @@
+{
+  "gift of amnytas": [
+    {
+      "name": "Pouch of Stardust",
+      "qty": 13,
+      "id": 99964
+    }
+  ],
+  "gift of ascalon": [
+    {
+      "name": "Tale of Dungeon Delving",
+      "qty": 500,
+      "id": null
+    }
+  ],
+  "gift of ascension": [
+    {
+      "name": "Black Lion Commemorative Sprocket",
+      "qty": 4,
+      "id": 84438
+    }
+  ],
+  "gift of bava nisos": [
+    {
+      "name": "Curious Mursaat Remnants",
+      "qty": 125,
+      "id": 104829
+    },
+    {
+      "name": "Ancient Coin",
+      "qty": 250,
+      "currency": 66
+    },
+    {
+      "name": "Ursus Oblige",
+      "qty": 2500,
+      "currency": 76
+    },
+    {
+      "name": "Karma",
+      "qty": 51000,
+      "currency": 2
+    }
+  ],
+  "gift of bloodstone magic": [
+    {
+      "name": "Blood Ruby",
+      "qty": 250,
+      "id": 79280
+    },
+    {
+      "name": "Jade Shard",
+      "qty": 250,
+      "id": 80332
+    },
+    {
+      "name": "Orrian Pearl",
+      "qty": 250,
+      "id": 81706
+    }
+  ],
+  "gift of complex emotions": [
+    {
+      "name": "Magnetite Shard",
+      "qty": 100,
+      "currency": 28
+    },
+    {
+      "name": "Coin",
+      "qty": 10000,
+      "currency": 1
+    }
+  ],
+  "gift of craftsmanship": [
+    {
+      "name": "Provisioner Token",
+      "qty": 50,
+      "currency": 29
+    }
+  ],
+  "gift of dragon magic": [
+    {
+      "name": "Fire Orchid Blossom",
+      "qty": 250,
+      "id": 81127
+    },
+    {
+      "name": "Fresh Winterberry",
+      "qty": 250,
+      "id": 79899
+    },
+    {
+      "name": "Petrified Wood",
+      "qty": 250,
+      "id": 79469
+    }
+  ],
+  "gift of eternity's garden exploration": [
+    {
+      "name": "Karma",
+      "qty": 300000,
+      "currency": 2
+    },
+    {
+      "name": "Coin",
+      "qty": 500000,
+      "currency": 1
+    }
+  ],
+  "gift of family": [
+    {
+      "name": "Coin",
+      "qty": 100000,
+      "currency": 1
+    }
+  ],
+  "gift of galdra": [
+    {
+      "name": "Gift of Eternity's Garden Exploration",
+      "qty": 1,
+      "id": 109114
+    },
+    {
+      "name": "Gift of Research",
+      "qty": 1,
+      "id": 97655
+    },
+    {
+      "name": "Gift of Regrowth",
+      "qty": 1,
+      "id": 109361
+    },
+    {
+      "name": "Preserved Eidolon Hide",
+      "qty": 1,
+      "id": 109141
+    }
+  ],
+  "gift of gliding": [
+    {
+      "name": "Airship Part",
+      "qty": 300,
+      "currency": 19
+    },
+    {
+      "name": "Ley Line Crystal",
+      "qty": 300,
+      "currency": 20
+    },
+    {
+      "name": "Lump of Aurillium",
+      "qty": 300,
+      "currency": 22
+    }
+  ],
+  "gift of inner nayos": [
+    {
+      "name": "Clot of Congealed Screams",
+      "qty": 13,
+      "id": 100098
+    }
+  ],
+  "gift of insight": [
+    {
+      "name": "Gift of Condensed Magic",
+      "qty": 4,
+      "id": 76530
+    },
+    {
+      "name": "Gift of Condensed Might",
+      "qty": 4,
+      "id": 70867
+    },
+    {
+      "name": "Amalgamated Draconic Lodestone",
+      "qty": 55,
+      "id": 92687
+    },
+    {
+      "name": "Mystic Clover",
+      "qty": 100,
+      "id": 19675
+    }
+  ],
+  "gift of janthir syntri": [
+    {
+      "name": "Janthir Syntri Renown Token",
+      "qty": 15,
+      "id": 102881
+    },
+    {
+      "name": "Curious Mursaat Currency",
+      "qty": 100,
+      "id": 102494
+    },
+    {
+      "name": "Ancient Coin",
+      "qty": 250,
+      "currency": 66
+    },
+    {
+      "name": "Ursus Oblige",
+      "qty": 2000,
+      "currency": 76
+    },
+    {
+      "name": "Karma",
+      "qty": 51000,
+      "currency": 2
+    }
+  ],
+  "gift of lowland shore": [
+    {
+      "name": "Lowland Shore Renown Token",
+      "qty": 15,
+      "id": 102818
+    },
+    {
+      "name": "Curious Lowland Honeycomb",
+      "qty": 100,
+      "id": 103038
+    },
+    {
+      "name": "Ancient Coin",
+      "qty": 250,
+      "currency": 66
+    },
+    {
+      "name": "Ursus Oblige",
+      "qty": 2000,
+      "currency": 76
+    },
+    {
+      "name": "Karma",
+      "qty": 51000,
+      "currency": 2
+    }
+  ],
+  "gift of mistburned barrens": [
+    {
+      "name": "Vial of Titan Melted Liquid Obsidian",
+      "qty": 2,
+      "id": 104229
+    },
+    {
+      "name": "Curious Mursaat Ruin Shard",
+      "qty": 100,
+      "id": 104331
+    },
+    {
+      "name": "Ancient Coin",
+      "qty": 250,
+      "currency": 66
+    },
+    {
+      "name": "Ursus Oblige",
+      "qty": 2000,
+      "currency": 76
+    },
+    {
+      "name": "Karma",
+      "qty": 51000,
+      "currency": 2
+    }
+  ],
+  "gift of patience": [
+    {
+      "name": "Magnetite Shard",
+      "qty": 100,
+      "currency": 28
+    },
+    {
+      "name": "Coin",
+      "qty": 10000,
+      "currency": 1
+    }
+  ],
+  "gift of persistence": [
+    {
+      "name": "Ancient Coin",
+      "qty": 250,
+      "currency": 66
+    },
+    {
+      "name": "Calcified Gasp",
+      "qty": 250,
+      "currency": 75
+    },
+    {
+      "name": "Pinch of Stardust",
+      "qty": 250,
+      "currency": 73
+    },
+    {
+      "name": "Static Charge",
+      "qty": 250,
+      "currency": 72
+    }
+  ],
+  "gift of regrowth": [
+    {
+      "name": "Karma",
+      "qty": 300000,
+      "currency": 2
+    },
+    {
+      "name": "Coin",
+      "qty": 250000,
+      "currency": 1
+    }
+  ],
+  "gift of restoration": [
+    {
+      "name": "Karma",
+      "qty": 300000,
+      "currency": 2
+    },
+    {
+      "name": "Coin",
+      "qty": 250000,
+      "currency": 1
+    }
+  ],
+  "gift of shadowstones": [
+    {
+      "name": "Gift of Restoration",
+      "qty": 1,
+      "id": 109489
+    },
+    {
+      "name": "Shadowstone Containment Frame",
+      "qty": 1,
+      "id": 109715
+    },
+    {
+      "name": "Shadowstone Orb",
+      "qty": 1,
+      "id": 109274
+    },
+    {
+      "name": "Seer Runestone",
+      "qty": 200,
+      "id": 109666
+    }
+  ],
+  "gift of shipwreck strand exploration": [
+    {
+      "name": "Karma",
+      "qty": 300000,
+      "currency": 2
+    },
+    {
+      "name": "Coin",
+      "qty": 500000,
+      "currency": 1
+    }
+  ],
+  "gift of skywatch archipelago": [
+    {
+      "name": "Case of Captured Lightning",
+      "qty": 13,
+      "id": 100267
+    }
+  ],
+  "gift of starlit weald exploration": [
+    {
+      "name": "Karma",
+      "qty": 300000,
+      "currency": 2
+    },
+    {
+      "name": "Coin",
+      "qty": 500000,
+      "currency": 1
+    }
+  ],
+  "gift of the catalyst": [
+    {
+      "name": "Coin",
+      "qty": 100000,
+      "currency": 1
+    }
+  ],
+  "gift of the cosmos": [
+    {
+      "name": "Coin",
+      "qty": 100000,
+      "currency": 1
+    }
+  ],
+  "gift of the desolation": [
+    {
+      "name": "Karma",
+      "qty": 23331,
+      "currency": 2
+    }
+  ],
+  "gift of the elders": [
+    {
+      "name": "Bloodstone Shard",
+      "qty": 1,
+      "id": 20797
+    },
+    {
+      "name": "Gift of Research",
+      "qty": 1,
+      "id": 97655
+    },
+    {
+      "name": "Gift of the Mists",
+      "qty": 1,
+      "id": 76427
+    },
+    {
+      "name": "Gift of the Tides",
+      "qty": 1,
+      "id": 106275
+    }
+  ],
+  "gift of the exalted": [
+    {
+      "name": "Lump of Aurillium",
+      "qty": 500,
+      "currency": 22
+    },
+    {
+      "name": "Coin",
+      "qty": 10000,
+      "currency": 1
+    }
+  ],
+  "gift of the highlands": [
+    {
+      "name": "Karma",
+      "qty": 23331,
+      "currency": 2
+    }
+  ],
+  "gift of the hylek": [
+    {
+      "name": "Sun Bead",
+      "qty": 250,
+      "id": 19717
+    },
+    {
+      "name": "Karma",
+      "qty": 300000,
+      "currency": 2
+    },
+    {
+      "name": "Coin",
+      "qty": 2000000,
+      "currency": 1
+    }
+  ],
+  "gift of the itzel": [
+    {
+      "name": "Airship Part",
+      "qty": 500,
+      "currency": 19
+    },
+    {
+      "name": "Coin",
+      "qty": 10000,
+      "currency": 1
+    }
+  ],
+  "gift of the mist warrior": [
+    {
+      "name": "Gift of War Prosperity",
+      "qty": 3,
+      "id": 82746
+    },
+    {
+      "name": "Pile of Recycled Siege Equipment",
+      "qty": 25,
+      "id": 103913
+    },
+    {
+      "name": "Grandmaster Mark Shard",
+      "qty": 50,
+      "id": 87557
+    },
+    {
+      "name": "Testimony of Castoran Heroics",
+      "qty": 500,
+      "currency": 82
+    }
+  ],
+  "gift of the nobleman": [
+    {
+      "name": "Tale of Dungeon Delving",
+      "qty": 500,
+      "id": null
+    }
+  ],
+  "gift of the nuhoch": [
+    {
+      "name": "Ley Line Crystal",
+      "qty": 500,
+      "currency": 20
+    },
+    {
+      "name": "Coin",
+      "qty": 10000,
+      "currency": 1
+    }
+  ],
+  "gift of the oasis": [
+    {
+      "name": "Karma",
+      "qty": 23331,
+      "currency": 2
+    }
+  ],
+  "gift of the pact": [
+    {
+      "name": "Airship Part",
+      "qty": 250,
+      "currency": 19
+    },
+    {
+      "name": "Ley Line Crystal",
+      "qty": 250,
+      "currency": 20
+    },
+    {
+      "name": "Lump of Aurillium",
+      "qty": 250,
+      "currency": 22
+    }
+  ],
+  "gift of the people": [
+    {
+      "name": "Gift of Starlit Weald Exploration",
+      "qty": 1,
+      "id": 106672
+    },
+    {
+      "name": "Patron of the Magical Arts Plaque",
+      "qty": 1,
+      "id": 105933
+    },
+    {
+      "name": "Seer Wreath of Service",
+      "qty": 1,
+      "id": 106627
+    },
+    {
+      "name": "Antiquated Ducat",
+      "qty": 500,
+      "currency": 81
+    }
+  ],
+  "gift of the raven spirit": [
+    {
+      "name": "Coin",
+      "qty": 100000,
+      "currency": 1
+    }
+  ],
+  "gift of the riverlands": [
+    {
+      "name": "Karma",
+      "qty": 23331,
+      "currency": 2
+    }
+  ],
+  "gift of the sanctuary": [
+    {
+      "name": "Tale of Dungeon Delving",
+      "qty": 500,
+      "id": null
+    }
+  ],
+  "gift of the survivors": [
+    {
+      "name": "Concentrated Chromatic Sap",
+      "qty": 1,
+      "id": 105848
+    },
+    {
+      "name": "Gift of Shipwreck Strand Exploration",
+      "qty": 1,
+      "id": 106467
+    },
+    {
+      "name": "Survivor's Enchanted Compass",
+      "qty": 1,
+      "id": 106370
+    },
+    {
+      "name": "Aether-Rich Sap",
+      "qty": 500,
+      "currency": 83
+    }
+  ],
+  "gift of the ursus": [
+    {
+      "name": "Curious Lowland Honeycomb",
+      "qty": 25,
+      "id": 103038
+    },
+    {
+      "name": "Curious Mursaat Currency",
+      "qty": 25,
+      "id": 102494
+    },
+    {
+      "name": "Ancient Coin",
+      "qty": 250,
+      "currency": 66
+    },
+    {
+      "name": "Ursus Oblige",
+      "qty": 1250,
+      "currency": 76
+    }
+  ],
+  "gift of titan understanding": [
+    {
+      "name": "Amalgamated Rift Essence",
+      "qty": 25,
+      "id": 100930
+    },
+    {
+      "name": "Curious Mursaat Remnants",
+      "qty": 25,
+      "id": 104829
+    },
+    {
+      "name": "Curious Mursaat Ruin Shard",
+      "qty": 25,
+      "id": 104331
+    },
+    {
+      "name": "Ursus Oblige",
+      "qty": 1250,
+      "currency": 76
+    }
+  ],
+  "gift of zhaitan": [
+    {
+      "name": "Tale of Dungeon Delving",
+      "qty": 500,
+      "id": null
+    }
+  ]
+}

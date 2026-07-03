@@ -45,6 +45,12 @@ export const CUR = {
   coin: 1, // gold, in copper
   karma: 2,
   spiritShard: 23,
+  // HoT map currencies — spent at mastery vendors to buy the insight gifts
+  // (Gift of the Itzel/Nuhoch/Exalted/Gliding). Tracked so they aren't spent
+  // elsewhere before the gifts are bought. (/v2/currencies, 2026-06-20)
+  airshipPart: 19,
+  leyLineCrystal: 20,
+  lumpOfAurillium: 22,
   laurel: 3,
   fractalRelic: 7,
   pristineFractalRelic: 24,
@@ -160,6 +166,8 @@ export const ITEM = {
   bloodstoneShard: 20797,          // Trophy; bought from Miyani / Mystic Forge for 200 Spirit Shards
   giftOfWarProsperity: 82746,      // WvW armor gift; forged: Gift of Battle + 15 Clovers + 2 Condensed gifts
   giftOfJadeMastery: 96033,        // EoD Gen3 mastery gift; forged: Dragon Empire + Bloodstone Shard + Cantha + 100 Antique Summoning Stone
+  giftOfMaguumaMastery: 73239,     // HoT Gen2 mastery gift; forged: Gift of Maguuma + Gift of Insights + Bloodstone Shard + 250 Crystalline Ingot
+  giftOfExordium: 90893,           // Gen2 themed weapon gift (Exordium only); forged: Gift of the Mists + 100 Mystic Runestone + 100 Shard of Exitare + Gift of Metal
   giftOfExpertise: 100852,         // SotO; forged: 12 Rift Essence + Eldritch Scroll + 50 Obsidian Shard + Cube Dark Energy
   giftOfMagicalProsperity: 100512, // SotO Obsidian / Eikasia (head/shoulder/chest); forged: Craftsmanship + 9 Clovers + Condensed Magic + Research
   giftOfMightyProsperity: 100933,  // SotO Obsidian / Eikasia (boots/gloves/legs); forged: Craftsmanship + 9 Clovers + Condensed Might + Research

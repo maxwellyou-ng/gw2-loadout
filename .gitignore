@@ -26,3 +26,4 @@ dist-ssr
 
 # Wiki-sync raw wikitext cache (snapshot/ and baseline.json ARE committed)
 scripts/wiki-sync/cache/
+scripts/wiki-sync/cache-html/

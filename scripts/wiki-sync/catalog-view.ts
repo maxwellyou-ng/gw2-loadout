@@ -70,6 +70,10 @@ export function catalogIntermediates(): CatalogIntermediate[] {
     for (const n of piece.recipe.nodes) {
       if (n.output.itemId === rootId) continue // piece root: already gated at top level
       if (n.inputs.length === 0) continue // terminal leaf, nothing to expand
+      // Vendor purchases ({{Sold by}}) have no craftable {{recipe}} to verify against —
+      // their inputs are a currency/item cost (from the rendered Acquisition table),
+      // not a Mystic-Forge combine. Skip so they aren't reported as drift/LOW.
+      if (n.source === 'vendor') continue
       const oid = n.output.itemId
       if (isCurrency(oid) || isTimeGated(oid)) continue
       const key = canonComponent(n.output.name)
