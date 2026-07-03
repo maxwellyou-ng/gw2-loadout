@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { useApp, CATALOG_BY_ID } from '../state/store'
 import { Card, ProgressBar, ScorePill, Badge, InfoTooltip, OverlayLink, ItemIcon } from '../components/ui'
+import PiecePicker from '../components/PiecePicker'
+import Onboarding from '../components/Onboarding'
 import { formatDate, formatDateShort } from '../lib/format'
 import { piecesForSlot } from '../lib/slotPieces'
 import type { SlotFamily } from '../types'
@@ -222,7 +224,6 @@ function PieceBody({
  */
 function SlotCard({ slot }: { slot: LoadoutSlot }) {
   const { setSlotPiece } = useApp()
-  const [pick, setPick] = useState('')
   const piece = slot.chosenPieceId != null ? CATALOG_BY_ID[slot.chosenPieceId] : undefined
 
   if (piece) {
@@ -239,22 +240,11 @@ function SlotCard({ slot }: { slot: LoadoutSlot }) {
         {options.length === 0 ? (
           <p className="text-xs text-muted">No catalog pieces for this slot yet.</p>
         ) : (
-          <select
-            value={pick}
-            onChange={(e) => {
-              const id = Number(e.target.value)
-              if (id) setSlotPiece(slot.key, id)
-              setPick('')
-            }}
-            className="w-full rounded-lg border border-line bg-surface-2 px-2 py-2 text-sm text-ink outline-none focus:border-accent"
-          >
-            <option value="">+ Choose a piece…</option>
-            {options.map((p) => (
-              <option key={p.id} value={p.id}>
-                {p.name} — {p.type}
-              </option>
-            ))}
-          </select>
+          <PiecePicker
+            options={options}
+            onPick={(id) => setSlotPiece(slot.key, id)}
+            placeholder={`Search ${slot.label.toLowerCase()} pieces…`}
+          />
         )}
       </div>
 
@@ -266,7 +256,6 @@ function SlotCard({ slot }: { slot: LoadoutSlot }) {
 /** Weapons: compact, removable, up to 8; empty slots collapse. */
 function WeaponsSection({ slots }: { slots: LoadoutSlot[] }) {
   const { setSlotPiece } = useApp()
-  const [pick, setPick] = useState('')
 
   const filled = slots.filter((s) => s.chosenPieceId != null)
   const firstEmpty = slots.find((s) => s.chosenPieceId == null)
@@ -285,22 +274,9 @@ function WeaponsSection({ slots }: { slots: LoadoutSlot[] }) {
       {filled.length < MAX_WEAPONS && firstEmpty && (
         <Card className="flex h-full flex-col justify-center border-dashed">
           <label className="text-xs font-medium text-muted">Add weapon ({filled.length}/{MAX_WEAPONS})</label>
-          <select
-            value={pick}
-            onChange={(e) => {
-              const id = Number(e.target.value)
-              if (id) addWeapon(id)
-              setPick('')
-            }}
-            className="mt-2 w-full rounded-lg border border-line bg-surface-2 px-2 py-2 text-sm text-ink outline-none focus:border-accent"
-          >
-            <option value="">+ Choose a weapon…</option>
-            {weaponOptions.map((p) => (
-              <option key={p.id} value={p.id}>
-                {p.name} — {p.type}
-              </option>
-            ))}
-          </select>
+          <div className="mt-2">
+            <PiecePicker options={weaponOptions} onPick={addWeapon} placeholder="Search weapons…" />
+          </div>
         </Card>
       )}
     </div>
@@ -312,6 +288,7 @@ export default function Loadout() {
 
   const tracked = loadout.slots.filter((s) => s.tracked && s.chosenPieceId != null)
   const doneCount = tracked.filter((s) => progressByPiece[s.chosenPieceId!]?.owned).length
+  const anyChosen = loadout.slots.some((s) => s.chosenPieceId != null)
 
   return (
     <div className="space-y-6">
@@ -319,11 +296,14 @@ export default function Loadout() {
         <div>
           <LoadoutName name={loadout.name} />
           <p className="text-sm text-muted">
-            {doneCount}/{tracked.length} tracked pieces unlocked
+            Pick the legendaries you're working toward — every tracked piece feeds the Materials
+            list. {doneCount}/{tracked.length} tracked pieces unlocked
             {!sync && ' · sync your account to populate progress'}
           </p>
         </div>
       </div>
+
+      {!anyChosen && <Onboarding />}
 
       {SECTIONS.map(({ families, title }) => {
         const slots = loadout.slots.filter((s) => families.includes(s.family))

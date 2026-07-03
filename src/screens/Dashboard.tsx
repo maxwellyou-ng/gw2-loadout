@@ -36,6 +36,7 @@ import {
   PageHeader,
 } from '../components/ui'
 import { formatGold, formatDate, formatPercent, daysUntil } from '../lib/format'
+import Onboarding from '../components/Onboarding'
 import { STORAGE_KEYS, loadJSON, saveJSON } from '../state/storage'
 import type { LoadoutSlot } from '../data/loadout'
 import type { SlotKey } from '../types'
@@ -109,15 +110,7 @@ export default function Dashboard() {
     .sort((a, b) => b.prog!.completionScore - a.prog!.completionScore)
 
   if (slots.length === 0) {
-    return (
-      <EmptyState title="Nothing tracked yet">
-        Pick pieces for your slots on the{' '}
-        <Link to="/loadout" className="text-accent underline">
-          Loadout
-        </Link>{' '}
-        tab, then come back here for a daily plan.
-      </EmptyState>
-    )
+    return <Onboarding title="Welcome — plan your legendaries" />
   }
 
   // Order hygiene rows: not-collected first, then by severity/days (agg order).
