@@ -1,5 +1,7 @@
-# All gates are offline (the wiki snapshot, golden totals, and test fixtures
-# are committed), so CI needs no network beyond npm ci.
+# Gates are offline (the wiki snapshot, golden totals, and test fixtures are
+# committed) except wiki:ids, which cross-checks every referenced item/currency
+# id against the official GW2 API — it self-skips (exit 0, loud notice) when
+# the API is unreachable so an ArenaNet outage can't block CI.
 name: CI
 
 on:
@@ -26,6 +28,8 @@ jobs:
         run: npm run wiki:check
       - name: Totals gate (full-tree + golden snapshot)
         run: npm run wiki:totals
+      - name: Id gate (name↔id vs GW2 API, discontinued tenders)
+        run: npm run wiki:ids
       - name: Wiki parser/expander tests
         run: npm run wiki:test
       - name: Production build

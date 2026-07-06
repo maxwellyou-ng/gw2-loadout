@@ -6,10 +6,19 @@ import { ITEM_NOTES } from '../data/items'
 import RecipeTree from '../components/RecipeTree'
 import { buildRecipeTree } from '../engine'
 import { VERIFIED_INTERMEDIATES } from '../data/verified-intermediates'
+import refinementTable from '../data/recipes/generated/refinements.generated.json'
 import { formatGold, formatDate, formatPercent } from '../lib/format'
 import type { RemainingMaterial } from '../types'
 
 type View = 'tree' | 'list'
+
+// Wiki-matched intermediates plus the refinement recipes, which are verified
+// against the official /v2/recipes API instead of the wiki snapshot
+// (`npm run wiki:refinements`) — equally authoritative, so equally badged.
+const VERIFIED_NAMES: ReadonlySet<string> = new Set([
+  ...VERIFIED_INTERMEDIATES,
+  ...Object.values(refinementTable).map((r) => r.name),
+])
 
 function MaterialRow({ m }: { m: RemainingMaterial }) {
   const days = m.timeGate.isGated && m.timeGate.dailyRate
@@ -81,7 +90,7 @@ export default function PieceDetail({ inModal = false }: { inModal?: boolean }) 
   const tree = useMemo(
     () =>
       piece
-        ? buildRecipeTree(piece, sync?.snapshot ?? {}, sync?.prices ?? {}, VERIFIED_INTERMEDIATES)
+        ? buildRecipeTree(piece, sync?.snapshot ?? {}, sync?.prices ?? {}, VERIFIED_NAMES)
         : null,
     [piece, sync],
   )

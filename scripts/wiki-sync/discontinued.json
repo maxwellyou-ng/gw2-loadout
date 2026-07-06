@@ -1,0 +1,10 @@
+{
+  "_comment": "Tender items that are no longer obtainable in-game. The wiki does NOT mark these {{historical}} when they came from limited-time Gem Store containers, so vendor rows priced in them must be skipped by gen-vendor-costs and flagged by wiki:ids / wiki:obtainable. Add entries here when a review turns up a dead acquisition path.",
+  "items": [
+    {
+      "id": 84438,
+      "name": "Black Lion Commemorative Sprocket",
+      "reason": "Guaranteed only from Gem Store 'Living World Season 1 Memory Boxes' (2022 Return to LWS1 promotion); not currently sold. Its exchange still lists Gift of Ascension at 4 sprockets, which shadowed the real Fractal Relic vendors."
+    }
+  ]
+}

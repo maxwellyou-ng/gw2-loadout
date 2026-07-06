@@ -100,6 +100,11 @@ function TreeRow({ node, depth }: { node: RecipeTreeNode; depth: number }) {
             <span title={prov.title}>
               <Badge tone={prov.tone}>{prov.label}</Badge>
             </span>
+            {node.notes && (
+              <span title={node.notes} className="cursor-help">
+                <Badge tone="neutral">ⓘ</Badge>
+              </span>
+            )}
           </span>
         </div>
 

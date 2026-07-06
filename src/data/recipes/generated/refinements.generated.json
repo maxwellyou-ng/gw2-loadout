@@ -1,0 +1,168 @@
+{
+  "ancient wood plank": {
+    "name": "Ancient Wood Plank",
+    "id": 19712,
+    "discipline": "Artificer/Weaponsmith/Scribe/Huntsman 400",
+    "inputs": [
+      {
+        "name": "Ancient Wood Log",
+        "qty": 3,
+        "id": 19725
+      }
+    ]
+  },
+  "bolt of gossamer": {
+    "name": "Bolt of Gossamer",
+    "id": 19746,
+    "discipline": "Leatherworker/Armorsmith/Tailor/Scribe 400",
+    "inputs": [
+      {
+        "name": "Gossamer Scrap",
+        "qty": 2,
+        "id": 19745
+      }
+    ]
+  },
+  "cured hardened leather square": {
+    "name": "Cured Hardened Leather Square",
+    "id": 19737,
+    "discipline": "Leatherworker/Armorsmith/Tailor/Scribe/Huntsman 400",
+    "inputs": [
+      {
+        "name": "Hardened Leather Section",
+        "qty": 3,
+        "id": 19732
+      }
+    ]
+  },
+  "darksteel ingot": {
+    "name": "Darksteel Ingot",
+    "id": 19681,
+    "discipline": "Leatherworker/Armorsmith/Tailor/Artificer/Weaponsmith/Scribe/Huntsman 225",
+    "inputs": [
+      {
+        "name": "Lump of Primordium",
+        "qty": 1,
+        "id": 19924
+      },
+      {
+        "name": "Platinum Ore",
+        "qty": 2,
+        "id": 19702
+      }
+    ]
+  },
+  "elder wood plank": {
+    "name": "Elder Wood Plank",
+    "id": 19709,
+    "discipline": "Artificer/Weaponsmith/Scribe/Huntsman 300",
+    "inputs": [
+      {
+        "name": "Elder Wood Log",
+        "qty": 3,
+        "id": 19722
+      }
+    ]
+  },
+  "hard wood plank": {
+    "name": "Hard Wood Plank",
+    "id": 19711,
+    "discipline": "Artificer/Weaponsmith/Scribe/Huntsman 225",
+    "inputs": [
+      {
+        "name": "Hard Wood Log",
+        "qty": 3,
+        "id": 19724
+      }
+    ]
+  },
+  "iron ingot": {
+    "name": "Iron Ingot",
+    "id": 19683,
+    "discipline": "Leatherworker/Armorsmith/Tailor/Artificer/Weaponsmith/Scribe/Huntsman 75",
+    "inputs": [
+      {
+        "name": "Iron Ore",
+        "qty": 3,
+        "id": 19699
+      }
+    ]
+  },
+  "mithril ingot": {
+    "name": "Mithril Ingot",
+    "id": 19684,
+    "discipline": "Leatherworker/Armorsmith/Tailor/Artificer/Weaponsmith/Scribe/Huntsman/Jeweler 300",
+    "inputs": [
+      {
+        "name": "Mithril Ore",
+        "qty": 2,
+        "id": 19700
+      }
+    ]
+  },
+  "orichalcum ingot": {
+    "name": "Orichalcum Ingot",
+    "id": 19685,
+    "discipline": "Armorsmith/Artificer/Weaponsmith/Scribe/Huntsman/Jeweler 400",
+    "inputs": [
+      {
+        "name": "Orichalcum Ore",
+        "qty": 2,
+        "id": 19701
+      }
+    ]
+  },
+  "platinum ingot": {
+    "name": "Platinum Ingot",
+    "id": 19686,
+    "discipline": "Scribe/Jeweler 225",
+    "inputs": [
+      {
+        "name": "Platinum Ore",
+        "qty": 2,
+        "id": 19702
+      }
+    ]
+  },
+  "seasoned wood plank": {
+    "name": "Seasoned Wood Plank",
+    "id": 19714,
+    "discipline": "Artificer/Weaponsmith/Scribe/Huntsman 150",
+    "inputs": [
+      {
+        "name": "Seasoned Wood Log",
+        "qty": 3,
+        "id": 19727
+      }
+    ]
+  },
+  "soft wood plank": {
+    "name": "Soft Wood Plank",
+    "id": 19713,
+    "discipline": "Artificer/Weaponsmith/Scribe/Huntsman 75",
+    "inputs": [
+      {
+        "name": "Soft Wood Log",
+        "qty": 2,
+        "id": 19726
+      }
+    ]
+  },
+  "steel ingot": {
+    "name": "Steel Ingot",
+    "id": 19688,
+    "discipline": "Leatherworker/Armorsmith/Tailor/Artificer/Weaponsmith/Scribe/Huntsman 150",
+    "inputs": [
+      {
+        "name": "Iron Ore",
+        "qty": 3,
+        "id": 19699
+      },
+      {
+        "name": "Lump of Coal",
+        "qty": 1,
+        "id": 19750
+      }
+    ]
+  }
+}

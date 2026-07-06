@@ -132,6 +132,22 @@ function indexOfTopLevelEquals(s: string): number {
 }
 
 /**
+ * The item's own api id from its `{{Item infobox}}`. NEVER match the first
+ * `| id =` anywhere in the page: nested templates carry ids of other things —
+ * food pages embed `{{nourishment|…|id=N}}` (the EFFECT id) inside the infobox,
+ * which is how every Orrax Manifested food got a wrong item id (2026-07-05).
+ * Falls back to a line-anchored match for pages without an Item infobox.
+ */
+export function itemInfoboxId(text: string): number | null {
+  for (const body of extractTemplates(text, 'Item infobox')) {
+    const m = parseParams(body)['id']?.match(/^(\d+)/)
+    if (m) return Number(m[1])
+  }
+  const m = text.match(/^\s*\|\s*id\s*=\s*(\d+)\s*$/im)
+  return m ? Number(m[1]) : null
+}
+
+/**
  * Pull the section of wikitext under a heading (any `== … ==` level) up to the
  * next heading of the same-or-higher level. Returns '' if the heading is absent.
  */

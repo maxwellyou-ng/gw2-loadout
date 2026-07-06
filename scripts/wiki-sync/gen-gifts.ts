@@ -32,7 +32,8 @@ import { fileURLToPath } from 'node:url'
 import { dirname, resolve } from 'node:path'
 import { expandWikiRecipe, type WikiTreeNode } from './expand-recipe'
 import { fetchWikitext } from './fetch'
-import { canonComponent } from './aliases'
+import { canonComponent, SUPERSEDED_BY_CURRENCY } from './aliases'
+import { itemInfoboxId } from './wikitext'
 import { CATALOG } from '../../src/data/recipes'
 
 /** Gifts the catalog already deep-expands via a dedicated builder — leave them
@@ -54,7 +55,10 @@ type Acq = 'recipe' | 'vendor' | 'reward'
 interface GiftInput {
   name: string
   qty: number
-  id: number | null
+  id?: number | null
+  /** Wallet currency id — replaces `id` for ingredients the game converted
+   * from inventory items to currencies (SUPERSEDED_BY_CURRENCY). */
+  currency?: number
 }
 interface GiftEntry {
   name: string
@@ -125,7 +129,12 @@ async function main(): Promise<void> {
       if (node.stop === null && node.children.length > 0 && !inputsByCanon.has(canon)) {
         inputsByCanon.set(
           canon,
-          node.children.map((c) => ({ name: c.name, qty: c.qty, id: c.apiId })),
+          node.children.map((c) => {
+            const sup = SUPERSEDED_BY_CURRENCY[canonComponent(c.name)]
+            return sup
+              ? { name: sup.name, qty: c.qty, currency: sup.currency }
+              : { name: c.name, qty: c.qty, id: c.apiId }
+          }),
         )
       }
     }
@@ -157,15 +166,15 @@ async function main(): Promise<void> {
   // (not synthetic → unverified) under a verified parent. Items with no infobox id
   // (e.g. armor-set ascended bases) stay null → synthetic at runtime.
   const nullInputs = new Set<string>()
-  for (const e of Object.values(table)) for (const inp of e.inputs) if (inp.id == null) nullInputs.add(inp.name)
+  for (const e of Object.values(table)) for (const inp of e.inputs) if (inp.currency == null && inp.id == null) nullInputs.add(inp.name)
   const idByName = new Map<string, number>()
   for (const nm of [...nullInputs].sort()) {
     const wikitext = await fetchPage(nm)
-    const m = wikitext?.match(/\|\s*id\s*=\s*(\d+)/i)
-    if (m) idByName.set(nm, Number(m[1]))
+    const id = wikitext ? itemInfoboxId(wikitext) : null
+    if (id != null) idByName.set(nm, id)
   }
   for (const e of Object.values(table)) {
-    for (const inp of e.inputs) if (inp.id == null && idByName.has(inp.name)) inp.id = idByName.get(inp.name)!
+    for (const inp of e.inputs) if (inp.currency == null && inp.id == null && idByName.has(inp.name)) inp.id = idByName.get(inp.name)!
   }
   console.log(`   resolved ${idByName.size}/${nullInputs.size} material-leaf ids`)
 

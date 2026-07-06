@@ -162,7 +162,7 @@ const envoy = gameModeArmorLine({
   wikiUrl: 'https://wiki.guildwars2.com/wiki/Perfected_Envoy_armor',
   baseName: (s) => `Refined Envoy ${s}`,
   prosperity: () => prosperityGift(ITEM.giftOfProsperity, 'Gift of Prosperity', { id: ITEM.giftOfCraftsmanship, name: 'Gift of Craftsmanship' }),
-  prowess: () => prowessGift(ITEM.giftOfProwess, 'Gift of Prowess', { id: synthetic(), name: 'Legendary Insight', qty: 25 }),
+  prowess: () => prowessGift(ITEM.giftOfProwess, 'Gift of Prowess', { id: currency(CUR.legendaryInsight), name: 'Legendary Insight', qty: 25 }),
   dedication: () => {
     const out = ref(ITEM.giftOfDedication, 'Gift of Dedication', 1)
     return {

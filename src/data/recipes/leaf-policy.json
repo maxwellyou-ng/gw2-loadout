@@ -14,10 +14,15 @@
   "action": "leaf",
   "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
  },
- "ancient wood plank": {
-  "name": "Ancient Wood Plank",
+ "ancient wood log": {
+  "name": "Ancient Wood Log",
   "action": "leaf",
   "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "ancient wood plank": {
+  "name": "Ancient Wood Plank",
+  "action": "expand",
+  "reason": "refinement — deterministic craft from raw materials (/v2/recipes); expanded so owned refined stock credits against the raw tier (refinements.generated.json)"
  },
  "armored scale": {
   "name": "Armored Scale",
@@ -36,8 +41,8 @@
  },
  "bolt of gossamer": {
   "name": "Bolt of Gossamer",
-  "action": "leaf",
-  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+  "action": "expand",
+  "reason": "refinement — deterministic craft from raw materials (/v2/recipes); expanded so owned refined stock credits against the raw tier (refinements.generated.json)"
  },
  "bone": {
   "name": "Bone",
@@ -116,13 +121,13 @@
  },
  "cured hardened leather square": {
   "name": "Cured Hardened Leather Square",
-  "action": "leaf",
-  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+  "action": "expand",
+  "reason": "refinement — deterministic craft from raw materials (/v2/recipes); expanded so owned refined stock credits against the raw tier (refinements.generated.json)"
  },
  "darksteel ingot": {
   "name": "Darksteel Ingot",
-  "action": "leaf",
-  "reason": "tp-buyable — purchasing is a legitimate direct path"
+  "action": "expand",
+  "reason": "refinement — deterministic craft from raw materials (/v2/recipes); expanded so owned refined stock credits against the raw tier (refinements.generated.json)"
  },
  "dawn": {
   "name": "Dawn",
@@ -224,10 +229,15 @@
   "action": "leaf",
   "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
  },
- "elder wood plank": {
-  "name": "Elder Wood Plank",
+ "elder wood log": {
+  "name": "Elder Wood Log",
   "action": "leaf",
   "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "elder wood plank": {
+  "name": "Elder Wood Plank",
+  "action": "expand",
+  "reason": "refinement — deterministic craft from raw materials (/v2/recipes); expanded so owned refined stock credits against the raw tier (refinements.generated.json)"
  },
  "endeavor": {
   "name": "Endeavor",
@@ -304,10 +314,20 @@
   "action": "leaf",
   "reason": "tp-buyable — purchasing is a legitimate direct path"
  },
- "hard wood plank": {
-  "name": "Hard Wood Plank",
+ "gossamer scrap": {
+  "name": "Gossamer Scrap",
   "action": "leaf",
   "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "hard wood log": {
+  "name": "Hard Wood Log",
+  "action": "leaf",
+  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "hard wood plank": {
+  "name": "Hard Wood Plank",
+  "action": "expand",
+  "reason": "refinement — deterministic craft from raw materials (/v2/recipes); expanded so owned refined stock credits against the raw tier (refinements.generated.json)"
  },
  "hardened leather section": {
   "name": "Hardened Leather Section",
@@ -331,6 +351,11 @@
  },
  "iron ingot": {
   "name": "Iron Ingot",
+  "action": "expand",
+  "reason": "refinement — deterministic craft from raw materials (/v2/recipes); expanded so owned refined stock credits against the raw tier (refinements.generated.json)"
+ },
+ "iron ore": {
+  "name": "Iron Ore",
   "action": "leaf",
   "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
  },
@@ -391,6 +416,11 @@
  },
  "mithril ingot": {
   "name": "Mithril Ingot",
+  "action": "expand",
+  "reason": "refinement — deterministic craft from raw materials (/v2/recipes); expanded so owned refined stock credits against the raw tier (refinements.generated.json)"
+ },
+ "mithril ore": {
+  "name": "Mithril Ore",
   "action": "leaf",
   "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
  },
@@ -426,6 +456,11 @@
  },
  "orichalcum ingot": {
   "name": "Orichalcum Ingot",
+  "action": "expand",
+  "reason": "refinement — deterministic craft from raw materials (/v2/recipes); expanded so owned refined stock credits against the raw tier (refinements.generated.json)"
+ },
+ "orichalcum ore": {
+  "name": "Orichalcum Ore",
   "action": "leaf",
   "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
  },
@@ -481,6 +516,11 @@
  },
  "platinum ingot": {
   "name": "Platinum Ingot",
+  "action": "expand",
+  "reason": "refinement — deterministic craft from raw materials (/v2/recipes); expanded so owned refined stock credits against the raw tier (refinements.generated.json)"
+ },
+ "platinum ore": {
+  "name": "Platinum Ore",
   "action": "leaf",
   "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
  },
@@ -529,10 +569,15 @@
   "action": "leaf",
   "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
  },
- "seasoned wood plank": {
-  "name": "Seasoned Wood Plank",
+ "seasoned wood log": {
+  "name": "Seasoned Wood Log",
   "action": "leaf",
   "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "seasoned wood plank": {
+  "name": "Seasoned Wood Plank",
+  "action": "expand",
+  "reason": "refinement — deterministic craft from raw materials (/v2/recipes); expanded so owned refined stock credits against the raw tier (refinements.generated.json)"
  },
  "shard o' war": {
   "name": "Shard o' War",
@@ -559,10 +604,15 @@
   "action": "leaf",
   "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
  },
- "soft wood plank": {
-  "name": "Soft Wood Plank",
+ "soft wood log": {
+  "name": "Soft Wood Log",
   "action": "leaf",
   "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+ },
+ "soft wood plank": {
+  "name": "Soft Wood Plank",
+  "action": "expand",
+  "reason": "refinement — deterministic craft from raw materials (/v2/recipes); expanded so owned refined stock credits against the raw tier (refinements.generated.json)"
  },
  "spark": {
   "name": "Spark (weapon)",
@@ -581,8 +631,8 @@
  },
  "steel ingot": {
   "name": "Steel Ingot",
-  "action": "leaf",
-  "reason": "promotion — self-referential tier upgrade, direct acquisition is the norm"
+  "action": "expand",
+  "reason": "refinement — deterministic craft from raw materials (/v2/recipes); expanded so owned refined stock credits against the raw tier (refinements.generated.json)"
  },
  "storm": {
   "name": "Storm",

@@ -63,8 +63,32 @@ export const COMPONENT_ALIASES: Record<string, string> = {
   'globs of ectoplasm': 'glob of ectoplasm',
   'spirit shards': 'spirit shard',
   'piles of bloodstone dust': 'pile of bloodstone dust',
+  'icy runestones': 'icy runestone',
+  'sun beads': 'sun bead',
   // Wiki disambiguates the raid currency as "(consumable)"; the catalog doesn't.
   'legendary insight (consumable)': 'legendary insight',
+  // Wiki recipe shorthand vs the item's full API name.
+  'dark matter': 'glob of dark matter',
+  // The API item that grants one token is literally named "1 Provisioner Token".
+  '1 provisioner token': 'provisioner token',
+  // Data uses the singular; /v2/currencies names currency 33 in the plural.
+  'ascended shard of glory': 'ascended shards of glory',
+}
+
+/**
+ * Inventory items the game RETIRED in favor of wallet currencies. Recipes must
+ * reference the currency — the retired item id can't be owned, so the player's
+ * real balance would never be credited (Coalescence's 150 LI bug, 2026-07-05).
+ * Keyed by canonical component name (post-`canonComponent`); generators route
+ * any matching ingredient to a `currency` input with the currency's real name.
+ */
+export const SUPERSEDED_BY_CURRENCY: Record<string, { currency: number; name: string }> = {
+  // Item 77302 "Legendary Insight (consumable)" → wallet currency 70 (2023 conversion).
+  'legendary insight': { currency: 70, name: 'Legendary Insight' },
+  // The wiki vendor tables use the singular item-style name; the wallet
+  // currency (69) that replaced the per-dungeon tokens is plural.
+  'tale of dungeon delving': { currency: 69, name: 'Tales of Dungeon Delving' },
+  'tales of dungeon delving': { currency: 69, name: 'Tales of Dungeon Delving' },
 }
 
 /**

@@ -786,9 +786,9 @@
         "id": 71994
       },
       {
-        "name": "Legendary Insight (consumable)",
+        "name": "Legendary Insight",
         "qty": 150,
-        "id": 77302
+        "currency": 70
       },
       {
         "name": "Gift of Complex Emotions",
@@ -2360,9 +2360,9 @@
     "acq": "recipe",
     "inputs": [
       {
-        "name": "Legendary Insight (consumable)",
+        "name": "Legendary Insight",
         "qty": 25,
-        "id": 77302
+        "currency": 70
       },
       {
         "name": "Eldritch Scroll",
@@ -2761,17 +2761,17 @@
       {
         "name": "Bowl of Poultry Satay",
         "qty": 200,
-        "id": 49296
+        "id": 87076
       },
       {
         "name": "Red-Lentil Saobosa",
         "qty": 100,
-        "id": 46273
+        "id": 84550
       },
       {
         "name": "Spicy Marinated Mushroom",
         "qty": 50,
-        "id": 17824
+        "id": 41563
       },
       {
         "name": "Fruit of the Shadow",
@@ -3001,12 +3001,12 @@
       {
         "name": "Bowl of Prickly Pear Sorbet",
         "qty": 200,
-        "id": 24792
+        "id": 66539
       },
       {
         "name": "Bowl of Passion Fruit Tapioca Pudding",
         "qty": 50,
-        "id": 32522
+        "id": 71826
       },
       {
         "name": "Amalgamated Rift Essence",
@@ -3094,17 +3094,17 @@
       {
         "name": "Plate of Orrian Steak Frittes",
         "qty": 200,
-        "id": 9773
+        "id": 12468
       },
       {
         "name": "Plate of Truffle Steak",
         "qty": 100,
-        "id": 9769
+        "id": 12467
       },
       {
         "name": "Plate of Spicy Herbed Chicken",
         "qty": 50,
-        "id": 17823
+        "id": 41567
       },
       {
         "name": "Fruit of the Shadow",
@@ -3541,12 +3541,12 @@
       {
         "name": "Meaty Asparagus Skewer",
         "qty": 200,
-        "id": 64568
+        "id": 95942
       },
       {
         "name": "Bowl of Black Pepper Cactus Salad",
         "qty": 100,
-        "id": 24807
+        "id": 66529
       },
       {
         "name": "Mystic Clovers",

@@ -42,7 +42,10 @@ function wikitext(title) {
   })
 }
 const idOf = (wt) => {
-  const m = /\|\s*id\s*=\s*(\d+)/i.exec(wt)
+  // Line-anchored: an unanchored `| id =` also matches ids inside NESTED
+  // templates (e.g. {{nourishment|…|id=N}} effect ids on food pages) — see
+  // wikitext.ts#itemInfoboxId for the template-aware TS version.
+  const m = /^\s*\|\s*id\s*=\s*(\d+)\s*$/im.exec(wt)
   return m ? parseInt(m[1], 10) : null
 }
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms))

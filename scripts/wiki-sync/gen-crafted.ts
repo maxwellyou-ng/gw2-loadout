@@ -25,7 +25,8 @@ import { fileURLToPath } from 'node:url'
 import { dirname, resolve } from 'node:path'
 import { fetchWikitext } from './fetch'
 import { parseItemPage } from './parse-recipe'
-import { canonComponent } from './aliases'
+import { canonComponent, SUPERSEDED_BY_CURRENCY } from './aliases'
+import { itemInfoboxId } from './wikitext'
 
 /** Craft-only / currency-conversion intermediates to expand (curated policy). */
 const CRAFTED_EXPAND: string[] = [
@@ -186,11 +187,11 @@ async function main(): Promise<void> {
   for (const name of CRAFTED_EXPAND) {
     const canon = canonComponent(name)
     const wikitext = await fetchPage(name)
-    const apiId = wikitext?.match(/\|\s*id\s*=\s*(\d+)/i)
+    const apiId = wikitext ? itemInfoboxId(wikitext) : null
 
     const staticRecipe = STATIC_RECIPES[canon]
     if (staticRecipe) {
-      table[canon] = { name, id: apiId ? Number(apiId[1]) : null, inputs: staticRecipe.map((i) => ({ ...i })) }
+      table[canon] = { name, id: apiId, inputs: staticRecipe.map((i) => ({ ...i })) }
       continue
     }
     if (!wikitext) {
@@ -204,6 +205,8 @@ async function main(): Promise<void> {
     }
     const inputs: CraftedInput[] = parsed.components.map((c) => {
       const cName = NAME_FIX[canonComponent(c.name)] ?? c.name
+      const sup = SUPERSEDED_BY_CURRENCY[canonComponent(cName)]
+      if (sup) return { name: sup.name, qty: c.qty, currency: sup.currency }
       const cur = CURRENCY_BY_NAME[canonComponent(cName)]
       return cur != null ? { name: cName, qty: c.qty, currency: cur } : { name: cName, qty: c.qty, id: null }
     })
@@ -218,8 +221,8 @@ async function main(): Promise<void> {
   const idByName = new Map<string, number>()
   for (const nm of [...nullNames].sort()) {
     const wikitext = await fetchPage(nm)
-    const m = wikitext?.match(/\|\s*id\s*=\s*(\d+)/i)
-    if (m) idByName.set(nm, Number(m[1]))
+    const id = wikitext ? itemInfoboxId(wikitext) : null
+    if (id != null) idByName.set(nm, id)
   }
   for (const e of Object.values(table)) {
     for (const i of e.inputs) if (i.currency == null && i.id == null && idByName.has(i.name)) i.id = idByName.get(i.name)!

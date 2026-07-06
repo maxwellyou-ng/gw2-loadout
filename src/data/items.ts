@@ -58,6 +58,11 @@ export const CUR = {
   wvwSkirmishClaimTicket: 26,
   badgeOfHonor: 15,
   magnetiteShard: 28, // raid
+  // Wallet currencies that superseded inventory items. Recipes must reference
+  // these, never the retired item ids, or the player's real balance is never
+  // credited. (/v2/currencies, 2026-07-05)
+  legendaryInsight: 70, // was item 77302 "Legendary Insight (consumable)", auto-converted 2023
+  talesOfDungeonDelving: 69, // replaced the per-dungeon token items in the 2023 rework
   // NOTE (2026-06-19): there is no "Testimony of Heroics" currency. The WvW
   // ability/heroics currency is Proof of Heroics (31); the expansion variants are
   // Testimony of Desert/Jade/Castoran Heroics (36/65/82). "Testimony of Heroics"

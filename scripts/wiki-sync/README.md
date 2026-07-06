@@ -19,6 +19,9 @@ discrepancies visible and enforced instead of relying on manual cross-checking.
 | `npm run wiki:report -- --scaffold="<Item>"` | no | — | Print a draft recipe stub (verified:false) for a missing item. |
 | `npm run wiki:fix` | no | `generated/`, `baseline.json` | Auto-fixer. Regenerate `verified:false` drafts for all generatable missing items, validate (`tsc`/`check`/`wiki:check`), revert on failure, auto-prune resolved baseline acks. `-- --dry-run` previews. Alias: `wiki:report -- --apply`. |
 | `npm run wiki:expand -- "<Item>"` | cache (live on miss) | — | Phase 4 recursive expander. Walks the wiki recipe DAG, stopping at the catalog's vocabulary (cycle/depth-guarded). `--check` lists wiki components the catalog doesn't model; `--deep` expands past base materials (structure only — totals compound via promotion recipes); `--no-cache` re-downloads. |
+| `npm run wiki:ids` | yes (GW2 API) | — | Id gate (also in CI). Every `{name, id}` in the generated tables + assembled catalog must match its `/v2/items` name; every currency ref must exist in `/v2/currencies`; nothing may reference a `discontinued.json` tender or a `SUPERSEDED_BY_CURRENCY` item id. Self-skips (exit 0, loud notice) if the API is down. |
+| `npm run wiki:obtainable` | cache (live on miss) | — | Obtainability review list. Scans every golden-totals leaf's wiki page for `{{historical}}` / "no longer obtainable" / disambiguation / gem-store-container-only acquisition. Human judges each flag: dead path → `discontinued.json` + recipe fix. |
+| `npm run wiki:refinements` | yes (GW2 API) | `generated/refinements.generated.json` | Deterministic refinement recipes (ingots/planks/bolts/leather ← ore/logs/scraps/sections) from `/v2/recipes`, merged into the crafted-expansion path so owned refined stock credits against the raw tier. |
 
 ## How it works
 
@@ -54,6 +57,27 @@ If the parser gets a recipe wrong, edit that entry in `snapshot/<category>.json`
 and set `"source": "curated"`. `wiki:fetch` then preserves it, but warns if the
 upstream wikitext changes (via `wikitextHash`) so you can re-verify.
 
+### Obtainability (2026-07-05 audit learnings)
+
+The wiki does **not** reliably mark dead acquisition paths. The Black Lion
+Commemorative Sprocket (a Gem Store Memory Box tender whose container left the
+store) carries no `{{historical}}` template, yet its exchange row was the first
+row of Gift of Ascension's vendor table — which the old first-row-wins parser
+happily took, hiding the real Fractal Relic vendors. Defenses, in order:
+
+- `discontinued.json` — reviewed-dead tenders. `gen-vendor-costs` skips rows
+  priced in them; `wiki:ids` fails if anything still references one.
+- `vendor-cost-overrides.json` — manual pin when several *current* vendors
+  disagree and the tracked cost is a product decision (keep `GIFT_NOTES` in
+  `_builders.ts` in sync so alternates stay visible to the player).
+- `SUPERSEDED_BY_CURRENCY` (`aliases.ts`) — items converted to wallet
+  currencies (Legendary Insight, Tales of Dungeon Delving). Generators emit
+  `currency` inputs for these; referencing the retired item id fails `wiki:ids`.
+- `wikitext.ts#itemInfoboxId` — ids come from the `{{Item infobox}}` block
+  only. An unanchored `| id =` match returns nested-template ids (food pages
+  embed `{{nourishment|…|id=N}}` *effect* ids — 10 wrong food ids in Orrax
+  Manifested's gifts came from exactly this).
+
 ## Periodic operation
 
 - Run `npm run wiki:fetch` after game updates / expansions (≈monthly), review the
@@ -83,7 +107,11 @@ phase 3 resolves real ones; armor sets and id-less items stay in the curated lan
 - `reconcile.ts` — the pure diff. `gate.ts` — baseline classification.
 - `report.ts` / `check.ts` / `fix.ts` — `wiki:report` / `wiki:check` / `wiki:fix` entrypoints.
 - `../../src/data/recipes/generated/` — machine-owned draft layer written by `fix.ts`.
-- `aliases.ts` — name normalization + wiki↔catalog name aliases.
+- `aliases.ts` — name normalization + wiki↔catalog name aliases + `SUPERSEDED_BY_CURRENCY`.
+- `check-ids.ts` / `gen-obtainability.ts` / `gen-refinements.ts` — id gate,
+  obtainability review, refinement recipes (see Commands).
+- `discontinued.json` / `vendor-cost-overrides.json` — **committed** review
+  decisions: dead tenders + manual vendor-cost pins.
 - `snapshot/*.json`, `baseline.json` — **committed**. `cache/` — git-ignored.
 
 ## Known follow-ups

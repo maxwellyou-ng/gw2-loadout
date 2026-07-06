@@ -23,6 +23,7 @@ import type {
 import { CUR, ITEM, TIME_GATED, currency, synthetic } from '../items'
 import giftTable from './generated/gifts.generated.json'
 import craftedTable from './generated/crafted.generated.json'
+import refinementTable from './generated/refinements.generated.json'
 import vendorCostTable from './generated/vendor-costs.generated.json'
 
 export const ref = (itemId: number, name: string, qty: number): ItemRef => ({
@@ -323,7 +324,9 @@ interface RawGiftEntry {
   name: string
   id: number | null
   acq?: GiftAcq
-  inputs: { name: string; qty: number; id: number | null }[]
+  /** An input is either an item (`id`) or a wallet currency (`currency`) — e.g.
+   * Gift of Compassion takes 150 Legendary Insight, a currency since 2023. */
+  inputs: { name: string; qty: number; id?: number | null; currency?: number }[]
 }
 interface RawCost {
   name: string
@@ -344,7 +347,11 @@ interface RawCraftedEntry {
   id: number | null
   inputs: { name: string; qty: number; id?: number | null; currency?: number }[]
 }
-const CRAFTED = craftedTable as Record<string, RawCraftedEntry>
+// Deterministic refinements (`npm run wiki:refinements` — ingots/planks/bolts/
+// leather from /v2/recipes) merge into the same crafted-expansion path, so a
+// bulk requirement like 250 Mithril Ingot exposes its ore tier in the tree and
+// owned ingots credit against the ore still needed (engine intermediate credit).
+const CRAFTED = { ...craftedTable, ...refinementTable } as Record<string, RawCraftedEntry>
 
 const giftCanon = (s: string) => s.trim().toLowerCase().replace(/['`´]/g, "'")
 
@@ -353,6 +360,14 @@ const ACQ_LEAF: Record<GiftAcq, { source: RecipeSource; notes: string }> = {
   recipe: { source: 'mystic-forge', notes: '' },
   vendor: { source: 'vendor', notes: 'Vendor purchase — exchanged for map currency / items' },
   reward: { source: 'collection', notes: 'Achievement / collection reward — no materials spent' },
+}
+
+/** Per-gift note overrides — alternate current vendors the single-cost model
+ * can't express. Keyed by canonical gift name. */
+const GIFT_NOTES: Record<string, string> = {
+  'gift of ascension':
+    'BUY-4373 (Mistlock Observatory): 500 Fractal Relics + 25s 20c. ' +
+    "Also sold for 25 Fractal Relics by the Fractal Reliquary and the Wizard's Gobbler.",
 }
 
 /** Sub-components the catalog deep-expands via a dedicated builder, not the
@@ -428,7 +443,13 @@ export function buildGiftSubTree(rootName: string): SubTree {
       built.add(canon)
       const nextSeen = new Set(seen)
       nextSeen.add(canon)
-      const inputs = (entry?.inputs ?? []).map((inp) => ({ ...visit(inp.name, inp.id, nextSeen), qty: inp.qty }))
+      // Currency inputs become tracked wallet leaves (like Spirit Shards in the
+      // curated builders); item inputs recurse.
+      const inputs = (entry?.inputs ?? []).map((inp) =>
+        inp.currency != null
+          ? ref(currency(inp.currency), inp.name, inp.qty)
+          : { ...visit(inp.name, inp.id ?? null, nextSeen), qty: inp.qty },
+      )
       // Crafted-intermediate recipe (Cube of Stabilized Dark Energy, Vision
       // Crystal, Certificates, …): item ingredients recurse like gift inputs;
       // wallet-currency ingredients become tracked currency leaves directly.
@@ -470,7 +491,7 @@ export function buildGiftSubTree(rootName: string): SubTree {
       const leaf = ACQ_LEAF[acq]
       const source: RecipeSource =
         inputs.length > 0 ? (acq === 'vendor' ? 'vendor' : crafted ? 'craft' : 'mystic-forge') : leaf.source
-      nodes.push(node(out, inputs, { source, notes: leaf.notes || undefined }))
+      nodes.push(node(out, inputs, { source, notes: GIFT_NOTES[canon] ?? (leaf.notes || undefined) }))
     }
     return out
   }

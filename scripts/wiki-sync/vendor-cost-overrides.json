@@ -1,0 +1,7 @@
+{
+  "_comment": "Manual vendor-cost pins merged LAST by gen-vendor-costs — for gifts whose wiki Acquisition table lists several current vendors and the single-cost model must pick one deliberately. Keyed by canonical gift name; values use the CostComponent shape ({name, qty, currency?|id?}). Keep GIFT_NOTES in _builders.ts in sync when an override hides alternates.",
+  "gift of ascension": [
+    { "name": "Fractal Relic", "qty": 500, "currency": 7 },
+    { "name": "Coin", "qty": 2520, "currency": 1 }
+  ]
+}
