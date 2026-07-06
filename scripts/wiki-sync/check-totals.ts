@@ -29,6 +29,8 @@ import { fileURLToPath } from 'node:url'
 import { CATALOG } from '../../src/data/recipes'
 import { hasGiftRecipe } from '../../src/data/recipes/_builders'
 import leafPolicy from '../../src/data/recipes/leaf-policy.json'
+import fastAcquire from '../../src/data/recipes/fast-acquire.json'
+import { collectGateCandidates } from './gate-candidates'
 import { computeProgress } from '../../src/engine'
 import { DEFAULT_WEIGHTS } from '../../src/types'
 import type { LegendaryPiece, RecipeNode } from '../../src/types'
@@ -338,6 +340,41 @@ function main(): void {
     }
     if (offenders.size === 0 && uncovered.length === 0) {
       console.log(`Leaf policy: no expandable material is modeled as a leaf (${Object.keys(policy).length} kept leaves documented).`)
+    }
+  }
+
+  // ---- Check 4: gate-or-allowlist — no unclassified non-buyable bulk leaf ----
+  // Anything a player can't TP-buy and needs in bulk must either be registered
+  // in TIME_GATED (bounded pace → shows on the Forecast) or documented in
+  // fast-acquire.json with a reason (quickly acquirable / gated elsewhere).
+  // Seed/maintain the allowlist with `npm run wiki:gate-audit`.
+  {
+    const allow = fastAcquire as Record<string, { name: string; itemId: number; reason: string }>
+    const problems: string[] = []
+    const candidates = collectGateCandidates()
+    const canonSeen = new Set<string>()
+    for (const c of candidates) {
+      canonSeen.add(c.canon)
+      const entry = allow[c.canon]
+      if (c.gated && entry) problems.push(`• ${c.name} — in TIME_GATED *and* fast-acquire.json (stale allowlist entry)`)
+      if (!c.gated && !entry)
+        problems.push(`• ${c.name} (id ${c.itemId}, max ${c.maxRequired}) — neither time-gated nor allowlisted`)
+      if (!c.gated && entry?.reason.includes('UNCLASSIFIED'))
+        problems.push(`• ${c.name} — allowlisted but UNCLASSIFIED (write a real reason)`)
+    }
+    for (const [canon, e] of Object.entries(allow)) {
+      if (!canonSeen.has(canon)) problems.push(`• ${e.name} — allowlisted but no longer a catalog candidate (prune via wiki:gate-audit)`)
+    }
+    if (problems.length > 0) {
+      failures++
+      console.error(`\n❌ Gate audit — ${problems.length} unclassified non-buyable bulk leaf/leaves:`)
+      for (const p of problems) console.error(`   ${p}`)
+      console.error('   Register in TIME_GATED (src/data/items.ts) or run `npm run wiki:gate-audit` and document the reason.')
+    } else {
+      const gated = candidates.filter((c) => c.gated).length
+      console.log(
+        `Gate audit: all ${candidates.length} non-buyable bulk leaves classified (${gated} time-gated, ${Object.keys(allow).length} fast-acquire).`,
+      )
     }
   }
 

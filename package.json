@@ -19,6 +19,7 @@
     "wiki:refinements": "tsx scripts/wiki-sync/gen-refinements.ts",
     "wiki:account-bound": "tsx scripts/wiki-sync/gen-account-bound.ts",
     "wiki:leaf-audit": "tsx scripts/wiki-sync/gen-leaf-audit.ts",
+    "wiki:gate-audit": "tsx scripts/wiki-sync/gen-gate-audit.ts",
     "wiki:check": "tsx scripts/wiki-sync/check.ts",
     "wiki:ids": "tsx scripts/wiki-sync/check-ids.ts",
     "wiki:obtainable": "tsx scripts/wiki-sync/gen-obtainability.ts",

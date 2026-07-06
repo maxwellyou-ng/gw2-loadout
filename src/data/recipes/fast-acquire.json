@@ -1,0 +1,112 @@
+{
+ "box o' fun": {
+  "name": "Box o' Fun",
+  "itemId": 20000,
+  "reason": "Mystic Forge conversion from cheap TP-buyable inputs — on-demand, minutes of effort for the qty-5 need"
+ },
+ "chak egg": {
+  "name": "Chak Egg",
+  "itemId": 72205,
+  "reason": "common drop from chak in Tangled Depths — one short farm session covers the qty-5 need"
+ },
+ "coin": {
+  "name": "Coin",
+  "itemId": 8000001,
+  "reason": "gold is the app's buy axis (buy-out split / finishable-by-gold), not a time gate"
+ },
+ "glob of dark matter": {
+  "name": "Dark Matter",
+  "itemId": 46681,
+  "reason": "salvaged from exotics with rare+ kits — gold-convertible on demand via TP-bought exotics"
+ },
+ "icy runestone": {
+  "name": "Icy Runestone",
+  "itemId": 19676,
+  "reason": "vendor purchase for coin (Rojan the Penitent, 1g each) — pace is gold, not a cap"
+ },
+ "mystic runestone": {
+  "name": "Mystic Runestone",
+  "itemId": 79418,
+  "reason": "vendor purchase for coin (Miyani, 1g each) — pace is gold, not a cap"
+ },
+ "philosopher's stone": {
+  "name": "Philosopher's Stone",
+  "itemId": 20796,
+  "reason": "vendor purchase from Miyani for Spirit Shards (10 per shard) — the shard pace is tracked as its own gate"
+ },
+ "pile of recycled siege equipment": {
+  "name": "Pile of Recycled Siege Equipment",
+  "itemId": 103913,
+  "reason": "WvW vendor purchase with Badges of Honor — the badge pace is tracked as its own gate"
+ },
+ "reclaimed metal plate": {
+  "name": "Reclaimed Metal Plate",
+  "itemId": 74356,
+  "reason": "drops from Tangled Depths meta/chests — one short farm session covers the qty-5 need"
+ },
+ "seer runestone": {
+  "name": "Seer Runestone",
+  "itemId": 109666,
+  "reason": "vendor purchase for coin (Visions of Eternity runestone vendor) — pace is gold, not a cap"
+ },
+ "shard o' war": {
+  "name": "Shard o' War",
+  "itemId": 80380,
+  "reason": "Gen2 precursor forge component crafted from largely TP-buyable inputs — precursors are modeled at piece granularity (leaf-policy)"
+ },
+ "tribute to arah": {
+  "name": "Tribute to Arah",
+  "itemId": 81871,
+  "reason": "Gen2 precursor forge component crafted from largely TP-buyable inputs — precursors are modeled at piece granularity (leaf-policy)"
+ },
+ "tribute to endeavor": {
+  "name": "Tribute to Endeavor",
+  "itemId": 79453,
+  "reason": "Gen2 precursor forge component crafted from largely TP-buyable inputs — precursors are modeled at piece granularity (leaf-policy)"
+ },
+ "tribute to friendship": {
+  "name": "Tribute to Friendship",
+  "itemId": 79845,
+  "reason": "Gen2 precursor forge component crafted from largely TP-buyable inputs — precursors are modeled at piece granularity (leaf-policy)"
+ },
+ "tribute to liturgy": {
+  "name": "Tribute to Liturgy",
+  "itemId": 81163,
+  "reason": "Gen2 precursor forge component crafted from largely TP-buyable inputs — precursors are modeled at piece granularity (leaf-policy)"
+ },
+ "tribute to resolution": {
+  "name": "Tribute to Resolution",
+  "itemId": 87165,
+  "reason": "Gen2 precursor forge component crafted from largely TP-buyable inputs — precursors are modeled at piece granularity (leaf-policy)"
+ },
+ "tribute to spero": {
+  "name": "Tribute to Spero",
+  "itemId": 89478,
+  "reason": "Gen2 precursor forge component crafted from largely TP-buyable inputs — precursors are modeled at piece granularity (leaf-policy)"
+ },
+ "tribute to the call of the void": {
+  "name": "Tribute to the Call of the Void",
+  "itemId": 87627,
+  "reason": "Gen2 precursor forge component crafted from largely TP-buyable inputs — precursors are modeled at piece granularity (leaf-policy)"
+ },
+ "tribute to the dark arts": {
+  "name": "Tribute to the Dark Arts",
+  "itemId": 86266,
+  "reason": "Gen2 precursor forge component crafted from largely TP-buyable inputs — precursors are modeled at piece granularity (leaf-policy)"
+ },
+ "tribute to the exitare": {
+  "name": "Tribute to the Exitare",
+  "itemId": 90776,
+  "reason": "Gen2 precursor forge component crafted from largely TP-buyable inputs — precursors are modeled at piece granularity (leaf-policy)"
+ },
+ "tribute to the queen": {
+  "name": "Tribute to the Queen",
+  "itemId": 81974,
+  "reason": "Gen2 precursor forge component crafted from largely TP-buyable inputs — precursors are modeled at piece granularity (leaf-policy)"
+ },
+ "tribute to tlehco": {
+  "name": "Tribute to Tlehco",
+  "itemId": 88756,
+  "reason": "Gen2 precursor forge component crafted from largely TP-buyable inputs — precursors are modeled at piece granularity (leaf-policy)"
+ }
+}

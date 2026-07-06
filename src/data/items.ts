@@ -366,6 +366,8 @@ export const TIME_GATED: Record<number, GatedMaterialInfo> = {
   [ITEM.clotOfCongealedScreams]: { dailyRate: 3, severity: 'medium', label: 'Clot of Congealed Screams' },
   // Istan renown-heart vendor purchase — daily heart gate. wiki: Sun Bead.
   [ITEM.sunBeads]: { dailyRate: 25, severity: 'medium', label: 'Sun Beads' },
+  // Quickplay Fractal completions (Eikasia's Infinite Recursion collection).
+  [ITEM.fractallineDust]: { dailyRate: 10, severity: 'medium', label: 'Fractalline Dust' },
 
   // --- low: farmable, just not overnight --------------------------------------
   // Karma vendors (temples) / fractals; the real gate is karma income.
