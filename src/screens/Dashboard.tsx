@@ -113,8 +113,12 @@ export default function Dashboard() {
     return <Onboarding title="Welcome — plan your legendaries" />
   }
 
+  // "Do today" = actual daily tasks: at least 1/day cadence and not a slow
+  // background accumulation (the low tier lives on the Forecast screen).
+  const dailyDebt = agg.timeGateDebt.filter((d) => d.dailyRate >= 1 && d.severity !== 'low')
+  const forecastOnly = agg.timeGateDebt.length - dailyDebt.length
   // Order hygiene rows: not-collected first, then by severity/days (agg order).
-  const debtRows = [...agg.timeGateDebt].sort(
+  const debtRows = [...dailyDebt].sort(
     (a, b) => Number(collectedToday(a.itemId)) - Number(collectedToday(b.itemId)),
   )
 
@@ -237,6 +241,15 @@ export default function Dashboard() {
               )
             })}
           </Card>
+        )}
+        {forecastOnly > 0 && (
+          <p className="text-xs text-muted">
+            +{forecastOnly} slower-accumulating material{forecastOnly === 1 ? '' : 's'} tracked on the{' '}
+            <Link to="/forecast" className="text-accent hover:underline">
+              Forecast
+            </Link>{' '}
+            screen.
+          </p>
         )}
       </section>
 

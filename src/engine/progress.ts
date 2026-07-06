@@ -218,7 +218,9 @@ export function computeProgress(
     }
 
     if (m.timeGate.isGated && m.timeGate.severity) {
-      const w = SEVERITY_WEIGHT[m.timeGate.severity]
+      // Weight by DAYS of grind (qty ÷ pace), not raw units — otherwise bulk
+      // currencies (900k Karma at 30k/day) would swamp the time dimension.
+      const w = SEVERITY_WEIGHT[m.timeGate.severity] / (m.timeGate.dailyRate ?? 1)
       gatedTotalW += w * m.required
       gatedRemainW += w * m.remaining
     }

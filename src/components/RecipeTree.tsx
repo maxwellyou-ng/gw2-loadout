@@ -11,7 +11,8 @@ import { formatGold } from '../lib/format'
 
 const CATEGORY_LABEL: Record<MaterialCategory, string> = {
   currency: 'Currency',
-  'time-gated': 'Daily',
+  'time-gated': 'Gated', // rates span daily hard caps to weekly cadences
+
   crafting: 'Crafting',
   gift: 'Gift',
   'reward-track': 'Reward track',
