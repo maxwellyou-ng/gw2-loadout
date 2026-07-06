@@ -63,6 +63,22 @@ export const CUR = {
   // credited. (/v2/currencies, 2026-07-05)
   legendaryInsight: 70, // was item 77302 "Legendary Insight (consumable)", auto-converted 2023
   talesOfDungeonDelving: 69, // replaced the per-dungeon token items in the 2023 rework
+  provisionerToken: 29, // was item 88926 "1 Provisioner Token" (legacy items remapped at sync; /v2/currencies, 2026-07-06)
+  // Currencies referenced by the time-gate registry / generated recipes.
+  // (/v2/currencies names verified 2026-07-06.)
+  researchNote: 61, // EoD; tender for Hydrocatalytic Reagent (10 per 50 notes)
+  pvpLeagueTicket: 30,
+  ascendedShardsOfGlory: 33,
+  testimonyOfJadeHeroics: 65,
+  testimonyOfCastoranHeroics: 82,
+  ancientCoin: 66,
+  // Visions of Eternity map currencies
+  staticCharge: 72,
+  pinchOfStardust: 73,
+  calcifiedGasp: 75,
+  ursusOblige: 76,
+  antiquatedDucat: 81,
+  aetherRichSap: 83,
   // NOTE (2026-06-19): there is no "Testimony of Heroics" currency. The WvW
   // ability/heroics currency is Proof of Heroics (31); the expansion variants are
   // Testimony of Desert/Jade/Castoran Heroics (36/65/82). "Testimony of Heroics"
@@ -150,7 +166,6 @@ export const ITEM = {
 
   // --- Other real leaf materials referenced by recipe trees -----------------
   memoryOfBattle: 71581,
-  provisionerToken: 88926,
   amalgamatedDraconicLodestone: 92687,
   amalgamatedRiftEssence: 100930,
   icyRunestone: 19676,

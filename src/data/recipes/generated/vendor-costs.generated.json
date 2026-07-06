@@ -676,5 +676,12 @@
       "qty": 500,
       "currency": 69
     }
+  ],
+  "hydrocatalytic reagent": [
+    {
+      "name": "Research Note",
+      "qty": 5,
+      "currency": 61
+    }
   ]
 }

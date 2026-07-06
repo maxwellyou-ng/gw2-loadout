@@ -16,9 +16,16 @@ export interface RawAccountData {
   wallet: { id: number; value: number }[]
 }
 
+/** Retired items superseded by wallet currencies: legacy stacks still sitting
+ *  in banks/bags count toward the currency's balance (1 item = 1 unit). */
+const ITEM_TO_CURRENCY: Record<number, number> = {
+  88926: currency(29), // "1 Provisioner Token" → Provisioner Token wallet currency
+}
+
 const add = (snap: InventorySnapshot, id: number, qty: number) => {
   if (!qty) return
-  snap[id] = (snap[id] ?? 0) + qty
+  const target = ITEM_TO_CURRENCY[id] ?? id
+  snap[target] = (snap[target] ?? 0) + qty
 }
 
 /** mergeInventory(apiResponses) -> InventorySnapshot (Section 4, step 4). */

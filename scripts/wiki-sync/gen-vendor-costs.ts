@@ -219,6 +219,17 @@ async function main(): Promise<void> {
     }
   }
 
+  // Override pins for NON-gift materials (e.g. Hydrocatalytic Reagent, a Gift
+  // of Research input sold for Research Notes): the gift loop above never
+  // iterates them, so emit them into the overlay directly. buildGiftSubTree
+  // expands any visited name with a VENDOR_COSTS entry, gift or not.
+  for (const [canon, cost] of Object.entries(OVERRIDES)) {
+    if (!overlay[canon]) {
+      overlay[canon] = cost.map((c) => ({ ...c }))
+      cost.filter((c) => c.currency == null).forEach((c) => itemTenders.add(c.name))
+    }
+  }
+
   // Resolve real item ids for item tenders (non-currency costs) from each item's
   // wiki infobox (`| id = NNNNN`), so map materials track against inventory too.
   const idByName = new Map<string, number>()

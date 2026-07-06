@@ -328,7 +328,9 @@ console.log('\nHidden-requirement expansion:')
   const luck = find(obsHelm, 'Exotic Essence of Luck')
   check('Obsidian Helm needs 250 Exotic Essence of Luck', luck?.required === 250, luck?.required)
   check('…and the luck is account-bound (not "buyable")', luck?.buyable === false)
-  check('…plus 500 Hydrocatalytic Reagent', find(obsHelm, 'Hydrocatalytic Reagent')?.required === 500)
+  // Hydrocatalytic Reagent is vendor-only (10 per 50 Research Notes), so the
+  // 500 reagents expand to the wallet leaf: 500 × 5 = 2,500 Research Notes.
+  check('…plus 2,500 Research Notes (via 500 Hydrocatalytic Reagents)', find(obsHelm, 'Research Note')?.required === 2500)
 
   // Cube of Stabilized Dark Energy — 1 Ball of Dark Energy + 75 Stabilizing
   // Matrix per cube; was an opaque leaf in ~64 pieces.

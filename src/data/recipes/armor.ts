@@ -257,7 +257,7 @@ function obsidianPiece(slot: (typeof ARMOR_SLOTS)[number]): LegendaryPiece {
     node(arcanum, [], { source: 'collection', notes: 'Per-slot collection unlock, bought from Lyhr for a Lesser Vision Crystal' }),
     node(
       ref(ITEM.giftOfCraftsmanship, 'Gift of Craftsmanship', 1),
-      [ref(ITEM.provisionerToken, 'Provisioner Token', 50)],
+      [ref(currency(CUR.provisionerToken), 'Provisioner Token', 50)],
       { source: 'vendor', notes: '50 Provisioner Tokens' }
     ),
     eldritchScrollNode(),
@@ -306,7 +306,7 @@ function eikasiaGloves(): LegendaryPiece {
       source: 'mystic-forge',
       notes: '9-clover gate',
     }),
-    node(ref(ITEM.giftOfCraftsmanship, 'Gift of Craftsmanship', 1), [ref(ITEM.provisionerToken, 'Provisioner Token', 50)], {
+    node(ref(ITEM.giftOfCraftsmanship, 'Gift of Craftsmanship', 1), [ref(currency(CUR.provisionerToken), 'Provisioner Token', 50)], {
       source: 'vendor',
       notes: '50 Provisioner Tokens',
     }),

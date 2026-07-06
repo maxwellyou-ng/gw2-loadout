@@ -3,5 +3,8 @@
   "gift of ascension": [
     { "name": "Fractal Relic", "qty": 500, "currency": 7 },
     { "name": "Coin", "qty": 2520, "currency": 1 }
+  ],
+  "hydrocatalytic reagent": [
+    { "name": "Research Note", "qty": 5, "currency": 61 }
   ]
 }

@@ -89,6 +89,9 @@ export const SUPERSEDED_BY_CURRENCY: Record<string, { currency: number; name: st
   // currency (69) that replaced the per-dungeon tokens is plural.
   'tale of dungeon delving': { currency: 69, name: 'Tales of Dungeon Delving' },
   'tales of dungeon delving': { currency: 69, name: 'Tales of Dungeon Delving' },
+  // Item 88926 "1 Provisioner Token" → wallet currency 29 (the '1 provisioner
+  // token' alias above canonicalizes the API item name into this key).
+  'provisioner token': { currency: 29, name: 'Provisioner Token' },
 }
 
 /**
