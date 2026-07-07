@@ -178,7 +178,8 @@ export function intermediateRequirements(
   return [...leafMap.values()].map((leaf) => toMaterial(leaf, snapshot, prices))
 }
 
-function isOwned(piece: LegendaryPiece, meta?: SyncMeta): boolean {
+/** Whether the armory already reports this piece unlocked (by id or name). */
+export function isOwned(piece: LegendaryPiece, meta?: SyncMeta): boolean {
   if (!meta) return false
   if (piece.unlocks.some((id) => meta.ownedArmoryIds.includes(id))) return true
   const norm = (s: string) => s.trim().toLowerCase()

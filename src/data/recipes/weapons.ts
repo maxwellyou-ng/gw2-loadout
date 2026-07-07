@@ -89,6 +89,7 @@ function aethericAnchor(): LegendaryPiece {
     slot: 'weapon',
     type: 'Spear + Staff (dual unlock)',
     acquisitionMode: 'open-world',
+    gen: 'Janthir Wilds',
     unlocks: [spearUnlock, staffUnlock],
     blurb:
       'One craft, two armory unlocks (Ancora Bellum spear + Ancora Pax staff). No precursor — four Visions of Eternity gifts; the 100-clover gate lives in Gift of Insight.',
@@ -112,6 +113,7 @@ function eternity(): LegendaryPiece {
     acquisitionMode: 'crafting',
     wikiUrl: 'https://wiki.guildwars2.com/wiki/Eternity',
     blurb: 'Forge two finished legendaries: Sunrise + Twilight (+ dust + Philosopher’s Stones).',
+    gen: 'Generation 1',
     components: [
       { name: 'Sunrise', qty: 1, itemId: 30703, buyable: false, notes: 'Requires a complete Sunrise' },
       { name: 'Twilight', qty: 1, itemId: 30704, buyable: false, notes: 'Requires a complete Twilight' },
@@ -562,6 +564,7 @@ export const WEAPONS: LegendaryPiece[] = [
       acquisitionMode: w.mode,
       wikiUrl: w.wikiUrl,
       blurb: `${w.gen} ${w.type.toLowerCase()}.`,
+      gen: w.gen,
       components: w.components,
     })
   ),

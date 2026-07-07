@@ -1,16 +1,30 @@
+// ---------------------------------------------------------------------------
+// Piece detail — one legendary, at the disclosure ladder's L1 (docs/REDESIGN.md
+// §5): summary header → grouped materials (collapsed where quiet) → recipe
+// tree → wiki links per node.
+//
+// Allocation-first (docs/UX-BEST-PRACTICES.md §3.1): when the piece is an
+// active goal, the plan-aware numbers lead ("in your plan: 43%, behind
+// Twilight"); the isolation view is one toggle away. Refine-when-close (§3.3):
+// a "Finishing steps" checklist appears only when everything left is on hand
+// or buyable.
+// ---------------------------------------------------------------------------
+
 import { useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useApp, CATALOG_BY_ID } from '../state/store'
 import { Card, ProgressBar, ScorePill, SeverityDot, Badge, EmptyState, WikiName, ItemIcon, InfoTooltip, StatStrip } from '../components/ui'
 import { ITEM_NOTES } from '../data/items'
 import RecipeTree from '../components/RecipeTree'
-import { buildRecipeTree } from '../engine'
+import { buildRecipeTree, finishingPlan } from '../engine'
 import { VERIFIED_INTERMEDIATES } from '../data/verified-intermediates'
 import refinementTable from '../data/recipes/generated/refinements.generated.json'
 import { formatGold, formatDate, formatPercent } from '../lib/format'
 import type { RemainingMaterial } from '../types'
+import type { FinishingStep } from '../engine'
 
-type View = 'tree' | 'list'
+type View = 'list' | 'tree'
+type Lens = 'plan' | 'isolation'
 
 // Wiki-matched intermediates plus the refinement recipes, which are verified
 // against the official /v2/recipes API instead of the wiki snapshot
@@ -45,47 +59,63 @@ function MaterialRow({ m }: { m: RemainingMaterial }) {
   )
 }
 
+/** A material group as a disclosure: count + subtotal always visible, rows on
+ *  demand. The loud group (time-gated) opens by default; the rest stay quiet. */
 function Group({
   title,
   tone,
   materials,
   hint,
+  defaultOpen = false,
 }: {
   title: string
   tone: 'gate' | 'good' | 'warn'
   materials: RemainingMaterial[]
   hint?: string
+  defaultOpen?: boolean
 }) {
   if (materials.length === 0) return null
   return (
-    <Card>
-      <div className="mb-1 flex items-center gap-2">
-        <h3 className="text-sm font-semibold text-ink">{title}</h3>
-        <Badge tone={tone}>{materials.length}</Badge>
-      </div>
-      {hint && <p className="mb-2 text-xs text-muted">{hint}</p>}
-      <div>
-        {materials.map((m) => (
-          <MaterialRow key={m.itemId} m={m} />
-        ))}
-      </div>
+    <Card className="p-0">
+      <details open={defaultOpen} className="group">
+        <summary className="flex cursor-pointer select-none items-center gap-2 p-3 marker:content-none">
+          <span className="text-xs text-muted transition-transform group-open:rotate-90">▶</span>
+          <h3 className="text-sm font-semibold text-ink">{title}</h3>
+          <Badge tone={tone}>{materials.length}</Badge>
+          {hint && <span className="hidden text-xs font-normal text-muted sm:inline">{hint}</span>}
+        </summary>
+        <div className="px-3 pb-3">
+          {materials.map((m) => (
+            <MaterialRow key={m.itemId} m={m} />
+          ))}
+        </div>
+      </details>
     </Card>
   )
 }
 
+const STEP_VERB: Record<FinishingStep['action'], string> = {
+  buy: 'Buy',
+  craft: 'Craft',
+  forge: 'Forge',
+  vendor: 'Buy from vendor',
+  collect: 'Collect',
+}
+
 export default function PieceDetail({ inModal = false }: { inModal?: boolean }) {
   const { id } = useParams()
-  const { progressByPiece, allocatedBySlot, loadout, sync, pricesLoaded } = useApp()
-  const [view, setView] = useState<View>('tree')
+  const { plan, progressByPiece, allocatedByGoal, sync, pricesLoaded } = useApp()
+  const [view, setView] = useState<View>('list')
+  const [lens, setLens] = useState<Lens>('plan')
   const piece = id ? CATALOG_BY_ID[Number(id)] : undefined
 
-  // If this piece sits in a tracked slot, the plan-level (allocation-aware)
-  // numbers can differ from the isolation view below: crafting consumes, so
-  // stock claimed by higher-priority pieces isn't available to this one.
-  const trackedSlot = piece
-    ? loadout.slots.find((s) => s.tracked && s.chosenPieceId === piece.id)
-    : undefined
-  const allocated = trackedSlot ? allocatedBySlot[trackedSlot.key] : undefined
+  // Plan context: is this piece an active goal, and where in the ladder?
+  const activeGoals = plan.goals.filter(
+    (g) => g.state === 'active' && g.pieceId != null && CATALOG_BY_ID[g.pieceId],
+  )
+  const goalIndex = piece ? activeGoals.findIndex((g) => g.pieceId === piece.id) : -1
+  const goal = goalIndex >= 0 ? activeGoals[goalIndex] : undefined
+  const allocated = goal ? allocatedByGoal[goal.id] : undefined
 
   const tree = useMemo(
     () =>
@@ -98,23 +128,37 @@ export default function PieceDetail({ inModal = false }: { inModal?: boolean }) 
   if (!piece) {
     return (
       <EmptyState title="Piece not found">
-        <Link to="/loadout" className="text-accent underline">
-          Back to loadout
+        <Link to="/goals" className="text-accent underline">
+          Back to goals
         </Link>
       </EmptyState>
     )
   }
 
-  const progress = progressByPiece[piece.id]
+  const isolation = progressByPiece[piece.id]
+  // Allocation-first: plan numbers lead when the piece is an active goal; the
+  // isolation lens (full inventory credited to this piece alone) is a toggle.
+  const hasBothLenses =
+    allocated != null &&
+    !allocated.owned &&
+    Math.abs(allocated.completionScore - isolation.completionScore) > 0.005
+  const progress = goal && allocated && lens === 'plan' ? allocated : isolation
+
   const timeGated = progress.remainingMaterials.filter((m) => m.timeGate.isGated)
   const buyable = progress.remainingMaterials.filter((m) => m.buyable && !m.timeGate.isGated)
   const grind = progress.remainingMaterials.filter((m) => !m.buyable && !m.timeGate.isGated)
 
+  // Refine-when-close: only computable (non-null) when every remaining leaf is
+  // on hand or buyable — i.e. the piece is closeable without more farming.
+  const finishing = !progress.owned && tree ? finishingPlan(tree) : null
+
+  const ahead = goalIndex > 0 ? CATALOG_BY_ID[activeGoals[goalIndex - 1].pieceId!] : undefined
+
   return (
     <div className="space-y-6">
       {!inModal && (
-        <Link to="/loadout" className="text-sm text-accent underline">
-          ← Loadout
+        <Link to="/goals" className="text-sm text-accent underline">
+          ← Goals
         </Link>
       )}
 
@@ -129,7 +173,11 @@ export default function PieceDetail({ inModal = false }: { inModal?: boolean }) 
               </div>
               <p className="text-sm text-muted">
                 {piece.type} · {piece.acquisitionMode}
+                {piece.gen && ` · ${piece.gen}`}
                 {piece.unlocks.length > 1 && ` · ${piece.unlocks.length} armory unlocks`}
+                {goal &&
+                  !progress.owned &&
+                  ` · #${goalIndex + 1} in your plan${ahead ? ` (behind ${ahead.name})` : ''}`}
               </p>
               {piece.blurb && <p className="mt-2 max-w-xl text-sm text-muted">{piece.blurb}</p>}
             </div>
@@ -161,6 +209,34 @@ export default function PieceDetail({ inModal = false }: { inModal?: boolean }) 
           ]}
         />
 
+        {hasBothLenses && (
+          <div className="mt-4 flex flex-wrap items-center gap-2">
+            <div className="inline-flex rounded-lg border border-line bg-surface p-0.5">
+              {(
+                [
+                  ['plan', 'In your plan'],
+                  ['isolation', 'In isolation'],
+                ] as [Lens, string][]
+              ).map(([v, label]) => (
+                <button
+                  key={v}
+                  onClick={() => setLens(v)}
+                  className={`rounded-md px-3 py-1 text-xs font-medium transition-colors ${
+                    lens === v ? 'bg-accent-soft text-accent' : 'text-muted hover:text-ink'
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+            <p className="text-xs text-muted">
+              {lens === 'plan'
+                ? `Higher-priority goals claim shared stock first — this is what's truly left for ${piece.name}.`
+                : `If ${piece.name} were your only goal, with your full inventory credited to it (${formatPercent(isolation.completionScore)}).`}
+            </p>
+          </div>
+        )}
+
         {!piece.recipe.verified && (
           <p className="mt-4 rounded-lg border border-warn/30 bg-warn/10 p-2 text-xs text-warn">
             ⚠ Recipe seeded from known structure but not yet wiki-verified.{' '}
@@ -179,28 +255,41 @@ export default function PieceDetail({ inModal = false }: { inModal?: boolean }) 
         </EmptyState>
       )}
 
-      {allocated && !allocated.owned && Math.abs(allocated.completionScore - progress.completionScore) > 0.005 && (
-        <Card className="border-line bg-surface/50">
-          <p className="text-sm text-muted">
-            This page shows the piece <span className="font-medium text-ink">in isolation</span>, with
-            your full inventory credited to it. In your plan, higher-priority pieces consume shared
-            stock first — after them this piece is at{' '}
-            <span className="font-medium text-ink">{formatPercent(allocated.completionScore)}</span>
-            {allocated.earliestFinishDate && (
-              <> with an earliest finish of <span className="font-medium text-ink">{formatDate(allocated.earliestFinishDate)}</span></>
-            )}
-            .
-          </p>
-        </Card>
-      )}
-
       {progress.owned ? (
         <EmptyState title="Already unlocked in your armory 🎉" />
       ) : (
         <>
+          {/* Finishing steps: refine-when-close. Only rendered when the whole
+              remainder is conversion work (or conversion + a TP run). */}
+          {finishing && sync && (
+            <Card className="border-good/50 bg-good/5">
+              <h3 className="text-sm font-semibold text-good">
+                {finishing.conversionOnly
+                  ? 'Everything is on hand — finishing steps:'
+                  : pricesLoaded
+                    ? `One session from done — ≈${formatGold(finishing.buyGold)} on the TP plus these steps:`
+                    : 'One session from done — a TP run plus these steps:'}
+              </h3>
+              <ol className="mt-2 space-y-1">
+                {finishing.steps.map((s) => (
+                  <li key={s.itemId} className="flex items-center gap-2 text-sm text-ink">
+                    <span className="text-xs text-muted">{STEP_VERB[s.action]}</span>
+                    <ItemIcon itemId={s.itemId} name={s.name} size={20} />
+                    <WikiName name={s.name} itemId={s.itemId} className="min-w-0 truncate" />
+                    <span className="font-mono text-xs text-muted">×{s.qty}</span>
+                    {s.discipline && <Badge tone="neutral">{s.discipline}</Badge>}
+                    {s.action === 'buy' && s.goldCost != null && pricesLoaded && (
+                      <span className="font-mono text-xs text-muted">≈{formatGold(s.goldCost)}</span>
+                    )}
+                  </li>
+                ))}
+              </ol>
+            </Card>
+          )}
+
           <div className="flex flex-wrap items-center gap-3">
             <div className="inline-flex rounded-lg border border-line bg-surface p-0.5">
-              {(['tree', 'list'] as const).map((v) => (
+              {(['list', 'tree'] as const).map((v) => (
                 <button
                   key={v}
                   onClick={() => setView(v)}
@@ -214,8 +303,8 @@ export default function PieceDetail({ inModal = false }: { inModal?: boolean }) 
             </div>
             <p className="text-xs text-muted">
               {view === 'tree'
-                ? 'Full recipe structure — expand a gift to see what it combines.'
-                : 'Flat list of what you still need, grouped by how you get it.'}
+                ? 'Full recipe structure — expand a gift to see what it combines; names link to the wiki.'
+                : 'What you still need, grouped by how you get it.'}
             </p>
           </div>
 
@@ -225,19 +314,18 @@ export default function PieceDetail({ inModal = false }: { inModal?: boolean }) 
             </Card>
           )}
 
-          {/* Buy-out callout — timed per Section 6.5. Suppressed pre-sync when
-              there are no prices (buyOutGold === 0 and not finishable). */}
-          {view === 'list' && (progress.finishableByGold || progress.buyOutGold > 0) && (
+          {/* Buy-out callout. Suppressed pre-sync when there are no prices. */}
+          {view === 'list' && !finishing && (progress.finishableByGold || progress.buyOutGold > 0) && (
             <Card
-              className={
-                progress.finishableByGold ? 'border-good/50 bg-good/5' : 'border-line'
-              }
+              className={progress.finishableByGold ? 'border-good/50 bg-good/5' : 'border-line'}
             >
               {progress.finishableByGold ? (
                 <p className="text-sm text-good">
                   {pricesLoaded ? (
                     <>
-                      <span className="font-semibold">Finish now for ≈{formatGold(progress.buyOutGold)}</span>{' '}
+                      <span className="font-semibold">
+                        Finish now for ≈{formatGold(progress.buyOutGold)}
+                      </span>{' '}
                       — everything left is purchasable. Spending gold is now the fastest path.
                     </>
                   ) : (
@@ -259,6 +347,7 @@ export default function PieceDetail({ inModal = false }: { inModal?: boolean }) 
                 title="Time-gated"
                 tone="gate"
                 materials={timeGated}
+                defaultOpen
                 hint="Daily-capped — collect every day so the finish date doesn't slip."
               />
               <Group
@@ -267,9 +356,14 @@ export default function PieceDetail({ inModal = false }: { inModal?: boolean }) 
                 materials={grind}
                 hint="Can't be bought on the Trading Post."
               />
-              <Group title="Buyable" tone="good" materials={buyable} hint="Available on the Trading Post." />
+              <Group
+                title="Buyable"
+                tone="good"
+                materials={buyable}
+                hint="Available on the Trading Post."
+              />
 
-              {progress.remainingMaterials.length === 0 && sync && (
+              {progress.remainingMaterials.length === 0 && sync && !finishing && (
                 <EmptyState title="No remaining materials — ready to forge!" />
               )}
             </>

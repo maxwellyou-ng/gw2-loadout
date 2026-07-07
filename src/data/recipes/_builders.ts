@@ -545,6 +545,7 @@ export function assembleLegendary(opts: {
   acquisitionMode: AcquisitionMode
   wikiUrl: string
   blurb?: string
+  gen?: string
   unlocks?: number[]
   components: TopComponent[]
   verified?: boolean
@@ -595,6 +596,7 @@ export function assembleLegendary(opts: {
     slot: opts.slot,
     type: opts.type,
     acquisitionMode: opts.acquisitionMode,
+    gen: opts.gen,
     unlocks: opts.unlocks ?? [opts.id],
     blurb: opts.blurb,
     recipe: {

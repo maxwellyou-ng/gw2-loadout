@@ -17,7 +17,15 @@ import {
   type LoadoutSlot,
 } from '../data/loadout'
 import type { SlotFamily, SlotKey } from '../types'
+import {
+  makeGoal,
+  migrateLoadoutToPlan,
+  normalizePlan,
+  type GoalState,
+  type Plan,
+} from '../state/plan'
 
+const PREFIX_V3 = 'gw2-v3.'
 const PREFIX_V2 = 'gw2-v2.'
 const PREFIX_V1 = 'gw2-v1.'
 
@@ -134,4 +142,85 @@ export function decode(code: string): Loadout {
   }
 
   throw new Error('Unrecognized build code (wrong or missing version prefix).')
+}
+
+// --- v3: goal-centric plan codes --------------------------------------------
+// Encoded per goal: pieceId, state index, candidates, slot hint. Goal ids are
+// NOT transmitted (regenerated on decode); `celebrated` is forced true so an
+// imported plan never replays someone else's completion celebrations.
+
+const V3_STATES: GoalState[] = ['active', 'paused', 'deciding', 'done']
+
+interface GoalWireV3 {
+  p: number | null // pieceId
+  s: number // state index into V3_STATES
+  n?: number[] // candidateIds
+  h?: SlotKey // slotHint
+  c?: string // completedAt
+}
+
+interface WireV3 {
+  n: string
+  g: GoalWireV3[]
+}
+
+export function encodePlan(plan: Plan): string {
+  const wire: WireV3 = {
+    n: plan.name,
+    g: plan.goals.map((g) => ({
+      p: g.pieceId,
+      s: Math.max(0, V3_STATES.indexOf(g.state)),
+      ...(g.candidateIds.length ? { n: g.candidateIds } : {}),
+      ...(g.slotHint ? { h: g.slotHint } : {}),
+      ...(g.completedAt ? { c: g.completedAt } : {}),
+    })),
+  }
+  return PREFIX_V3 + toBase64Url(JSON.stringify(wire))
+}
+
+function assertWireV3(value: unknown): asserts value is WireV3 {
+  if (typeof value !== 'object' || value === null) throw new Error('Build code is not an object.')
+  const v = value as Record<string, unknown>
+  if (typeof v.n !== 'string') throw new Error('Build code is missing its plan name.')
+  if (!Array.isArray(v.g)) throw new Error('Build code is missing its goal list.')
+  for (const gw of v.g) {
+    if (typeof gw !== 'object' || gw === null) throw new Error('Build code has a malformed goal.')
+    const g = gw as Record<string, unknown>
+    if (!(typeof g.p === 'number' || g.p === null))
+      throw new Error('Build code has a malformed goal piece id.')
+    if (typeof g.s !== 'number' || g.s < 0 || g.s >= V3_STATES.length)
+      throw new Error('Build code has an unknown goal state.')
+    if (g.n !== undefined && !(Array.isArray(g.n) && g.n.every((x) => typeof x === 'number')))
+      throw new Error('Build code has malformed candidate ids.')
+  }
+}
+
+/**
+ * Decode any build code version into a Plan: v3 natively; v1/v2 slot codes are
+ * decoded to a Loadout and migrated forward, so old shared codes keep working.
+ */
+export function decodePlan(code: string): Plan {
+  const trimmed = code.trim()
+  if (trimmed.length > MAX_CODE_LENGTH) throw new Error('Build code is too large.')
+
+  if (trimmed.startsWith(PREFIX_V3)) {
+    const wire = JSON.parse(fromBase64Url(trimmed.slice(PREFIX_V3.length)))
+    assertWireV3(wire)
+    return normalizePlan({
+      version: 2,
+      name: wire.n,
+      goals: wire.g.map((gw) =>
+        makeGoal({
+          pieceId: gw.p,
+          state: V3_STATES[gw.s],
+          candidateIds: gw.n ?? [],
+          slotHint: gw.h,
+          completedAt: gw.c,
+          celebrated: V3_STATES[gw.s] === 'done' ? true : undefined,
+        }),
+      ),
+    })
+  }
+
+  return migrateLoadoutToPlan(decode(trimmed))
 }

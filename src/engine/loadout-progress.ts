@@ -23,10 +23,21 @@ import type {
 import { DEFAULT_WEIGHTS } from '../types'
 import type { CompletionWeights } from '../types'
 import type { Loadout, LoadoutSlot } from '../data/loadout'
-import type { SlotKey } from '../types'
 import { CATALOG_BY_ID } from '../data/recipes'
 import { isSynthetic } from '../data/items'
 import { computeProgress, intermediateRequirements } from './progress'
+
+/**
+ * The structural shape the allocation walk actually reads. Both the legacy
+ * LoadoutSlot (key: SlotKey) and the goal-centric Plan's entries (key: goal id)
+ * satisfy it — the engine doesn't care where the ordering comes from.
+ */
+export interface AllocationEntry {
+  key: string
+  tracked: boolean
+  priority: number
+  chosenPieceId: number | null
+}
 
 /** Tracked slots only — the basis for every whole-loadout total. */
 export function trackedSlots(loadout: Loadout): LoadoutSlot[] {
@@ -34,20 +45,20 @@ export function trackedSlots(loadout: Loadout): LoadoutSlot[] {
 }
 
 /** The chosen legendary for a slot, if one is set. */
-export function pieceForSlot(slot: LoadoutSlot): LegendaryPiece | undefined {
+export function pieceForSlot(slot: AllocationEntry): LegendaryPiece | undefined {
   return slot.chosenPieceId != null ? CATALOG_BY_ID[slot.chosenPieceId] : undefined
 }
 
 /** Derived progress for a slot's chosen piece, if both exist. */
 export function progressForSlot(
-  slot: LoadoutSlot,
+  slot: AllocationEntry,
   progressByPiece: Record<number, DerivedProgress>,
 ): DerivedProgress | undefined {
   return slot.chosenPieceId != null ? progressByPiece[slot.chosenPieceId] : undefined
 }
 
 /** Sortable priority rank: lower numbers come first. */
-export function priorityRank(slot: LoadoutSlot): number {
+export function priorityRank(slot: AllocationEntry): number {
   return slot.priority
 }
 
@@ -74,18 +85,18 @@ export function plannedSlots(loadout: Loadout): LoadoutSlot[] {
  * result — the second copy sees the depleted snapshot.
  */
 export function allocateProgress(
-  slots: LoadoutSlot[],
+  slots: AllocationEntry[],
   snapshot: InventorySnapshot,
   prices: PriceMap,
   weights: CompletionWeights = DEFAULT_WEIGHTS,
   meta?: SyncMeta,
-): Partial<Record<SlotKey, DerivedProgress>> {
+): Record<string, DerivedProgress> {
   const ordered = slots
     .filter((s) => s.tracked && pieceForSlot(s) != null)
     .sort((a, b) => priorityRank(a) - priorityRank(b))
 
   const working: InventorySnapshot = { ...snapshot }
-  const out: Partial<Record<SlotKey, DerivedProgress>> = {}
+  const out: Record<string, DerivedProgress> = {}
 
   for (const slot of ordered) {
     const piece = pieceForSlot(slot)!
@@ -144,7 +155,7 @@ const SEVERITY_RANK = { high: 3, medium: 2, low: 1 } as const
  * Weights don't affect material math, so defaults are fine here.
  */
 export function aggregateRequirements(
-  slots: LoadoutSlot[],
+  slots: AllocationEntry[],
   snapshot: InventorySnapshot,
   prices: PriceMap,
   meta?: SyncMeta,
@@ -182,7 +193,7 @@ export function aggregateRequirements(
  * one requirement. Already-unlocked pieces contribute nothing.
  */
 export function aggregateIntermediates(
-  slots: LoadoutSlot[],
+  slots: AllocationEntry[],
   snapshot: InventorySnapshot,
   prices: PriceMap,
   meta?: SyncMeta,
@@ -200,8 +211,8 @@ export function aggregateIntermediates(
 /** Sum per-piece gross requirement lists into rows, skipping untracked slots,
  *  unresolvable pieces, and pieces the armory already reports unlocked. */
 function buildGrossRows(
-  slots: LoadoutSlot[],
-  alloc: Partial<Record<SlotKey, DerivedProgress>>,
+  slots: AllocationEntry[],
+  alloc: Record<string, DerivedProgress>,
   grossFor: (piece: LegendaryPiece) => RemainingMaterial[],
 ): Map<number, AggregatedMaterial> {
   const byItem = new Map<number, AggregatedMaterial>()

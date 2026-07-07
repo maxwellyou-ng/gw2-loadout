@@ -6,10 +6,15 @@ const PREFIX = 'gw2lt:'
 export const STORAGE_KEYS = {
   settings: `${PREFIX}settings`,
   sync: `${PREFIX}sync`,
+  /** Legacy slot-grid model — read once for migration, kept for rollback. */
   loadout: `${PREFIX}loadout`,
+  /** Goal-centric plan (v2 model) — the source of truth. */
+  plan: `${PREFIX}plan`,
   dailyLog: `${PREFIX}dailyLog`,
   paceOverrides: `${PREFIX}paceOverrides`,
   history: `${PREFIX}history`,
+  /** ISO timestamp of the previous app visit — powers the welcome-back diff. */
+  lastVisit: `${PREFIX}lastVisit`,
 } as const
 
 export function loadJSON<T>(key: string, fallback: T): T {

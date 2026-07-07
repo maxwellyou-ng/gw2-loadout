@@ -5,15 +5,15 @@ import { Card } from './ui'
 const steps = (hasKey: boolean) => [
   {
     n: 1,
-    title: 'Pick your targets',
+    title: 'Pick your first goal',
     body: (
       <>
-        On the{' '}
-        <Link to="/loadout" className="text-accent underline">
-          Loadout
+        Browse the{' '}
+        <Link to="/catalog" className="text-accent underline">
+          legendary catalog
         </Link>{' '}
-        tab, choose the legendaries you want to work toward — as many or as few as you like. Every
-        tracked piece feeds the combined plan.
+        — filter by weapon type, generation, or game mode, and add whatever you want to work
+        toward. Cost and time-to-finish show up right on the cards.
       </>
     ),
     done: false,
@@ -35,15 +35,18 @@ const steps = (hasKey: boolean) => [
   },
   {
     n: 3,
-    title: 'See what to save',
+    title: 'Follow the plan',
     body: (
       <>
-        The{' '}
+        Today tells you the single best thing to do right now,{' '}
+        <Link to="/goals" className="text-accent underline">
+          Goals
+        </Link>{' '}
+        is your priority ladder, and{' '}
         <Link to="/materials" className="text-accent underline">
           Materials
         </Link>{' '}
-        tab is your combined shopping list, and the Dashboard tells you which daily-capped
-        materials to collect today so the finish date doesn't slip.
+        is the combined shopping list.
       </>
     ),
     done: false,

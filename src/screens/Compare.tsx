@@ -1,25 +1,23 @@
 // ---------------------------------------------------------------------------
-// Flexible-slot comparison (brief Phase 4.1).
+// Compare — generalized candidate comparison (docs/REDESIGN.md §2).
 //
-// For a slot's candidate pieces, a side-by-side table of the effort signals:
-//   - remaining time-gate days   (max of the piece's timeGateDebt.days)
-//   - remaining gold             (buyOutGold)
-//   - required game mode         (piece.acquisitionMode)
-//   - material overlap           (distinct required mats already in inventory)
-// Sorted by time-gate days, tie-broken by gold then overlap. The lowest-effort
-// candidate is recommended. A picker lets you add/remove candidates and choose
-// the winner for the slot.
+// Two entry points, one table of effort signals (time-gate days → gold →
+// material overlap; the lowest-effort row is recommended):
+//   /compare?ids=a,b,c   ad-hoc set from the Catalog tray ("Add as goal")
+//   /compare?goal=<id>   a deciding goal's candidates ("Choose" resolves it)
+// Candidates are alternatives — only one will be crafted — so each is measured
+// against the full inventory (isolation), not the priority-allocated numbers.
 // ---------------------------------------------------------------------------
 
 import { useMemo } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { useApp, CATALOG_BY_ID } from '../state/store'
-import { piecesForSlot } from '../lib/slotPieces'
 import { compareCandidates, computeProgress } from '../engine'
 import { DEFAULT_WEIGHTS } from '../types'
 import { Card, Badge, EmptyState, OverlayLink, ItemIcon, PageHeader } from '../components/ui'
+import PiecePicker from '../components/PiecePicker'
 import { formatGold } from '../lib/format'
-import type { SlotKey } from '../types'
+import { CATALOG } from '../data/recipes'
 
 interface Row {
   pieceId: number
@@ -34,10 +32,31 @@ interface Row {
 }
 
 export default function Compare({ inModal = false }: { inModal?: boolean }) {
-  const { slotKey } = useParams<{ slotKey: string }>()
-  const { loadout, sync, progressByPiece, setSlotCandidates, setSlotPiece } = useApp()
+  const [params] = useSearchParams()
+  const { plan, sync, progressByPiece, addGoal, chooseGoalPiece, setGoalCandidates } = useApp()
 
-  const slot = loadout.slots.find((s) => s.key === slotKey)
+  const goalId = params.get('goal')
+  const idsParam = params.get('ids')
+
+  const goal = goalId ? plan.goals.find((g) => g.id === goalId) : undefined
+
+  const mode: 'goal' | 'ids' | 'none' = goal ? 'goal' : idsParam ? 'ids' : 'none'
+
+  const candidateIds: number[] =
+    mode === 'goal'
+      ? goal!.candidateIds
+      : mode === 'ids'
+        ? idsParam!
+            .split(',')
+            .map((s) => Number(s))
+            .filter((n) => Number.isFinite(n))
+        : []
+
+  const goalByPiece = useMemo(() => {
+    const m = new Map<number, string>()
+    for (const g of plan.goals) if (g.pieceId != null) m.set(g.pieceId, g.state)
+    return m
+  }, [plan])
 
   // Distinct required mats already in inventory — a proxy for "leverages what
   // you already have". Computed against gross requirements (empty snapshot) so
@@ -52,66 +71,87 @@ export default function Compare({ inModal = false }: { inModal?: boolean }) {
     }
   }, [sync])
 
-  const rows: Row[] = useMemo(() => {
-    if (!slot) return []
-    const base = slot.candidateIds
-      .map((id) => CATALOG_BY_ID[id])
-      .filter((p) => p != null)
-      .map((piece) => {
-        const prog = progressByPiece[piece.id]
-        const timeGateDays = prog?.timeGateDebt.reduce((mx, d) => Math.max(mx, d.days), 0) ?? 0
-        return {
-          pieceId: piece.id,
-          name: piece.name,
-          type: piece.type,
-          mode: piece.acquisitionMode,
-          timeGateDays,
-          gold: prog?.buyOutGold ?? 0,
-          overlap: overlapFor(piece.id),
-          owned: prog?.owned ?? false,
-          recommended: false,
-        }
-      })
-    base.sort(compareCandidates)
-    if (base.length > 0) base[0].recommended = true
-    return base
-  }, [slot, progressByPiece, overlapFor])
+  // Small set (a handful of candidates) — computed per render; the React
+  // Compiler memoizes automatically.
+  const rows: Row[] = candidateIds
+    .map((id) => CATALOG_BY_ID[id])
+    .filter((p) => p != null)
+    .map((piece) => {
+      const prog = progressByPiece[piece.id]
+      const timeGateDays = prog?.timeGateDebt.reduce((mx, d) => Math.max(mx, d.days), 0) ?? 0
+      return {
+        pieceId: piece.id,
+        name: piece.name,
+        type: piece.type,
+        mode: piece.acquisitionMode,
+        timeGateDays,
+        gold: prog?.buyOutGold ?? 0,
+        overlap: overlapFor(piece.id),
+        owned: prog?.owned ?? false,
+        recommended: false,
+      }
+    })
+    .sort(compareCandidates)
+  if (rows.length > 0) rows[0].recommended = true
 
-  if (!slot) {
+  if (mode === 'none') {
     return (
-      <EmptyState title="Slot not found">
-        <Link to="/loadout" className="text-accent underline">
-          Back to loadout
-        </Link>
+      <EmptyState title="Nothing to compare">
+        Pick candidates in the{' '}
+        <Link to="/catalog" className="text-accent underline">
+          catalog
+        </Link>{' '}
+        (select two or more, then "Compare").
       </EmptyState>
     )
   }
 
-  const familyPieces = piecesForSlot(slot)
-  const toggleCandidate = (pieceId: number) => {
-    const next = slot.candidateIds.includes(pieceId)
-      ? slot.candidateIds.filter((id) => id !== pieceId)
-      : [...slot.candidateIds, pieceId]
-    setSlotCandidates(slot.key as SlotKey, next)
+  const backTo = mode === 'goal' ? '/goals' : '/catalog'
+  const title = mode === 'goal' ? 'Compare candidates · deciding goal' : 'Compare'
+
+  const chooseAction = (r: Row) => {
+    if (mode === 'goal') {
+      const chosen = goal!.pieceId === r.pieceId && goal!.state !== 'deciding'
+      return (
+        <button
+          onClick={() => chooseGoalPiece(goal!.id, r.pieceId)}
+          disabled={chosen}
+          className="rounded-lg border border-line px-2.5 py-1 text-xs font-medium text-ink hover:border-accent"
+        >
+          {chosen ? 'Chosen' : 'Choose'}
+        </button>
+      )
+    }
+    const inPlan = goalByPiece.get(r.pieceId)
+    return inPlan ? (
+      <span className="text-xs font-medium text-good">✓ In plan</span>
+    ) : (
+      <button
+        onClick={() => addGoal({ pieceId: r.pieceId, state: 'active' })}
+        className="rounded-lg border border-line px-2.5 py-1 text-xs font-medium text-ink hover:border-accent"
+      >
+        Add as goal
+      </button>
+    )
   }
 
   return (
     <div className="space-y-6">
       {!inModal && (
-        <Link to="/loadout" className="text-sm text-accent underline">
-          ← Loadout
+        <Link to={backTo} className="text-sm text-accent underline">
+          ← Back
         </Link>
       )}
 
       <PageHeader
-        title={`Compare candidates · ${slot.label}`}
+        title={title}
         subtitle={`Lowest remaining effort wins.${!sync ? ' Sync to factor in your inventory.' : ''}`}
-        help="Sorted by remaining time-gate days, then buy-out gold, then how many required materials you already own. Candidates are alternatives — only one will be crafted — so each is measured against your full inventory, unlike the priority-allocated numbers on the Dashboard."
+        help="Sorted by remaining time-gate days, then buy-out gold, then how many required materials you already own. Candidates are alternatives — only one will be crafted — so each is measured against your full inventory, unlike the priority-allocated ladder numbers."
       />
 
       {rows.length === 0 ? (
         <EmptyState title="No candidates yet">
-          Add a few pieces below to weigh them side by side.
+          {mode === 'goal' ? 'Add candidates below.' : 'Add a few pieces to weigh side by side.'}
         </EmptyState>
       ) : (
         <Card className="overflow-x-auto p-0">
@@ -139,12 +179,14 @@ export default function Compare({ inModal = false }: { inModal?: boolean }) {
                       <ItemIcon itemId={r.pieceId} name={r.name} size={28} />
                       <div className="min-w-0">
                         <div className="flex flex-wrap items-center gap-2">
-                          <OverlayLink to={`/piece/${r.pieceId}`} className="font-medium text-ink hover:text-accent">
+                          <OverlayLink
+                            to={`/piece/${r.pieceId}`}
+                            className="font-medium text-ink hover:text-accent"
+                          >
                             {r.name}
                           </OverlayLink>
                           {r.recommended && <Badge tone="good">lowest effort</Badge>}
                           {r.owned && <Badge tone="accent">owned</Badge>}
-                          {slot.chosenPieceId === r.pieceId && <Badge>chosen</Badge>}
                         </div>
                         <p className="text-xs text-muted">{r.type}</p>
                       </div>
@@ -156,15 +198,7 @@ export default function Compare({ inModal = false }: { inModal?: boolean }) {
                     <Badge>{r.mode}</Badge>
                   </td>
                   <td className="p-3 text-muted">{r.overlap}</td>
-                  <td className="p-3 text-right">
-                    <button
-                      onClick={() => setSlotPiece(slot.key as SlotKey, r.pieceId)}
-                      disabled={slot.chosenPieceId === r.pieceId}
-                      className="rounded-lg border border-line px-2.5 py-1 text-xs font-medium text-ink hover:border-accent disabled:opacity-40"
-                    >
-                      {slot.chosenPieceId === r.pieceId ? 'Chosen' : 'Choose'}
-                    </button>
-                  </td>
+                  <td className="p-3 text-right">{chooseAction(r)}</td>
                 </tr>
               ))}
             </tbody>
@@ -172,37 +206,51 @@ export default function Compare({ inModal = false }: { inModal?: boolean }) {
         </Card>
       )}
 
-      <Card>
-        <h3 className="mb-1 text-sm font-semibold text-ink">Candidates for this slot</h3>
-        <p className="mb-3 text-xs text-muted">
-          Toggle the {slot.family} pieces you're weighing for {slot.label}.
-        </p>
-        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-          {familyPieces.map((p) => {
-            const on = slot.candidateIds.includes(p.id)
-            return (
-              <label
-                key={p.id}
-                className={`flex cursor-pointer items-center gap-2 rounded-lg border px-3 py-2 text-sm transition-colors ${
-                  on ? 'border-accent bg-accent-soft text-accent' : 'border-line text-ink hover:border-accent/60'
-                }`}
-              >
-                <input
-                  type="checkbox"
-                  checked={on}
-                  onChange={() => toggleCandidate(p.id)}
-                  className="accent-accent"
-                />
-                <ItemIcon itemId={p.id} name={p.name} size={22} />
-                <span className="min-w-0 truncate">{p.name}</span>
-              </label>
-            )
-          })}
-          {familyPieces.length === 0 && (
-            <p className="text-sm text-muted">No catalog pieces for this slot family yet.</p>
+      {/* Candidate management, per entry point. */}
+      {mode === 'goal' && (
+        <Card>
+          <h3 className="mb-1 text-sm font-semibold text-ink">Candidates for this goal</h3>
+          <p className="mb-3 text-xs text-muted">Search the catalog to add another candidate.</p>
+          <div className="max-w-md">
+            <PiecePicker
+              options={CATALOG.filter((p) => !goal!.candidateIds.includes(p.id))}
+              onPick={(id) => setGoalCandidates(goal!.id, [...goal!.candidateIds, id])}
+              placeholder="Add a candidate…"
+            />
+          </div>
+          {goal!.candidateIds.length > 0 && (
+            <div className="mt-3 flex flex-wrap gap-2">
+              {goal!.candidateIds.map((id) => {
+                const p = CATALOG_BY_ID[id]
+                if (!p) return null
+                return (
+                  <span
+                    key={id}
+                    className="flex items-center gap-1.5 rounded-lg border border-line px-2 py-1 text-xs text-ink"
+                  >
+                    <ItemIcon itemId={id} name={p.name} size={18} />
+                    {p.name}
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setGoalCandidates(
+                          goal!.id,
+                          goal!.candidateIds.filter((c) => c !== id),
+                        )
+                      }
+                      aria-label={`Remove ${p.name} from candidates`}
+                      className="text-muted hover:text-bad"
+                    >
+                      ✕
+                    </button>
+                  </span>
+                )
+              })}
+            </div>
           )}
-        </div>
-      </Card>
+        </Card>
+      )}
+
     </div>
   )
 }

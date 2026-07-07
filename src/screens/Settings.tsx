@@ -3,7 +3,7 @@ import { useApp } from '../state/store'
 import { validateKey } from '../api/gw2'
 import { Card, Badge } from '../components/ui'
 import { formatRelative } from '../lib/format'
-import { encode, decode } from '../lib/buildcode'
+import { encodePlan, decodePlan } from '../lib/buildcode'
 
 // Ordered as they appear on the GW2 account site (account.arena.net/applications),
 // each paired with ArenaNet's own description of the scope.
@@ -44,8 +44,8 @@ export default function Settings() {
     syncMessage,
     syncError,
     sync,
-    loadout,
-    setLoadout,
+    plan,
+    importPlan,
   } = useApp()
   const [keyInput, setKeyInput] = useState(settings.apiKey)
   const [validation, setValidation] = useState<
@@ -94,8 +94,8 @@ export default function Settings() {
     }
   }
 
-  // --- Build-code import / export (Phase 5.1) — goals only, never the key ---
-  const exportCode = encode(loadout)
+  // --- Build-code import / export — goals only, never the key ---------------
+  const exportCode = encodePlan(plan)
   const [importInput, setImportInput] = useState('')
   const [importMsg, setImportMsg] = useState<
     { state: 'idle' } | { state: 'ok' } | { state: 'error'; message: string }
@@ -114,8 +114,8 @@ export default function Settings() {
 
   const applyImport = () => {
     try {
-      const next = decode(importInput)
-      setLoadout(next)
+      const next = decodePlan(importInput)
+      importPlan(next)
       setImportInput('')
       setImportMsg({ state: 'ok' })
     } catch (e) {
@@ -240,10 +240,11 @@ export default function Settings() {
       </Card>
 
       <Card>
-        <h2 className="mb-1 text-lg font-semibold text-ink">Share your loadout</h2>
+        <h2 className="mb-1 text-lg font-semibold text-ink">Share your plan</h2>
         <p className="mb-4 text-sm text-muted">
-          A build code captures only your slot goals (chosen pieces, tracked, flexible, priority, candidates)
-          — never your API key or account data. Share it or save it as a backup.
+          A build code captures only your goals (pieces, order, states, candidates) — never your
+          API key or account data. Old slot-based codes import fine. Share it or save it as a
+          backup.
         </p>
 
         <label className="mb-1 block text-sm font-medium text-ink">Export</label>
@@ -264,7 +265,9 @@ export default function Settings() {
         </div>
 
         <label className="mb-1 mt-4 block text-sm font-medium text-ink">Import</label>
-        <p className="mb-2 text-xs text-warn">Importing replaces your current loadout.</p>
+        <p className="mb-2 text-xs text-warn">
+          Importing replaces your current plan — an Undo toast lets you take it back.
+        </p>
         <div className="flex flex-wrap gap-2">
           <input
             type="text"
@@ -285,7 +288,7 @@ export default function Settings() {
           </button>
         </div>
         {importMsg.state === 'ok' && (
-          <p className="mt-2 text-sm text-good">✓ Loadout replaced from build code.</p>
+          <p className="mt-2 text-sm text-good">✓ Plan replaced from build code.</p>
         )}
         {importMsg.state === 'error' && (
           <p className="mt-2 text-sm text-bad">{importMsg.message}</p>

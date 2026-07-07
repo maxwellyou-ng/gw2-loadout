@@ -155,6 +155,12 @@ export interface LegendaryPiece {
   icon?: string
   acquisitionMode: AcquisitionMode
   /**
+   * Generation / release label for catalog faceting (e.g. 'Generation 1',
+   * 'Generation 3', 'Janthir Wilds'). Weapons carry it from the wiki data;
+   * armor/trinkets/backs facet by acquisitionMode instead when absent.
+   */
+  gen?: string
+  /**
    * Armory item ids unlocked by completing this project. Usually one; the
    * Aetheric Anchor unlocks two (spear + staff).
    */

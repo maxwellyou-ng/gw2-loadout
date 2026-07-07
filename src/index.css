@@ -18,6 +18,7 @@
   --color-warn: #fbbf24;
   --color-bad: #f87171;
   --color-gate: #a78bfa; /* time-gated emphasis */
+  --color-ink-disabled: #9aa2b5; /* disabled control text — still ≥AA on surface-2 */
 }
 
 html,
@@ -38,4 +39,31 @@ body {
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--color-line) transparent;
+}
+
+/* Keyboard focus is as visible as hover: accent ring on any focused control.
+   Unlayered, so it wins over utility classes like `outline-none`. */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Disabled controls stay readable (AA) instead of fading the whole control. */
+button:disabled {
+  opacity: 1;
+  cursor: not-allowed;
+  background-color: var(--color-surface-2);
+  border-color: var(--color-line);
+  color: var(--color-ink-disabled);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

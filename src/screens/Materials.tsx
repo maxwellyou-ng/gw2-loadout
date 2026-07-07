@@ -11,13 +11,14 @@
 import { useMemo, useState, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { useApp } from '../state/store'
+import { goalEntries } from '../state/plan'
 import {
   aggregateRequirements,
   aggregateIntermediates,
-  trackedSlots,
   type AggregatedMaterial,
 } from '../engine'
 import { Card, Badge, SeverityDot, EmptyState, WikiName, ItemIcon, InfoTooltip, PageHeader } from '../components/ui'
+import PacePanel from '../components/PacePanel'
 import { formatGold } from '../lib/format'
 import { ITEM_NOTES } from '../data/items'
 import type { GameMode, MaterialCategory } from '../types'
@@ -133,7 +134,7 @@ function Chip({ active, onClick, children }: { active: boolean; onClick: () => v
 }
 
 export default function Materials() {
-  const { loadout, sync, pricesLoaded } = useApp()
+  const { plan, sync, pricesLoaded } = useApp()
   const [view, setView] = useState<View>('base')
   const [grouping, setGrouping] = useState<Grouping>('phase')
   const [sort, setSort] = useState<Sort>('default')
@@ -142,14 +143,14 @@ export default function Materials() {
   const [gatedOnly, setGatedOnly] = useState(false)
   const [modes, setModes] = useState<Set<GameMode>>(new Set())
 
-  const slots = useMemo(() => trackedSlots(loadout), [loadout])
+  const entries = useMemo(() => goalEntries(plan).filter((e) => e.tracked), [plan])
   const agg = useMemo(() => {
     const snapshot = sync?.snapshot ?? {}
     const prices = sync?.prices ?? {}
     return view === 'gifts'
-      ? aggregateIntermediates(slots, snapshot, prices, sync?.meta)
-      : aggregateRequirements(slots, snapshot, prices, sync?.meta)
-  }, [slots, sync, view])
+      ? aggregateIntermediates(entries, snapshot, prices, sync?.meta)
+      : aggregateRequirements(entries, snapshot, prices, sync?.meta)
+  }, [entries, sync, view])
 
   const toggleMode = (mode: GameMode) =>
     setModes((prev) => {
@@ -212,16 +213,16 @@ export default function Materials() {
           materials: sorted.filter((m) => m.category === cat),
         }))
 
-  const trackedWithPiece = slots.filter((s) => s.chosenPieceId != null).length
+  const activeCount = entries.length
 
-  if (trackedWithPiece === 0) {
+  if (activeCount === 0) {
     return (
-      <EmptyState title="Nothing tracked yet">
-        Choose pieces for your tracked slots on the{' '}
-        <Link to="/loadout" className="text-accent underline">
-          Loadout
+      <EmptyState title="Nothing planned yet">
+        Add a goal from the{' '}
+        <Link to="/catalog" className="text-accent underline">
+          catalog
         </Link>{' '}
-        tab to see a combined shopping list.
+        to see a combined shopping list.
       </EmptyState>
     )
   }
@@ -229,8 +230,8 @@ export default function Materials() {
   return (
     <div className="space-y-6">
       <PageHeader
-        title="Whole-loadout materials"
-        subtitle={`${trackedWithPiece} tracked pieces · crafting consumes: each piece needs its own materials${!sync ? ' · sync to credit your inventory' : ''}`}
+        title="Materials"
+        subtitle={`${activeCount} goal${activeCount === 1 ? '' : 's'} in the plan · crafting consumes: each piece needs its own materials${!sync ? ' · sync to credit your inventory' : ''}`}
         help="Every tracked piece rolled into one list. Crafting consumes materials, so required is the sum over pieces (two pieces needing 77 and 18 clovers require 95) and your stock — including pre-built gifts — is credited to one piece at a time in priority order, never to several at once. Pieces you already own contribute nothing."
         actions={
           <div className="text-right">
@@ -245,6 +246,9 @@ export default function Materials() {
           </div>
         }
       />
+
+      {/* Projected finish + pace tuning (the old Forecast, absorbed). */}
+      <PacePanel debt={agg.timeGateDebt} />
 
       {/* Toolbar: granularity / grouping / sort + search + filter chips */}
       <div className="flex flex-wrap items-center gap-2">
